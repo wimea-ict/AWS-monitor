@@ -3595,6 +3595,10 @@ class ComposerStaticInit87b9326ddaef55773641bf54eaf4d0ef
         'station\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
         'station\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
         'station\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'station\\Http\\Controllers\\NodeController' => __DIR__ . '/../..' . '/app/Http/Controllers/NodeController.php',
+        'station\\Http\\Controllers\\NodeStatusController' => __DIR__ . '/../..' . '/app/Http/Controllers/NodeStatusController.php',
+        'station\\Http\\Controllers\\SensorsController' => __DIR__ . '/../..' . '/app/Http/Controllers/SensorsController.php',
+        'station\\Http\\Controllers\\StationsController' => __DIR__ . '/../..' . '/app/Http/Controllers/StationsController.php',
         'station\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'station\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
         'station\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
@@ -3606,7 +3610,12 @@ class ComposerStaticInit87b9326ddaef55773641bf54eaf4d0ef
         'station\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
         'station\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'station\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
+        'station\\Stations' => __DIR__ . '/../..' . '/app/Stations.php',
         'station\\User' => __DIR__ . '/../..' . '/app/User.php',
+        'station\\node' => __DIR__ . '/../..' . '/app/node.php',
+        'station\\node_status' => __DIR__ . '/../..' . '/app/node_status.php',
+        'station\\node_status_configuration' => __DIR__ . '/../..' . '/app/node_status_configuration.php',
+        'station\\sensors' => __DIR__ . '/../..' . '/app/sensors.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

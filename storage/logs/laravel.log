@@ -1,0 +1,176 @@
+[2018-02-11 18:28:42] local.ERROR: Command "migrate:make" is not defined.
+
+Did you mean one of these?
+    migrate
+    migrate:fresh
+    migrate:install
+    migrate:refresh
+    migrate:reset
+    migrate:rollback
+    migrate:status {"exception":"[object] (Symfony\\Component\\Console\\Exception\\CommandNotFoundException(code: 0): Command \"migrate:make\" is not defined.
+
+Did you mean one of these?
+    migrate
+    migrate:fresh
+    migrate:install
+    migrate:refresh
+    migrate:reset
+    migrate:rollback
+    migrate:status at /home/joshua/Documents/lavarel projects/AWS monitor/vendor/symfony/console/Application.php:618)
+[stacktrace]
+#0 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/symfony/console/Application.php(229): Symfony\\Component\\Console\\Application->find('migrate:make')
+#1 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/symfony/console/Application.php(148): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#2 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Console/Application.php(88): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#3 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(121): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#4 /home/joshua/Documents/lavarel projects/AWS monitor/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#5 {main}
+"} 
+[2018-02-11 18:29:15] local.ERROR: Command "migrate:make" is not defined.
+
+Did you mean one of these?
+    migrate
+    migrate:fresh
+    migrate:install
+    migrate:refresh
+    migrate:reset
+    migrate:rollback
+    migrate:status {"exception":"[object] (Symfony\\Component\\Console\\Exception\\CommandNotFoundException(code: 0): Command \"migrate:make\" is not defined.
+
+Did you mean one of these?
+    migrate
+    migrate:fresh
+    migrate:install
+    migrate:refresh
+    migrate:reset
+    migrate:rollback
+    migrate:status at /home/joshua/Documents/lavarel projects/AWS monitor/vendor/symfony/console/Application.php:618)
+[stacktrace]
+#0 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/symfony/console/Application.php(229): Symfony\\Component\\Console\\Application->find('migrate:make')
+#1 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/symfony/console/Application.php(148): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#2 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Console/Application.php(88): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#3 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(121): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#4 /home/joshua/Documents/lavarel projects/AWS monitor/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#5 {main}
+"} 
+[2018-02-12 05:38:14] local.ERROR: Method strings does not exist. {"exception":"[object] (BadMethodCallException(code: 0): Method strings does not exist. at /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Support/Traits/Macroable.php:96)
+[stacktrace]
+#0 /home/joshua/Documents/lavarel projects/AWS monitor/database/migrations/2018_02_11_183219_create_stations_table.php(18): Illuminate\\Database\\Schema\\Blueprint->__call('strings', Array)
+#1 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Database/Schema/Builder.php(164): CreateStationsTable->{closure}(Object(Illuminate\\Database\\Schema\\Blueprint))
+#2 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Support/helpers.php(1038): Illuminate\\Database\\Schema\\Builder->Illuminate\\Database\\Schema\\{closure}(Object(Illuminate\\Database\\Schema\\Blueprint))
+#3 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Database/Schema/Builder.php(165): tap(Object(Illuminate\\Database\\Schema\\Blueprint), Object(Closure))
+#4 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(221): Illuminate\\Database\\Schema\\Builder->create('stations', Object(Closure))
+#5 /home/joshua/Documents/lavarel projects/AWS monitor/database/migrations/2018_02_11_183219_create_stations_table.php(32): Illuminate\\Support\\Facades\\Facade::__callStatic('create', Array)
+#6 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(359): CreateStationsTable->up()
+#7 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(366): Illuminate\\Database\\Migrations\\Migrator->Illuminate\\Database\\Migrations\\{closure}()
+#8 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(177): Illuminate\\Database\\Migrations\\Migrator->runMigration(Object(CreateStationsTable), 'up')
+#9 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(146): Illuminate\\Database\\Migrations\\Migrator->runUp('/home/joshua/Do...', 1, false)
+#10 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(95): Illuminate\\Database\\Migrations\\Migrator->runPending(Array, Array)
+#11 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Database/Console/Migrations/MigrateCommand.php(69): Illuminate\\Database\\Migrations\\Migrator->run(Array, Array)
+#12 [internal function]: Illuminate\\Database\\Console\\Migrations\\MigrateCommand->handle()
+#13 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(29): call_user_func_array(Array, Array)
+#14 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(87): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#15 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(31): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#16 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Container/Container.php(549): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#17 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Console/Command.php(183): Illuminate\\Container\\Container->call(Array)
+#18 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/symfony/console/Command/Command.php(252): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArrayInput), Object(Illuminate\\Console\\OutputStyle))
+#19 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Console/Command.php(170): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArrayInput), Object(Illuminate\\Console\\OutputStyle))
+#20 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Console/Command.php(198): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArrayInput), Object(Illuminate\\Console\\OutputStyle))
+#21 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Database/Console/Migrations/RefreshCommand.php(64): Illuminate\\Console\\Command->call('migrate', Array)
+#22 [internal function]: Illuminate\\Database\\Console\\Migrations\\RefreshCommand->handle()
+#23 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(29): call_user_func_array(Array, Array)
+#24 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(87): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#25 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(31): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#26 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Container/Container.php(549): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#27 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Console/Command.php(183): Illuminate\\Container\\Container->call(Array)
+#28 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/symfony/console/Command/Command.php(252): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#29 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Console/Command.php(170): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#30 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/symfony/console/Application.php(946): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#31 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/symfony/console/Application.php(248): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Database\\Console\\Migrations\\RefreshCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#32 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/symfony/console/Application.php(148): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#33 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Console/Application.php(88): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#34 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(121): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#35 /home/joshua/Documents/lavarel projects/AWS monitor/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#36 {main}
+"} 
+[2018-02-12 05:39:33] local.ERROR: SQLSTATE[42S21]: Column already exists: 1060 Duplicate column name 'station_name' (SQL: create table `stations` (`station_id` int unsigned not null auto_increment primary key, `station_name` varchar(255) not null, `station_location` varchar(255) not null, `station_name` varchar(255) not null, `longitude` double not null, `latitude` double not null, `station_number` varchar(255) not null, `location` varchar(255) not null, `city` varchar(255) not null, `region` varchar(255) not null, `code` varchar(255) not null, `date_opened` datetime not null, `date_closed` datetime not null, `created_at` timestamp null, `updated_at` timestamp null) default character set utf8mb4 collate utf8mb4_unicode_ci) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S21): SQLSTATE[42S21]: Column already exists: 1060 Duplicate column name 'station_name' (SQL: create table `stations` (`station_id` int unsigned not null auto_increment primary key, `station_name` varchar(255) not null, `station_location` varchar(255) not null, `station_name` varchar(255) not null, `longitude` double not null, `latitude` double not null, `station_number` varchar(255) not null, `location` varchar(255) not null, `city` varchar(255) not null, `region` varchar(255) not null, `code` varchar(255) not null, `date_opened` datetime not null, `date_closed` datetime not null, `created_at` timestamp null, `updated_at` timestamp null) default character set utf8mb4 collate utf8mb4_unicode_ci) at /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Database/Connection.php:664, PDOException(code: 42S21): SQLSTATE[42S21]: Column already exists: 1060 Duplicate column name 'station_name' at /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Database/Connection.php:458)
+[stacktrace]
+#0 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Database/Connection.php(624): Illuminate\\Database\\Connection->runQueryCallback('create table `s...', Array, Object(Closure))
+#1 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Database/Connection.php(459): Illuminate\\Database\\Connection->run('create table `s...', Array, Object(Closure))
+#2 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Database/Schema/Blueprint.php(86): Illuminate\\Database\\Connection->statement('create table `s...')
+#3 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Database/Schema/Builder.php(252): Illuminate\\Database\\Schema\\Blueprint->build(Object(Illuminate\\Database\\MySqlConnection), Object(Illuminate\\Database\\Schema\\Grammars\\MySqlGrammar))
+#4 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Database/Schema/Builder.php(165): Illuminate\\Database\\Schema\\Builder->build(Object(Illuminate\\Database\\Schema\\Blueprint))
+#5 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(221): Illuminate\\Database\\Schema\\Builder->create('stations', Object(Closure))
+#6 /home/joshua/Documents/lavarel projects/AWS monitor/database/migrations/2018_02_11_183219_create_stations_table.php(32): Illuminate\\Support\\Facades\\Facade::__callStatic('create', Array)
+#7 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(359): CreateStationsTable->up()
+#8 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(366): Illuminate\\Database\\Migrations\\Migrator->Illuminate\\Database\\Migrations\\{closure}()
+#9 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(177): Illuminate\\Database\\Migrations\\Migrator->runMigration(Object(CreateStationsTable), 'up')
+#10 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(146): Illuminate\\Database\\Migrations\\Migrator->runUp('/home/joshua/Do...', 1, false)
+#11 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(95): Illuminate\\Database\\Migrations\\Migrator->runPending(Array, Array)
+#12 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Database/Console/Migrations/MigrateCommand.php(69): Illuminate\\Database\\Migrations\\Migrator->run(Array, Array)
+#13 [internal function]: Illuminate\\Database\\Console\\Migrations\\MigrateCommand->handle()
+#14 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(29): call_user_func_array(Array, Array)
+#15 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(87): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#16 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(31): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#17 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Container/Container.php(549): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#18 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Console/Command.php(183): Illuminate\\Container\\Container->call(Array)
+#19 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/symfony/console/Command/Command.php(252): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArrayInput), Object(Illuminate\\Console\\OutputStyle))
+#20 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Console/Command.php(170): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArrayInput), Object(Illuminate\\Console\\OutputStyle))
+#21 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Console/Command.php(198): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArrayInput), Object(Illuminate\\Console\\OutputStyle))
+#22 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Database/Console/Migrations/RefreshCommand.php(64): Illuminate\\Console\\Command->call('migrate', Array)
+#23 [internal function]: Illuminate\\Database\\Console\\Migrations\\RefreshCommand->handle()
+#24 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(29): call_user_func_array(Array, Array)
+#25 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(87): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#26 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(31): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#27 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Container/Container.php(549): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#28 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Console/Command.php(183): Illuminate\\Container\\Container->call(Array)
+#29 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/symfony/console/Command/Command.php(252): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#30 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Console/Command.php(170): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#31 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/symfony/console/Application.php(946): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#32 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/symfony/console/Application.php(248): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Database\\Console\\Migrations\\RefreshCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#33 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/symfony/console/Application.php(148): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#34 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Console/Application.php(88): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#35 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(121): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#36 /home/joshua/Documents/lavarel projects/AWS monitor/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#37 {main}
+"} 
+[2018-02-12 05:39:56] local.ERROR: SQLSTATE[42S21]: Column already exists: 1060 Duplicate column name 'station_name' (SQL: create table `stations` (`station_id` int unsigned not null auto_increment primary key, `station_name` varchar(255) not null, `station_location` varchar(255) not null, `station_name` varchar(255) not null, `longitude` double not null, `latitude` double not null, `station_number` varchar(255) not null, `location` varchar(255) not null, `city` varchar(255) not null, `region` varchar(255) not null, `code` varchar(255) not null, `date_opened` datetime not null, `date_closed` datetime not null, `created_at` timestamp null, `updated_at` timestamp null) default character set utf8mb4 collate utf8mb4_unicode_ci) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S21): SQLSTATE[42S21]: Column already exists: 1060 Duplicate column name 'station_name' (SQL: create table `stations` (`station_id` int unsigned not null auto_increment primary key, `station_name` varchar(255) not null, `station_location` varchar(255) not null, `station_name` varchar(255) not null, `longitude` double not null, `latitude` double not null, `station_number` varchar(255) not null, `location` varchar(255) not null, `city` varchar(255) not null, `region` varchar(255) not null, `code` varchar(255) not null, `date_opened` datetime not null, `date_closed` datetime not null, `created_at` timestamp null, `updated_at` timestamp null) default character set utf8mb4 collate utf8mb4_unicode_ci) at /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Database/Connection.php:664, PDOException(code: 42S21): SQLSTATE[42S21]: Column already exists: 1060 Duplicate column name 'station_name' at /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Database/Connection.php:458)
+[stacktrace]
+#0 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Database/Connection.php(624): Illuminate\\Database\\Connection->runQueryCallback('create table `s...', Array, Object(Closure))
+#1 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Database/Connection.php(459): Illuminate\\Database\\Connection->run('create table `s...', Array, Object(Closure))
+#2 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Database/Schema/Blueprint.php(86): Illuminate\\Database\\Connection->statement('create table `s...')
+#3 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Database/Schema/Builder.php(252): Illuminate\\Database\\Schema\\Blueprint->build(Object(Illuminate\\Database\\MySqlConnection), Object(Illuminate\\Database\\Schema\\Grammars\\MySqlGrammar))
+#4 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Database/Schema/Builder.php(165): Illuminate\\Database\\Schema\\Builder->build(Object(Illuminate\\Database\\Schema\\Blueprint))
+#5 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(221): Illuminate\\Database\\Schema\\Builder->create('stations', Object(Closure))
+#6 /home/joshua/Documents/lavarel projects/AWS monitor/database/migrations/2018_02_11_183219_create_stations_table.php(32): Illuminate\\Support\\Facades\\Facade::__callStatic('create', Array)
+#7 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(359): CreateStationsTable->up()
+#8 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(366): Illuminate\\Database\\Migrations\\Migrator->Illuminate\\Database\\Migrations\\{closure}()
+#9 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(177): Illuminate\\Database\\Migrations\\Migrator->runMigration(Object(CreateStationsTable), 'up')
+#10 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(146): Illuminate\\Database\\Migrations\\Migrator->runUp('/home/joshua/Do...', 1, false)
+#11 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(95): Illuminate\\Database\\Migrations\\Migrator->runPending(Array, Array)
+#12 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Database/Console/Migrations/MigrateCommand.php(69): Illuminate\\Database\\Migrations\\Migrator->run(Array, Array)
+#13 [internal function]: Illuminate\\Database\\Console\\Migrations\\MigrateCommand->handle()
+#14 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(29): call_user_func_array(Array, Array)
+#15 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(87): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#16 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(31): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#17 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Container/Container.php(549): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#18 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Console/Command.php(183): Illuminate\\Container\\Container->call(Array)
+#19 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/symfony/console/Command/Command.php(252): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArrayInput), Object(Illuminate\\Console\\OutputStyle))
+#20 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Console/Command.php(170): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArrayInput), Object(Illuminate\\Console\\OutputStyle))
+#21 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Console/Command.php(198): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArrayInput), Object(Illuminate\\Console\\OutputStyle))
+#22 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Database/Console/Migrations/FreshCommand.php(45): Illuminate\\Console\\Command->call('migrate', Array)
+#23 [internal function]: Illuminate\\Database\\Console\\Migrations\\FreshCommand->handle()
+#24 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(29): call_user_func_array(Array, Array)
+#25 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(87): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#26 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(31): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#27 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Container/Container.php(549): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#28 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Console/Command.php(183): Illuminate\\Container\\Container->call(Array)
+#29 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/symfony/console/Command/Command.php(252): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#30 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Console/Command.php(170): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#31 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/symfony/console/Application.php(946): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#32 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/symfony/console/Application.php(248): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Database\\Console\\Migrations\\FreshCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#33 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/symfony/console/Application.php(148): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#34 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Console/Application.php(88): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#35 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(121): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#36 /home/joshua/Documents/lavarel projects/AWS monitor/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#37 {main}
+"} 
