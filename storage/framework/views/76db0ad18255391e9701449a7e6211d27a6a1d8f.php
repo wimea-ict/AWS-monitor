@@ -21,7 +21,19 @@
         <!-- sweet alerts -->
         <link href="assets/sweet-alert/sweet-alert.min.css" rel="stylesheet">
 
+        <link rel="stylesheet" type="text/css" href="assets/form-wizard/jquery.steps.css" />
+
+        <link href="assets/modal-effect/css/component.css" rel="stylesheet">
+
+
         <!-- Custom styles for this template -->
         <link href="css/style.css" rel="stylesheet">
         <link href="css/helper.css" rel="stylesheet">
         <link href="css/style-responsive.css" rel="stylesheet" />
+
+        <link href="assets/timepicker/bootstrap-datepicker.min.css" rel="stylesheet" />
+
+        <!-- DataTables -->
+        <link href="assets/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+
+        

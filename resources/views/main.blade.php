@@ -23,11 +23,9 @@
             <!-- ================== -->
      
             <div class="wraper container-fluid">
-                <div class="page-title"> 
-                    <h3 class="title">Welcome to the AWS Monitor !</h3> 
-                </div>
+                
 
-                @section('layouts.dynamiccontent')
+                @yield('content')
 
 
             </div>

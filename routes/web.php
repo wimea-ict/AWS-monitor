@@ -14,3 +14,27 @@
 Route::get('/', function () {
     return view('main');
 });
+
+Route::get('/addstation', function () {
+    return view('layouts/addstation');
+});
+
+Route::get('/configurestation', function () {
+    return view('layouts/configurestation');
+});
+
+Route::get('/addnode', function () {
+    return view('layouts/addnode');
+});
+
+Route::get('/configurenode', function () {
+    return view('layouts/configurenode');
+});
+
+Route::get('/addsensor', function () {
+    return view('layouts/addsensor');
+});
+
+Route::get('/configuresensor', function () {
+    return view('layouts/configuresensor');
+});

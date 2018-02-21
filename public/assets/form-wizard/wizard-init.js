@@ -1,8 +1,4 @@
-/**
-* Theme: Velonic Admin Template
-* Author: Coderthemes
-* Form wizard page
-*/
+
 
 !function($) {
     "use strict";

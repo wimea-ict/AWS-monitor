@@ -23,11 +23,9 @@
             <!-- ================== -->
      
             <div class="wraper container-fluid">
-                <div class="page-title"> 
-                    <h3 class="title">Welcome to the AWS Monitor !</h3> 
-                </div>
+                
 
-                <?php $__env->startSection('layouts.dynamiccontent'); ?>
+                <?php echo $__env->yieldContent('content'); ?>
 
 
             </div>

@@ -1247,7 +1247,7 @@ lesshat-selector {
 
 .wizard > .content {
   background: #fff;
-  min-height: 240px;
+  min-height: 600px;
 }
 
 .wizard > .content > .body {
@@ -1302,7 +1302,8 @@ lesshat-selector {
 }
 
 .wizard > .actions {
-  margin-bottom: 30px;
+ 
+  margin-top: 10px;
 }
 
 .wizard > .actions a, .wizard > .actions a:hover, .wizard > .actions a:active {

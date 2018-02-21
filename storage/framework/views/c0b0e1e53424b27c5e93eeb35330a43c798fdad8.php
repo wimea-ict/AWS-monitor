@@ -42,3 +42,27 @@
 
         <!-- Todo -->
         <script src="js/jquery.todo.js"></script>
+
+        <!--Form Wizard-->
+        <script src="assets/form-wizard/jquery.steps.min.js" type="text/javascript"></script>
+        <script type="text/javascript" src="assets/jquery.validate/jquery.validate.min.js"></script>
+
+        <!--wizard initialization-->
+        <script src="assets/form-wizard/wizard-init.js" type="text/javascript"></script>
+
+         <script src="assets/timepicker/bootstrap-datepicker.js"></script>
+
+        <script src="assets/datatables/jquery.dataTables.min.js"></script>
+        <script src="assets/datatables/dataTables.bootstrap.js"></script>
+
+         <!-- Modal-Effect -->
+         <script src="assets/modal-effect/js/classie.js"></script>
+        <script src="assets/modal-effect/js/modalEffects.js"></script>
+
+
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#datatable').dataTable();
+            } );
+        </script>
