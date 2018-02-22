@@ -21,7 +21,7 @@
                     </li>
                     <li class="has-submenu"><a href="#"><i class="ion-flask"></i> <span class="nav-label">Nodes</span></a>
                         <ul class="list-unstyled">
-                            <li><a href="/addnode">Add Node</a></li>
+                            <!--<li><a href="/addnode">Add Node</a></li>-->
                             <li><a href="/configurenode">Configure Node</a></li>
                             <li><a href="widgets.html">Node Performance</a></li>
                             
@@ -29,8 +29,8 @@
                     </li>
                     <li class="has-submenu"><a href="#"><i class="ion-settings"></i> <span class="nav-label">Sensors</span></a>
                         <ul class="list-unstyled">
-                            <li><a href="/addsensor">Add sensor</a></li>
-                            <li><a href="/configuresensor">Edit Sensor</a></li>
+                            <!--<li><a href="/addsensor">Add sensor</a></li>
+                            <li><a href="/configuresensor">Edit Sensor</a></li>-->
                             <li><a href="widgets.html">Sensor performance</a></li>
 
                             

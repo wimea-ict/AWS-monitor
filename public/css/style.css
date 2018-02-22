@@ -1976,3 +1976,12 @@ ul.p-social-link li a {
 #legend .line {
   color: #333; 
 }
+
+.activate-style{
+  margin-top:-6px;
+}
+
+.activate-style:visited{
+  color: #107cb7;
+}
+
