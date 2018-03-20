@@ -4,7 +4,7 @@ namespace station;
 
 use Illuminate\Database\Eloquent\Model;
 
-class sensors extends Model
+class NodeStatusConfiguration extends Model
 {
     //
 }

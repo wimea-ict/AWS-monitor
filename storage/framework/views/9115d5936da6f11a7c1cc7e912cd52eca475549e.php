@@ -117,7 +117,7 @@
                     <div class="col-md-12">
                         <div class="panel panel-default">
                             <div class="panel-heading"> 
-                                <h3 class="panel-title">Add Station</h3> 
+                                <h3 class="panel-title">Configure Station</h3> 
                             </div> 
                             <div class="panel-body"> 
                                 <form id="wizard-validation-form" action="#" style="margin-bottom: 30px;">
