@@ -4,7 +4,7 @@ namespace station;
 
 use Illuminate\Database\Eloquent\Model;
 
-class node_status extends Model
+class Station extends Model
 {
     //
 }

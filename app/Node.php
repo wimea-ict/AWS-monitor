@@ -4,7 +4,8 @@ namespace station;
 
 use Illuminate\Database\Eloquent\Model;
 
-class node_status_configuration extends Model
+class Node extends Model
 {
     //
+   protected $fillable =[""];
 }

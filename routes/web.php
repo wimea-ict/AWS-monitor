@@ -10,14 +10,12 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::resource('addstation', 'StationsController');
 Route::get('/', function () {
     return view('main');
 });
 
-Route::get('/addstation', function () {
-    return view('layouts/addstation');
-});
+
 
 Route::get('/configurestation', function () {
     return view('layouts/configurestation');
