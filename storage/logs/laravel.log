@@ -1,4 +1,4 @@
-[2018-02-11 18:28:42] local.ERROR: Command "migrate:make" is not defined.
+g[2018-02-11 18:28:42] local.ERROR: Command "migrate:make" is not defined.
 
 Did you mean one of these?
     migrate
