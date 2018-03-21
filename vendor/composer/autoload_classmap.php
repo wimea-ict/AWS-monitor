@@ -3295,6 +3295,7 @@ return array(
     'station\\Http\\Controllers\\Auth\\ResetPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ResetPasswordController.php',
     'station\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'station\\Http\\Controllers\\NodeController' => $baseDir . '/app/Http/Controllers/NodeController.php',
+    'station\\Http\\Controllers\\NodeStatusConfigurationController' => $baseDir . '/app/Http/Controllers/NodeStatusConfigurationController.php',
     'station\\Http\\Controllers\\NodeStatusController' => $baseDir . '/app/Http/Controllers/NodeStatusController.php',
     'station\\Http\\Controllers\\SensorsController' => $baseDir . '/app/Http/Controllers/SensorsController.php',
     'station\\Http\\Controllers\\StationsController' => $baseDir . '/app/Http/Controllers/StationsController.php',
