@@ -81,17 +81,17 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label" for="userName2">Node name</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input class="form-control" id="nname" name="nname" type="text">
+                                                                                    <input class="form-control" id="nname" name="nname" type="text" value="<?php echo e($stationdetails['10m_node']['name']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label" for="userName2">TXT key</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input class="form-control" id="nnumber" name="nnumber" type="text">
+                                                                                    <input class="form-control" id="nnumber" name="nnumber" type="text" value="<?php echo e($stationdetails['10m_node']['txt_key']); ?>">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="userName2">MAC address</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="mcaddress" name="mcaddress" type="text" class="form-control">
+                                                                                    <input id="mcaddress" name="mcaddress" type="text" class="form-control" value="<?php echo e($stationdetails['10m_node']['mac_add']); ?>">
 
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="userName2">Date Registered</label>
@@ -124,51 +124,51 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="userName2">v_in_label</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="v_in_label" name="v_in_label" type="text" class="form-control">
+                                                                                    <input id="v_in_label" name="v_in_label" type="text" class="form-control" value="<?php echo e($stationdetails['10m_node']['vin_label']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="userName2">v_in_key_title</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="v_in_key_title" name="v_in_key_title" type="text" class="form-control">
+                                                                                    <input id="v_in_key_title" name="v_in_key_title" type="text" class="form-control" value="<?php echo e($stationdetails['10m_node']['v_in_key_title']); ?>">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="confirm2">v_in_key_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="v_in_key_value" name="v_in_key_value" type="text" class="form-control">
+                                                                                    <input id="v_in_key_value" name="v_in_key_value" type="text" class="form-control" value="<?php echo e($stationdetails['10m_node']['v_in_key_value']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="confirm2">v_in_min_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="region" name="v_in_min_value" type="number" class="form-control">
+                                                                                    <input id="region" name="v_in_min_value" type="number" class="form-control" value="<?php echo e($stationdetails['10m_node']['v_in_min_value']); ?>">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="confirm2">v_in_max_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="v_in_max_value" name="v_in_max_value" type="number" class="form-control">
+                                                                                    <input id="v_in_max_value" name="v_in_max_value" type="number" class="form-control" value="<?php echo e($stationdetails['10m_node']['v_in_max_value']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="userName2">v_mcu_label</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="v_mcu_label" name="v_mcu_label" type="text" class="form-control">
+                                                                                    <input id="v_mcu_label" name="v_mcu_label" type="text" class="form-control" value="<?php echo e($stationdetails['10m_node']['v_mcu_label']); ?>">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="confirm2">v_mcu_key_title</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="v_mcu_key_title" name="v_mcu_key_title" type="text" class="form-control">
+                                                                                    <input id="v_mcu_key_title" name="v_mcu_key_title" type="text" class="form-control" value="<?php echo e($stationdetails['10m_node']['v_mcu_key_title']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="confirm2">v_mcu_key_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="v_mcu_key_value" name="v_mcu_key_value" type="number" class="form-control">
+                                                                                    <input id="v_mcu_key_value" name="v_mcu_key_value" type="number" class="form-control" value="<?php echo e($stationdetails['10m_node']['v_mcu_key_value']); ?>">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="confirm2">v_mcu_max_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="v_mcu_max_value" name="v_mcu_max_value" type="number" class="form-control">
+                                                                                    <input id="v_mcu_max_value" name="v_mcu_max_value" type="number" class="form-control" value="<?php echo e($stationdetails['10m_node']['v_mcu_max_value']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="userName2">v_mcu_min_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="v_mcu_min_value" name="v_mcu_min_value" type="text" class="form-control">
+                                                                                    <input id="v_mcu_min_value" name="v_mcu_min_value" type="text" class="form-control" value="<?php echo e($stationdetails['10m_node']['v_mcu_min_value']); ?>">
                                                                                 </div>
                                                                             </div>
                                                                                
@@ -191,31 +191,31 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="confirm2">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="parameter_read" name="parameter_read" type="text" class="form-control">
+                                                                                    <input id="parameter_read" name="parameter_read" type="text" class="form-control" value="<?php echo e($stationdetails['insulation_sensor']['parameter_read']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="userName2">Identifier used</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="id_used" name="id_used" type="text" class="form-control">
+                                                                                    <input id="id_used" name="id_used" type="text" class="form-control" value="<?php echo e($stationdetails['insulation_sensor']['identifier_used']); ?>">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="confirm2">report_key_title</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="report_key_title" name="report_key_title" type="text" class="form-control">
+                                                                                    <input id="report_key_title" name="report_key_title" type="text" class="form-control" value="<?php echo e($stationdetails['insulation_sensor']['report_key_title']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="confirm2">report_key_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="report_key_value" name="report_key_value" type="number" class="form-control">
+                                                                                    <input id="report_key_value" name="report_key_value" type="number" class="form-control" value="<?php echo e($stationdetails['insulation_sensor']['report_key_value']); ?>">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="confirm2">max_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="max_value" name="max_value" type="number" class="form-control">
+                                                                                    <input id="max_value" name="max_value" type="number" class="form-control" value="<?php echo e($stationdetails['insulation_sensor']['max_value']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="userName2">min_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="min_value" name="min_value" type="number" class="form-control">
+                                                                                    <input id="min_value" name="min_value" type="number" class="form-control" value="<?php echo e($stationdetails['insulation_sensor']['min_value']); ?>">
                                                                                 </div>
                                                                     </div>
                                                                                
@@ -235,39 +235,36 @@
                                                     </div> 
                                                     <div id="collapseTwo-2" class="panel-collapse collapse"> 
                                                         <div class="panel-body">
-                                                        <div class="form-group clearfix">
-                                                        
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="confirm2">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="parameter_read" name="parameter_read" type="text" class="form-control">
+                                                                                    <input id="parameter_read" name="parameter_read" type="text" class="form-control" value="<?php echo e($stationdetails['wind_speed_semsor']['parameter_read']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="userName2">Identifier used</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="id_used" name="id_used" type="text" class="form-control">
+                                                                                    <input id="id_used" name="id_used" type="text" class="form-control" value="<?php echo e($stationdetails['wind_speed_semsor']['identifier_used']); ?>">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="confirm2">report_key_title</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="report_key_title" name="report_key_title" type="text" class="form-control">
+                                                                                    <input id="report_key_title" name="report_key_title" type="text" class="form-control" value="<?php echo e($stationdetails['wind_speed_semsor']['report_key_title']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="confirm2">report_key_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="report_key_value" name="report_key_value" type="number" class="form-control">
+                                                                                    <input id="report_key_value" name="report_key_value" type="number" class="form-control" value="<?php echo e($stationdetails['wind_speed_semsor']['report_key_value']); ?>">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="confirm2">max_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="max_value" name="max_value" type="number" class="form-control">
+                                                                                    <input id="max_value" name="max_value" type="number" class="form-control" value="<?php echo e($stationdetails['wind_speed_semsor']['max_value']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="userName2">min_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="min_value" name="min_value" type="number" class="form-control">
+                                                                                    <input id="min_value" name="min_value" type="number" class="form-control" value="<?php echo e($stationdetails['wind_speed_semsor']['min_value']); ?>">
                                                                                 </div>
-                                                                    </div>    
-                                                        </div> 
+                                                                            </div> 
                                                     </div>
                                                     </div> 
                                                 </div> 
@@ -283,41 +280,37 @@
                                                     </div> 
                                                     <div id="collapseThree-2" class="panel-collapse collapse"> 
                                                         <div class="panel-body">
-                                                        <div class="form-group clearfix">
-                                                                                    
-                                                                                    
-                                                                            </div>
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="confirm2">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="parameter_read" name="parameter_read" type="text" class="form-control">
+                                                                                    <input id="parameter_read" name="parameter_read" type="text" class="form-control" value="<?php echo e($stationdetails['wind_direction_semsor']['parameter_read']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="userName2">Identifier used</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="id_used" name="id_used" type="text" class="form-control">
+                                                                                    <input id="id_used" name="id_used" type="text" class="form-control" value="<?php echo e($stationdetails['wind_direction_semsor']['identifier_used']); ?>">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="confirm2">report_key_title</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="report_key_title" name="report_key_title" type="text" class="form-control">
+                                                                                    <input id="report_key_title" name="report_key_title" type="text" class="form-control" value="<?php echo e($stationdetails['wind_direction_semsor']['report_key_title']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="confirm2">report_key_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="report_key_value" name="report_key_value" type="number" class="form-control">
+                                                                                    <input id="report_key_value" name="report_key_value" type="number" class="form-control" value="<?php echo e($stationdetails['wind_direction_semsor']['report_key_value']); ?>">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="confirm2">max_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="max_value" name="max_value" type="number" class="form-control">
+                                                                                    <input id="max_value" name="max_value" type="number" class="form-control" value="<?php echo e($stationdetails['wind_direction_semsor']['max_value']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="userName2">min_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="min_value" name="min_value" type="number" class="form-control">
+                                                                                    <input id="min_value" name="min_value" type="number" class="form-control" value="<?php echo e($stationdetails['wind_direction_semsor']['min_value']); ?>">
                                                                                 </div>
-                                                                    </div>    
-                                                        </div> 
+                                                                            </div> 
+                                                    </div> 
                                                     </div> 
                                                 </div> 
                                             </div> 
@@ -331,17 +324,17 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label" for="userName2">Node name</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input class="form-control" id="nname" name="nname" type="text">
+                                                                                    <input class="form-control" id="nname" name="nname" type="text" value="<?php echo e($stationdetails['2m_node']['name']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label" for="userName2">TXT key</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input class="form-control" id="nnumber" name="nnumber" type="text">
+                                                                                    <input class="form-control" id="nnumber" name="nnumber" type="text" value="<?php echo e($stationdetails['2m_node']['txt_key']); ?>">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="userName2">MAC address</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="mcaddress" name="mcaddress" type="text" class="form-control">
+                                                                                    <input id="mcaddress" name="mcaddress" type="text" class="form-control" value="<?php echo e($stationdetails['2m_node']['mac_add']); ?>">
 
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="userName2">Date Registered</label>
@@ -371,57 +364,56 @@
                                                     <div id="collapsesix-2" class="panel-collapse collapse"> 
                                                         <div class="panel-body">
                              
-                                                                            <div class="form-group clearfix">
+                                                        <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="userName2">v_in_label</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="v_in_label" name="v_in_label" type="text" class="form-control">
+                                                                                    <input id="v_in_label" name="v_in_label" type="text" class="form-control" value="<?php echo e($stationdetails['2m_node']['vin_label']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="userName2">v_in_key_title</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="v_in_key_title" name="v_in_key_title" type="text" class="form-control">
+                                                                                    <input id="v_in_key_title" name="v_in_key_title" type="text" class="form-control" value="<?php echo e($stationdetails['2m_node']['v_in_key_title']); ?>">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="confirm2">v_in_key_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="v_in_key_value" name="v_in_key_value" type="text" class="form-control">
+                                                                                    <input id="v_in_key_value" name="v_in_key_value" type="text" class="form-control" value="<?php echo e($stationdetails['2m_node']['v_in_key_value']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="confirm2">v_in_min_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="region" name="v_in_min_value" type="number" class="form-control">
+                                                                                    <input id="region" name="v_in_min_value" type="number" class="form-control" value="<?php echo e($stationdetails['2m_node']['v_in_min_value']); ?>">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="confirm2">v_in_max_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="v_in_max_value" name="v_in_max_value" type="number" class="form-control">
+                                                                                    <input id="v_in_max_value" name="v_in_max_value" type="number" class="form-control" value="<?php echo e($stationdetails['2m_node']['v_in_max_value']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="userName2">v_mcu_label</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="v_mcu_label" name="v_mcu_label" type="text" class="form-control">
+                                                                                    <input id="v_mcu_label" name="v_mcu_label" type="text" class="form-control" value="<?php echo e($stationdetails['2m_node']['v_mcu_label']); ?>">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="confirm2">v_mcu_key_title</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="v_mcu_key_title" name="v_mcu_key_title" type="text" class="form-control">
+                                                                                    <input id="v_mcu_key_title" name="v_mcu_key_title" type="text" class="form-control" value="<?php echo e($stationdetails['2m_node']['v_mcu_key_title']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="confirm2">v_mcu_key_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="v_mcu_key_value" name="v_mcu_key_value" type="number" class="form-control">
+                                                                                    <input id="v_mcu_key_value" name="v_mcu_key_value" type="number" class="form-control" value="<?php echo e($stationdetails['2m_node']['v_mcu_key_value']); ?>">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="confirm2">v_mcu_max_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="v_mcu_max_value" name="v_mcu_max_value" type="number" class="form-control">
+                                                                                    <input id="v_mcu_max_value" name="v_mcu_max_value" type="number" class="form-control" value="<?php echo e($stationdetails['2m_node']['v_mcu_max_value']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="userName2">v_mcu_min_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="v_mcu_min_value" name="v_mcu_min_value" type="text" class="form-control">
+                                                                                    <input id="v_mcu_min_value" name="v_mcu_min_value" type="text" class="form-control" value="<?php echo e($stationdetails['2m_node']['v_mcu_min_value']); ?>">
                                                                                 </div>
-                                                                            </div>
-                                                                               
+                                                                            </div>                                                                               
                                                         </div> 
                                                     </div> 
                                                 </div>
@@ -438,36 +430,36 @@
                                                     <div id="collapseseven-2" class="panel-collapse collapse"> 
                                                         <div class="panel-body">
                                                                             
-                                                                            <div class="form-group clearfix">
+                                                        <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="confirm2">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="parameter_read" name="parameter_read" type="text" class="form-control">
+                                                                                    <input id="parameter_read" name="parameter_read" type="text" class="form-control" value="<?php echo e($stationdetails['relative_humidity_semsor']['parameter_read']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="userName2">Identifier used</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="id_used" name="id_used" type="text" class="form-control">
+                                                                                    <input id="id_used" name="id_used" type="text" class="form-control" value="<?php echo e($stationdetails['relative_humidity_semsor']['identifier_used']); ?>">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="confirm2">report_key_title</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="report_key_title" name="report_key_title" type="text" class="form-control">
+                                                                                    <input id="report_key_title" name="report_key_title" type="text" class="form-control" value="<?php echo e($stationdetails['relative_humidity_semsor']['report_key_title']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="confirm2">report_key_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="report_key_value" name="report_key_value" type="number" class="form-control">
+                                                                                    <input id="report_key_value" name="report_key_value" type="number" class="form-control" value="<?php echo e($stationdetails['relative_humidity_semsor']['report_key_value']); ?>">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="confirm2">max_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="max_value" name="max_value" type="number" class="form-control">
+                                                                                    <input id="max_value" name="max_value" type="number" class="form-control" value="<?php echo e($stationdetails['relative_humidity_semsor']['max_value']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="userName2">min_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="min_value" name="min_value" type="number" class="form-control">
+                                                                                    <input id="min_value" name="min_value" type="number" class="form-control" value="<?php echo e($stationdetails['relative_humidity_semsor']['min_value']); ?>">
                                                                                 </div>
-                                                                    </div>
+                                                                            </div>
                                                                                
                                                         </div> 
                                                     </div> 
@@ -490,33 +482,33 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="confirm2">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="parameter_read" name="parameter_read" type="text" class="form-control">
+                                                                                    <input id="parameter_read" name="parameter_read" type="text" class="form-control" value="<?php echo e($stationdetails['Temp_semsor']['parameter_read']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="userName2">Identifier used</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="id_used" name="id_used" type="text" class="form-control">
+                                                                                    <input id="id_used" name="id_used" type="text" class="form-control" value="<?php echo e($stationdetails['Temp_semsor']['identifier_used']); ?>">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="confirm2">report_key_title</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="report_key_title" name="report_key_title" type="text" class="form-control">
+                                                                                    <input id="report_key_title" name="report_key_title" type="text" class="form-control" value="<?php echo e($stationdetails['Temp_semsor']['report_key_title']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="confirm2">report_key_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="report_key_value" name="report_key_value" type="number" class="form-control">
+                                                                                    <input id="report_key_value" name="report_key_value" type="number" class="form-control" value="<?php echo e($stationdetails['Temp_semsor']['report_key_value']); ?>">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="confirm2">max_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="max_value" name="max_value" type="number" class="form-control">
+                                                                                    <input id="max_value" name="max_value" type="number" class="form-control" value="<?php echo e($stationdetails['Temp_semsor']['max_value']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="userName2">min_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="min_value" name="min_value" type="number" class="form-control">
+                                                                                    <input id="min_value" name="min_value" type="number" class="form-control" value="<?php echo e($stationdetails['Temp_semsor']['min_value']); ?>">
                                                                                 </div>
-                                                                    </div>    
+                                                                            </div>  
                                                         </div> 
                                                     </div>
                                                     </div> 
@@ -531,17 +523,17 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label" for="userName2">Node name</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input class="form-control" id="nname" name="nname" type="text">
+                                                                                    <input class="form-control" id="nname" name="nname" type="text" value="<?php echo e($stationdetails['ground_node']['name']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label" for="userName2">TXT key</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input class="form-control" id="nnumber" name="nnumber" type="text">
+                                                                                    <input class="form-control" id="nnumber" name="nnumber" type="text" value="<?php echo e($stationdetails['ground_node']['txt_key']); ?>">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="userName2">MAC address</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="mcaddress" name="mcaddress" type="text" class="form-control">
+                                                                                    <input id="mcaddress" name="mcaddress" type="text" class="form-control" value="<?php echo e($stationdetails['ground_node']['mac_add']); ?>">
 
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="userName2">Date Registered</label>
@@ -574,54 +566,53 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="userName2">v_in_label</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="v_in_label" name="v_in_label" type="text" class="form-control">
+                                                                                    <input id="v_in_label" name="v_in_label" type="text" class="form-control" value="<?php echo e($stationdetails['ground_node']['vin_label']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="userName2">v_in_key_title</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="v_in_key_title" name="v_in_key_title" type="text" class="form-control">
+                                                                                    <input id="v_in_key_title" name="v_in_key_title" type="text" class="form-control" value="<?php echo e($stationdetails['ground_node']['v_in_key_title']); ?>">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="confirm2">v_in_key_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="v_in_key_value" name="v_in_key_value" type="text" class="form-control">
+                                                                                    <input id="v_in_key_value" name="v_in_key_value" type="text" class="form-control" value="<?php echo e($stationdetails['ground_node']['v_in_key_value']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="confirm2">v_in_min_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="region" name="v_in_min_value" type="number" class="form-control">
+                                                                                    <input id="region" name="v_in_min_value" type="number" class="form-control" value="<?php echo e($stationdetails['ground_node']['v_in_min_value']); ?>">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="confirm2">v_in_max_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="v_in_max_value" name="v_in_max_value" type="number" class="form-control">
+                                                                                    <input id="v_in_max_value" name="v_in_max_value" type="number" class="form-control" value="<?php echo e($stationdetails['ground_node']['v_in_max_value']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="userName2">v_mcu_label</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="v_mcu_label" name="v_mcu_label" type="text" class="form-control">
+                                                                                    <input id="v_mcu_label" name="v_mcu_label" type="text" class="form-control" value="<?php echo e($stationdetails['ground_node']['v_mcu_label']); ?>">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="confirm2">v_mcu_key_title</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="v_mcu_key_title" name="v_mcu_key_title" type="text" class="form-control">
+                                                                                    <input id="v_mcu_key_title" name="v_mcu_key_title" type="text" class="form-control" value="<?php echo e($stationdetails['ground_node']['v_mcu_key_title']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="confirm2">v_mcu_key_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="v_mcu_key_value" name="v_mcu_key_value" type="number" class="form-control">
+                                                                                    <input id="v_mcu_key_value" name="v_mcu_key_value" type="number" class="form-control" value="<?php echo e($stationdetails['ground_node']['v_mcu_key_value']); ?>">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="confirm2">v_mcu_max_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="v_mcu_max_value" name="v_mcu_max_value" type="number" class="form-control">
+                                                                                    <input id="v_mcu_max_value" name="v_mcu_max_value" type="number" class="form-control" value="<?php echo e($stationdetails['ground_node']['v_mcu_max_value']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="userName2">v_mcu_min_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="v_mcu_min_value" name="v_mcu_min_value" type="text" class="form-control">
+                                                                                    <input id="v_mcu_min_value" name="v_mcu_min_value" type="text" class="form-control" value="<?php echo e($stationdetails['ground_node']['v_mcu_min_value']); ?>">
                                                                                 </div>
-                                                                            </div>
-                                                                               
+                                                                            </div>                                                                               
                                                         </div> 
                                                     </div> 
                                                 </div>
@@ -641,33 +632,33 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="confirm2">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="parameter_read" name="parameter_read" type="text" class="form-control">
+                                                                                    <input id="parameter_read" name="parameter_read" type="text" class="form-control" value="<?php echo e($stationdetails['preciptation_semsor']['parameter_read']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="userName2">Identifier used</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="id_used" name="id_used" type="text" class="form-control">
+                                                                                    <input id="id_used" name="id_used" type="text" class="form-control" value="<?php echo e($stationdetails['preciptation_semsor']['identifier_used']); ?>">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="confirm2">report_key_title</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="report_key_title" name="report_key_title" type="text" class="form-control">
+                                                                                    <input id="report_key_title" name="report_key_title" type="text" class="form-control" value="<?php echo e($stationdetails['preciptation_semsor']['report_key_title']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="confirm2">report_key_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="report_key_value" name="report_key_value" type="number" class="form-control">
+                                                                                    <input id="report_key_value" name="report_key_value" type="number" class="form-control" value="<?php echo e($stationdetails['preciptation_semsor']['report_key_value']); ?>">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="confirm2">max_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="max_value" name="max_value" type="number" class="form-control">
+                                                                                    <input id="max_value" name="max_value" type="number" class="form-control" value="<?php echo e($stationdetails['preciptation_semsor']['max_value']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="userName2">min_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="min_value" name="min_value" type="number" class="form-control">
+                                                                                    <input id="min_value" name="min_value" type="number" class="form-control" value="<?php echo e($stationdetails['preciptation_semsor']['min_value']); ?>">
                                                                                 </div>
-                                                                    </div>
+                                                                            </div>
                                                                                
                                                         </div> 
                                                     </div> 
@@ -690,33 +681,33 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="confirm2">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="parameter_read" name="parameter_read" type="text" class="form-control">
+                                                                                    <input id="parameter_read" name="parameter_read" type="text" class="form-control" value="<?php echo e($stationdetails['soil_temp_semsor']['parameter_read']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="userName2">Identifier used</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="id_used" name="id_used" type="text" class="form-control">
+                                                                                    <input id="id_used" name="id_used" type="text" class="form-control" value="<?php echo e($stationdetails['soil_temp_semsor']['identifier_used']); ?>">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="confirm2">report_key_title</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="report_key_title" name="report_key_title" type="text" class="form-control">
+                                                                                    <input id="report_key_title" name="report_key_title" type="text" class="form-control" value="<?php echo e($stationdetails['soil_temp_semsor']['report_key_title']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="confirm2">report_key_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="report_key_value" name="report_key_value" type="number" class="form-control">
+                                                                                    <input id="report_key_value" name="report_key_value" type="number" class="form-control" value="<?php echo e($stationdetails['soil_temp_semsor']['report_key_value']); ?>">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="confirm2">max_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="max_value" name="max_value" type="number" class="form-control">
+                                                                                    <input id="max_value" name="max_value" type="number" class="form-control" value="<?php echo e($stationdetails['soil_temp_semsor']['max_value']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="userName2">min_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="min_value" name="min_value" type="number" class="form-control">
+                                                                                    <input id="min_value" name="min_value" type="number" class="form-control" value="<?php echo e($stationdetails['soil_temp_semsor']['min_value']); ?>">
                                                                                 </div>
-                                                                    </div>    
+                                                                            </div>  
                                                         </div> 
                                                     </div>
                                                     </div> 
@@ -740,33 +731,33 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="confirm2">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="parameter_read" name="parameter_read" type="text" class="form-control">
+                                                                                    <input id="parameter_read" name="parameter_read" type="text" class="form-control" value="<?php echo e($stationdetails['soil_moisture_semsor']['parameter_read']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="userName2">Identifier used</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="id_used" name="id_used" type="text" class="form-control">
+                                                                                    <input id="id_used" name="id_used" type="text" class="form-control" value="<?php echo e($stationdetails['soil_moisture_semsor']['identifier_used']); ?>">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="confirm2">report_key_title</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="report_key_title" name="report_key_title" type="text" class="form-control">
+                                                                                    <input id="report_key_title" name="report_key_title" type="text" class="form-control" value="<?php echo e($stationdetails['soil_moisture_semsor']['report_key_title']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="confirm2">report_key_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="report_key_value" name="report_key_value" type="number" class="form-control">
+                                                                                    <input id="report_key_value" name="report_key_value" type="number" class="form-control" value="<?php echo e($stationdetails['soil_moisture_semsor']['report_key_value']); ?>">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="confirm2">max_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="max_value" name="max_value" type="number" class="form-control">
+                                                                                    <input id="max_value" name="max_value" type="number" class="form-control" value="<?php echo e($stationdetails['soil_moisture_semsor']['max_value']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="userName2">min_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="min_value" name="min_value" type="number" class="form-control">
+                                                                                    <input id="min_value" name="min_value" type="number" class="form-control" value="<?php echo e($stationdetails['soil_moisture_semsor']['min_value']); ?>">
                                                                                 </div>
-                                                                    </div>    
+                                                                            </div>  
                                                         </div> 
                                                     </div> 
                                                 </div> 
@@ -779,17 +770,17 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label" for="userName2">Node name</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input class="form-control" id="nname" name="nname" type="text">
+                                                                                    <input class="form-control" id="nname" name="nname" type="text" value="<?php echo e($stationdetails['sink_node']['name']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label" for="userName2">TXT key</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input class="form-control" id="nnumber" name="nnumber" type="text">
+                                                                                    <input class="form-control" id="nnumber" name="nnumber" type="text" value="<?php echo e($stationdetails['sink_node']['txt_key']); ?>">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="userName2">MAC address</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="mcaddress" name="mcaddress" type="text" class="form-control">
+                                                                                    <input id="mcaddress" name="mcaddress" type="text" class="form-control" value="<?php echo e($stationdetails['sink_node']['mac_add']); ?>">
 
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="userName2">Date Registered</label>
@@ -799,7 +790,6 @@
                                                                                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                                                                 </div>                                                                               </div>
                                                                             </div>
-
                                                                             
                                                                             
                                                                  
@@ -819,57 +809,56 @@
                                                     <div id="collapsethirteen-2" class="panel-collapse collapse"> 
                                                         <div class="panel-body">
                              
-                                                                            <div class="form-group clearfix">
+                                                        <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="userName2">v_in_label</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="v_in_label" name="v_in_label" type="text" class="form-control">
+                                                                                    <input id="v_in_label" name="v_in_label" type="text" class="form-control" value="<?php echo e($stationdetails['sink_node']['vin_label']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="userName2">v_in_key_title</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="v_in_key_title" name="v_in_key_title" type="text" class="form-control">
+                                                                                    <input id="v_in_key_title" name="v_in_key_title" type="text" class="form-control" value="<?php echo e($stationdetails['sink_node']['v_in_key_title']); ?>">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="confirm2">v_in_key_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="v_in_key_value" name="v_in_key_value" type="text" class="form-control">
+                                                                                    <input id="v_in_key_value" name="v_in_key_value" type="text" class="form-control" value="<?php echo e($stationdetails['sink_node']['v_in_key_value']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="confirm2">v_in_min_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="region" name="v_in_min_value" type="number" class="form-control">
+                                                                                    <input id="region" name="v_in_min_value" type="number" class="form-control" value="<?php echo e($stationdetails['sink_node']['v_in_min_value']); ?>">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="confirm2">v_in_max_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="v_in_max_value" name="v_in_max_value" type="number" class="form-control">
+                                                                                    <input id="v_in_max_value" name="v_in_max_value" type="number" class="form-control" value="<?php echo e($stationdetails['sink_node']['v_in_max_value']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="userName2">v_mcu_label</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="v_mcu_label" name="v_mcu_label" type="text" class="form-control">
+                                                                                    <input id="v_mcu_label" name="v_mcu_label" type="text" class="form-control" value="<?php echo e($stationdetails['sink_node']['v_mcu_label']); ?>">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="confirm2">v_mcu_key_title</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="v_mcu_key_title" name="v_mcu_key_title" type="text" class="form-control">
+                                                                                    <input id="v_mcu_key_title" name="v_mcu_key_title" type="text" class="form-control" value="<?php echo e($stationdetails['sink_node']['v_mcu_key_title']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="confirm2">v_mcu_key_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="v_mcu_key_value" name="v_mcu_key_value" type="number" class="form-control">
+                                                                                    <input id="v_mcu_key_value" name="v_mcu_key_value" type="number" class="form-control" value="<?php echo e($stationdetails['sink_node']['v_mcu_key_value']); ?>">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="confirm2">v_mcu_max_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="v_mcu_max_value" name="v_mcu_max_value" type="number" class="form-control">
+                                                                                    <input id="v_mcu_max_value" name="v_mcu_max_value" type="number" class="form-control" value="<?php echo e($stationdetails['sink_node']['v_mcu_max_value']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="userName2">v_mcu_min_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="v_mcu_min_value" name="v_mcu_min_value" type="text" class="form-control">
+                                                                                    <input id="v_mcu_min_value" name="v_mcu_min_value" type="text" class="form-control" value="<?php echo e($stationdetails['sink_node']['v_mcu_min_value']); ?>">
                                                                                 </div>
-                                                                            </div>
-                                                                               
+                                                                            </div>                                                                               
                                                         </div> 
                                                     </div> 
                                                 </div>
@@ -886,36 +875,36 @@
                                                     <div id="collapsefourteen-2" class="panel-collapse collapse"> 
                                                         <div class="panel-body">
                                                                             
-                                                                            <div class="form-group clearfix">
+                                                        <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="confirm2">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="parameter_read" name="parameter_read" type="text" class="form-control">
+                                                                                    <input id="parameter_read" name="parameter_read" type="text" class="form-control" value="<?php echo e($stationdetails['pressure_semsor']['parameter_read']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="userName2">Identifier used</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="id_used" name="id_used" type="text" class="form-control">
+                                                                                    <input id="id_used" name="id_used" type="text" class="form-control" value="<?php echo e($stationdetails['pressure_semsor']['identifier_used']); ?>">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="confirm2">report_key_title</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="report_key_title" name="report_key_title" type="text" class="form-control">
+                                                                                    <input id="report_key_title" name="report_key_title" type="text" class="form-control" value="<?php echo e($stationdetails['pressure_semsor']['report_key_title']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="confirm2">report_key_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="report_key_value" name="report_key_value" type="number" class="form-control">
+                                                                                    <input id="report_key_value" name="report_key_value" type="number" class="form-control" value="<?php echo e($stationdetails['pressure_semsor']['report_key_value']); ?>">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="confirm2">max_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="max_value" name="max_value" type="number" class="form-control">
+                                                                                    <input id="max_value" name="max_value" type="number" class="form-control" value="<?php echo e($stationdetails['pressure_semsor']['max_value']); ?>">
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="userName2">min_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="min_value" name="min_value" type="number" class="form-control">
+                                                                                    <input id="min_value" name="min_value" type="number" class="form-control" value="<?php echo e($stationdetails['pressure_semsor']['min_value']); ?>">
                                                                                 </div>
-                                                                    </div>
+                                                                            </div>
                                                                                
                                                         </div> 
                                                     </div> 
