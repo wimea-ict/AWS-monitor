@@ -15,9 +15,10 @@ class CreateNodesTable extends Migration
     {
         Schema::create('nodes', function (Blueprint $table) {
             $table->increments('node_id');
-            $table->integer('station_id');
+            $table->integer('station_id')->unsigned();
             $table->string('txt_key');
             $table->string('mac_address');
+            $table->foreign('station_id')->references('station_id')->on('stations'); 
             $table->timestamps();
         });
     }
