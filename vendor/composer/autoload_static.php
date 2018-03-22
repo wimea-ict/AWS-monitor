@@ -3596,6 +3596,7 @@ class ComposerStaticInit87b9326ddaef55773641bf54eaf4d0ef
         'station\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
         'station\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'station\\Http\\Controllers\\NodeController' => __DIR__ . '/../..' . '/app/Http/Controllers/NodeController.php',
+        'station\\Http\\Controllers\\NodeStatusConfigurationController' => __DIR__ . '/../..' . '/app/Http/Controllers/NodeStatusConfigurationController.php',
         'station\\Http\\Controllers\\NodeStatusController' => __DIR__ . '/../..' . '/app/Http/Controllers/NodeStatusController.php',
         'station\\Http\\Controllers\\SensorsController' => __DIR__ . '/../..' . '/app/Http/Controllers/SensorsController.php',
         'station\\Http\\Controllers\\StationsController' => __DIR__ . '/../..' . '/app/Http/Controllers/StationsController.php',
