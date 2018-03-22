@@ -23,3 +23,18 @@ $factory->define(station\User::class, function (Faker $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+// $factory->define(station\Station::class, function (Faker $faker) {
+//     static $password;
+
+//     return [
+//         'station_name' => $faker->name,
+//         'station_location' => $faker->unique()->safeEmail,
+//         'longitude' => $faker->unique()->safeEmail,
+//         'latitude' => $faker->unique()->safeEmail,
+//         'station_number' => $faker->unique()->safeEmail,
+//         'location' => $faker->unique()->safeEmail,
+//         'city' => $faker->unique()->safeEmail,
+        
+//     ];
+// });
