@@ -27,16 +27,17 @@ $factory->define(station\User::class, function (Faker $faker) {
  $factory->define(station\Station::class, function (Faker $faker) {
      
      return [
-         'station_name' => $faker->name,
-         'station_location' => $faker->unique()->safeEmail,
-         'longitude' => $faker->unique()->safeEmail,
-         'latitude' => $faker->unique()->safeEmail,
-         'station_number' => $faker->unique()->safeEmail,
-         'location' => $faker->unique()->safeEmail,
-         'city' => $faker->unique()->safeEmail,
-        'code' => $faker->unique()->safeEmail,
-        'date_opened' => $faker->unique()->safeEmail,
-        'date_closed' => $faker->unique()->safeEmail
+         'station_name' => $faker->company,
+         'station_location' => $faker->streetName,
+         'longitude' => $faker->longitude,
+         'latitude' => $faker->latitude,
+         'station_number' => $faker->unique()->numberBetween($min = 0, $max = 2147483647),
+         'location' => $faker->streetName,
+         'city' => $faker->city,
+         'region'=>$faker->address,
+         'code' => $faker->postcode,
+         'date_opened' => date($format = 'Y-m-d', $min = 'now'),
+         'date_closed' => date($format = 'Y-m-d', $min = 'now')
      ];
          
  });
@@ -45,23 +46,23 @@ $factory->define(station\User::class, function (Faker $faker) {
  $factory->define(station\Node::class, function (Faker $faker) {
 
     return [
-        'station_id' => $faker->integer,
-        'txt_key' => $faker->unique()->string,
-        'mac_address' => str_random(10)
+        
+        'txt_key' => $faker->unique()->slug,
+        'mac_address' => $faker->unique()->macAddress
     ];
 });
 
 $factory->define(station\Sensor::class, function (Faker $faker) {
 
     return [
-        'node_id' => $faker->integer,
-        'parameter_read' => $faker->unique()->string,
-        'identifier_used' => $faker->unique()->string,
-        'min_value' => $faker->unique()->string,
-        'max_value' => $faker->unique()->string,
-        'report_key_title' => $faker->unique()->string,
-        'report_key_value' => $faker->unique()->string,
-        'report_time_interval' => str_random(10)
+        
+        'parameter_read' => $faker->unique()->name,
+        'identifier_used' => $faker->unique()->name,
+        'min_value' => $faker->numberBetween($min = 0, $max = 10),
+        'max_value' => $faker->numberBetween($min = 10, $max = 20),
+        'report_key_title' => $faker->name,
+        'report_key_value' => $faker->name,
+        'report_time_interval' => $faker->numberBetween($min = 30, $max = 60)
     ];
 });
 
@@ -70,8 +71,8 @@ $factory->define(station\Sensor::class, function (Faker $faker) {
 $factory->define(station\NodeStatus::class, function (Faker $faker) {
 
     return [
-        'node_id' => $faker->integer,
-        'v_in' => $faker->unique()->double,
+        
+        'v_in' => $faker->numberBetween($min = 0, $max = 10),
         'rssi' => $faker->unique()->double,
         'drop' => $faker->unique()->double,
         'vmcu' => $faker->unique()->double,
