@@ -15,7 +15,7 @@ class CreateSensorsTable extends Migration
     {
         Schema::create('sensors', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('node_id');
+            $table->integer('node_id')->unsigned();
             $table->string('parameter_read');
             $table->string('identifier_used');
             $table->string('min_value');
@@ -23,6 +23,7 @@ class CreateSensorsTable extends Migration
             $table->string('report_key_title');
             $table->string('report_key_value');
             $table->string('report_time_interval');
+            $table->foreign('node_id')->references('node_id')->on('nodes'); 
             $table->timestamps();
         });
     }

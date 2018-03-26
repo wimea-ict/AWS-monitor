@@ -15,13 +15,14 @@ class CreateNodeStatusesTable extends Migration
     {
         Schema::create('node_statuses', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('node_id');
+            $table->integer('node_id')->unsigned();
             $table->double('v_in');
             $table->double('rssi');
             $table->double('drop');
             $table->double('vmcu');
             $table->double('lqi');
             $table->dateTime('date_time');
+            $table->foreign('node_id')->references('node_id')->on('nodes');
             $table->timestamps();
         });
     }

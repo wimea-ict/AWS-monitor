@@ -15,7 +15,7 @@ class CreateNodeStatusConfigurationsTable extends Migration
     {
         Schema::create('node_status_configurations', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('node_id');
+            $table->integer('node_id')->unsigned();
             $table->string('v_in_label');
             $table->string('v_in_key_title');
             $table->string('v_in_key_value');
@@ -26,6 +26,7 @@ class CreateNodeStatusConfigurationsTable extends Migration
             $table->string('v_mcu_key_value');
             $table->double('v_mcu_min_value');
             $table->double('v_mcu_max_value');
+            $table->foreign('node_id')->references('node_id')->on('nodes');
             $table->timestamps();
         });
     }
