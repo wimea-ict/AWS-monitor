@@ -33,7 +33,7 @@
                 return $form_container.valid();
             },
             onFinished: function (event, currentIndex) {
-                alert("Submitted!");
+                alert("Lots");
             }
         });
 

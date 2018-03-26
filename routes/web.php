@@ -11,15 +11,17 @@
 |
 */
 Route::resource('addstation', 'StationsController');
+
+Route::resource('configurestation', 'ConfigureStaion');
 Route::get('/', function () {
     return view('main');
 });
 
-
-
-Route::get('/configurestation', function () {
-    return view('layouts/configurestation');
+Route::get('/ajax-model', function () {
+    return view('layouts/ajax-model.php');
 });
+
+
 
 Route::get('/addnode', function () {
     return view('layouts/addnode');

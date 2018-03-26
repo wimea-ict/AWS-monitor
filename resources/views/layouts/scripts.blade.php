@@ -65,4 +65,10 @@
             $(document).ready(function() {
                 $('#datatable').dataTable();
             } );
+            
+            $('.edit-station-button').on('click', function () {
+                $('#wizard-validation-form').attr('action', $(this).data('edit-link'));
+                //$('#bookId').val($(this).data('id'));
+            });
+            
         </script>

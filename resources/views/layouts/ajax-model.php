@@ -1,53 +1,5 @@
-<?php $__env->startSection('content'); ?>
-<div class="row">
-                    <div class="col-md-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Stations</h3>
-                            </div>
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-12 col-xs-12">
-                                        <table id="datatable" class="table table-striped table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th>Name</th>
-                                                    <th>Number</th>
-                                                    <th>location</th>
-                                                    <th>longitude</th>
-                                                    <th>Latitude</th>
-                                                    <th>Edit</th>
-                                                </tr>
-                                            </thead>
-
-                                     
-                                            <tbody>
-                                            <?php $__currentLoopData = $stations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $station): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                <tr>
-                                                    <td><?php echo e($station['station_name']); ?></td>
-                                                    <td><?php echo e($station['station_number']); ?></td>
-                                                    <td><?php echo e($station['station_location']); ?></td>
-                                                    <td><?php echo e($station['longitude']); ?></td>
-                                                    <td><?php echo e($station['latitude']); ?></td>
-                                                    <td><button class="btn btn-icon btn-success m-b-5 edit-station-button" data-toggle="modal" data-target="#full-width-modal" data-edit-link="<?php echo e(route('configurestation.show', $station['station_id'])); ?>"> <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
-                                                </tr>
-                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>    
-                                                
-                                            </tbody>
-                                        </table>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div> <!-- End Row -->
-
-                <div id="full-width-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="full-width-modalLabel" aria-hidden="true" style="display: none;">
-                    <div class="modal-dialog modal-full">
-                        <div class="modal-content">
-                                     
+@foreach($stations as $station)
+                             @if ($station.station_id === $GET['id'])               
                             <div class="modal-body">
                                 <div class="row">
                                     <!-- Wizard with Validation -->
@@ -65,7 +17,7 @@
                                                 <div class="form-group clearfix">
                                                     <label class="col-lg-2 control-label" for="userName2">Station name</label>
                                                     <div class="col-lg-4">
-                                                        <input class="form-control" id="sname" name="sname" type="text" value="<?php echo e($station['station_name']); ?>">
+                                                        <input class="form-control" id="sname" name="sname" type="text" value="{{$station['station_name']}}">
                                                     </div>
                                                     <label class="col-lg-2 control-label" for="userName2">Station number</label>
                                                     <div class="col-lg-4">
@@ -986,9 +938,6 @@
  
 
                                             </div>
-                        </div><!-- /.modal-content -->
-                    </div><!-- /.modal-dialog -->
-                </div><!-- /.modal -->
-
-<?php $__env->stopSection(); ?>
-<?php echo $__env->make('main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                                            @endif
+                                            @endforeach
+                                           

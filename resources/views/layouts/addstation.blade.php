@@ -11,8 +11,9 @@
                                 <h3 class="panel-title">Add Station</h3> 
                             </div> 
                             <div class="panel-body"> 
-                                <form id="wizard-validation-form" action="#" style="margin-bottom: 30px;">
+                                <form id="wizard-validation-form" method="post" action="{{url('addstation')}}" style="margin-bottom: 30px;">
                                     <div>
+                                    {{csrf_field()}}
                                         <h3>Station Credentials</h3>
                                         <section style="padding-bottom:30px;">
                                             <div class="form-group clearfix">
@@ -63,17 +64,24 @@
                                                 <label class="col-lg-2 control-label " for="dateopened">Date opened</label>
                                                 <div class="col-lg-4">
                                                     <div class="input-group">
-                                                        <input type="date" class="form-control" placeholder="mm/dd/yyyy" id="datepicker" name="dateopened">
+                                                        <input type="date" class="form-control" placeholder="mm/dd/yyyy" id="datepicker" name="date_opened">
                                                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                                     </div>
                                                 </div>
                                                 <label class="col-lg-2 control-label " for="dateclosed">Date closed</label>
                                                 <div class="col-lg-4">
                                                 <div class="input-group">
-                                                        <input type="date" class="form-control" placeholder="mm/dd/yyyy" id="datepicker" name="dateclosed">
+                                                        <input type="date" class="form-control" placeholder="mm/dd/yyyy" id="datepicker" name="date_closed">
                                                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div class="form-group clearfix">
+                                                <label class="col-lg-2 control-label " for="station_type">station Type</label>
+                                                <div class="col-lg-4">
+                                                    <input id="station_type" name="station_type" type="number" class="form-control">
+                                                </div>
+                                                
                                             </div>
                                             
                                         </section>
@@ -911,13 +919,20 @@
                                                                                     <input id="psmin_value" name="psmin_value" type="number" class="form-control" value="{{ $stationdetails['pressure_semsor']['min_value']}}">
                                                                                 </div>
                                                                             </div>
+                                                                            
                                                                                
                                                         </div> 
                                                     </div> 
                                                 </div>
                                                 
                                             </div> 
-                                        </div> 
+                                        </div>
+                                        <div class="form-group clearfix">
+                                                                                <div class="col-lg-4 text-right">
+                                                                                    <input type="submit" name="finish" class="btn btn-primary" value="Submit">
+                                                                                </div>
+                                                                                
+                                                                            </div> 
                                         </section>
                                     </div>
                                 </form>
