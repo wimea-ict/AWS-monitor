@@ -36,3 +36,18 @@ Route::get('/addsensor', function () {
 Route::get('/configuresensor', function () {
     return view('layouts/configuresensor');
 });
+
+Route::get('/faker',function(){
+    $faker = Faker\Factory::create();
+
+    $limit = 11;
+
+    for ($i = 0; $i < $limit; $i++) {
+        // $fakers[] = $faker->name . ', Email Address: ' . $faker->unique()->email . ', Contact No' . $faker->phoneNumber;
+        // $fakers[] = 'randomElement: '.$faker->unique()->randomElement($array = array('Hello', 'World', 'Am', 'Eugene', 'Owak'));
+        $fakers[] = $faker->unique()->latitude;
+        // $fakers[] = $faker->unique()->title($gender = null);
+    }
+
+    return view('layouts/fakerTests', compact('fakers'));
+});
