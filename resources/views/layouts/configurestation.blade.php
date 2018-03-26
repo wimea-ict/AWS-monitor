@@ -67,7 +67,7 @@
                                                 <div class="form-group clearfix">
                                                     <label class="col-lg-2 control-label" for="userName2">Station name</label>
                                                     <div class="col-lg-4">
-                                                        <input class="form-control" id="sname" name="sname" type="text" value="{{$station['station_name']}}">
+                                                        <input class="form-control" id="sname" name="sname" type="text" value="">
                                                     </div>
                                                     <label class="col-lg-2 control-label" for="userName2">Station number</label>
                                                     <div class="col-lg-4">
