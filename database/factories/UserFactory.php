@@ -1,7 +1,12 @@
 <?php
 
 use Faker\Generator as Faker;
-
+use station\User;
+use station\Node;
+use station\Station;
+use station\Sensor;
+use station\NodeStatus;
+use station\NodeStatusConfiguration;
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -13,7 +18,7 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(station\User::class, function (Faker $faker) {
+$factory->define(User::class, function (Faker $faker) {
     static $password;
 
     return [
@@ -24,9 +29,10 @@ $factory->define(station\User::class, function (Faker $faker) {
     ];
 });
 
- $factory->define(station\Station::class, function (Faker $faker) {
+ $factory->define(Station::class, function (Faker $faker) {
      
      return [
+         
          'station_name' => $faker->company,
          'station_location' => $faker->streetName,
          'longitude' => $faker->longitude,
@@ -36,23 +42,23 @@ $factory->define(station\User::class, function (Faker $faker) {
          'city' => $faker->city,
          'region'=>$faker->address,
          'code' => $faker->postcode,
-         'date_opened' => date($format = 'Y-m-d', $min = 'now'),
-         'date_closed' => date($format = 'Y-m-d', $min = 'now')
+         'date_opened' => new DateTime,
+         'date_closed' => new DateTime
      ];
          
  });
 
  
- $factory->define(station\Node::class, function (Faker $faker) {
-
+ $factory->define(Node::class, function (Faker $faker) {
+    
     return [
         
-        'txt_key' => $faker->unique()->slug,
+        'txt_key' =>$faker->randomElement(['mak-2m', 'mak-gnd',"mak-10m"]),
         'mac_address' => $faker->unique()->macAddress
     ];
 });
 
-$factory->define(station\Sensor::class, function (Faker $faker) {
+$factory->define(Sensor::class, function (Faker $faker) {
 
     return [
         
@@ -68,35 +74,35 @@ $factory->define(station\Sensor::class, function (Faker $faker) {
 
 
 
-$factory->define(station\NodeStatus::class, function (Faker $faker) {
+$factory->define(NodeStatus::class, function (Faker $faker) {
 
     return [
         
         'v_in' => $faker->numberBetween($min = 0, $max = 10),
-        'rssi' => $faker->unique()->double,
-        'drop' => $faker->unique()->double,
-        'vmcu' => $faker->unique()->double,
-        'lqi' => $faker->unique()->double,
-        'date_time' => $faker->unique()->dateTime
+        'rssi' => $faker->finance->amount(2,20,2),
+        'drop' => $faker->finance->amount(2,20,2),
+        'vmcu' => $faker->finance->amount(2,20,2),
+        'lqi' => $faker->finance->amount(2,20,2),
+        'date_time' => new DateTime
         
     ];
 });
 
 
-$factory->define(station\NodeStatusConfiguration::class, function (Faker $faker) {
+$factory->define(NodeStatusConfiguration::class, function (Faker $faker) {
      
      return [
-         'node_id' => $faker->integer,
-         'v_in_label' => $faker->unique()->string,
-         'v_in_key_title' => $faker->unique()->string,
-         'v_in_key_value' => $faker->unique()->string,
-         'v_in_min_value' => $faker->unique()->double,
-         'v_in_max_value' => $faker->unique()->double,
-         'v_mcu_label' => $faker->unique()->string,
-        'v_mcu_key_title' => $faker->unique()->string,
-        'v_mcu_key_value' => $faker->unique()->string,
-        'v_mcu_min_value' => $faker->unique()->double,
-        'v_mcu_max_value' => $faker->unique()->double
+         
+         'v_in_label' => $faker->name,
+         'v_in_key_title' => $faker->title,
+         'v_in_key_value' => $faker->unique()->name,
+         'v_in_min_value' => $faker->finance()->amount(2,20,2),
+         'v_in_max_value' => $faker->finance()->amount(2,20,2),
+         'v_mcu_label' => $faker->unique()->title,
+        'v_mcu_key_title' => $faker->unique()->title,
+        'v_mcu_key_value' => $faker->unique()->name,
+        'v_mcu_min_value' => $faker->finance()->amount(2,20,2),
+        'v_mcu_max_value' => $faker->finance()->amount(2,20,2)
      ];
          
  });

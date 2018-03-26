@@ -45,11 +45,7 @@ return [
             'port' => env('DB_PORT', '3306'),
             'database' => env('DB_DATABASE', 'aws_monitor'),
             'username' => env('DB_USERNAME', 'root'),
-<<<<<<< Upstream, based on origin/master
-            'password' => env('DB_PASSWORD', 'root*'),
-=======
             'password' => env('DB_PASSWORD', ''),
->>>>>>> 4bb534f updated migrations & seed for users table
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',

@@ -1,6 +1,12 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use station\User;
+use station\Node;
+use station\Sensor;
+use station\Station;
+use station\NodeStatus;
+use station\NodeStatusConfiguration;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,24 +18,36 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UsersTableSeeder::class);
-        factory(station\User::class, 50)->create();
+        factory(User::class, 50)->create();
 
-        // // Seed dummy tags
-        // factory(station\Station::class, 20)->create();
-
-        // $tagIds = DB::table('stations')->pluck('id')->toArray();
-
-        // // Seed dummy users
-        // factory(App\User::class, 10)->create()->each(function($user) use($tagIds)
+        // factory(Station::class, 5)->create()->each(function($station)
         // {
-        //     // With dummy questions
-        //     $user->questions()->saveMany(factory(App\Question::class, 3)
-        //     ->create(['user_id' => $user->id])->each(function($question) use($tagIds)
+
+        // $station->nodes()->saveMany(
+        //     factory(Node::class, 5)->create()->each(function($node)
         //     {
-        //         // With dummy tags
-        //         $question->tags()->sync(array_random($tagIds, mt_rand(1, 5)));
-        //     }));
-        // });
+        //         // With dummy questions
+        //         $node->sensors()->saveMany(factory(Sensor::class, 4)
+        //         ->create(['node_id' => $node->node_id])->each(function($sensor)
+        //         {
+        //             // With dummy tags
+        //         // $question->tags()->sync(array_random($tagIds, mt_rand(1, 5)));
+        //         }));
+        //     })
+        // );
+
+
+        $stations = factory(Station::class,5)->create();
+        foreach( $stations as $station)
+        {
+            //factory(Node::class,5)->create(['station_id' => $station->station_id]);
+            $nodes=$station->nodes()->saveMany(factory(Node::class, 3)->make()); 
+            foreach($nodes as $node){
+                $sensors=$node->sensors()->saveMany(factory(Sensor::class, 5)->make()); 
+            }  
+        }
+    
+        
         
     }
 }
