@@ -20,7 +20,7 @@ class CreateStationsTable extends Migration
             $table->double('longitude');
             $table->double('latitude');
             $table->string('station_number');
-            $table->string('location');
+            $table->string('station_type');
             $table->string('city');
             $table->string('region');
             $table->string('code');
