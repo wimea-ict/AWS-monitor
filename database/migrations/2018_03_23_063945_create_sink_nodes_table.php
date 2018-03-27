@@ -33,6 +33,10 @@ class CreateSinkNodesTable extends Migration
             $table->string('drp_sink');
             $table->string('rssi_sink');
             $table->string('txt_sink');
+            $table->double('v_in_min_value');
+            $table->double('v_in_max_value');
+            $table->double('v_mcu_min_value');
+            $table->double('v_mcu_max_value');
             $table->timestamps();
         });
     }

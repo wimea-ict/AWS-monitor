@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateNodesTable extends Migration
+class UpdateStationTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,6 +13,7 @@ class CreateNodesTable extends Migration
      */
     public function up()
     {
+<<<<<<< HEAD:database/migrations/2018_02_12_061442_create_nodes_table.php
         Schema::create('nodes', function (Blueprint $table) {
             $table->increments('node_id');
             $table->integer('station_id')->unsigned();
@@ -21,6 +22,9 @@ class CreateNodesTable extends Migration
             $table->foreign('station_id')->references('station_id')->on('stations'); 
             $table->timestamps();
         });
+=======
+        //
+>>>>>>> c74096c27d46aa298943fc215473d7b325a29b78:database/migrations/2018_03_27_044914_update_station_table.php
     }
 
     /**
@@ -30,6 +34,6 @@ class CreateNodesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('nodes');
+        //
     }
 }

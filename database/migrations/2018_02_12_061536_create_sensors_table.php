@@ -20,8 +20,7 @@ class CreateSensorsTable extends Migration
             $table->string('identifier_used');
             $table->string('min_value');
             $table->string('max_value');
-            $table->string('report_key_title');
-            $table->string('report_key_value');
+            $table->enum('node_type',["2m_node","10m_node","grnd_node","sink_node"]);
             $table->string('report_time_interval');
             $table->foreign('node_id')->references('node_id')->on('nodes'); 
             $table->timestamps();

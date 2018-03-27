@@ -31,6 +31,10 @@ class CreateTwoMeterNodesTable extends Migration
             $table->string('txt_2m');
             $table->string('t_sht2x_2m');
             $table->string('rh_sh2x_2m');
+            $table->double('v_in_min_value');
+            $table->double('v_in_max_value');
+            $table->double('v_mcu_min_value');
+            $table->double('v_mcu_max_value');
             $table->timestamps();
         });
     }

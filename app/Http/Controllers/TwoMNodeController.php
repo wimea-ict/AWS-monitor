@@ -4,7 +4,7 @@ namespace station\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class SinkNodeController extends Controller
+class TwoMNodeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +13,7 @@ class SinkNodeController extends Controller
      */
     public function index()
     {
-        return view('layouts.configureSinkNode');
+        return view('layouts.configureTwomNode');
     }
 
     /**

@@ -66,9 +66,27 @@
                 $('#datatable').dataTable();
             } );
             
-            $('.edit-station-button').on('click', function () {
-                $('#wizard-validation-form').attr('action', $(this).data('edit-link'));
-                //$('#bookId').val($(this).data('id'));
+            
+
+            $('#full-width-modal').on('show.bs.modal', function(e) {
+                var station = e.relatedTarget.id;
+                var obj = jQuery.parseJSON(station);
+                //$('#wizard-validation-form').attr('action', "/updatestation");
+                $('#station_number').val(obj["station_id"]);
+                $('#station_name').val(obj["station_name"]);
+                $('#snumber').val(obj["station_number"]);
+                $('#slocation').val(obj["station_location"]);
+                $('#latitude').val(obj["latitude"]);
+                $('#longitude').val(obj["longitude"]);
+                $('#city').val(obj["city"]);
+                $('#code').val(obj["code"]);
+                $('#region').val(obj["region"]);
+                $('#date_opened').val(obj["date_opened"]);
+                $('#date_closed').val(obj["date_closed"]);
+                $('#station_type').val(obj["station_type"]);
+
+                
             });
+
             
         </script>
