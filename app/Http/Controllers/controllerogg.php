@@ -3,19 +3,14 @@
 namespace station\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\layouts;
-use station\Station;
-use station\TwoMeterNode;
+
 class StationsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function index()
     {
-        $StationDetails = array("station_name"=>"",
+       $StationDetails = array("station_name"=>"",
                                 "station_number"=>"",
                                 "city"=>"hi",
                                 "longitude"=>"",
@@ -169,117 +164,9 @@ class StationsController extends Controller
         ->with('stationdetails', $StationDetails);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        return view(layouts.configurestation);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $stationcreation = new Station([
-            'station_name' => $request->get('sname'),
-            'station_number' => $request->get('snumber'),
-            'station_location' => $request->get('slocation'),
-            'latitude' => $request->get('latitude'),
-            'longitude' => $request->get('longitude'),
-            'city' => $request->get('city'),
-            'code' => $request->get('code'),
-            'region' => $request->get('region'),
-            'date_opened' => $request->get('date_opened'),
-            'date_closed' => $request->get('date_closed'),
-            'station_type' => $request->get('station_type')
-            
-          ]);
-
-          $stationcreation->save();
-
-          $station = Station::where('station_id', $request->get('sname'))->first();
-        
-
-        $TwomnodeCreation = new TwoMeterNode([
-            
-            'station_id' => $request->get($station->station_id),
-            'txt_2m' => $request->get('txt_key'),
-            'e64_2m' => $request->get('mac_add'),
-            'v_in_2m' => $request->get('vin_label'),
-            'time_2m' => $request->get('time'),
-            'ut_2m' => $request->get('ut'),
-            'date_2m' => $request->get('date'),
-            'gw_lat_2m' => $request->get('gwlat'),
-            'gw_long_2m' => $request->get('gwlong'),
-            'v_in_min_value' => $request->get('v_in_max_value'),
-            'v_in_max_value' => $request->get('v_in_min_value'),
-            'ttl_2m' => $request->get('ttl'),
-            'rssi_2m' => $request->get('rssi'),
-            'drp_2m' => $request->get('drp'),
-            'lqi_2m' => $request->get('lqi'),
-            'v_mcu_max_value' => $request->get('v_mcu_max_value'),
-            'v_mcu_min_value' => $request->get('v_mcu_min_value'),
-            'v_mcu_2m' => $request->get('v_mcu_label'),
-                         
-            
-        ]);
-
-        $TwomnodeCreation->save();
-
-  
-          
-          return redirect('/addstation');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
         
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }
