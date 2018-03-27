@@ -33,17 +33,18 @@ $factory->define(User::class, function (Faker $faker) {
      
      return [
          
-         'station_name' => $faker->company,
-         'station_location' => $faker->streetName,
-         'longitude' => $faker->longitude,
-         'latitude' => $faker->latitude,
-         'station_number' => $faker->unique()->numberBetween($min = 0, $max = 2147483647),
-         'location' => $faker->streetName,
-         'city' => $faker->city,
-         'region'=>$faker->address,
-         'code' => $faker->postcode,
-         'date_opened' => new DateTime,
-         'date_closed' => new DateTime
+        'station_name' => $faker->unique()->company,
+        'station_location' => $faker->unique()->streetName,
+        'longitude' => $faker->unique()->longitude,
+        'latitude' => $faker->unique()->latitude,
+        'station_number' => $faker->unique()->numberBetween($min = 0, $max = 2147483647),
+        'station_type' => $faker->randomElement($array = array('Synoptic','Agrometeorological','Automatic','Climatological','Rainfall', 'Hygrometeorological')),
+        'city' => $faker->city,
+        // 'city' => $faker->randomElement($array = array('Kampala','Mbarara','Rukungiri','Gulu','Jinja')),
+        'region' => $faker->randomElement($array = array('Northern','Western','Eastern','Southern')),
+        'code' => $faker->unique()->postcode,
+        'date_opened' => $faker->unique()->dateTime($max = 'now'),//new DateTime
+        'date_closed' => $faker->unique()->dateTime($max = 'now'),//new DateTime
      ];
          
  });
