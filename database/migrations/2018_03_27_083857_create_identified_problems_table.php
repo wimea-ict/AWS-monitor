@@ -15,7 +15,13 @@ class CreateIdentifiedProblemsTable extends Migration
     {
         Schema::create('identified_problems', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->timestamp('date_time_recorded');
+            $table->integer('hourly_track_counter');
+            $table->enum('problem_state',["investigation","reported","resolved"]);
+            $table->integer('node_id');
+            $table->integer('station_id');
+            $table->integer('sensor_id');
+            //$table->timestamps();
         });
     }
 

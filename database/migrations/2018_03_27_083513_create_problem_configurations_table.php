@@ -15,6 +15,9 @@ class CreateProblemConfigurationsTable extends Migration
     {
         Schema::create('problem_configurations', function (Blueprint $table) {
             $table->increments('id');
+            $table->time('investigation_hours');
+            $table->enum('report_method',["sms","email","both"]);
+            $table->integer('reporting_time_diff');
             $table->timestamps();
         });
     }

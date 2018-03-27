@@ -15,7 +15,10 @@ class CreateProblemTrackersTable extends Migration
     {
         Schema::create('problem_trackers', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->timestamp('datetime_recorded');
+            $table->integer('hourly_track_counter');
+            $table->string('problem_state');
+           // $table->timestamps();
         });
     }
 
