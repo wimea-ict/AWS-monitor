@@ -35,6 +35,10 @@ class CreateGroundNodesTable extends Migration
             $table->string('drp_gnd');
             $table->string('e64_gnd');
             $table->string('txt');
+            $table->double('v_in_min_value');
+            $table->double('v_in_max_value');
+            $table->double('v_mcu_min_value');
+            $table->double('v_mcu_max_value');
             $table->timestamps();
         });
     }

@@ -419,6 +419,13 @@
                                                                                     <input id="2time" name="2time" type="text" class="form-control" value="{{ $stationdetails['2m_node']['time']}}">
                                                                                 </div>
                                                                             </div>
+                                                                            <div class="form-group clearfix">
+                                                                                <label class="col-lg-2 control-label " for="2ut">Time type label</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="2ut" name="2ut" type="text" class="form-control" value="{{ $stationdetails['2m_node']['ut']}}">
+                                                                                </div>
+                                                                                
+                                                                            </div>
                                                                                                                                                          
                                                         </div> 
                                                     </div> 

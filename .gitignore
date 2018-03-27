@@ -4,11 +4,17 @@
 /storage/*.key
 /vendor
 /.idea
+<<<<<<< HEAD
 /.vscode
+=======
+>>>>>>> 24f6d5374d5eee5f07465fc9e76e26003c2819b6
 /.vagrant
 Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
 .env
+<<<<<<< HEAD
 fakerTests.blade.php
+=======
+>>>>>>> 24f6d5374d5eee5f07465fc9e76e26003c2819b6

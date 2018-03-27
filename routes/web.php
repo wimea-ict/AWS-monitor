@@ -11,13 +11,19 @@
 |
 */
 Route::resource('addstation', 'StationsController');
-
 Route::resource('configurestation', 'ConfigureStaion');
+Route::post('updateStation','ConfigureStaion@update');
+
+Route::resource('configure10mnode', 'TenMNodeController');
+Route::resource('configure2mnode', 'TwoMNodeController');
+Route::resource('configuresinknode', 'SinkNodeController');
+Route::resource('configuregroundnode', 'GroundNodeController');
 Route::get('/', function () {
     return view('main');
 });
 
 Route::get('/ajax-model', function () {
+
     return view('layouts/ajax-model.php');
 });
 

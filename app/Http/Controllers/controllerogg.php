@@ -10,7 +10,7 @@ class StationsController extends Controller
 
     public function index()
     {
-        $StationDetails = array("station_name"=>"",
+       $StationDetails = array("station_name"=>"",
                                 "station_number"=>"",
                                 "city"=>"hi",
                                 "longitude"=>"",
@@ -36,6 +36,7 @@ class StationsController extends Controller
                                     "v_mcu_max_value"=>"3",
                                     "v_mcu_min_value"=>"1",
                                     "v_mcu_label"=>"VMCU",
+                                    "ut"=>"UT",
                                 ),
                                 "ground_node"=>array(
                                     "name"=>"ground node",
@@ -44,6 +45,7 @@ class StationsController extends Controller
                                     "date"=>"D",
                                     "vin_label"=>"VIN",
                                     "time"=>"TZ",
+                                    "ut"=>"UT",
                                     "gwlat"=>"GW_LAT",
                                     "gwlong"=>"GW_LONG",
                                     "v_in_max_value"=>"4",
@@ -79,6 +81,7 @@ class StationsController extends Controller
                                     "v_mcu_max_value"=>"3",
                                     "v_mcu_min_value"=>"1",
                                     "v_mcu_label"=>"VMCU",
+                                    "ut"=>"UT",
                                 ),
                                 "2m_node"=>array(
                                     "name"=>"2m node",
@@ -99,6 +102,7 @@ class StationsController extends Controller
                                     "v_mcu_max_value"=>"3",
                                     "v_mcu_min_value"=>"1",
                                     "v_mcu_label"=>"VMCU",
+                                    "ut"=>"UT",
                                 ),
                                 "Temp_semsor"=>array(
                                     "parameter_read"=>"Temperature",
@@ -156,7 +160,7 @@ class StationsController extends Controller
                                     "min_value"=>"1",
                                 ));
 
-        return View('layouts.addstation')
+        return view('layouts.addstation')
         ->with('stationdetails', $StationDetails);
     }
 

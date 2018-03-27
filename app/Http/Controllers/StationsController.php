@@ -5,6 +5,7 @@ namespace station\Http\Controllers;
 use Illuminate\Http\Request;
 use App\layouts;
 use station\Station;
+use station\TwoMeterNode;
 class StationsController extends Controller
 {
     /**
@@ -40,6 +41,7 @@ class StationsController extends Controller
                                     "v_mcu_max_value"=>"3",
                                     "v_mcu_min_value"=>"1",
                                     "v_mcu_label"=>"VMCU",
+                                    "ut"=>"UT",
                                 ),
                                 "ground_node"=>array(
                                     "name"=>"ground node",
@@ -48,6 +50,7 @@ class StationsController extends Controller
                                     "date"=>"D",
                                     "vin_label"=>"VIN",
                                     "time"=>"TZ",
+                                    "ut"=>"UT",
                                     "gwlat"=>"GW_LAT",
                                     "gwlong"=>"GW_LONG",
                                     "v_in_max_value"=>"4",
@@ -83,6 +86,7 @@ class StationsController extends Controller
                                     "v_mcu_max_value"=>"3",
                                     "v_mcu_min_value"=>"1",
                                     "v_mcu_label"=>"VMCU",
+                                    "ut"=>"UT",
                                 ),
                                 "2m_node"=>array(
                                     "name"=>"2m node",
@@ -103,6 +107,7 @@ class StationsController extends Controller
                                     "v_mcu_max_value"=>"3",
                                     "v_mcu_min_value"=>"1",
                                     "v_mcu_label"=>"VMCU",
+                                    "ut"=>"UT",
                                 ),
                                 "Temp_semsor"=>array(
                                     "parameter_read"=>"Temperature",
@@ -196,8 +201,40 @@ class StationsController extends Controller
             'station_type' => $request->get('station_type')
             
           ]);
-  
+
           $stationcreation->save();
+
+          $station = Station::where('station_id', $request->get('sname'))->first();
+        
+
+        $TwomnodeCreation = new TwoMeterNode([
+            
+            'station_id' => $request->get($station->station_id),
+            'txt_2m' => $request->get('txt_key'),
+            'e64_2m' => $request->get('mac_add'),
+            'v_in_2m' => $request->get('vin_label'),
+            'time_2m' => $request->get('time'),
+            'ut_2m' => $request->get('ut'),
+            'date_2m' => $request->get('date'),
+            'gw_lat_2m' => $request->get('gwlat'),
+            'gw_long_2m' => $request->get('gwlong'),
+            'v_in_min_value' => $request->get('v_in_max_value'),
+            'v_in_max_value' => $request->get('v_in_min_value'),
+            'ttl_2m' => $request->get('ttl'),
+            'rssi_2m' => $request->get('rssi'),
+            'drp_2m' => $request->get('drp'),
+            'lqi_2m' => $request->get('lqi'),
+            'v_mcu_max_value' => $request->get('v_mcu_max_value'),
+            'v_mcu_min_value' => $request->get('v_mcu_min_value'),
+            'v_mcu_2m' => $request->get('v_mcu_label'),
+                         
+            
+        ]);
+
+        $TwomnodeCreation->save();
+
+  
+          
           return redirect('/addstation');
     }
 
