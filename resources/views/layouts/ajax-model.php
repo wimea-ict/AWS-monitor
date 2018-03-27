@@ -1,55 +1,5 @@
-@extends('main')
-
-@section('content')
-<div class="row">
-                    <div class="col-md-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Stations</h3>
-                            </div>
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-12 col-xs-12">
-                                        <table id="datatable" class="table table-striped table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th>Name</th>
-                                                    <th>Number</th>
-                                                    <th>location</th>
-                                                    <th>longitude</th>
-                                                    <th>Latitude</th>
-                                                    <th>Edit</th>
-                                                </tr>
-                                            </thead>
-
-                                     
-                                            <tbody>
-                                            @foreach($stations as $station)
-                                                <tr>
-                                                    <td>{{$station['station_name']}}</td>
-                                                    <td>{{$station['station_number']}}</td>
-                                                    <td>{{$station['station_location']}}</td>
-                                                    <td>{{$station['longitude']}}</td>
-                                                    <td>{{$station['latitude']}}</td>
-                                                    <td><button class="btn btn-icon btn-success m-b-5 edit-station-button" data-toggle="modal" data-target="#full-width-modal" data-edit-link="{{route('configurestation.show', $station['station_id']) }}"> <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
-                                                </tr>
-                                                @endforeach    
-                                                
-                                            </tbody>
-                                        </table>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div> <!-- End Row -->
-
-                <div id="full-width-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="full-width-modalLabel" aria-hidden="true" style="display: none;">
-                    <div class="modal-dialog modal-full">
-                        <div class="modal-content">
-                                     
+@foreach($stations as $station)
+                             @if ($station.station_id === $GET['id'])               
                             <div class="modal-body">
                                 <div class="row">
                                     <!-- Wizard with Validation -->
@@ -67,7 +17,7 @@
                                                 <div class="form-group clearfix">
                                                     <label class="col-lg-2 control-label" for="userName2">Station name</label>
                                                     <div class="col-lg-4">
-                                                        <input class="form-control" id="sname" name="sname" type="text" value="">
+                                                        <input class="form-control" id="sname" name="sname" type="text" value="{{$station['station_name']}}">
                                                     </div>
                                                     <label class="col-lg-2 control-label" for="userName2">Station number</label>
                                                     <div class="col-lg-4">
@@ -988,8 +938,6 @@
  
 
                                             </div>
-                        </div><!-- /.modal-content -->
-                    </div><!-- /.modal-dialog -->
-                </div><!-- /.modal -->
-
-@endsection
+                                            @endif
+                                            @endforeach
+                                           

@@ -11,15 +11,17 @@
 |
 */
 Route::resource('addstation', 'StationsController');
+
+Route::resource('configurestation', 'ConfigureStaion');
 Route::get('/', function () {
     return view('main');
 });
 
-
-
-Route::get('/configurestation', function () {
-    return view('layouts/configurestation');
+Route::get('/ajax-model', function () {
+    return view('layouts/ajax-model.php');
 });
+
+
 
 Route::get('/addnode', function () {
     return view('layouts/addnode');
@@ -35,4 +37,19 @@ Route::get('/addsensor', function () {
 
 Route::get('/configuresensor', function () {
     return view('layouts/configuresensor');
+});
+
+Route::get('/faker',function(){
+    $faker = Faker\Factory::create();
+
+    $limit = 15;
+
+    for ($i = 0; $i < $limit; $i++) {
+        // $fakers[] = $faker->name . ', Email Address: ' . $faker->unique()->email . ', Contact No' . $faker->phoneNumber;
+        // $fakers[] = 'randomElement: '.$faker->unique()->randomElement($array = array('Hello', 'World', 'Am', 'Eugene', 'Owak'));
+        $fakers[] = $faker->unique()->postcode;
+        // $fakers[] = $faker->unique()->title($gender = null);
+    }
+
+    return view('layouts/fakerTests', compact('fakers'));
 });
