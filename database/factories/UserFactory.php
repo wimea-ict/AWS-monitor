@@ -93,12 +93,12 @@ $factory->define(NodeStatusConfiguration::class, function (Faker $faker) {
      
      return [
          
-         'v_in_label' => $faker->name,
-         'v_in_key_title' => $faker->title,
-         'v_in_key_value' => $faker->unique()->name,
-         'v_in_min_value' => $faker->finance()->amount(2,20,2),
-         'v_in_max_value' => $faker->finance()->amount(2,20,2),
-         'v_mcu_label' => $faker->unique()->title,
+        'v_in_label' => $faker->name,
+        'v_in_key_title' => $faker->title,
+        'v_in_key_value' => $faker->unique()->name,
+        'v_in_min_value' => $faker->finance()->amount(2,20,2),
+        'v_in_max_value' => $faker->finance()->amount(2,20,2),
+        'v_mcu_label' => $faker->unique()->title,
         'v_mcu_key_title' => $faker->unique()->title,
         'v_mcu_key_value' => $faker->unique()->name,
         'v_mcu_min_value' => $faker->finance()->amount(2,20,2),
