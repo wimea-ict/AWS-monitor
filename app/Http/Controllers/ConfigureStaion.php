@@ -49,7 +49,10 @@ class ConfigureStaion extends Controller
     public function show($id)
     {
         $stationToEdit = Station::find($id);
-        return response()->json($stationToEdit);
+        
+
+        return view('layouts.addstation', compact('stationToEdit'));
+    
     }
 
     /**
@@ -70,9 +73,15 @@ class ConfigureStaion extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        if($request->get('station_number')!= null){
+            $id=$request->get('station_number');
+        $station = Station::where('station_id', $id)->first();
+        $station->station_name = $request->get('station_name');
+        $station->save();
+        }
+        return redirect('/configurestation');
     }
 
     /**

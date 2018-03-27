@@ -22,7 +22,10 @@
                     <li class="has-submenu"><a href="#"><i class="ion-flask"></i> <span class="nav-label">Nodes</span></a>
                         <ul class="list-unstyled">
                             <!--<li><a href="/addnode">Add Node</a></li>-->
-                            <li><a href="/configurenode">Configure Node</a></li>
+                            <li><a href="/configure10mnode">Configure 10m Node</a></li>
+                            <li><a href="/configure2mnode">Configure 2m Node</a></li>
+                            <li><a href="/configuresinknode">Configure sink Node</a></li>
+                            <li><a href="/configuregroundnode">Configure Ground Node</a></li>
                             <li><a href="widgets.html">Node Performance</a></li>
                             
                         </ul>
