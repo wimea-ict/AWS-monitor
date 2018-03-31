@@ -3,6 +3,8 @@
 namespace station\Http\Controllers;
 
 use Illuminate\Http\Request;
+use station\GroundNode;
+use station\Station;
 
 class GroundNodeController extends Controller
 {
@@ -13,7 +15,12 @@ class GroundNodeController extends Controller
      */
     public function index()
     {
-        return view('layouts.configureGroundNode');
+        $stations = Station::all()->toArray();
+        $groundNodes = GroundNode::all()->toArray();
+        
+        return view('layouts.configureGroundNode',compact('groundNodes','stations'));
+    
+        
     }
 
     /**

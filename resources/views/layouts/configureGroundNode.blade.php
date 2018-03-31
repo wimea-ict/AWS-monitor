@@ -14,103 +14,38 @@
                                             <thead>
                                                 <tr>
                                                     <th>Station Name</th>
-                                                    <th>Node Name</th>
+                                                    <th>Station Location</th>
                                                     <th>MAC Address</th>
                                                     <th>Txt key</th>
-                                                    <th>Date registered</th>
+                                                    <th>Activation Status</th>
                                                     <th>Edit</th>
                                                 </tr>
                                             </thead>
 
                                      
                                             <tbody>
-                                                <tr>
-                                                    <td>Tiger Nixon</td>
-                                                    <td>System Architect</td>
-                                                    <td>Edinburgh</td>
-                                                    <td>61</td>
-                                                    <td>2011/04/25</td>
-                                                    <td><button class="btn btn-icon btn-success m-b-5" data-toggle="modal" data-target="#con-close-modal"> <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Garrett Winters</td>
-                                                    <td>Accountant</td>
-                                                    <td>Tokyo</td>
-                                                    <td>63</td>
-                                                    <td>2011/07/25</td>
-                                                    <td><button class="btn btn-icon btn-success m-b-5" data-toggle="modal" data-target="#con-close-modal"> <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Ashton Cox</td>
-                                                    <td>Junior Technical Author</td>
-                                                    <td>San Francisco</td>
-                                                    <td>66</td>
-                                                    <td>2009/01/12</td>
-                                                    <td><button class="btn btn-icon btn-success m-b-5" data-toggle="modal" data-target="#con-close-modal"> <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Cedric Kelly</td>
-                                                    <td>Senior Javascript Developer</td>
-                                                    <td>Edinburgh</td>
-                                                    <td>22</td>
-                                                    <td>2012/03/29</td>
-                                                    <td><button class="btn btn-icon btn-success m-b-5" data-toggle="modal" data-target="#con-close-modal"> <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Airi Satou</td>
-                                                    <td>Accountant</td>
-                                                    <td>Tokyo</td>
-                                                    <td>33</td>
-                                                    <td>2008/11/28</td>
-                                                    <td><button class="btn btn-icon btn-success m-b-5" data-toggle="modal" data-target="#con-close-modal"> <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
-                                                </tr>
-                                                <div id="con-close-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="full-width-modalLabel" aria-hidden="true" style="display: none;">
-                <div class="modal-dialog modal-full">
-                <div class="modal-content" style="background:#797979">
-                                           
-                <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <ul class="nav nav-tabs"> 
-
-                            <li class="active"> 
-                                <a href="#ground" data-toggle="tab" aria-expanded="true"> 
-                                    <span class="visible-xs"><i class="fa fa-envelope-o"></i></span> 
-                                    <span class="hidden-xs">Ground node</span> 
-                                </a> 
-                            </li> 
-                            
-                        </ul> 
-                        <div class="tab-content"> 
-                            
-                            <div class="tab-pane active" id="ground"> <div>
-                                        <div>
-                                                                            <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label" for="userName2">Node name</label>
-                                                                                <div class="col-lg-4">
-                                                                                    <input class="form-control" id="nname" name="nname" type="text">
-                                                                                </div>
-                                                                                <label class="col-lg-2 control-label" for="userName2">TXT key</label>
-                                                                                <div class="col-lg-4">
-                                                                                    <input class="form-control" id="nnumber" name="nnumber" type="text">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="userName2">MAC address</label>
-                                                                                <div class="col-lg-4">
-                                                                                    <input id="mcaddress" name="mcaddress" type="text" class="form-control">
-
-                                                                                </div>
-                                                                                <label class="col-lg-2 control-label " for="userName2">Date Registered</label>
-                                                                                <div class="col-lg-4">
-                                                                                <div class="input-group">
-                                                                                    <input type="date" class="form-control" placeholder="mm/dd/yyyy" id="datepicker">
-                                                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                                                                                </div>                                                                               </div>
-                                                                            </div>
-     
-                                        </div>
-                                        <div> 
+                                            @foreach($groundNodes as $groundNode)
+                                                @foreach($stations as $station)
+                                                    @if($station['station_id']== $groundNode['station_id'] )
+                                                    <tr>
+                                                        <td>{{$station['station_name']}}</td>
+                                                        <td>{{$station['station_location']}}</td>
+                                                        <td>{{$groundNode['txt_gnd']}}</td>
+                                                        <td>{{$groundNode['e64_gnd']}}</td>
+                                                        <td>{{$groundNode['node_status']}}</td>
+                                                        <td><button class="btn btn-icon btn-success m-b-5" data-toggle="modal" data-target="#full-width-modal2"> <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
+                                                    </tr>
+                                                    <div id="full-width-modal2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="full-width-modalLabel" aria-hidden="true" style="display: none;">
+                    <div class="modal-dialog modal-full">
+                        <div class="modal-content">
+                            <div class="modal-header"> 
+                                <h3 class="panel-title btn btn-primary">Edit Ground Node settings</h3> 
+                            </div>
+                           <div class="modal-body">
+                           <div class="row">
+                           <div class="col-lg-12">
+                           <form id="" method="post" action="{{url('updateStation')}}">
+                     
                                             <div class="panel-group panel-group-joined" id="accordion-test-4"> 
                                             <div class="panel panel-default"> 
                                                     <div class="panel-heading"> 
@@ -125,63 +60,136 @@
                                                         <div class="panel-body">
                              
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="userName2">v_in_label</label>
+                                                                                <label class="col-lg-2 control-label " for="gndvin_label">v_in label</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="v_in_label" name="v_in_label" type="text" class="form-control">
+                                                                                    <input id="gndvin_label" name="gndvin_label" type="text" class="form-control" value="">
                                                                                 </div>
-                                                                                <label class="col-lg-2 control-label " for="userName2">v_in_key_title</label>
+                                                                                <label class="col-lg-2 control-label " for="10txt_key">TXT key</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="v_in_key_title" name="v_in_key_title" type="text" class="form-control">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="confirm2">v_in_key_value</label>
-                                                                                <div class="col-lg-4">
-                                                                                    <input id="v_in_key_value" name="v_in_key_value" type="text" class="form-control">
-                                                                                </div>
-                                                                                <label class="col-lg-2 control-label " for="confirm2">v_in_min_value</label>
-                                                                                <div class="col-lg-4">
-                                                                                    <input id="region" name="v_in_min_value" type="number" class="form-control">
+                                                                                    <input id="gndtxt_key" name="gndtxt_key" type="text" class="form-control" value="">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="confirm2">v_in_max_value</label>
+                                                                                <label class="col-lg-2 control-label " for="gdv_mcu_max_value">v_mcu_max_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="v_in_max_value" name="v_in_max_value" type="number" class="form-control">
+                                                                                    <input id="gdv_mcu_max_value" name="gdv_mcu_max_value" type="number" class="form-control" value="">
                                                                                 </div>
-                                                                                <label class="col-lg-2 control-label " for="userName2">v_mcu_label</label>
+                                                                                <label class="col-lg-2 control-label " for="gdv_mcu_min_value">v_mcu_min_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="v_mcu_label" name="v_mcu_label" type="text" class="form-control">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="confirm2">v_mcu_key_title</label>
-                                                                                <div class="col-lg-4">
-                                                                                    <input id="v_mcu_key_title" name="v_mcu_key_title" type="text" class="form-control">
-                                                                                </div>
-                                                                                <label class="col-lg-2 control-label " for="confirm2">v_mcu_key_value</label>
-                                                                                <div class="col-lg-4">
-                                                                                    <input id="v_mcu_key_value" name="v_mcu_key_value" type="number" class="form-control">
+                                                                                    <input id="gdv_mcu_min_value" name="gdv_mcu_min_value" type="text" class="form-control" value="">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="confirm2">v_mcu_max_value</label>
+                                                                                <label class="col-lg-2 control-label " for="gdv_in_max_value">v_in_max_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="v_mcu_max_value" name="v_mcu_max_value" type="number" class="form-control">
+                                                                                    <input id="gdv_in_max_value" name="gdv_in_max_value" type="number" class="form-control" value="">
                                                                                 </div>
-                                                                                <label class="col-lg-2 control-label " for="userName2">v_mcu_min_value</label>
+                                                                                <label class="col-lg-2 control-label " for="gdv_mcu_label">v_mcu_label</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="v_mcu_min_value" name="v_mcu_min_value" type="text" class="form-control">
+                                                                                    <input id="gdv_mcu_label" name="gdv_mcu_label" type="text" class="form-control" value="">
                                                                                 </div>
                                                                             </div>
-                                                                               
+                                                                            <div class="form-group clearfix">
+                                                                                <label class="col-lg-2 control-label " for="gndmac_add">MAK key</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="gndmac_add" name="gndmac_add" type="text" class="form-control" value="">
+                                                                                </div>
+                                                                                <label class="col-lg-2 control-label " for="gndv_in_min_value">v_in min value</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="gndv_in_min_value" name="gndv_in_min_value" type="number" class="form-control" value="">
+                                                                                </div>
+                                                                            </div>
+                                                                            
+                                                                            <div class="form-group clearfix">
+                                                                                <label class="col-lg-2 control-label " for="gndgwlat">latitude key</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="gndgwlat" name="gndgwlat" type="text" class="form-control" value="">
+                                                                                </div>
+                                                                                <label class="col-lg-2 control-label " for="gndgwlong">longitude key</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="gndgwlong" name="gndgwlong" type="text" class="form-control" value="">
+                                                                                </div>
+                                                                            </div>
+                                                                           
+                                                                            <div class="form-group clearfix">
+                                                                                <label class="col-lg-2 control-label " for="gndrssi">RSSI key</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="gndrssi" name="gndrssi" type="text" class="form-control" value="">
+                                                                                </div>
+                                                                                <label class="col-lg-2 control-label " for="gndlqi">LQI key</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="gndlqi" name="gndlqi" type="text" class="form-control" value="">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group clearfix">
+                                                                                <label class="col-lg-2 control-label " for="gnddrp">drp key</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="gnddrp" name="gnddrp" type="text" class="form-control" value="">
+                                                                                </div>
+                                                                                <label class="col-lg-2 control-label " for="gndttl">TTL key</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="gndttl" name="gndttl" type="text" class="form-control" value="">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group clearfix">
+                                                                                <label class="col-lg-2 control-label " for="gnddate">Date identifier</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="gnddate" name="gnddate" type="text" class="form-control" value="">
+                                                                                </div>
+                                                                                <label class="col-lg-2 control-label " for="grndtime">Time identifier</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="grndtime" name="grndtime" type="text" class="form-control" value="">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group clearfix">
+                                                                                <label class="col-lg-2 control-label " for="groundps">PS key</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="groundps" name="groundps" type="text" class="form-control" value="">
+                                                                                </div>
+                                                                                <label class="col-lg-2 control-label " for="groundrain_pulses">Rain Pulses</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="groundrain_pulses" name="groundrain_pulses" type="text" class="form-control" value="">
+                                                                                </div>
+                                                                                
+                                                                            </div>
+                                                                            <div class="form-group clearfix">
+                                                                                <label class="col-lg-2 control-label " for="groundpo">PO key</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="groundpo" name="groundpo" type="text" class="form-control" value="">
+                                                                                </div>
+                                                                                <label class="col-lg-2 control-label " for="groundup">Rain Pulses</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="groundup" name="groundup" type="text" class="form-control" value="">
+                                                                                </div>
+                                                                                
+                                                                            </div>
+
+                                                                            <div class="form-group clearfix">
+                                                                                <label class="col-lg-2 control-label " for="gndps">UP key</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="gndup" name="gndup" type="text" class="form-control" value="">
+                                                                                </div>
+                                                                                <label class="col-lg-2 control-label " for="gndut">UT key</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="gndut" name="gndut" type="text" class="form-control" value="">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group clearfix">
+                                                                                <label class="col-lg-2 control-label " for="gndtxt_value">TXT value</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="gndtxt_value" name="gndtxt_value" type="text" class="form-control" required>
+                                                                                </div>
+                                                                            </div>
+                                                                            
+                                                                            
+                                                                                                                                                              
                                                         </div> 
                                                     </div> 
                                                 </div>
                                                 <div class="panel panel-default"> 
                                                     <div class="panel-heading"> 
                                                         <h4 class="panel-title"> 
-                                                            <a data-toggle="collapse" data-parent="#accordion-test-2" href="#collapseten-2" aria-expanded="false" class="collapsed">
+                                                            <a data-toggle="collapse" data-parent="#accordion-test-4" href="#collapseten-2" aria-expanded="false" class="collapsed">
                                                                 Precipitation
                                                                 <span class="btn btn-default pull-right activate-style">Activate</span>
                                                             
@@ -192,35 +200,25 @@
                                                         <div class="panel-body">
                                                                             
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="confirm2">Parameter read</label>
+                                                                                <label class="col-lg-2 control-label " for="ppparameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="parameter_read" name="parameter_read" type="text" class="form-control">
+                                                                                    <input id="ppparameter_read" name="ppparameter_read" type="text" class="form-control" value="">
                                                                                 </div>
-                                                                                <label class="col-lg-2 control-label " for="userName2">Identifier used</label>
+                                                                                <label class="col-lg-2 control-label " for="ppidentifier_used">Identifier used</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="id_used" name="id_used" type="text" class="form-control">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="confirm2">report_key_title</label>
-                                                                                <div class="col-lg-4">
-                                                                                    <input id="report_key_title" name="report_key_title" type="text" class="form-control">
-                                                                                </div>
-                                                                                <label class="col-lg-2 control-label " for="confirm2">report_key_value</label>
-                                                                                <div class="col-lg-4">
-                                                                                    <input id="report_key_value" name="report_key_value" type="number" class="form-control">
+                                                                                    <input id="ppidentifier_used" name="ppidentifier_used" type="text" class="form-control" value="">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="confirm2">max_value</label>
+                                                                                <label class="col-lg-2 control-label " for="ppmax_value">max_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="max_value" name="max_value" type="number" class="form-control">
+                                                                                    <input id="ppmax_value" name="ppmax_value" type="number" class="form-control" value="">
                                                                                 </div>
-                                                                                <label class="col-lg-2 control-label " for="userName2">min_value</label>
+                                                                                <label class="col-lg-2 control-label " for="ppmin_value">min_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="min_value" name="min_value" type="number" class="form-control">
+                                                                                    <input id="ppmin_value" name="ppmin_value" type="number" class="form-control" value="">
                                                                                 </div>
-                                                                    </div>
+                                                                            </div>
                                                                                
                                                         </div> 
                                                     </div> 
@@ -228,7 +226,7 @@
                                                 <div class="panel panel-default"> 
                                                     <div class="panel-heading"> 
                                                         <h4 class="panel-title"> 
-                                                            <a data-toggle="collapse" data-parent="#accordion-test-2" href="#collapseeleven-2" class="collapsed" aria-expanded="false">
+                                                            <a data-toggle="collapse" data-parent="#accordion-test-4" href="#collapseeleven-2" class="collapsed" aria-expanded="false">
                                                                 Soil temperature
 
                                                                 <span class="btn btn-default pull-right activate-style">Activate</span>
@@ -241,35 +239,25 @@
                                                         <div class="form-group clearfix">
                                                         
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="confirm2">Parameter read</label>
+                                                                                <label class="col-lg-2 control-label " for="stparameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="parameter_read" name="parameter_read" type="text" class="form-control">
+                                                                                    <input id="stparameter_read" name="stparameter_read" type="text" class="form-control" value="">
                                                                                 </div>
-                                                                                <label class="col-lg-2 control-label " for="userName2">Identifier used</label>
+                                                                                <label class="col-lg-2 control-label " for="stidentifier_used">Identifier used</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="id_used" name="id_used" type="text" class="form-control">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="confirm2">report_key_title</label>
-                                                                                <div class="col-lg-4">
-                                                                                    <input id="report_key_title" name="report_key_title" type="text" class="form-control">
-                                                                                </div>
-                                                                                <label class="col-lg-2 control-label " for="confirm2">report_key_value</label>
-                                                                                <div class="col-lg-4">
-                                                                                    <input id="report_key_value" name="report_key_value" type="number" class="form-control">
+                                                                                    <input id="stidentifier_used" name="stidentifier_used" type="text" class="form-control" value="">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="confirm2">max_value</label>
+                                                                                <label class="col-lg-2 control-label " for="stmax_value">max_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="max_value" name="max_value" type="number" class="form-control">
+                                                                                    <input id="stmax_value" name="stmax_value" type="number" class="form-control" value="">
                                                                                 </div>
-                                                                                <label class="col-lg-2 control-label " for="userName2">min_value</label>
+                                                                                <label class="col-lg-2 control-label " for="stmin_value">min_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="min_value" name="min_value" type="number" class="form-control">
+                                                                                    <input id="stmin_value" name="stmin_value" type="number" class="form-control" value="">
                                                                                 </div>
-                                                                    </div>    
+                                                                            </div>  
                                                         </div> 
                                                     </div>
                                                     </div> 
@@ -277,7 +265,7 @@
                                                 <div class="panel panel-default"> 
                                                     <div class="panel-heading"> 
                                                         <h4 class="panel-title"> 
-                                                            <a data-toggle="collapse" data-parent="#accordion-test-2" href="#collapsetweleve-2" class="collapsed" aria-expanded="false">
+                                                            <a data-toggle="collapse" data-parent="#accordion-test-4" href="#collapsetweleve-2" class="collapsed" aria-expanded="false">
                                                                 Soil moisture sensor
                                                                 <span class="btn btn-default pull-right activate-style">Activate</span>
                                                             
@@ -291,90 +279,44 @@
                                                                                     
                                                                             </div>
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="confirm2">Parameter read</label>
+                                                                                <label class="col-lg-2 control-label " for="smparameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="parameter_read" name="parameter_read" type="text" class="form-control">
+                                                                                    <input id="smparameter_read" name="smparameter_read" type="text" class="form-control" value="">
                                                                                 </div>
-                                                                                <label class="col-lg-2 control-label " for="userName2">Identifier used</label>
+                                                                                <label class="col-lg-2 control-label " for="smidentifier_used">Identifier used</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="id_used" name="id_used" type="text" class="form-control">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="confirm2">report_key_title</label>
-                                                                                <div class="col-lg-4">
-                                                                                    <input id="report_key_title" name="report_key_title" type="text" class="form-control">
-                                                                                </div>
-                                                                                <label class="col-lg-2 control-label " for="confirm2">report_key_value</label>
-                                                                                <div class="col-lg-4">
-                                                                                    <input id="report_key_value" name="report_key_value" type="number" class="form-control">
+                                                                                    <input id="smidentifier_used" name="smidentifier_used" type="text" class="form-control" value="">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="confirm2">max_value</label>
+                                                                                <label class="col-lg-2 control-label " for="smmax_value">max_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="max_value" name="max_value" type="number" class="form-control">
+                                                                                    <input id="smmax_value" name="smmax_value" type="number" class="form-control" value="">
                                                                                 </div>
-                                                                                <label class="col-lg-2 control-label " for="userName2">min_value</label>
+                                                                                <label class="col-lg-2 control-label " for="smmin_value">min_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="min_value" name="min_value" type="number" class="form-control">
+                                                                                    <input id="smmin_value" name="smmin_value" type="number" class="form-control" value="">
                                                                                 </div>
-                                                                    </div>    
+                                                                            </div>  
                                                         </div> 
                                                     </div> 
                                                 </div> 
-                                            </div> 
+                                            </div>
+                                            </form> 
                                         </div>
-                                        <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary">Save changes</button>
-                                        </div>
-                            </div> </div>
-                            
-                        </div>
+                                    
 
-                    </div> <!-- end col -->
-
-                </div> <!-- End row -->
+                            </div> <!-- End row -->
  
 
-                </div>
-                                            
-                </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
+                                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
                 </div><!-- /.modal -->
-                                                <tr>
-                                                    <td>Brielle Williamson</td>
-                                                    <td>Integration Specialist</td>
-                                                    <td>New York</td>
-                                                    <td>61</td>
-                                                    <td>2012/12/02</td>
-                                                    <td><button class="btn btn-icon btn-success m-b-5" data-toggle="modal" data-target="#con-close-modal"> <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Herrod Chandler</td>
-                                                    <td>Sales Assistant</td>
-                                                    <td>San Francisco</td>
-                                                    <td>59</td>
-                                                    <td>2012/08/06</td>
-                                                    <td><button class="btn btn-icon btn-success m-b-5" data-toggle="modal" data-target="#con-close-modal"> <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Rhona Davidson</td>
-                                                    <td>Integration Specialist</td>
-                                                    <td>Tokyo</td>
-                                                    <td>55</td>
-                                                    <td>2010/10/14</td>
-                                                    <td><button class="btn btn-icon btn-success m-b-5" data-toggle="modal" data-target="#con-close-modal"> <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Colleen Hurst</td>
-                                                    <td>Javascript Developer</td>
-                                                    <td>San Francisco</td>
-                                                    <td>39</td>
-                                                    <td>2009/09/15</td>
-                                                    <td><button class="btn btn-icon btn-success m-b-5" data-toggle="modal" data-target="#con-close-modalS"> <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
-                                                </tr>
+                                                    @endif
+                                                @endforeach    
+                                            @endforeach   
+                                                
                                                 
                                             </tbody>
                                         </table>

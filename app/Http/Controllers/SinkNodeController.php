@@ -3,6 +3,8 @@
 namespace station\Http\Controllers;
 
 use Illuminate\Http\Request;
+use station\SinkNode;
+use station\Station;
 
 class SinkNodeController extends Controller
 {
@@ -13,7 +15,12 @@ class SinkNodeController extends Controller
      */
     public function index()
     {
-        return view('layouts.configureSinkNode');
+        $stations = Station::all()->toArray();
+        $sinkNodes = SinkNode::all()->toArray();
+        
+        return view('layouts.configureSinkNode',compact('sinkNodes','stations'));
+    
+        
     }
 
     /**
