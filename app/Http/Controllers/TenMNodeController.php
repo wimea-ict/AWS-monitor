@@ -16,6 +16,10 @@ class TenMNodeController extends Controller
         return view('layouts.configureTenmNode');
     }
 
+    public function report1(){
+        return view("reports.node10m");
+    }
+
     /**
      * Show the form for creating a new resource.
      *

@@ -16,6 +16,11 @@ class GroundNodeController extends Controller
         return view('layouts.configureGroundNode');
     }
 
+
+    public function report1(){
+        return view("reports.nodegnd");
+    }
+
     /**
      * Show the form for creating a new resource.
      *

@@ -16,6 +16,11 @@ class SinkNodeController extends Controller
         return view('layouts.configureSinkNode');
     }
 
+
+    public function report1(){
+        return view("reports.nodesink");
+    }
+
     /**
      * Show the form for creating a new resource.
      *

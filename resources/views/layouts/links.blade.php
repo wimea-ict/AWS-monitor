@@ -36,4 +36,4 @@
         <!-- DataTables -->
         <link href="assets/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
 
-        
+        @yield("page_specific_css_files");

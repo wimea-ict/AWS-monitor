@@ -16,6 +16,10 @@ class TwoMNodeController extends Controller
         return view('layouts.configureTwomNode');
     }
 
+    public function report1(){
+        return view("reports.node2m");
+    }
+
     /**
      * Show the form for creating a new resource.
      *

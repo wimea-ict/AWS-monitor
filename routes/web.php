@@ -18,6 +18,13 @@ Route::resource('configure10mnode', 'TenMNodeController');
 Route::resource('configure2mnode', 'TwoMNodeController');
 Route::resource('configuresinknode', 'SinkNodeController');
 Route::resource('configuregroundnode', 'GroundNodeController');
+
+Route::get('/node10m_report','TenMNodeController@report1');
+Route::get('/node2m_report','TwoMNodeController@report1');
+Route::get('/nodesink_report','SinkNodeController@report1');
+Route::get('/nodegnd_report','GroundNodeController@report1');
+
+
 Route::get('/', function () {
     return view('main');
 });

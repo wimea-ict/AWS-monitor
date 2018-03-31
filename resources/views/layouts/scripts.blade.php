@@ -26,6 +26,8 @@
         <script src="assets/morris/morris.min.js"></script>
         <script src="assets/morris/raphael.min.js"></script>
 
+       
+
         <!-- sparkline --> 
         <script src="assets/sparkline-chart/jquery.sparkline.min.js" type="text/javascript"></script>
         <script src="assets/sparkline-chart/chart-sparkline.js" type="text/javascript"></script> 
@@ -43,6 +45,8 @@
         <!-- Todo -->
         <script src="js/jquery.todo.js"></script>
 
+         @yield("page_specific_script_files");
+
         <!--Form Wizard-->
         <script src="assets/form-wizard/jquery.steps.min.js" type="text/javascript"></script>
         <script type="text/javascript" src="assets/jquery.validate/jquery.validate.min.js"></script>
@@ -59,7 +63,7 @@
          <script src="assets/modal-effect/js/classie.js"></script>
         <script src="assets/modal-effect/js/modalEffects.js"></script>
 
-
+        
 
         <script type="text/javascript">
             $(document).ready(function() {
