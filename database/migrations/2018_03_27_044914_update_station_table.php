@@ -24,7 +24,11 @@ class UpdateStationTable extends Migration
         });
 =======
         //
+<<<<<<< HEAD
 >>>>>>> c74096c27d46aa298943fc215473d7b325a29b78:database/migrations/2018_03_27_044914_update_station_table.php
+=======
+>>>>>>> 24f6d5374d5eee5f07465fc9e76e26003c2819b6:database/migrations/2018_03_27_044914_update_station_table.php
+>>>>>>> bc8fd876f56ad734d92d6bad43dfd59fed7250e7
     }
 
     /**
