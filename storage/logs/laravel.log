@@ -5237,7 +5237,6 @@ Did you mean one of these?
 #55 /home/joshua/Documents/lavarel projects/AWS monitor/server.php(21): require_once('/home/joshua/Do...')
 #56 {main}
 "} 
-<<<<<<< HEAD
 [2018-03-26 09:16:43] local.ERROR: Undefined variable: station (View: /var/www/AWS-monitor/resources/views/layouts/configurestation.blade.php) {"exception":"[object] (ErrorException(code: 0): Undefined variable: station (View: /var/www/AWS-monitor/resources/views/layouts/configurestation.blade.php) at /var/www/AWS-monitor/storage/framework/views/d88896d0f93f70d730119955258a296c8e82d86f.php:68, ErrorException(code: 0): Undefined variable: station at /var/www/AWS-monitor/storage/framework/views/d88896d0f93f70d730119955258a296c8e82d86f.php:68)
 [stacktrace]
 #0 /var/www/AWS-monitor/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(45): Illuminate\\View\\Engines\\CompilerEngine->handleViewException(Object(ErrorException), 1)
@@ -5986,7 +5985,6 @@ Did you mean one of these?
 #35 /var/www/AWS-monitor/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(121): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #36 /var/www/AWS-monitor/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #37 {main}
-=======
 [2018-03-26 09:05:53] local.ERROR: Undefined variable: stationToEdit (View: /home/joshua/Documents/lavarel projects/AWS monitor/resources/views/layouts/configurestation.blade.php) {"exception":"[object] (ErrorException(code: 0): Undefined variable: stationToEdit (View: /home/joshua/Documents/lavarel projects/AWS monitor/resources/views/layouts/configurestation.blade.php) at /home/joshua/Documents/lavarel projects/AWS monitor/storage/framework/views/9115d5936da6f11a7c1cc7e912cd52eca475549e.php:68, ErrorException(code: 0): Undefined variable: stationToEdit at /home/joshua/Documents/lavarel projects/AWS monitor/storage/framework/views/9115d5936da6f11a7c1cc7e912cd52eca475549e.php:68)
 [stacktrace]
 #0 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(45): Illuminate\\View\\Engines\\CompilerEngine->handleViewException(Object(ErrorException), 1)
@@ -8952,5 +8950,4 @@ Did you mean this?
 #6 /home/joshua/Documents/lavarel projects/AWS monitor/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(121): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #7 /home/joshua/Documents/lavarel projects/AWS monitor/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #8 {main}
->>>>>>> c74096c27d46aa298943fc215473d7b325a29b78
 "} 

@@ -49,32 +49,6 @@
                 <div id="full-width-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="full-width-modalLabel" aria-hidden="true" style="display: none;">
                     <div class="modal-dialog modal-full">
                         <div class="modal-content">
-<<<<<<< HEAD
-                                     
-                            <div class="modal-body">
-                                <div class="row">
-                                    <!-- Wizard with Validation -->
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="panel panel-default">
-                                <div class="panel-heading"> 
-                                    <h3 class="panel-title">Configure Station</h3> 
-                                </div> 
-                                <div class="panel-body"> 
-                                    <form id="wizard-validation-form" action="#" style="margin-bottom: 30px;">
-                                        <div>
-                                            <h3>Station Credentials</h3>
-                                            <section style="padding-bottom:30px;">
-                                                <div class="form-group clearfix">
-                                                    <label class="col-lg-2 control-label" for="userName2">Station name</label>
-                                                    <div class="col-lg-4">
-                                                        <input class="form-control" id="sname" name="sname" type="text" value="">
-                                                    </div>
-                                                    <label class="col-lg-2 control-label" for="userName2">Station number</label>
-                                                    <div class="col-lg-4">
-                                                        <input class="form-control" id="snumber" name="snumber" type="text">
-                                                    </div>
-=======
                            <div class="modal-body">
                            <div class="row">
                     <div class="col-md-12">
@@ -99,7 +73,6 @@
                                                 <label class="col-lg-2 control-label" for="snumber">Station number</label>
                                                 <div class="col-lg-4">
                                                     <input class="form-control" id="snumber" name="snumber" type="text">
->>>>>>> c74096c27d46aa298943fc215473d7b325a29b78
                                                 </div>
                                             </div>
                                             <div class="form-group clearfix">
