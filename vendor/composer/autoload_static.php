@@ -78,6 +78,7 @@ class ComposerStaticInit87b9326ddaef55773641bf54eaf4d0ef
         array (
             'League\\Flysystem\\' => 17,
             'Laravel\\Tinker\\' => 15,
+            'Laracademy\\ModelGenerator\\' => 26,
         ),
         'I' => 
         array (
@@ -224,6 +225,10 @@ class ComposerStaticInit87b9326ddaef55773641bf54eaf4d0ef
         'Laravel\\Tinker\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/tinker/src',
+        ),
+        'Laracademy\\ModelGenerator\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/laracademy/model-generator/src',
         ),
         'Illuminate\\' => 
         array (
@@ -1705,6 +1710,8 @@ class ComposerStaticInit87b9326ddaef55773641bf54eaf4d0ef
         'JakubOnderka\\PhpConsoleColor\\ConsoleColor' => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src/JakubOnderka/PhpConsoleColor/ConsoleColor.php',
         'JakubOnderka\\PhpConsoleColor\\InvalidStyleException' => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src/JakubOnderka/PhpConsoleColor/InvalidStyleException.php',
         'JakubOnderka\\PhpConsoleHighlighter\\Highlighter' => __DIR__ . '/..' . '/jakub-onderka/php-console-highlighter/src/JakubOnderka/PhpConsoleHighlighter/Highlighter.php',
+        'Laracademy\\ModelGenerator\\Commands\\ModelGenerateCommand' => __DIR__ . '/..' . '/laracademy/model-generator/src/Commands/ModelGenerateCommand.php',
+        'Laracademy\\ModelGenerator\\ModelGeneratorServiceProvider' => __DIR__ . '/..' . '/laracademy/model-generator/src/ModelGeneratorServiceProvider.php',
         'Laravel\\Tinker\\ClassAliasAutoloader' => __DIR__ . '/..' . '/laravel/tinker/src/ClassAliasAutoloader.php',
         'Laravel\\Tinker\\Console\\TinkerCommand' => __DIR__ . '/..' . '/laravel/tinker/src/Console/TinkerCommand.php',
         'Laravel\\Tinker\\TinkerCaster' => __DIR__ . '/..' . '/laravel/tinker/src/TinkerCaster.php',
@@ -2924,8 +2931,6 @@ class ComposerStaticInit87b9326ddaef55773641bf54eaf4d0ef
         'SebastianBergmann\\ResourceOperations\\ResourceOperations' => __DIR__ . '/..' . '/sebastian/resource-operations/src/ResourceOperations.php',
         'SebastianBergmann\\Version' => __DIR__ . '/..' . '/sebastian/version/src/Version.php',
         'SessionUpdateTimestampHandlerInterface' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/SessionUpdateTimestampHandlerInterface.php',
-        'StationSeeder' => __DIR__ . '/../..' . '/database/seeds/StationSeeder.php',
-        'StationTableSeeder' => __DIR__ . '/../..' . '/database/seeds/StationTableSeeder.php',
         'Symfony\\Component\\Console\\Application' => __DIR__ . '/..' . '/symfony/console/Application.php',
         'Symfony\\Component\\Console\\CommandLoader\\CommandLoaderInterface' => __DIR__ . '/..' . '/symfony/console/CommandLoader/CommandLoaderInterface.php',
         'Symfony\\Component\\Console\\CommandLoader\\ContainerCommandLoader' => __DIR__ . '/..' . '/symfony/console/CommandLoader/ContainerCommandLoader.php',
@@ -3600,19 +3605,16 @@ class ComposerStaticInit87b9326ddaef55773641bf54eaf4d0ef
         'station\\Http\\Controllers\\ConfigureStaion' => __DIR__ . '/../..' . '/app/Http/Controllers/ConfigureStaion.php',
         'station\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'station\\Http\\Controllers\\GroundNodeController' => __DIR__ . '/../..' . '/app/Http/Controllers/GroundNodeController.php',
-        'station\\Http\\Controllers\\NodeController' => __DIR__ . '/../..' . '/app/Http/Controllers/NodeController.php',
-        'station\\Http\\Controllers\\NodeStatusConfigurationController' => __DIR__ . '/../..' . '/app/Http/Controllers/NodeStatusConfigurationController.php',
-        'station\\Http\\Controllers\\NodeStatusController' => __DIR__ . '/../..' . '/app/Http/Controllers/NodeStatusController.php',
+        'station\\Http\\Controllers\\IdentifiedProblemController' => __DIR__ . '/../..' . '/app/Http/Controllers/IdentifiedProblemController.php',
+        'station\\Http\\Controllers\\ObservationSlipController' => __DIR__ . '/../..' . '/app/Http/Controllers/ObservationSlipController.php',
         'station\\Http\\Controllers\\PotentialProblemController' => __DIR__ . '/../..' . '/app/Http/Controllers/PotentialProblemController.php',
         'station\\Http\\Controllers\\ProblemConfigurationController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProblemConfigurationController.php',
         'station\\Http\\Controllers\\ProblemTrackerController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProblemTrackerController.php',
         'station\\Http\\Controllers\\SensorsController' => __DIR__ . '/../..' . '/app/Http/Controllers/SensorsController.php',
         'station\\Http\\Controllers\\SinkNodeController' => __DIR__ . '/../..' . '/app/Http/Controllers/SinkNodeController.php',
         'station\\Http\\Controllers\\StationsController' => __DIR__ . '/../..' . '/app/Http/Controllers/controllerogg.php',
-        'station\\Http\\Controllers\\TenMeterNodeController' => __DIR__ . '/../..' . '/app/Http/Controllers/TenMeterNodeController.php',
-        'station\\Http\\Controllers\\TodoController' => __DIR__ . '/../..' . '/app/Http/Controllers/TodoController.php',
-        'station\\Http\\Controllers\\TwoMeterNodeController' => __DIR__ . '/../..' . '/app/Http/Controllers/TwoMeterNodeController.php',
-        'station\\Http\\Controllers\\help' => __DIR__ . '/../..' . '/app/Http/Controllers/help.php',
+        'station\\Http\\Controllers\\TenMNodeController' => __DIR__ . '/../..' . '/app/Http/Controllers/TenMNodeController.php',
+        'station\\Http\\Controllers\\TwoMNodeController' => __DIR__ . '/../..' . '/app/Http/Controllers/TwoMNodeController.php',
         'station\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'station\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
         'station\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
@@ -3622,7 +3624,7 @@ class ComposerStaticInit87b9326ddaef55773641bf54eaf4d0ef
         'station\\IdentifiedProblem' => __DIR__ . '/../..' . '/app/IdentifiedProblem.php',
         'station\\Node' => __DIR__ . '/../..' . '/app/Node.php',
         'station\\NodeStatus' => __DIR__ . '/../..' . '/app/NodeStatus.php',
-        'station\\NodeStatusConfiguration' => __DIR__ . '/../..' . '/app/NodeStatusConfiguration.php',
+        'station\\ObservationSlip' => __DIR__ . '/../..' . '/app/ObservationSlip.php',
         'station\\PotentialProblem' => __DIR__ . '/../..' . '/app/PotentialProblem.php',
         'station\\ProblemConfiguration' => __DIR__ . '/../..' . '/app/ProblemConfiguration.php',
         'station\\ProblemTracker' => __DIR__ . '/../..' . '/app/ProblemTracker.php',
@@ -3635,7 +3637,6 @@ class ComposerStaticInit87b9326ddaef55773641bf54eaf4d0ef
         'station\\SinkNode' => __DIR__ . '/../..' . '/app/SinkNode.php',
         'station\\Station' => __DIR__ . '/../..' . '/app/Station.php',
         'station\\TenMeterNode' => __DIR__ . '/../..' . '/app/TenMeterNode.php',
-        'station\\Todo' => __DIR__ . '/../..' . '/app/Todo.php',
         'station\\TwoMeterNode' => __DIR__ . '/../..' . '/app/TwoMeterNode.php',
         'station\\User' => __DIR__ . '/../..' . '/app/User.php',
     );

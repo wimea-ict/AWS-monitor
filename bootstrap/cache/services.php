@@ -25,10 +25,11 @@
     21 => 'Illuminate\\View\\ViewServiceProvider',
     22 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
     23 => 'Laravel\\Tinker\\TinkerServiceProvider',
-    24 => 'station\\Providers\\AppServiceProvider',
-    25 => 'station\\Providers\\AuthServiceProvider',
-    26 => 'station\\Providers\\EventServiceProvider',
-    27 => 'station\\Providers\\RouteServiceProvider',
+    24 => 'Laracademy\\ModelGenerator\\ModelGeneratorServiceProvider',
+    25 => 'station\\Providers\\AppServiceProvider',
+    26 => 'station\\Providers\\AuthServiceProvider',
+    27 => 'station\\Providers\\EventServiceProvider',
+    28 => 'station\\Providers\\RouteServiceProvider',
   ),
   'eager' => 
   array (
@@ -43,10 +44,11 @@
     8 => 'Illuminate\\Session\\SessionServiceProvider',
     9 => 'Illuminate\\View\\ViewServiceProvider',
     10 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
-    11 => 'station\\Providers\\AppServiceProvider',
-    12 => 'station\\Providers\\AuthServiceProvider',
-    13 => 'station\\Providers\\EventServiceProvider',
-    14 => 'station\\Providers\\RouteServiceProvider',
+    11 => 'Laracademy\\ModelGenerator\\ModelGeneratorServiceProvider',
+    12 => 'station\\Providers\\AppServiceProvider',
+    13 => 'station\\Providers\\AuthServiceProvider',
+    14 => 'station\\Providers\\EventServiceProvider',
+    15 => 'station\\Providers\\RouteServiceProvider',
   ),
   'deferred' => 
   array (
