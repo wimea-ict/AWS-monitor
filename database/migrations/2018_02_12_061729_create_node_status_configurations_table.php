@@ -17,6 +17,7 @@ class CreateNodeStatusConfigurationsTable extends Migration
             $table->increments('id');
             $table->integer('node_id')->unsigned();
             $table->enum('node_type',["twoMeterNode","tenMeterNode","groundNode","sinkNode"])->comment('this should be the table of the node e.g twoMeterNode');
+            $table->string('txt_value')->comment('assuming that no two nodes can have the same txt value');
             $table->double('v_in_min_value');
             $table->double('v_in_max_value');
             $table->double('v_mcu_min_value');
