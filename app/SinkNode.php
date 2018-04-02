@@ -6,5 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class SinkNode extends Model
 {
+    /**
+     * The table associated with the model
+     * 
+     * @var string
+     */
+    protected $table = 'sinkNode';
+
+    /**
+     * Indicates if the model should be timestamped
+     * 
+     * @var bool
+     */
+    // public $timestamps = false;
+
+    // const CREATED_AT = 'CreationDate';
     //
 }
