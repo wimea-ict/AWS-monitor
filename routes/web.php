@@ -69,12 +69,17 @@ Route::get('/tester',function(){
     // pick only columns that we'll be using. We won't need date_time_recorded because we have
     $counts = DB::table('nodestatus')->select('V_MCU','V_IN','date','time','TXT','StationNumber')->orderBy('id')->chunk(100, function($nodes) use(&$vinNull, &$vmcuNull, &$dateNull, &$vinMin, &$vinMax, &$vmcuMin, &$vmcuMax, &$dateMin, &$dateMax, &$date, &$date1970, &$invalidDates, &$nodeConf){
         foreach ($nodes as $node) {
+            /**
+             * Get the config data for each node
+             * Since only configured nodes are saved to the database, there shouldn't be an unassigned variable.
+              */
             foreach ($nodeConf as $nodeConfig) {
                 if ($nodeConfig->txt_value === $node->TXT) {// if the txt matches then get the config info
                     $vinMaxVal = $nodeConfig->v_in_max_value;
                     $vinMinVal = $nodeConfig->v_in_min_value;
                     $vmcuMaxVal = $nodeConfig->v_mcu_max_value;
                     $vmcuMinVal = $nodeConfig->v_mcu_min_value;
+                    break;// exit loop since we have the info we need.
                 }
             }
             //check for nulls
