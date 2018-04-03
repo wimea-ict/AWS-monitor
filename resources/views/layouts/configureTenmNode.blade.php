@@ -5,7 +5,7 @@
                     <div class="col-md-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title">Node configurations</h3>
+                                <h3 class="panel-title">10m Node configurations</h3>
                             </div>
                             <div class="panel-body">
                                 <div class="row">
@@ -14,173 +14,158 @@
                                             <thead>
                                                 <tr>
                                                     <th>Station Name</th>
-                                                    <th>Node Name</th>
+                                                    <th>Station Location</th>
                                                     <th>MAC Address</th>
                                                     <th>Txt key</th>
-                                                    <th>Date registered</th>
+                                                    <th>Activation Status</th>
                                                     <th>Edit</th>
                                                 </tr>
                                             </thead>
 
                                      
                                             <tbody>
-                                                <tr>
-                                                    <td>Tiger Nixon</td>
-                                                    <td>System Architect</td>
-                                                    <td>Edinburgh</td>
-                                                    <td>61</td>
-                                                    <td>2011/04/25</td>
-                                                    <td><button class="btn btn-icon btn-success m-b-5" data-toggle="modal" data-target="#con-close-modal"> <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Garrett Winters</td>
-                                                    <td>Accountant</td>
-                                                    <td>Tokyo</td>
-                                                    <td>63</td>
-                                                    <td>2011/07/25</td>
-                                                    <td><button class="btn btn-icon btn-success m-b-5" data-toggle="modal" data-target="#con-close-modal"> <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Ashton Cox</td>
-                                                    <td>Junior Technical Author</td>
-                                                    <td>San Francisco</td>
-                                                    <td>66</td>
-                                                    <td>2009/01/12</td>
-                                                    <td><button class="btn btn-icon btn-success m-b-5" data-toggle="modal" data-target="#con-close-modal"> <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Cedric Kelly</td>
-                                                    <td>Senior Javascript Developer</td>
-                                                    <td>Edinburgh</td>
-                                                    <td>22</td>
-                                                    <td>2012/03/29</td>
-                                                    <td><button class="btn btn-icon btn-success m-b-5" data-toggle="modal" data-target="#con-close-modal"> <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Airi Satou</td>
-                                                    <td>Accountant</td>
-                                                    <td>Tokyo</td>
-                                                    <td>33</td>
-                                                    <td>2008/11/28</td>
-                                                    <td><button class="btn btn-icon btn-success m-b-5" data-toggle="modal" data-target="#con-close-modal"> <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
-                                                </tr>
-                                                <div id="con-close-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="full-width-modalLabel" aria-hidden="true" style="display: none;">
-                <div class="modal-dialog modal-full">
-                <div class="modal-content" style="background:#797979">
-                                           
-                <div class="modal-body">
-                <div class="row">
+                                            @foreach($tenMeterNodes as $tenMeterNode)
+                                                @foreach($stations as $station)
+                                                    @if($station['station_id']== $tenMeterNode['station_id'] )
+                                                    <tr>
+                                                        <td>{{$station['station_name']}}</td>
+                                                        <td>{{$station['station_location']}}</td>
+                                                        <td>{{$tenMeterNode['txt_10m']}}</td>
+                                                        <td>{{$tenMeterNode['e64_10m']}}</td>
+                                                        <td>{{$tenMeterNode['node_status']}}</td>
+                                                        <td><button class="btn btn-icon btn-success m-b-5" data-toggle="modal" data-target="#full-width-modal2" id="{{htmlspecialchars(json_encode($tenMeterNode))}}"> <i class="fa fa-thumbs-o-up" ></i> Edit </button></td>
+                                                    </tr>
+                                                    <div id="full-width-modal2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="full-width-modalLabel" aria-hidden="true" style="display: none;">
+                    <div class="modal-dialog modal-full">
+                        <div class="modal-content">
+                            <div class="modal-header"> 
+                                <h3 class="panel-title btn btn-primary">Edit 10m Node settings</h3> 
+                            </div>
+                           <div class="modal-body">
+                           <div class="row">
                     <div class="col-md-12">
-                        <ul class="nav nav-tabs"> 
-                            <li class="active"> 
-                                <a href="#10m" data-toggle="tab" aria-expanded="true"> 
-                                    <span class="visible-xs"><i class="fa fa-home"></i></span> 
-                                    <span class="hidden-xs">10m node</span> 
-                                </a> 
-                            </li> 
+                    <form id="" method="post" action="{{url('updateStation')}}">
                             
-                        </ul> 
-                        <div class="tab-content"> 
-                            <div class="tab-pane active" id="10m"><div> 
-                                <div >
-                                                                            <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label" for="userName2">Node name</label>
-                                                                                <div class="col-lg-4">
-                                                                                    <input class="form-control" id="nname" name="nname" type="text">
-                                                                                </div>
-                                                                                <label class="col-lg-2 control-label" for="userName2">TXT key</label>
-                                                                                <div class="col-lg-4">
-                                                                                    <input class="form-control" id="nnumber" name="nnumber" type="text">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="userName2">MAC address</label>
-                                                                                <div class="col-lg-4">
-                                                                                    <input id="mcaddress" name="mcaddress" type="text" class="form-control">
-
-                                                                                </div>
-                                                                                <label class="col-lg-2 control-label " for="userName2">Date Registered</label>
-                                                                                <div class="col-lg-4">
-                                                                                <div class="input-group">
-                                                                                    <input type="date" class="form-control" placeholder="mm/dd/yyyy" id="datepicker">
-                                                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                                                                                </div>                                                                               </div>
-                                                                            </div>
-
-                                                                            
-                                                                            
-                                                                 
-                                                     
-                                </div>
-                                <div > 
-                                        <div class="panel-group panel-group-joined" id="accordion-test-2"> 
-                                            <div class="panel panel-default"> 
+                        <div class="panel panel-default">
+                             
+                            <div class="panel-body"> 
+                                    <div>
+                                    {{csrf_field()}}
+                                    <div class="col-lg-12"> 
+                                            <div class="panel-group panel-group-joined" id="accordion-test-2"> 
+                                                <div class="panel panel-default"> 
                                                     <div class="panel-heading"> 
                                                         <h4 class="panel-title"> 
                                                             <a data-toggle="collapse" data-parent="#accordion-test-2" href="#collapsefour-2" aria-expanded="false" class="collapsed" >
                                                                 Node Status Configurations
 
-                                                            </a> 
+                                                               </a> 
                                                         </h4> 
                                                     </div> 
                                                     <div id="collapsefour-2" class="panel-collapse collapse"> 
                                                         <div class="panel-body">
                              
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="userName2">v_in_label</label>
+                                                                                <label class="col-lg-2 control-label " for="10vin_label">v_in label</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="v_in_label" name="v_in_label" type="text" class="form-control">
+                                                                                    <input id="10vin_label" name="10vin_label" type="text" class="form-control" value="">
                                                                                 </div>
-                                                                                <label class="col-lg-2 control-label " for="userName2">v_in_key_title</label>
+                                                                                <label class="col-lg-2 control-label " for="10txt_key">TXT key</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="v_in_key_title" name="v_in_key_title" type="text" class="form-control">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="confirm2">v_in_key_value</label>
-                                                                                <div class="col-lg-4">
-                                                                                    <input id="v_in_key_value" name="v_in_key_value" type="text" class="form-control">
-                                                                                </div>
-                                                                                <label class="col-lg-2 control-label " for="confirm2">v_in_min_value</label>
-                                                                                <div class="col-lg-4">
-                                                                                    <input id="region" name="v_in_min_value" type="number" class="form-control">
+                                                                                    <input id="10txt_key" name="10txt_key" type="text" class="form-control" value="">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="confirm2">v_in_max_value</label>
+                                                                                <label class="col-lg-2 control-label " for="10mac_add">MAK key</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="v_in_max_value" name="v_in_max_value" type="number" class="form-control">
+                                                                                    <input id="10mac_add" name="10mac_add" type="text" class="form-control" value="">
                                                                                 </div>
-                                                                                <label class="col-lg-2 control-label " for="userName2">v_mcu_label</label>
+                                                                                <label class="col-lg-2 control-label " for="10v_in_min_value">v_in min value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="v_mcu_label" name="v_mcu_label" type="text" class="form-control">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="confirm2">v_mcu_key_title</label>
-                                                                                <div class="col-lg-4">
-                                                                                    <input id="v_mcu_key_title" name="v_mcu_key_title" type="text" class="form-control">
-                                                                                </div>
-                                                                                <label class="col-lg-2 control-label " for="confirm2">v_mcu_key_value</label>
-                                                                                <div class="col-lg-4">
-                                                                                    <input id="v_mcu_key_value" name="v_mcu_key_value" type="number" class="form-control">
+                                                                                    <input id="10v_in_min_value" name="10v_in_min_value" type="number" class="form-control" value="">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="confirm2">v_mcu_max_value</label>
+                                                                                <label class="col-lg-2 control-label " for="10v_in_max_value">v_in max value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="v_mcu_max_value" name="v_mcu_max_value" type="number" class="form-control">
+                                                                                    <input id="10v_in_max_value" name="10v_in_max_value" type="number" class="form-control" value="">
                                                                                 </div>
-                                                                                <label class="col-lg-2 control-label " for="userName2">v_mcu_min_value</label>
+                                                                                <label class="col-lg-2 control-label " for="userName2">v_mcu label</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="v_mcu_min_value" name="v_mcu_min_value" type="text" class="form-control">
+                                                                                    <input id="10v_mcu_label" name="10v_mcu_label" type="text" class="form-control" value="">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group clearfix">
+                                                                                <label class="col-lg-2 control-label " for="10gwlat">latitude key</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="10gwlat" name="10gwlat" type="text" class="form-control" value="">
+                                                                                </div>
+                                                                                <label class="col-lg-2 control-label " for="10gwlong">longitude key</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="10gwlong" name="10gwlong" type="text" class="form-control" value="">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group clearfix">
+                                                                                <label class="col-lg-2 control-label " for="10v_mcu_max_value">v_mcu max value</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="10v_mcu_max_value" name="10v_mcu_max_value" type="number" class="form-control" value="">
+                                                                                </div>
+                                                                                <label class="col-lg-2 control-label " for="10v_mcu_min_value">v_mcu min value</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="10v_mcu_min_value" name="10v_mcu_min_value" type="text" class="form-control" value="">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group clearfix">
+                                                                                <label class="col-lg-2 control-label " for="10rssi">RSSI key</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="10rssi" name="10rssi" type="text" class="form-control" value="">
+                                                                                </div>
+                                                                                <label class="col-lg-2 control-label " for="10lqi">LQI key</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="10lqi" name="10lqi" type="text" class="form-control" value="">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group clearfix">
+                                                                                <label class="col-lg-2 control-label " for="10drp">drp key</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="10drp" name="10drp" type="text" class="form-control" value="">
+                                                                                </div>
+                                                                                <label class="col-lg-2 control-label " for="10ttl">TTL key</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="10ttl" name="10ttl" type="text" class="form-control" value="">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group clearfix">
+                                                                                <label class="col-lg-2 control-label " for="10date">Date identifier</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="10date" name="10date" type="text" class="form-control" value="">
+                                                                                </div>
+                                                                                <label class="col-lg-2 control-label " for="10time">Time identifier</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="10time" name="10time" type="text" class="form-control" value="">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group clearfix">
+                                                                                <label class="col-lg-2 control-label " for="10ps">PS key</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="10ps" name="10ps" type="text" class="form-control" value="">
+                                                                                </div>
+                                                                                <label class="col-lg-2 control-label " for="10ut">UT key</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="10ut" name="10ut" type="text" class="form-control" value="">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group clearfix">
+                                                                                <label class="col-lg-2 control-label " for="10txt_value">TXT value</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="10txt_value" name="10txt_value" type="text" class="form-control" required>
                                                                                 </div>
                                                                             </div>
                                                                                
                                                         </div> 
                                                     </div> 
-                                            </div>
-                                            <div class="panel panel-default"> 
+                                                </div>
+                                                <div class="panel panel-default"> 
                                                     <div class="panel-heading"> 
                                                         <h4 class="panel-title"> 
                                                             <a data-toggle="collapse" data-parent="#accordion-test-2" href="#collapseOne-2" aria-expanded="false" class="collapsed">
@@ -194,39 +179,30 @@
                                                         <div class="panel-body">
                                                                             
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="confirm2">Parameter read</label>
+                                                                                <label class="col-lg-2 control-label " for="10parameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="parameter_read" name="parameter_read" type="text" class="form-control">
+                                                                                    <input id="10parameter_read" name="10parameter_read" type="text" class="form-control" value="" >
                                                                                 </div>
-                                                                                <label class="col-lg-2 control-label " for="userName2">Identifier used</label>
+                                                                                <label class="col-lg-2 control-label " for="10identifier_used">Identifier used</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="id_used" name="id_used" type="text" class="form-control">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="confirm2">report_key_title</label>
-                                                                                <div class="col-lg-4">
-                                                                                    <input id="report_key_title" name="report_key_title" type="text" class="form-control">
-                                                                                </div>
-                                                                                <label class="col-lg-2 control-label " for="confirm2">report_key_value</label>
-                                                                                <div class="col-lg-4">
-                                                                                    <input id="report_key_value" name="report_key_value" type="number" class="form-control">
+                                                                                    <input id="10identifier_used" name="10identifier_used" type="text" class="form-control" value="">
                                                                                 </div>
                                                                             </div>
+                                                                            
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="confirm2">max_value</label>
+                                                                                <label class="col-lg-2 control-label " for="10max_value">max_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="max_value" name="max_value" type="number" class="form-control">
+                                                                                    <input id="10max_value" name="10max_value" type="number" class="form-control" value="">
                                                                                 </div>
-                                                                                <label class="col-lg-2 control-label " for="userName2">min_value</label>
+                                                                                <label class="col-lg-2 control-label " for="10min_value">min_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="min_value" name="min_value" type="number" class="form-control">
+                                                                                    <input id="10min_value" name="10min_value" type="number" class="form-control" value="">
                                                                                 </div>
-                                                                    </div>
+                                                                            </div>
                                                                                
                                                         </div> 
                                                     </div> 
-                                            </div>
+                                                </div>
                                                 <div class="panel panel-default"> 
                                                     <div class="panel-heading"> 
                                                         <h4 class="panel-title"> 
@@ -240,40 +216,28 @@
                                                     </div> 
                                                     <div id="collapseTwo-2" class="panel-collapse collapse"> 
                                                         <div class="panel-body">
-                                                        <div class="form-group clearfix">
-                                                        
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="confirm2">Parameter read</label>
+                                                                                <label class="col-lg-2 control-label " for="wsparameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="parameter_read" name="parameter_read" type="text" class="form-control">
+                                                                                    <input id="wsparameter_read" name="wsparameter_read" type="text" class="form-control" value="">
                                                                                 </div>
-                                                                                <label class="col-lg-2 control-label " for="userName2">Identifier used</label>
+                                                                                <label class="col-lg-2 control-label " for="wsidentifier_used">Identifier used</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="id_used" name="id_used" type="text" class="form-control">
+                                                                                    <input id="wsidentifier_used" name="wsidentifier_used" type="text" class="form-control" value="">
                                                                                 </div>
                                                                             </div>
+                                                                            
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="confirm2">report_key_title</label>
+                                                                                <label class="col-lg-2 control-label " for="wsmax_value">max_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="report_key_title" name="report_key_title" type="text" class="form-control">
+                                                                                    <input id="wsmax_value" name="wsmax_value" type="number" class="form-control" value="">
                                                                                 </div>
-                                                                                <label class="col-lg-2 control-label " for="confirm2">report_key_value</label>
+                                                                                <label class="col-lg-2 control-label " for="wsmin_value">min_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="report_key_value" name="report_key_value" type="number" class="form-control">
+                                                                                    <input id="wsmin_value" name="wsmin_value" type="number" class="form-control" value="">
                                                                                 </div>
-                                                                            </div>
-                                                                            <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="confirm2">max_value</label>
-                                                                                <div class="col-lg-4">
-                                                                                    <input id="max_value" name="max_value" type="number" class="form-control">
-                                                                                </div>
-                                                                                <label class="col-lg-2 control-label " for="userName2">min_value</label>
-                                                                                <div class="col-lg-4">
-                                                                                    <input id="min_value" name="min_value" type="number" class="form-control">
-                                                                                </div>
-                                                                    </div>    
-                                                        </div> 
-                                                    </div>
+                                                                            </div> 
+                                                        </div>
                                                     </div> 
                                                 </div> 
                                                 <div class="panel panel-default"> 
@@ -288,105 +252,60 @@
                                                     </div> 
                                                     <div id="collapseThree-2" class="panel-collapse collapse"> 
                                                         <div class="panel-body">
-                                                        <div class="form-group clearfix">
-                                                                                    
-                                                                                    
-                                                                            </div>
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="confirm2">Parameter read</label>
+                                                                                <label class="col-lg-2 control-label " for="wdparameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="parameter_read" name="parameter_read" type="text" class="form-control">
+                                                                                    <input id="wdparameter_read" name="wdparameter_read" type="text" class="form-control" value="">
                                                                                 </div>
-                                                                                <label class="col-lg-2 control-label " for="userName2">Identifier used</label>
+                                                                                <label class="col-lg-2 control-label " for="wdidentifier_used">Identifier used</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="id_used" name="id_used" type="text" class="form-control">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="confirm2">report_key_title</label>
-                                                                                <div class="col-lg-4">
-                                                                                    <input id="report_key_title" name="report_key_title" type="text" class="form-control">
-                                                                                </div>
-                                                                                <label class="col-lg-2 control-label " for="confirm2">report_key_value</label>
-                                                                                <div class="col-lg-4">
-                                                                                    <input id="report_key_value" name="report_key_value" type="number" class="form-control">
+                                                                                    <input id="wdidentifier_used" name="wdidentifier_used" type="text" class="form-control" value="">
                                                                                 </div>
                                                                             </div>
+                                                                        
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="confirm2">max_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="max_value" name="max_value" type="number" class="form-control">
+                                                                                    <input id="wdmax_value" name="wdmax_value" type="number" class="form-control" value="">
                                                                                 </div>
-                                                                                <label class="col-lg-2 control-label " for="userName2">min_value</label>
+                                                                                <label class="col-lg-2 control-label " for="wdmin_value">min_value</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="min_value" name="min_value" type="number" class="form-control">
+                                                                                    <input id="wdmin_value" name="wdmin_value" type="number" class="form-control" value="">
                                                                                 </div>
-                                                                    </div>    
+                                                                            </div> 
                                                         </div> 
                                                     </div> 
                                                 </div> 
                                             </div> 
-                                        </div>  
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                                 <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary">Save changes</button>
-                                </div>
-                            </div>
-                            </div> 
-                            
-                        </div>
+                                        </div>
+                                        
 
+                                        
+                                        
+                                    </div>
+                                
+                                
+                            </div>  <!-- End panel-body -->
+                            
+                        </div> <!-- End panel -->
+                        <div class="modal-footer">
+                                <button type="submit" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="submit" name="update" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>        
                     </div> <!-- end col -->
 
-                </div> <!-- End row -->
+</div> <!-- End row -->
  
 
-                </div>
-                                            
-                </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
+                                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
                 </div><!-- /.modal -->
-                                                <tr>
-                                                    <td>Brielle Williamson</td>
-                                                    <td>Integration Specialist</td>
-                                                    <td>New York</td>
-                                                    <td>61</td>
-                                                    <td>2012/12/02</td>
-                                                    <td><button class="btn btn-icon btn-success m-b-5" data-toggle="modal" data-target="#con-close-modal"> <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Herrod Chandler</td>
-                                                    <td>Sales Assistant</td>
-                                                    <td>San Francisco</td>
-                                                    <td>59</td>
-                                                    <td>2012/08/06</td>
-                                                    <td><button class="btn btn-icon btn-success m-b-5" data-toggle="modal" data-target="#con-close-modal"> <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Rhona Davidson</td>
-                                                    <td>Integration Specialist</td>
-                                                    <td>Tokyo</td>
-                                                    <td>55</td>
-                                                    <td>2010/10/14</td>
-                                                    <td><button class="btn btn-icon btn-success m-b-5" data-toggle="modal" data-target="#con-close-modal"> <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Colleen Hurst</td>
-                                                    <td>Javascript Developer</td>
-                                                    <td>San Francisco</td>
-                                                    <td>39</td>
-                                                    <td>2009/09/15</td>
-                                                    <td><button class="btn btn-icon btn-success m-b-5" data-toggle="modal" data-target="#con-close-modalS"> <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
-                                                </tr>
+                                                    @endif
+                                                @endforeach    
+                                            @endforeach   
+                                                
                                                 
                                             </tbody>
                                         </table>

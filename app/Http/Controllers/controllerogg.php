@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\layouts;
 use station\Station;
 use station\TwoMeterNode;
+use station\TenMeterNode;
+use station\GroundNode;
+use station\SinkNode;
+use station\Sensor;
 class StationsController extends Controller
 {
     /**
@@ -17,7 +21,7 @@ class StationsController extends Controller
     {
         $StationDetails = array("station_name"=>"",
                                 "station_number"=>"",
-                                "city"=>"hi",
+                                "city"=>"",
                                 "longitude"=>"",
                                 "latitude"=>"",
                                 "code"=>"",
@@ -87,6 +91,7 @@ class StationsController extends Controller
                                     "v_mcu_min_value"=>"1",
                                     "v_mcu_label"=>"VMCU",
                                     "ut"=>"UT",
+                                    "up"=>"UP",
                                 ),
                                 "2m_node"=>array(
                                     "name"=>"2m node",
@@ -111,7 +116,7 @@ class StationsController extends Controller
                                 ),
                                 "Temp_semsor"=>array(
                                     "parameter_read"=>"Temperature",
-                                    "identifier_used"=>"t_sht2x",
+                                    "identifier_used"=>"T_SHT2X",
                                     "max_value"=>"6",
                                     "min_value"=>"2",
                                 ),
@@ -136,7 +141,7 @@ class StationsController extends Controller
                                 ),
                                 "relative_humidity_semsor"=>array(
                                     "parameter_read"=>"relative humidity",
-                                    "identifier_used"=>"rh_sht2x",
+                                    "identifier_used"=>"RH_SHT2X",
                                     "max_value"=>"6",
                                     "min_value"=>"1",
                                 ),
@@ -160,7 +165,7 @@ class StationsController extends Controller
                                 ),
                                 "pressure_semsor"=>array(
                                     "parameter_read"=>"pressure",
-                                    "identifier_used"=>"P_ms5611",
+                                    "identifier_used"=>"P_MS5611",
                                     "max_value"=>"8",
                                     "min_value"=>"1",
                                 ));
@@ -204,12 +209,12 @@ class StationsController extends Controller
 
           $stationcreation->save();
 
-          $station = Station::where('station_id', $request->get('sname'))->first();
+          $station = Station::where('station_name', $request->get('sname'))->first();
         
 
         $TwomnodeCreation = new TwoMeterNode([
             
-            'station_id' => $request->get($station->station_id),
+            'station_id' => $station['station_id'],
             'txt_2m' => $request->get('2txt_key'),
             'e64_2m' => $request->get('2mac_add'),
             'v_in_2m' => $request->get('2mvin_label'),
@@ -227,14 +232,146 @@ class StationsController extends Controller
             'v_mcu_max_value' => $request->get('2mv_mcu_max_value'),
             'v_mcu_min_value' => $request->get('2mv_mcu_min_value'),
             'v_mcu_2m' => $request->get('2mv_mcu_label'),
+            't_sht2x_2m'=>$request->get('tsidentifier_used'),
+            'rh_sh2x_2m'=>$request->get('rhidentifier_used'),
+            'node_status'=>'on',
+            'txt_value_10m'=>$request->get('2txt_value'), 
+            
                          
             
         ]);
 
+
         $TwomnodeCreation->save();
 
-  
-          
+        $TwoMNode = TwoMeterNode::where('txt_value_2m', $request->get('2txt_value'))->first();
+        $HumiditySensorCreation = new Sensor([
+            'node_id'=>$TwoMNode['id'],
+            'parameter_read'=>$request->get('rhidentifier_used'),
+            'identifier_used'=>$request->get('rhidentifier_used'),
+            'min_value'=>$request->get('rhidentifier_used'),
+            'max_value'=>$request->get('rhidentifier_used'),
+            'node_type'=>$request->get('rhidentifier_used'),
+            'report_time_interval'=>$request->get('rhidentifier_used'),
+
+        ]);
+
+       
+
+        $HumiditySensorCreation->save();
+
+        //temperature sensor creation
+        $TemperatureSensorCreation = new Sensor([
+            'node_id'=>$TwoMNode['id'],
+            'parameter_read'=>$request->get('tsidentifier_used'),
+            'identifier_used'=>$request->get('tsidentifier_used'),
+            'min_value'=>$request->get('tsidentifier_used'),
+            'max_value'=>$request->get('tsidentifier_used'),
+            'node_type'=>$request->get('tsidentifier_used'),
+            'report_time_interval'=>$request->get('tsidentifier_used'),
+
+        ]);
+        $TemperatureSensorCreation->save();
+        
+        
+        //ten meter node creation
+        $TenmnodeCreation = new TenMeterNode([
+            
+            'station_id' => $station['station_id'],
+            'txt_10m' => $request->get('10txt_key'),
+            'e64_10m' => $request->get('10mac_add'),
+            'v_in_10m' => $request->get('10vin_label'),
+            'time_10m' => $request->get('10time'),
+            'ut_10m' => $request->get('10ut'),
+            'date_10m' => $request->get('10date'),
+            'gw_lat_10m' => $request->get('10gwlat'),
+            'gw_long_10m' => $request->get('10gwlong'),
+            'v_in_min_value' => $request->get('10v_in_max_value'),
+            'v_in_max_value' => $request->get('10v_in_min_value'),
+            'ttl_10m' => $request->get('10ttl'),
+            'rssi_10m' => $request->get('10rssi'),
+            'drp_10m' => $request->get('10drp'),
+            'lqi_10m' => $request->get('10lqi'),
+            'ps_10m' => $request->get('10ps'),
+            'v_mcu_max_value' => $request->get('10v_mcu_max_value'),
+            'v_mcu_min_value' => $request->get('10v_mcu_min_value'),
+            'v_mcu_10m' => $request->get('10v_mcu_label'),
+            'v_a1_10m'=>$request->get('10identifier_used'),
+            'v_a2_10m'=>$request->get('wsidentifier_used'),
+            'v_a3_10m'=>$request->get('wdidentifier_used'),
+            'node_status'=>'on',
+            'txt_value_10m'=>$request->get('10txt_value'),              
+            
+        ]);
+
+        $TenmnodeCreation->save();
+
+        $groundnodeCreation = new GroundNode([
+            
+            'station_id' => $station['station_id'],
+            'txt_gnd' => $request->get('gndtxt_key'),
+            'e64_gnd' => $request->get('gndmac_add'),
+            'v_in_gnd' => $request->get('gndvin_label'),
+            'time_gnd' => $request->get('grndtime'),
+            'ut_gnd' => $request->get('gndut'),
+            'date_gnd' => $request->get('gnddate'),
+            'gw_lat_gnd' => $request->get('gndgwlat'),
+            'gw_long_gnd' => $request->get('gndgwlong'),
+            'v_in_min_value' => $request->get('gndv_in_min_value'),
+            'v_in_max_value' => $request->get('gdv_in_max_value'),
+            'ttl_gnd' => $request->get('gndttl'),
+            'rssi_gnd' => $request->get('gndrssi'),
+            'drp_gnd' => $request->get('gnddrp'),
+            'lqi_gnd' => $request->get('gndlqi'),
+            'v_mcu_max_value' => $request->get('gdv_mcu_max_value'),
+            'v_mcu_min_value' => $request->get('gdv_mcu_min_value'),
+            'v_mcu_gnd' => $request->get('gdv_mcu_label'),
+            'v_a1_gnd'=>$request->get('smidentifier_used'),
+            'v_a2_gnd'=>$request->get('stidentifier_used'),
+            'ps_gnd'=>$request->get('groundps'),
+            'node_status'=>'on',
+            'txt_value_gnd'=>$request->get('gndtxt_value'),
+            'up_gnd'=>$request->get('gndup'),
+            'po_lst60_gnd'=> $request->get('groundrain_pulses'),
+                          
+            
+        ]);
+
+        $groundnodeCreation->save();
+
+            $sinkCreation = new SinkNode([
+            
+                'station_id' => $station['station_id'],
+                'txt_sink' => $request->get('sinktxt_key'),
+                'e64_sink' => $request->get('sinkmac_add'),
+                'v_in_sink' => $request->get('sinkvin_label'),
+                'time_sink' => $request->get('sinktime'),
+                'ut_sink' => $request->get('sinkut'),
+                'date_sink' => $request->get('sinkdate'),
+                'gw_lat_sink' => $request->get('sinkgwlat'),
+                'gw_long_sink' => $request->get('sinkgwlong'),
+                'v_in_min_value' => $request->get('sinkv_in_max_value'),
+                'v_in_max_value' => $request->get('sinkv_in_min_value'),
+                'ttl_sink' => $request->get('sinkttl'),
+                'rssi_sink' => $request->get('sinkrssi'),
+                'drp_sink' => $request->get('sinkdrp'),
+                'lqi_sink' => $request->get('sinklqi'),
+                'v_mcu_max_value' => $request->get('sinkv_mcu_max_value'),
+                'v_mcu_min_value' => $request->get('sinkv_mcu_min_value'),
+                'v_mcu_sink' => $request->get('sinkv_mcu_label'),
+                'p_ms5611_sink'=>$request->get('psidentifier_used'),
+                't_sink'=>'T',
+                'ps_sink'=>$request->get('sinkps'),
+                'node_status'=>'on',
+                'txt_value_sink'=>$request->get('sinktxt_value'),
+                'up_sink'=>$request->get('sinkup'),
+                
+                              
+                
+            ]);
+    
+            $sinkCreation->save();
+            
           return redirect('/addstation');
     }
 

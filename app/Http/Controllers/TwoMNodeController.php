@@ -3,6 +3,9 @@
 namespace station\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\layouts;
+use station\TwoMeterNode;
+use station\Station;
 
 class TwoMNodeController extends Controller
 {
@@ -13,7 +16,9 @@ class TwoMNodeController extends Controller
      */
     public function index()
     {
-        return view('layouts.configureTwomNode');
+        $stations = Station::all()->toArray();
+        $twoMeterNodes = TwoMeterNode::all()->toArray();
+        return view('layouts.configureTwomNode', compact('twoMeterNodes','stations'));
     }
 
     /**
@@ -23,7 +28,7 @@ class TwoMNodeController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**

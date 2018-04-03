@@ -23,9 +23,5 @@ class Sensor extends Model
     // const CREATED_AT = 'CreationDate';
     
     //
-    
-    protected $fillable=["node_id","parameter_read","identifier_used",
-                        "min_value","max_value","report_key_title",
-                        "report_key_value","report_time_interval"];
-    
+    protected $fillable = ['node_id','parameter_read','identifier_used','min_value','max_value','node_type','report_time_interval'];
 }
