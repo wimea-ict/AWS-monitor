@@ -56,7 +56,7 @@
                                                 </div>
                                                 <label class="col-lg-2 control-label " for="region">Region</label>
                                                 <div class="col-lg-4">
-                                                    <input id="region" name="region" type="number" class="form-control">
+                                                    <input id="region" name="region" type="text" class="form-control">
                                                 </div>
                                             </div>
                                             
@@ -79,7 +79,7 @@
                                             <div class="form-group clearfix">
                                                 <label class="col-lg-2 control-label " for="station_type">station Type</label>
                                                 <div class="col-lg-4">
-                                                    <input id="station_type" name="station_type" type="number" class="form-control">
+                                                    <input id="station_type" name="station_type" type="text" class="form-control">
                                                 </div>
                                                 
                                             </div>
@@ -109,6 +109,12 @@
                                                     </div> 
                                                     <div id="collapsefour-2" class="panel-collapse collapse"> 
                                                         <div class="panel-body">
+                                                                            <div class="form-group clearfix">
+                                                                                <label class="col-lg-2 col-lg-offset-3 control-label " for="10txt_value">TXT value</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="10txt_value" name="10txt_value" type="text" class="form-control" required>
+                                                                                </div>
+                                                                            </div>
                              
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="10vin_label">v_in label</label>
@@ -200,12 +206,7 @@
                                                                                     <input id="10ut" name="10ut" type="text" class="form-control" value="{{ $stationdetails['10m_node']['ut']}}">
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="10txt_value">TXT value</label>
-                                                                                <div class="col-lg-4">
-                                                                                    <input id="10txt_value" name="10txt_value" type="text" class="form-control" required>
-                                                                                </div>
-                                                                            </div>
+                                                                            
                                                                                
                                                         </div> 
                                                     </div> 
@@ -355,6 +356,13 @@
                                                     </div> 
                                                     <div id="collapsesix-2" class="panel-collapse collapse"> 
                                                         <div class="panel-body">
+                                                                            <div class="form-group clearfix">
+                                                                                <label class="col-lg-2 col-lg-offset-3 control-label " for="2txt_value">TXT value</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="2txt_value" name="2txt_value" type="text" class="form-control" required>
+                                                                                </div>
+                                                                            </div>
+                                                                                
                              
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="2mvin_label">v_in_label</label>
@@ -445,10 +453,7 @@
                                                                                 <div class="col-lg-4">
                                                                                     <input id="2mac_add" name="2mac_add" type="text" class="form-control" value="{{ $stationdetails['2m_node']['mac_add']}}">
                                                                                 </div>
-                                                                                <label class="col-lg-2 control-label " for="2txt_value">TXT value</label>
-                                                                                <div class="col-lg-4">
-                                                                                    <input id="2txt_value" name="2txt_value" type="text" class="form-control" required>
-                                                                                </div>
+                                                                                
                                                                             </div>
 
                                                                             
@@ -566,6 +571,12 @@
                                                     </div> 
                                                     <div id="collapsenight-2" class="panel-collapse collapse"> 
                                                         <div class="panel-body">
+                                                                            <div class="form-group clearfix">
+                                                                                <label class="col-lg-2 col-lg-offset-3 control-label " for="2txt_value">TXT value</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="gndtxt_value" name="gndtxt_value" type="text" class="form-control" required>
+                                                                                </div>
+                                                                            </div>
                              
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="gndvin_label">v_in label</label>
@@ -682,12 +693,7 @@
                                                                                     <input id="gndut" name="gndut" type="text" class="form-control" value="{{ $stationdetails['ground_node']['ut']}}">
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="gndtxt_value">TXT value</label>
-                                                                                <div class="col-lg-4">
-                                                                                    <input id="gndtxt_value" name="gndtxt_value" type="text" class="form-control" required>
-                                                                                </div>
-                                                                            </div>
+                                                                            
                                                                             
                                                                             
                                                                                                                                                               
@@ -841,6 +847,12 @@
                                                     </div> 
                                                     <div id="collapsethirteen-2" class="panel-collapse collapse"> 
                                                         <div class="panel-body">
+                                                                            <div class="form-group clearfix">
+                                                                                <label class="col-lg-2 col-lg-offset-3 control-label " for="2txt_value">TXT value</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="sinktxt_value" name="sinktxt_value" type="text" class="form-control"  required>
+                                                                                </div>    
+                                                                            </div>
                              
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="sinkvin_label">v_in label</label>
@@ -936,10 +948,6 @@
                                                                                 
                                                                             </div>
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="sinktxt_value">Txt value</label>
-                                                                                <div class="col-lg-4">
-                                                                                    <input id="sinktxt_value" name="sinktxt_value" type="text" class="form-control"  required>
-                                                                                </div>
                                                                                 <label class="col-lg-2 control-label " for="sinkup">UP key</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="sinkup" name="sinkup" type="text" class="form-control" value="{{ $stationdetails['sink_node']['up']}}">

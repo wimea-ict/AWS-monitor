@@ -29,6 +29,7 @@ class CreateTwoMeterNodesTable extends Migration
             $table->string('drp_2m');
             $table->string('e64_2m');
             $table->string('txt_2m');
+            $table->string('txt_value2m');
             $table->string('t_sht2x_2m');
             $table->string('rh_sh2x_2m');
             $table->double('v_in_min_value');

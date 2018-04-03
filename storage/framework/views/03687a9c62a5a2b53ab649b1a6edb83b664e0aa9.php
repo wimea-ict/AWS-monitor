@@ -31,9 +31,9 @@
                                                         <td><?php echo e($twoMeterNode['txt_2m']); ?></td>
                                                         <td><?php echo e($twoMeterNode['e64_2m']); ?></td>
                                                         <td><?php echo e($twoMeterNode['node_status']); ?></td>
-                                                        <td><button class="btn btn-icon btn-success m-b-5" data-toggle="modal" data-target="#full-width-modal2"> <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
+                                                        <td><button class="btn btn-icon btn-success m-b-5"  data-toggle="modal" data-target="#full-width-modal3" id="<?php echo e(htmlspecialchars(json_encode($twoMeterNode))); ?>"> <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
                                                     </tr>
-                                                    <div id="full-width-modal2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="full-width-modalLabel" aria-hidden="true" style="display: none;">
+                                                    <div id="full-width-modal3" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="full-width-modalLabel" aria-hidden="true" style="display: none;">
                     <div class="modal-dialog modal-full">
                         <div class="modal-content">
                             <div class="modal-header"> 

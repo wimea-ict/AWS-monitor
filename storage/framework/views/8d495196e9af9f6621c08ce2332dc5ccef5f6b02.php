@@ -31,9 +31,9 @@
                                                         <td><?php echo e($groundNode['txt_gnd']); ?></td>
                                                         <td><?php echo e($groundNode['e64_gnd']); ?></td>
                                                         <td><?php echo e($groundNode['node_status']); ?></td>
-                                                        <td><button class="btn btn-icon btn-success m-b-5" data-toggle="modal" data-target="#full-width-modal2"> <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
+                                                        <td><button class="btn btn-icon btn-success m-b-5" data-toggle="modal" data-target="#full-width-modal4" id="<?php echo e(htmlspecialchars(json_encode($groundNode))); ?>"> <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
                                                     </tr>
-                                                    <div id="full-width-modal2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="full-width-modalLabel" aria-hidden="true" style="display: none;">
+                                                    <div id="full-width-modal4" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="full-width-modalLabel" aria-hidden="true" style="display: none;">
                     <div class="modal-dialog modal-full">
                         <div class="modal-content">
                             <div class="modal-header"> 
@@ -299,6 +299,10 @@
                                                         </div> 
                                                     </div> 
                                                 </div> 
+                                            </div>
+                                            <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    <button type="submit" name="update" class="btn btn-primary">Save changes</button>
                                             </div>
                                             </form> 
                                         </div>

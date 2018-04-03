@@ -9,6 +9,7 @@ use station\TwoMeterNode;
 use station\TenMeterNode;
 use station\GroundNode;
 use station\SinkNode;
+use station\Sensor;
 class StationsController extends Controller
 {
     /**
@@ -20,7 +21,7 @@ class StationsController extends Controller
     {
         $StationDetails = array("station_name"=>"",
                                 "station_number"=>"",
-                                "city"=>"hi",
+                                "city"=>"",
                                 "longitude"=>"",
                                 "latitude"=>"",
                                 "code"=>"",
@@ -115,7 +116,7 @@ class StationsController extends Controller
                                 ),
                                 "Temp_semsor"=>array(
                                     "parameter_read"=>"Temperature",
-                                    "identifier_used"=>"t_sht2x",
+                                    "identifier_used"=>"T_SHT2X",
                                     "max_value"=>"6",
                                     "min_value"=>"2",
                                 ),
@@ -140,7 +141,7 @@ class StationsController extends Controller
                                 ),
                                 "relative_humidity_semsor"=>array(
                                     "parameter_read"=>"relative humidity",
-                                    "identifier_used"=>"rh_sht2x",
+                                    "identifier_used"=>"RH_SHT2X",
                                     "max_value"=>"6",
                                     "min_value"=>"1",
                                 ),
@@ -164,7 +165,7 @@ class StationsController extends Controller
                                 ),
                                 "pressure_semsor"=>array(
                                     "parameter_read"=>"pressure",
-                                    "identifier_used"=>"P_ms5611",
+                                    "identifier_used"=>"P_MS5611",
                                     "max_value"=>"8",
                                     "min_value"=>"1",
                                 ));
@@ -240,8 +241,40 @@ class StationsController extends Controller
             
         ]);
 
+
         $TwomnodeCreation->save();
 
+        $TwoMNode = TwoMeterNode::where('txt_value_2m', $request->get('2txt_value'))->first();
+        $HumiditySensorCreation = new Sensor([
+            'node_id'=>$TwoMNode['id'],
+            'parameter_read'=>$request->get('rhidentifier_used'),
+            'identifier_used'=>$request->get('rhidentifier_used'),
+            'min_value'=>$request->get('rhidentifier_used'),
+            'max_value'=>$request->get('rhidentifier_used'),
+            'node_type'=>$request->get('rhidentifier_used'),
+            'report_time_interval'=>$request->get('rhidentifier_used'),
+
+        ]);
+
+       
+
+        $HumiditySensorCreation->save();
+
+        //temperature sensor creation
+        $TemperatureSensorCreation = new Sensor([
+            'node_id'=>$TwoMNode['id'],
+            'parameter_read'=>$request->get('tsidentifier_used'),
+            'identifier_used'=>$request->get('tsidentifier_used'),
+            'min_value'=>$request->get('tsidentifier_used'),
+            'max_value'=>$request->get('tsidentifier_used'),
+            'node_type'=>$request->get('tsidentifier_used'),
+            'report_time_interval'=>$request->get('tsidentifier_used'),
+
+        ]);
+        $TemperatureSensorCreation->save();
+        
+        
+        //ten meter node creation
         $TenmnodeCreation = new TenMeterNode([
             
             'station_id' => $station['station_id'],

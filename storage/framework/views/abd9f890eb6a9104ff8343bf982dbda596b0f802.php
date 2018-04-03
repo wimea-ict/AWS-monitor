@@ -3,7 +3,7 @@
                     <div class="col-md-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title">Node configurations</h3>
+                                <h3 class="panel-title">Sink Node configurations</h3>
                             </div>
                             <div class="panel-body">
                                 <div class="row">
@@ -28,16 +28,16 @@
                                                     <tr>
                                                         <td><?php echo e($station['station_name']); ?></td>
                                                         <td><?php echo e($station['station_location']); ?></td>
-                                                        <td><?php echo e($sinkNode['txt_2m']); ?></td>
-                                                        <td><?php echo e($sinkNode['e64_2m']); ?></td>
+                                                        <td><?php echo e($sinkNode['txt_sink']); ?></td>
+                                                        <td><?php echo e($sinkNode['e64_sink']); ?></td>
                                                         <td><?php echo e($sinkNode['node_status']); ?></td>
-                                                        <td><button class="btn btn-icon btn-success m-b-5" data-toggle="modal" data-target="#full-width-modal2"> <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
+                                                        <td><button class="btn btn-icon btn-success m-b-5" data-toggle="modal" data-target="#full-width-modal5" id="<?php echo e(htmlspecialchars(json_encode($sinkNode))); ?>"> <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
                                                     </tr>
-                                                    <div id="full-width-modal2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="full-width-modalLabel" aria-hidden="true" style="display: none;">
+                                                    <div id="full-width-modal5" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="full-width-modalLabel" aria-hidden="true" style="display: none;">
                     <div class="modal-dialog modal-full">
                         <div class="modal-content">
                             <div class="modal-header"> 
-                                <h3 class="panel-title btn btn-primary">Edit 2m Node settings</h3> 
+                                <h3 class="panel-title btn btn-primary">Edit Sink Node settings</h3> 
                             </div>
                            <div class="modal-body">
                            <div class="row">
@@ -207,6 +207,10 @@
                                                 </div>
                                                 
                                             </div> 
+                                        </div>
+                                        <div class="modal-footer">
+                                                <button type="submit" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                <button type="submit" name="update" class="btn btn-primary">Save changes</button>
                                         </div>
                                     </form>
 

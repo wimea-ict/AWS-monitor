@@ -3,7 +3,7 @@
                     <div class="col-md-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title">Node configurations</h3>
+                                <h3 class="panel-title">10m Node configurations</h3>
                             </div>
                             <div class="panel-body">
                                 <div class="row">
@@ -31,7 +31,7 @@
                                                         <td><?php echo e($tenMeterNode['txt_10m']); ?></td>
                                                         <td><?php echo e($tenMeterNode['e64_10m']); ?></td>
                                                         <td><?php echo e($tenMeterNode['node_status']); ?></td>
-                                                        <td><button class="btn btn-icon btn-success m-b-5" data-toggle="modal" data-target="#full-width-modal2"> <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
+                                                        <td><button class="btn btn-icon btn-success m-b-5" data-toggle="modal" data-target="#full-width-modal2" id="<?php echo e(htmlspecialchars(json_encode($tenMeterNode))); ?>"> <i class="fa fa-thumbs-o-up" ></i> Edit </button></td>
                                                     </tr>
                                                     <div id="full-width-modal2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="full-width-modalLabel" aria-hidden="true" style="display: none;">
                     <div class="modal-dialog modal-full">
