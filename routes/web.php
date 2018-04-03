@@ -61,13 +61,13 @@ Route::get('/tester',function(){
     $date = $date->format('Y-m-d H:m:s');// change date time object to string format used in the database.
 
     // test variables
-    $vinNull = 0; $vmcuNull = 0; $dateNull = 0; $vinMin = 0; $vinMax = 0; $vmcuMin = 0; $vmcuMax = 0; $dateMin = 0; $dateMax = 0; $date1970 = 0; $invalidDates = array();
+    $vinNull = 0; $vmcuNull = 0; $dateNull = 0; $vinMin = 0; $vinMax = 0; $vmcuMin = 0; $vmcuMax = 0; $dateMin = 0; $dateMax = 0; $date1970 = 0; $invalidDates = array(); $nullV_IN = array(); $nullVMCU = array();
 
     // pick configuration info
     $nodeConf = DB::table('node_status_configurations')->select('txt_value','v_in_min_value','v_in_max_value','v_mcu_min_value','v_mcu_max_value')->get();
 
     // pick only columns that we'll be using. We won't need date_time_recorded because we have
-    $counts = DB::table('nodestatus')->select('V_MCU','V_IN','date','time','TXT','StationNumber')->orderBy('id')->chunk(100, function($nodes) use(&$vinNull, &$vmcuNull, &$dateNull, &$vinMin, &$vinMax, &$vmcuMin, &$vmcuMax, &$dateMin, &$dateMax, &$date, &$date1970, &$invalidDates, &$nodeConf){
+    $counts = DB::table('nodestatus')->select('V_MCU','V_IN','date','time','TXT','StationNumber')->orderBy('id')->chunk(400, function($nodes) use(&$vinNull, &$vmcuNull, &$dateNull, &$vinMin, &$vinMax, &$vmcuMin, &$vmcuMax, &$dateMin, &$dateMax, &$date, &$date1970, &$invalidDates, &$nodeConf, &$nullV_IN, &$nullVMCU){
         foreach ($nodes as $node) {
             /**
              * Get the config data for each node
@@ -85,9 +85,11 @@ Route::get('/tester',function(){
             //check for nulls
             if ($node->V_MCU == ''| $node->V_MCU == null) {
                 $vmcuNull++;
+                $nullV_IN[] = $node->TXT;
             }
             if ($node->V_IN == ''| $node->V_IN == null) {
                 $vinNull++;
+                $nullVMCU[] = $node->TXT;
             }
             if ($node->date == ''| $node->date == null) {
                 $dateNull++;
@@ -126,7 +128,17 @@ Route::get('/tester',function(){
     foreach ($wrongDates as $key => $value) {
         $wrongDateString .= $key." appears ". $value." time(s). \n";
     };
-    $string = "V_IN nulls: ".$vinNull."\n"."V_MCU nulls: ".$vmcuNull."\n"."Date nulls: ".$dateNull."\n"."V_IN mins: ".$vinMin."\n"."V_IN max: ".$vinMax."\n"."V_MCU mins: ".$vmcuMin."\n"."V_MCU max: ".$vmcuMax."\n"."V_IN nulls: ".$dateMin."\n"."Date Max: ".$dateMax."\n"."1970 Date: ".$date1970."\n"."Wrong Dates: ".$wrongDateString;
+    $vinNulls = "\n";
+    $nullsvin = array_count_values($nullV_IN);
+    foreach ($nullsvin as $key => $value) {
+        $vinNulls .= $key." appears ". $value." time(s). \n";
+    };
+    $vmcuNulls = "\n";
+    $nullsvmcu = array_count_values($nullV_IN);
+    foreach ($nullsvmcu as $key => $value) {
+        $vmcuNulls .= $key." appears ". $value." time(s). \n";
+    };
+    $string = "V_IN nulls: ".$vinNull."\n"."V_MCU nulls: ".$vmcuNull."\n"."Date nulls: ".$dateNull."\n"."V_IN mins: ".$vinMin."\n"."V_IN max: ".$vinMax."\n"."V_MCU mins: ".$vmcuMin."\n"."V_MCU max: ".$vmcuMax."\n"."V_IN nulls: ".$dateMin."\n"."Date Max: ".$dateMax."\n"."1970 Date: ".$date1970."\n"."Wrong Dates: ".$wrongDateString."\n"."V_IN nulls: ".$vinNulls."\n"."V_IN nulls: ".$vmcuNulls;
 
     
     dd($string);
