@@ -45,7 +45,7 @@
         <!-- Todo -->
         <script src="js/jquery.todo.js"></script>
 
-         @yield("page_specific_script_files");
+         @yield("page_specific_script_files")
 
         <!--Form Wizard-->
         <script src="assets/form-wizard/jquery.steps.min.js" type="text/javascript"></script>

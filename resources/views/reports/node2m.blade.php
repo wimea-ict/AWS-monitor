@@ -10,9 +10,9 @@
 @section('content')
 <div class="row">
     
+    @include("reports.select_station_section")
 
     <div class="col-sm-12">
-        <h3>2m Node Reports</h3>
         <div class="portlet"><!-- /primary heading -->             
             <div class="portlet-heading">
                 <h3 class="portlet-title text-dark">Line gragh  for V_IN and V_MCU against datetime </h3>
@@ -90,5 +90,43 @@
 @endsection
 
 @section('page_specific_script_files')
-    <script src="assets/morris/node2mcharts.js"></script>
+    {{--  <script src="assets/morris/node2mcharts.js"></script>  --}}
+    <script>
+        $(function() {
+
+            var vin_vmcu_2m = Morris.Line({
+            element: "vin_vmcu_2m",
+            data: <?=json_encode($vin_vmcu_2m)?>,
+            xkey: "y",
+            ykeys: ["V_MCU", "V_IN"],
+            labels: ["V_MCU", "V_IN"],
+            parseTime: false,
+            resize: true,
+            lineColors: ["#3bc0c3", "#1a2942"]});
+
+         //creating bar chart
+         var humidity = Morris.Line({
+            element: "humidity",
+            data: <?=json_encode($humidity)?>,
+            xkey: "y",
+            ykeys: ["humidity"],
+            labels: ["humidity"],
+            parseTime: false,
+            resize: true,
+            lineColors: ["#dcdcdc"]});
+
+        
+            var templature = Morris.Line({
+            element: "templature",
+            data: <?=json_encode($templature)?>,
+            xkey: "y",
+            ykeys: ["templature"],
+            labels: ["templature"],
+            parseTime: false,
+            resize: true,
+            lineColors: ["#dcdcdc"]});
+  
+           
+        });//end out function
+    </script>
 @endsection

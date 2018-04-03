@@ -10,9 +10,10 @@
 @section('content')
 <div class="row">
     
+    @include("reports.select_station_section")
 
     <div class="col-sm-12">
-        <h3>sink Node Reports</h3>
+        
         <div class="portlet"><!-- /primary heading -->             
             <div class="portlet-heading">
                 <h3 class="portlet-title text-dark">Line gragh  for V_IN and V_MCU against datetime </h3>
@@ -65,5 +66,32 @@
 @endsection
 
 @section('page_specific_script_files')
-    <script src="assets/morris/nodesinkcharts.js"></script>
+    {{--  <script src="assets/morris/nodesinkcharts.js"></script>  --}}
+    <script>
+        $(function() {
+
+            var vin_vmcu_sink1 = Morris.Line({
+            element: "vin_vmcu_sink",
+            data: <?=json_encode($vin_vmcu_sink)?>,
+            xkey: "y",
+            ykeys: ["V_MCU", "V_IN"],
+            labels: ["V_MCU", "V_IN"],
+            parseTime: false,
+            resize: true,
+            lineColors: ["#3bc0c3", "#1a2942"]});
+
+         //creating bar chart
+         var pressure1 = Morris.Line({
+            element: "pressure",
+            data: <?=json_encode($pressure)?>,
+            xkey: "y",
+            ykeys: ["pressure"],
+            labels: ["pressure"],
+            parseTime: false,
+            resize: true,
+            lineColors: ["#dcdcdc"]});
+
+        
+        });//end out function
+    </script>
 @endsection

@@ -24,6 +24,10 @@ Route::get('/node2m_report','TwoMNodeController@report1');
 Route::get('/nodesink_report','SinkNodeController@report1');
 Route::get('/nodegnd_report','GroundNodeController@report1');
 
+Route::post('/reports10m','TenMNodeController@get10mStationReports');
+Route::post('/reportsGnd','GroundNodeController@getGndStationReports');
+Route::post('/reportsSink','SinkNodeController@getSinkStationReports');
+Route::post('/reports2m','TwoMNodeController@get2mStationReports');
 
 Route::get('/', function () {
     return view('main');

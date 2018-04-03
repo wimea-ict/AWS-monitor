@@ -10,9 +10,10 @@
 @section('content')
 <div class="row">
     
+    @include("reports.select_station_section")
 
     <div class="col-sm-12">
-        <h3>10m Node Reports</h3>
+       
         <div class="portlet"><!-- /primary heading -->             
             <div class="portlet-heading">
                 <h3 class="portlet-title text-dark">Line gragh  for V_IN and V_MCU against datetime </h3>
@@ -109,5 +110,54 @@
 @endsection
 
 @section('page_specific_script_files')
-    <script src="assets/morris/node10mcharts.js"></script>
+    {{--  <script src="assets/morris/node10mcharts.js"></script>  --}}
+    <script>
+        $(function() {
+
+            var vin_vmcu_10m = Morris.Line({
+            element: "vin_vmcu_10m",
+            data: <?=json_encode($vin_vmcu_10m)?>,
+            xkey: "y",
+            ykeys: ["V_MCU", "V_IN"],
+            labels: ["V_MCU", "V_IN"],
+            parseTime: false,
+            resize: true,
+            lineColors: ["#3bc0c3", "#1a2942"]});
+
+         //creating bar chart
+         var insulation_sensor = Morris.Line({
+            element: "insulation_sensor",
+            data: <?=json_encode($insulation_sensor)?>,
+            xkey: "y",
+            ykeys: ["insulation"],
+            labels: ["insulation"],
+            parseTime: false,
+            resize: true,
+            lineColors: ["#dcdcdc"]});
+
+        
+            var windspeed_sensor = Morris.Line({
+            element: "windspeed_sensor",
+            data: <?=json_encode($windspeed_sensor)?>,
+            xkey: "y",
+            ykeys: ["windspeed"],
+            labels: ["windspeed"],
+            parseTime: false,
+            resize: true,
+            lineColors: ["#dcdcdc"]});
+  
+            var wind_direction_sensor = Morris.Line({
+            element: "wind_direction_sensor",
+            data: <?=json_encode($wind_direction_sensor)?>,
+            xkey: "y",
+            ykeys: ["wind_direction"],
+            labels: ["wind_direction"],
+            parseTime: false,
+            resize: true,
+            lineColors: ["#dcdcdc"]});
+
+
+        });//end out function
+
+    </script>
 @endsection

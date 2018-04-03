@@ -1,5 +1,3 @@
-<!--page_specific_css_files  page_specific_script_files-->
-
 @extends('main')
 
 @section('page_specific_css_files')
@@ -9,9 +7,9 @@
 @section('content')
 <div class="row">
     
+    @include("reports.select_station_section")
 
     <div class="col-sm-12">
-        <h3>Ground Node Reports</h3>
         <div class="portlet"><!-- /primary heading -->             
             <div class="portlet-heading">
                 <h3 class="portlet-title text-dark">Line gragh  for V_IN and V_MCU against datetime </h3>
@@ -108,5 +106,57 @@
 @endsection
 
 @section('page_specific_script_files')
-    <script src="assets/morris/nodegndcharts.js"></script>
+    //<script src="assets/morris/nodegndcharts.js"></script>
+    <script>
+        $(function() {
+
+            var vmcu_chart = Morris.Line({
+            element: "vin_vmcu_gnd",
+            data: <?=json_encode($vin_vmcu)?>,
+            xkey: "y",
+            ykeys: ["V_MCU", "V_IN"],
+            labels: ["V_MCU", "V_IN"],
+            parseTime: false,
+            resize: true,
+            lineColors: ["#3bc0c3", "#1a2942"]});
+
+         //creating bar chart
+         var precipitation = Morris.Line({
+            element: "precipitation",
+            data: <?=json_encode($precipitation)?>,
+            xkey: "y",
+            ykeys: ["Precipitation"],
+            labels: ["Precipitation"],
+            parseTime: false,
+            resize: true,
+            lineColors: ["#dcdcdc"]});
+
+        
+            var soil_templature = Morris.Line({
+            element: "soil_templature",
+            data: <?=json_encode($soil_templature)?>,
+            xkey: "y",
+            ykeys: ["soil_templature"],
+            labels: ["soil_templature"],
+            parseTime: false,
+            resize: true,
+            lineColors: ["#dcdcdc"]});
+  
+            var soil_moisture = Morris.Line({
+            element: "soil_moisture",
+            data: <?=json_encode($soil_moisture)?>,
+            xkey: "y",
+            ykeys: ["soil_moisture"],
+            labels: ["soil_moisture"],
+            parseTime: false,
+            resize: true,
+            lineColors: ["#dcdcdc"]});
+
+           //var $precipitation = [{ y: "2009", a: 100, b: 90, c: 40 }, { y: "2010", a: 75, b: 65, c: 20 }, { y: "2011", a: 50, b: 40, c: 50 }, { y: "2012", a: 75, b: 65, c: 95 }, { y: "2013", a: 50, b: 40, c: 22 }, { y: "2014", a: 75, b: 65, c: 56 }, { y: "2015", a: 100, b: 90, c: 60 }];
+           // this.createLineChart("precipitation", $precipitation, "y", ["a"], ["Precipitation"], ["#3bc0c3", "#1a2942", "#dcdcdc"]);
+
+
+        });//end out function
+
+    </script>
 @endsection
