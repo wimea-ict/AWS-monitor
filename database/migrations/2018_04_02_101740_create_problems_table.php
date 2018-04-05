@@ -15,10 +15,10 @@ class CreateProblemsTable extends Migration
     {
         Schema::create('problems', function (Blueprint $table) {
             $table->increments('id');
-            $table->enum('source',["node","sensor","station"]);
+            $table->enum('source',["2m_node","10m_node","sink_node","ground_node","sensor","station"]);
             $table->string('source_id');// for node(tableName_txtValue)
             $table->enum('criticality',["critical","non-critical"]);
-            $table->integer('description_id')->unsigned();
+            $table->integer('classification_id')->unsigned();
             $table->enum('status',["reported","investigation","solved"]);
             $table->timestamps();
         });

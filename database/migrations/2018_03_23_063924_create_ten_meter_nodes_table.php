@@ -13,7 +13,7 @@ class CreateTenMeterNodesTable extends Migration
      */
     public function up()
     {
-        Schema::create('ten_meter_nodes', function (Blueprint $table) {
+        /* Schema::create('ten_meter_nodes', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('station_id');
             $table->string('date_10m');
@@ -41,7 +41,7 @@ class CreateTenMeterNodesTable extends Migration
             $table->enum('node_status',["off","on"]);
             
             $table->timestamps();
-        });
+        }); */
     }
 
     /**

@@ -13,7 +13,7 @@ class CreateGroundNodesTable extends Migration
      */
     public function up()
     {
-        Schema::create('ground_nodes', function (Blueprint $table) {
+        /* Schema::create('ground_nodes', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('station_id');
             $table->string('date_gnd');
@@ -41,7 +41,7 @@ class CreateGroundNodesTable extends Migration
             $table->double('v_mcu_max_value');
             $table->enum('node_status',["off","on"]);
             $table->timestamps();
-        });
+        }); */
     }
 
     /**

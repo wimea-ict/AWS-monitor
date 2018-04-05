@@ -15,14 +15,16 @@ class CreateStationProblemSettingsTable extends Migration
     {
         Schema::create('station_problem_settings', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('station_id')->unsigned();
+            $table->integer('station_id');
+            $table->integer('problem_id')->unsigned();
             $table->integer('max_track_counter')->unsigned();
             $table->enum('criticality',["critical","non_critical"]);
             $table->timestamps();
         });
 
         Schema::table('station_problem_settings', function (Blueprint $table) {
-            // $table->foreign('station_id')->references('id')->on('station');
+            $table->foreign('station_id')->references('station_id')->on('stations');
+            $table->foreign('problem_id')->references('id')->on('problem_classification');
         });
     }
 
