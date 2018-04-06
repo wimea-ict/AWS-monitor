@@ -58,6 +58,18 @@
                                                     </div> 
                                                     <div id="collapsethirteen-2" class="panel-collapse collapse"> 
                                                         <div class="panel-body">
+                                                                            <div class="form-group clearfix">
+                                                                                <label class="col-lg-2 control-label " for="sinktxt_value">TXT value</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="sinktxt_value" name="sinktxt_value" type="text" class="form-control" required>
+                                                                                </div>
+                                                                                <div class="col-sm-6 control-label text-right">
+                                                                                    <label class="switch">
+                                                                                            <input type="checkbox" name="sinknode_status" id="sinknode_status">
+                                                                                            <span class="slider round"></span>
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
                              
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="sinkvin_label">v_in label</label>
@@ -153,10 +165,7 @@
                                                                                 
                                                                             </div>
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="sinktxt_value">Txt value</label>
-                                                                                <div class="col-lg-4">
-                                                                                    <input id="sinktxt_value" name="sinktxt_value" type="text" class="form-control"  required>
-                                                                                </div>
+                                                                                
                                                                                 <label class="col-lg-2 control-label " for="sinkup">UP key</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="sinkup" name="sinkup" type="text" class="form-control" value="">
@@ -174,15 +183,26 @@
                                                         <h4 class="panel-title"> 
                                                             <a data-toggle="collapse" data-parent="#accordion-test-3" href="#collapsefourteen-2" aria-expanded="false" class="collapsed">
                                                                 Pressure sensor
-                                                                <span class="btn btn-default pull-right activate-style">Activate</span>
-                                                            
+                                                               
                                                             </a> 
                                                         </h4> 
                                                     </div> 
                                                     <div id="collapsefourteen-2" class="panel-collapse collapse"> 
                                                         <div class="panel-body">
+                                                                            <div class="form-group clearfix">
+                                                                                <label class="col-lg-2 control-label " for="psrptTime">Report time interval</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="psrptTime" name="psrptTime" type="text" class="form-control" required>
+                                                                                </div>
+                                                                                <div class="col-sm-6  control-label text-right">
+                                                                                    <label class="switch">
+                                                                                            <input type="checkbox" name="pssensor_status" id="pssensor_status" >
+                                                                                            <span class="slider round"></span>
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
                                                                             
-                                                        <div class="form-group clearfix">
+                                                                            <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="psparameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="psparameter_read" name="psparameter_read" type="text" class="form-control" value="">

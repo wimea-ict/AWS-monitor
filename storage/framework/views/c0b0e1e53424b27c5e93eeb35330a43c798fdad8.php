@@ -89,7 +89,40 @@
             });
             $('#full-width-modal2').on('show.bs.modal', function(e) {
                 var tenMeterNode = e.relatedTarget.id;
-                var obj = jQuery.parseJSON(tenMeterNode);
+                alert(tenMeterNode);
+                var tenMeterData = jQuery.parseJSON(tenMeterNode);
+
+                obj=tenMeterData[0];
+                var insulatorsensors = new Array();
+                var windSpeedSensors = new Array();
+                var windDirectionSensors = new Array();
+                insulationSensors=tenMeterData[1];
+                        for (var i = 0; i < insulationSensors.length; i++) {
+                            if (insulationSensors[i]['node_id'] === obj["id"]) {
+                                insulatorsensors.push(insulationSensors[i]);
+                                break;
+                            }
+                        }
+                        for (var i = 0; i < tenMeterData[2].length; i++) {
+                            if (tenMeterData[2][i]['node_id'] === obj["id"]) {
+                                windSpeedSensors.push(tenMeterData[2][i]);
+                                break;
+                            }
+                        }
+                        for (var i = 0; i < tenMeterData[3].length; i++) {
+                            if (tenMeterData[3][i]['node_id'] === obj["id"]) {
+                                windDirectionSensors.push(tenMeterData[3][i]);
+                                break;
+                            }
+                        }
+                        
+                alert(insulatorsensors[0]["identifier_used"]);
+                alert(windSpeedSensors[0]["identifier_used"]);
+                alert(windDirectionSensors[0]["identifier_used"]);
+
+
+                windSpeedSensors=tenMeterData[2];
+                windDirectionSensors=tenMeterData[3];
                 
                 //$('#wizard-validation-form').attr('action', "/updatestation");
                 $('#10txt_key').val(obj["txt_10m"]);
@@ -111,18 +144,38 @@
                 $('#10date').val(obj["date_10m"]);
                 $('#10time').val(obj["time_10m"]);
                 $('#10txt_value').val(obj["txt_value_10m"]);
-                $('#10parameter_read').val(obj["txt_value_10m"]);
-                $('#10identifier_used').val(obj["v_a1_10m"]);
-                $('#10max_value').val(obj["txt_value_10m"]);
-                $('#10min_value').val(obj["txt_value_10m"]);
-                $('#wsparameter_read').val(obj["txt_value_10m"]);
-                $('#wsidentifier_used').val(obj["v_a2_10m"]);
-                $('#wsmax_value').val(obj["txt_value_10m"]);
-                $('#wsmin_value').val(obj["txt_value_10m"]);
-                $('#wdparameter_read').val(obj["txt_value_10m"]);
-                $('#wdidentifier_used').val(obj["v_a3_10m"]);
-                $('#wdmax_value').val(obj["txt_value_10m"]);
-                $('#wdmin_value').val(obj["txt_value_10m"]);
+                if(obj["node_status"]=="on")
+                    $('#10mnode_status').prop('checked', true);
+                else 
+                    $('#10mnode_status').prop('checked', false);
+                $('#10parameter_read').val(insulatorsensors[0]["parameter_read"]);
+                $('#10identifier_used').val(insulatorsensors[0]["identifier_used"]);
+                $('#10max_value').val(insulatorsensors[0]["max_value"]);
+                $('#10min_value').val(insulatorsensors[0]["min_value"]);
+                if(insulatorsensors[0]["sensor_status"]=="on")
+                    $('#10sensor_status').prop('checked', true);
+                else 
+                    $('#10sensor_status').prop('checked', false);    
+                $('#10rptTime').val(insulatorsensors[0]["report_time_interval"]);
+                $('#wsparameter_read').val(windSpeedSensors[0]["parameter_read"]);
+                $('#wsidentifier_used').val(windSpeedSensors[0]["identifier_used"]);
+                $('#wsmax_value').val(windSpeedSensors[0]["max_value"]);
+                $('#wsmin_value').val(windSpeedSensors[0]["min_value"]);
+                if(windSpeedSensors[0]["sensor_status"]=="on")
+                    $('#wssensor_status').prop('checked', true);
+                else 
+                    $('#wssensor_status').prop('checked', false); 
+                $('#wsrptTime').val(windSpeedSensors[0]["report_time_interval"]);
+                $('#wssensor_status').val(windSpeedSensors[0]["sensor_status"]);
+                $('#wdparameter_read').val(windDirectionSensors[0]["parameter_read"]);
+                $('#wdidentifier_used').val(windDirectionSensors[0]["identifier_used"]);
+                $('#wdmax_value').val(windDirectionSensors[0]["max_value"]);
+                $('#wdmin_value').val(windDirectionSensors[0]["min_value"]);
+                $('#wdrptTime').val(windDirectionSensors[0]["report_time_interval"]);
+                if(windDirectionSensors[0]["sensor_status"]=="on")
+                    $('#wdsensor_status').prop('checked', true);
+                else 
+                    $('#wdsensor_status').prop('checked', false);
             
             });
 

@@ -184,6 +184,17 @@ class StationsController extends Controller
         return view(layouts.configurestation);
     }
 
+    public function getStatus(Request $request, $status){
+        $value = 'on';
+          if($request->has($status)) {
+            $value = 'on';
+            }
+            else{
+                $value = 'off';
+            }
+        return $value;
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -211,6 +222,8 @@ class StationsController extends Controller
 
           $station = Station::where('station_name', $request->get('sname'))->first();
         
+            
+            
 
         $TwomnodeCreation = new TwoMeterNode([
             
@@ -234,8 +247,8 @@ class StationsController extends Controller
             'v_mcu_2m' => $request->get('2mv_mcu_label'),
             't_sht2x_2m'=>$request->get('tsidentifier_used'),
             'rh_sh2x_2m'=>$request->get('rhidentifier_used'),
-            'node_status'=>'on',
-            'txt_value_10m'=>$request->get('2txt_value'), 
+            'node_status'=>$this->getStatus($request,'2mnode_status'),
+            'txt_value2m'=>$request->get('2txt_value'), 
             
                          
             
@@ -243,38 +256,6 @@ class StationsController extends Controller
 
 
         $TwomnodeCreation->save();
-
-        $TwoMNode = TwoMeterNode::where('txt_value_2m', $request->get('2txt_value'))->first();
-        $HumiditySensorCreation = new Sensor([
-            'node_id'=>$TwoMNode['id'],
-            'parameter_read'=>$request->get('rhidentifier_used'),
-            'identifier_used'=>$request->get('rhidentifier_used'),
-            'min_value'=>$request->get('rhidentifier_used'),
-            'max_value'=>$request->get('rhidentifier_used'),
-            'node_type'=>$request->get('rhidentifier_used'),
-            'report_time_interval'=>$request->get('rhidentifier_used'),
-
-        ]);
-
-       
-
-        $HumiditySensorCreation->save();
-
-        //temperature sensor creation
-        $TemperatureSensorCreation = new Sensor([
-            'node_id'=>$TwoMNode['id'],
-            'parameter_read'=>$request->get('tsidentifier_used'),
-            'identifier_used'=>$request->get('tsidentifier_used'),
-            'min_value'=>$request->get('tsidentifier_used'),
-            'max_value'=>$request->get('tsidentifier_used'),
-            'node_type'=>$request->get('tsidentifier_used'),
-            'report_time_interval'=>$request->get('tsidentifier_used'),
-
-        ]);
-        $TemperatureSensorCreation->save();
-        
-        
-        //ten meter node creation
         $TenmnodeCreation = new TenMeterNode([
             
             'station_id' => $station['station_id'],
@@ -299,12 +280,91 @@ class StationsController extends Controller
             'v_a1_10m'=>$request->get('10identifier_used'),
             'v_a2_10m'=>$request->get('wsidentifier_used'),
             'v_a3_10m'=>$request->get('wdidentifier_used'),
-            'node_status'=>'on',
+            'node_status'=>$this->getStatus($request,'10mnode_status'),
             'txt_value_10m'=>$request->get('10txt_value'),              
             
         ]);
 
         $TenmnodeCreation->save();
+
+
+        $TenMNode = TenMeterNode::where('txt_value_10m', $request->get('10txt_value'))->first();
+        $HumiditySensorCreation = new Sensor([
+            'node_id'=>$TenMNode['id'],
+            'parameter_read'=>$request->get('rhparameter_read'),
+            'identifier_used'=>$request->get('rhidentifier_used'),
+            'min_value'=>$request->get('rhmin_value'),
+            'max_value'=>$request->get('rhmax_value'),
+            'node_type'=>'2m_node',
+            'report_time_interval'=>$request->get('rhrptTime'),
+            'sensor_status'=>$this->getStatus($request,'rhsensor_status'),
+
+        ]);
+
+       
+
+        $HumiditySensorCreation->save();
+
+        //temperature sensor creation
+        $TemperatureSensorCreation = new Sensor([
+            'node_id'=>$TenMNode['id'],
+            'parameter_read'=>$request->get('tsparameter_read'),
+            'identifier_used'=>$request->get('tsidentifier_used'),
+            'min_value'=>$request->get('tsmin_value'),
+            'max_value'=>$request->get('tsmax_value'),
+            'node_type'=>'2m_node',
+            'sensor_status'=>$this->getStatus($request,'tssensor_status'),
+            'report_time_interval'=>2,
+
+        ]);
+        $TemperatureSensorCreation->save();
+        
+        
+        
+        
+        //ten meter node creation
+        
+        //$TenMNode = TenMeterNode::where('txt_value_10m', $request->get('2txt_value'))->first();
+        //insulation sensor creation
+        $InsulationSensorCreation = new Sensor([
+            'node_id'=>$TenMNode['id'],
+            'parameter_read'=>'insulation',
+            'identifier_used'=>$request->get('10identifier_used'),
+            'min_value'=>$request->get('10min_value'),
+            'max_value'=>$request->get('10max_value'),
+            'node_type'=>'10m_node',
+            'sensor_status'=>$this->getStatus($request,'10sensor_status'),
+            'report_time_interval'=>$request->get('10rptTime'),
+
+        ]);
+        $InsulationSensorCreation->save();
+
+        $WindSpeedSensorCreation = new Sensor([
+            'node_id'=>$TenMNode['id'],
+            'parameter_read'=>$request->get('wsparameter_read'),
+            'identifier_used'=>$request->get('wsidentifier_used'),
+            'min_value'=>$request->get('wsmin_value'),
+            'max_value'=>$request->get('wsmax_value'),
+            'node_type'=>'10m_node',
+            'sensor_status'=>$this->getStatus($request,'wssensor_status'),
+            'report_time_interval'=>$request->get('wsrptTime'),
+
+        ]);
+        $WindSpeedSensorCreation->save();
+        
+        $WindDirectionSensorCreation = new Sensor([
+            'node_id'=>$TenMNode['id'],
+            'parameter_read'=>$request->get('wdparameter_read'),
+            'identifier_used'=>$request->get('wdidentifier_used'),
+            'min_value'=>$request->get('wdmin_value'),
+            'max_value'=>$request->get('wdmax_value'),
+            'node_type'=>'10m_node',
+            'sensor_status'=>$this->getStatus($request,'wdsensor_status'),
+            'report_time_interval'=>$request->get('wdrptTime'),
+
+        ]);
+        $WindDirectionSensorCreation->save();
+        
 
         $groundnodeCreation = new GroundNode([
             
@@ -329,7 +389,7 @@ class StationsController extends Controller
             'v_a1_gnd'=>$request->get('smidentifier_used'),
             'v_a2_gnd'=>$request->get('stidentifier_used'),
             'ps_gnd'=>$request->get('groundps'),
-            'node_status'=>'on',
+            'node_status'=>$this->getStatus($request,'gndnode_status'),
             'txt_value_gnd'=>$request->get('gndtxt_value'),
             'up_gnd'=>$request->get('gndup'),
             'po_lst60_gnd'=> $request->get('groundrain_pulses'),
@@ -338,6 +398,48 @@ class StationsController extends Controller
         ]);
 
         $groundnodeCreation->save();
+
+        $gndNode = GroundNode::where('txt_value_gnd', $request->get('gndtxt_value'))->first();
+        
+        $PrecipitationSensorCreation = new Sensor([
+            'node_id'=>$gndNode['id'],
+            'parameter_read'=>$request->get('ppparameter_read'),
+            'identifier_used'=>$request->get('ppidentifier_used'),
+            'min_value'=>$request->get('ppmin_value'),
+            'max_value'=>$request->get('ppmax_value'),
+            'node_type'=>'sink_node',
+            'sensor_status'=>$this->getStatus($request,'ppsensor_status'),
+            'report_time_interval'=>$request->get('pprptTime'),
+
+        ]);
+        $PrecipitationSensorCreation->save();
+
+        $SoilMoistureSensorCreation = new Sensor([
+            'node_id'=>$gndNode['id'],
+            'parameter_read'=>$request->get('smparameter_read'),
+            'identifier_used'=>$request->get('smidentifier_used'),
+            'min_value'=>$request->get('smmin_value'),
+            'max_value'=>$request->get('smmax_value'),
+            'node_type'=>'sink_node',
+            'sensor_status'=>$this->getStatus($request,'smsensor_status'),
+            'report_time_interval'=>$request->get('smrptTime'),
+
+        ]);
+        $SoilMoistureSensorCreation->save();
+        
+        $SoilTempSensorCreation = new Sensor([
+            'node_id'=>$gndNode['id'],
+            'parameter_read'=>$request->get('stparameter_read'),
+            'identifier_used'=>$request->get('stidentifier_used'),
+            'min_value'=>$request->get('stmin_value'),
+            'max_value'=>$request->get('stmax_value'),
+            'node_type'=>'sink_node',
+            'sensor_status'=>$this->getStatus($request,'stsensor_status'),
+            'report_time_interval'=>$request->get('strptTime'),
+
+        ]);
+        $SoilTempSensorCreation->save();
+
 
             $sinkCreation = new SinkNode([
             
@@ -362,15 +464,26 @@ class StationsController extends Controller
                 'p_ms5611_sink'=>$request->get('psidentifier_used'),
                 't_sink'=>'T',
                 'ps_sink'=>$request->get('sinkps'),
-                'node_status'=>'on',
+                'node_status'=>$this->getStatus($request,'sinknode_status'),
                 'txt_value_sink'=>$request->get('sinktxt_value'),
                 'up_sink'=>$request->get('sinkup'),
-                
-                              
                 
             ]);
     
             $sinkCreation->save();
+
+            $PressureSensorCreation = new Sensor([
+                'node_id'=>$TenMNode['id'],
+                'parameter_read'=>$request->get('psparameter_read'),
+                'identifier_used'=>$request->get('psidentifier_used'),
+                'min_value'=>$request->get('psmin_value'),
+                'max_value'=>$request->get('psmax_value'),
+                'node_type'=>'sink_node',
+                'sensor_status'=>$this->getStatus($request,'pssensor_status'),
+                'report_time_interval'=>$request->get('psrptTime'),
+    
+            ]);
+            $PressureSensorCreation->save();
             
           return redirect('/addstation');
     }

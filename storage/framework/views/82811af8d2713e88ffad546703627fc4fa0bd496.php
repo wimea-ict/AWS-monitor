@@ -88,11 +88,19 @@
                                         <section>
                                             <div class="col-lg-12">
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 col-lg-offset-3 control-label" for="10name">Node name</label>
+                                                                                <label class="col-lg-2 col-lg-offset-2 control-label" for="10name">Node name</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input class="form-control" id="10name" name="10name" type="text" value="<?php echo e($stationdetails['10m_node']['name']); ?>" disabled>
                                                                                 </div>
+                                                                                <div class="col-sm-4 control-label text-right">
+                                                                                    <label class="switch">
+                                                                                            <input type="checkbox" name="10mnode_status" value="Yes" checked>
+                                                                                            <span class="slider round"></span>
+                                                                                    </label>
+                                                                                </div>
                                                                             </div>
+
+                                                                            
                                                      
                                             </div>
                                         <div class="col-lg-12"> 
@@ -215,13 +223,24 @@
                                                         <h4 class="panel-title"> 
                                                             <a data-toggle="collapse" data-parent="#accordion-test-2" href="#collapseOne-2" aria-expanded="false" class="collapsed">
                                                                 Insulation sensor
-                                                                <span class="btn btn-default pull-right activate-style">Activate</span>
-                                                            
+                                                                
                                                             </a> 
                                                         </h4> 
                                                     </div> 
                                                     <div id="collapseOne-2" class="panel-collapse collapse"> 
                                                         <div class="panel-body">
+                                                                            <div class="form-group clearfix">
+                                                                                <label class="col-lg-2 control-label " for="10rptTime">Report time interval</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="10rptTime" name="10rptTime" type="text" class="form-control" required>
+                                                                                </div>
+                                                                                <div class="col-sm-6  control-label text-right">
+                                                                                    <label class="switch">
+                                                                                            <input type="checkbox" name="10sensor_status" value="Yes" checked>
+                                                                                            <span class="slider round"></span>
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
                                                                             
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="10parameter_read">Parameter read</label>
@@ -244,6 +263,12 @@
                                                                                     <input id="10min_value" name="10min_value" type="number" class="form-control" value="<?php echo e($stationdetails['insulation_sensor']['min_value']); ?>">
                                                                                 </div>
                                                                             </div>
+                                                                            <div class="form-group clearfix">
+                                                                                <label class="col-lg-2 control-label " for="10max_value">max_value</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="10max_value" name="10max_value" type="number" class="form-control" value="<?php echo e($stationdetails['insulation_sensor']['max_value']); ?>">
+                                                                                </div>
+                                                                            </div>
                                                                                
                                                         </div> 
                                                     </div> 
@@ -254,13 +279,24 @@
                                                             <a data-toggle="collapse" data-parent="#accordion-test-2" href="#collapseTwo-2" class="collapsed" aria-expanded="false">
                                                                 wind speed Sensor
 
-                                                                <span class="btn btn-default pull-right activate-style">Activate</span>
-                                                            
+                                                                
                                                             </a> 
                                                         </h4> 
                                                     </div> 
                                                     <div id="collapseTwo-2" class="panel-collapse collapse"> 
                                                         <div class="panel-body">
+                                                                            <div class="form-group clearfix">
+                                                                                <label class="col-lg-2 control-label " for="wsrptTime">Report time interval</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="wsrptTime" name="wsrptTime" type="text" class="form-control" required>
+                                                                                </div>
+                                                                                <div class="col-sm-6  control-label text-right">
+                                                                                    <label class="switch">
+                                                                                            <input type="checkbox" name="wssensor_status" value="Yes" checked>
+                                                                                            <span class="slider round"></span>
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="wsparameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
@@ -290,13 +326,25 @@
                                                         <h4 class="panel-title"> 
                                                             <a data-toggle="collapse" data-parent="#accordion-test-2" href="#collapseThree-2" class="collapsed" aria-expanded="false">
                                                                 wind Direction sensor
-                                                                <span class="btn btn-default pull-right activate-style">Activate</span>
-                                                            
+                                                                
                                                             </a> 
                                                         </h4> 
                                                     </div> 
                                                     <div id="collapseThree-2" class="panel-collapse collapse"> 
                                                         <div class="panel-body">
+                                                                            <div class="form-group clearfix">
+                                                                                <label class="col-lg-2 control-label " for="wdrptTime">Report time interval</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="wdrptTime" name="wdrptTime" type="text" class="form-control" required>
+                                                                                </div>
+                                                                                <div class="col-sm-6  control-label text-right">
+                                                                                    <label class="switch">
+                                                                                            <input type="checkbox" name="wdsensor_status" value="Yes" checked>
+                                                                                            <span class="slider round"></span>
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
+                                                                            
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="wdparameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
@@ -331,9 +379,15 @@
                                         <div class="col-lg-12">
                                                                             
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 col-lg-offset-3 control-label" for="2mname">Node name</label>
+                                                                                <label class="col-lg-2 col-lg-offset-2 control-label" for="10name">Node name</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input class="form-control" id="2mname" name="2mname" type="text" value="<?php echo e($stationdetails['2m_node']['name']); ?>" disabled>
+                                                                                </div>
+                                                                                <div class="col-sm-4 control-label text-right">
+                                                                                    <label class="switch">
+                                                                                            <input type="checkbox" name="2mnode_status" value="on" checked>
+                                                                                            <span class="slider round"></span>
+                                                                                    </label>
                                                                                 </div>
                                                                             </div>
 
@@ -465,15 +519,25 @@
                                                         <h4 class="panel-title"> 
                                                             <a data-toggle="collapse" data-parent="#accordion-test-5" href="#collapseseven-2" aria-expanded="false" class="collapsed">
                                                                 Relative humidity sensor
-                                                                <span class="btn btn-default pull-right activate-style">Activate</span>
-                                                            
+                                                                
                                                             </a> 
                                                         </h4> 
                                                     </div> 
                                                     <div id="collapseseven-2" class="panel-collapse collapse"> 
                                                         <div class="panel-body">
-                                                                            
-                                                        <div class="form-group clearfix">
+                                                                            <div class="form-group clearfix">
+                                                                                <label class="col-lg-2 control-label " for="rhrptTime">Report time interval</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="rhrptTime" name="rhrptTime" type="text" class="form-control" required>
+                                                                                </div>
+                                                                                <div class="col-sm-6  control-label text-right">
+                                                                                    <label class="switch">
+                                                                                            <input type="checkbox" name="rhsensor_status" value="Yes" checked>
+                                                                                            <span class="slider round"></span>
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="rhparameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="rhparameter_read" name="rhparameter_read" type="text" class="form-control" value="<?php echo e($stationdetails['relative_humidity_semsor']['parameter_read']); ?>">
@@ -504,15 +568,25 @@
                                                             <a data-toggle="collapse" data-parent="#accordion-test-5" href="#collapseeight-2" class="collapsed" aria-expanded="false">
                                                                 Temperature Sensor
 
-                                                                <span class="btn btn-default pull-right activate-style">Activate</span>
-                                                            
+                                                               
                                                             </a> 
                                                         </h4> 
                                                     </div> 
                                                     <div id="collapseeight-2" class="panel-collapse collapse"> 
                                                         <div class="panel-body">
                                                         <div class="form-group clearfix">
-                                                        
+                                                                            <div class="form-group clearfix">
+                                                                                <label class="col-lg-2 control-label " for="tsrptTime">Report time interval</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="tsrptTime" name="tsrptTime" type="text" class="form-control" required>
+                                                                                </div>
+                                                                                <div class="col-sm-6  control-label text-right">
+                                                                                    <label class="switch">
+                                                                                            <input type="checkbox" name="tssensor_status" value="Yes" checked>
+                                                                                            <span class="slider round"></span>
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="tsparameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
@@ -546,17 +620,18 @@
                                         <section>
                                         <div class="col-lg-12">
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 col-lg-offset-3 control-label" for="gdname">Node name</label>
+                                                                                <label class="col-lg-2 col-lg-offset-2 control-label" for="10name">Node name</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input class="form-control" id="gdname" name="gdname" type="text" value="<?php echo e($stationdetails['ground_node']['name']); ?>">
                                                                                 </div>
+                                                                                <div class="col-sm-4 control-label text-center">
+                                                                                    <label class="switch">
+                                                                                            <input type="checkbox" name="gndnode_status" value="Yes" checked>
+                                                                                            <span class="slider round"></span>
+                                                                                    </label>
+                                                                                </div>
                                                                             </div>
-                                                                            
-                                                                            
-                                                                            
-                                                                 
-                                                     
-                                                </div>
+                                        </div>
                                         <div class="col-lg-12"> 
                                             <div class="panel-group panel-group-joined" id="accordion-test-4"> 
                                             <div class="panel panel-default"> 
@@ -704,14 +779,24 @@
                                                         <h4 class="panel-title"> 
                                                             <a data-toggle="collapse" data-parent="#accordion-test-4" href="#collapseten-2" aria-expanded="false" class="collapsed">
                                                                 Precipitation
-                                                                <span class="btn btn-default pull-right activate-style">Activate</span>
-                                                            
+                                                                
                                                             </a> 
                                                         </h4> 
                                                     </div> 
                                                     <div id="collapseten-2" class="panel-collapse collapse"> 
                                                         <div class="panel-body">
-                                                                            
+                                                                            <div class="form-group clearfix">
+                                                                                <label class="col-lg-2 control-label " for="pprptTime">Report time interval</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="pprptTime" name="pprptTime" type="text" class="form-control" required>
+                                                                                </div>
+                                                                                <div class="col-sm-6  control-label text-right">
+                                                                                    <label class="switch">
+                                                                                            <input type="checkbox" name="ppsensor_status" value="Yes" checked>
+                                                                                            <span class="slider round"></span>
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="ppparameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
@@ -741,16 +826,26 @@
                                                         <h4 class="panel-title"> 
                                                             <a data-toggle="collapse" data-parent="#accordion-test-4" href="#collapseeleven-2" class="collapsed" aria-expanded="false">
                                                                 Soil temperature
-
-                                                                <span class="btn btn-default pull-right activate-style">Activate</span>
                                                             
                                                             </a> 
                                                         </h4> 
                                                     </div> 
                                                     <div id="collapseeleven-2" class="panel-collapse collapse"> 
                                                         <div class="panel-body">
+
                                                         <div class="form-group clearfix">
-                                                        
+                                                                            <div class="form-group clearfix">
+                                                                                <label class="col-lg-2 control-label " for="strptTime">Report time interval</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="strptTime" name="strptTime" type="text" class="form-control" required>
+                                                                                </div>
+                                                                                <div class="col-sm-6  control-label text-right">
+                                                                                    <label class="switch">
+                                                                                            <input type="checkbox" name="stsensor_status" value="Yes" checked>
+                                                                                            <span class="slider round"></span>
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="stparameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
@@ -780,8 +875,7 @@
                                                         <h4 class="panel-title"> 
                                                             <a data-toggle="collapse" data-parent="#accordion-test-4" href="#collapsetweleve-2" class="collapsed" aria-expanded="false">
                                                                 Soil moisture sensor
-                                                                <span class="btn btn-default pull-right activate-style">Activate</span>
-                                                            
+                                                               
                                                             </a> 
                                                         </h4> 
                                                     </div> 
@@ -790,6 +884,18 @@
                                                         <div class="form-group clearfix">
                                                                                     
                                                                                     
+                                                                            </div>
+                                                                            <div class="form-group clearfix">
+                                                                                <label class="col-lg-2 control-label " for="smrptTime">Report time interval</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="smrptTime" name="smrptTime" type="text" class="form-control" required>
+                                                                                </div>
+                                                                                <div class="col-sm-6  control-label text-right">
+                                                                                    <label class="switch">
+                                                                                            <input type="checkbox" name="smsensor_status" value="Yes" checked>
+                                                                                            <span class="slider round"></span>
+                                                                                    </label>
+                                                                                </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="smparameter_read">Parameter read</label>
@@ -820,14 +926,20 @@
                                         <h3>Sink Node</h3>
                                         <section>
                                         <div class="col-lg-12">
+                                                                           
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 col-lg-offset-3 control-label" for="sinkname">Node name</label>
+                                                                                <label class="col-lg-2 col-lg-offset-2 control-label" for="10name">Node name</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input class="form-control" id="sinkname" name="sinkname" type="text" value="<?php echo e($stationdetails['sink_node']['name']); ?>">
                                                                                 </div>
-                                                                                
+                                                                                <div class="col-sm-4 control-label text-center">
+                                                                                    <label class="switch">
+                                                                                            <input type="checkbox" name="sinknode_status" value="Yes" checked>
+                                                                                            <span class="slider round"></span>
+                                                                                    </label>
+                                                                                </div>
                                                                             </div>
-                                                                            
+                                
                                                                             
                                                                             
                                                                  
@@ -964,15 +1076,26 @@
                                                         <h4 class="panel-title"> 
                                                             <a data-toggle="collapse" data-parent="#accordion-test-3" href="#collapsefourteen-2" aria-expanded="false" class="collapsed">
                                                                 Pressure sensor
-                                                                <span class="btn btn-default pull-right activate-style">Activate</span>
-                                                            
+                                                                
                                                             </a> 
                                                         </h4> 
                                                     </div> 
                                                     <div id="collapsefourteen-2" class="panel-collapse collapse"> 
                                                         <div class="panel-body">
+                                                                            <div class="form-group clearfix">
+                                                                                <label class="col-lg-2 control-label " for="psrptTime">Report time interval</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="psrptTime" name="psrptTime" type="text" class="form-control" required>
+                                                                                </div>
+                                                                                <div class="col-sm-6  control-label text-right">
+                                                                                <label class="switch">
+                                                                                            <input type="checkbox" name="pssensor_status" value="Yes" checked>
+                                                                                            <span class="slider round"></span>
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
                                                                             
-                                                        <div class="form-group clearfix">
+                                                                            <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="psparameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="psparameter_read" name="psparameter_read" type="text" class="form-control" value="<?php echo e($stationdetails['pressure_semsor']['parameter_read']); ?>">

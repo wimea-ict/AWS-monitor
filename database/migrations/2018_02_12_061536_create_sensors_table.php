@@ -22,6 +22,7 @@ class CreateSensorsTable extends Migration
             $table->string('max_value');
             $table->enum('node_type',["2m_node","10m_node","grnd_node","sink_node"]);
             $table->string('report_time_interval');
+            $table->enum('sensor_status',["off","on"]);
             $table->timestamps();
         });
     }
