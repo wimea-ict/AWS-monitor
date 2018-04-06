@@ -74,7 +74,7 @@ Route::get('/tester',function(){
     $stations = DB::table('stations')->select('station_id', 'StationName', 'StationNumber')->get();
 
     // pick only columns that we'll be using. We won't need date_time_recorded because we have
-    $counts = DB::table('nodestatus')->select('V_MCU','V_IN','date','time','TXT','StationNumber')->orderBy('id')->chunk(400, function($nodes) use(&$vinNull, &$vmcuNull, &$dateNull, &$vinMin, &$vinMax, &$vmcuMin, &$vmcuMax, &$dateMin, &$dateMax, &$date, &$date1970, &$invalidDates, &$nodeConf, &$nullV_IN, &$nullVMCU, &$problemClassfications, &$str, &$stations){
+    DB::table('nodestatus')->select('V_MCU','V_IN','date','time','TXT','StationNumber')->orderBy('id')->chunk(400, function($nodes) use(&$vinNull, &$vmcuNull, &$dateNull, &$vinMin, &$vinMax, &$vmcuMin, &$vmcuMax, &$dateMin, &$dateMax, &$date, &$date1970, &$invalidDates, &$nodeConf, &$nullV_IN, &$nullVMCU, &$problemClassfications, &$str, &$stations){
         foreach ($nodes as $node) {
 
             /**
@@ -182,8 +182,8 @@ Route::get('/tester',function(){
             // problem_id, station_id, max_track_counter, criticality
             $stn_prb_conf = DB::table('station_problem_settings')->where('station_id',$stn_id)->select('problem_id','max_track_counter','criticality')->get();
             // initialize variables with default values
-            $criticality = 'non-critical';
-            $max_track_counter = 12;
+            $criticality = 'non-critical';// default criticality
+            $max_track_counter = 12;// default criticality
             
             // ------------------------------------------------------------------------------
             //check for nulls
@@ -195,19 +195,35 @@ Route::get('/tester',function(){
                     // do a case insensitive check
                     if (stripos($problem->problem_description, "V_MCU") !== false) {
                         if (stripos($problem->problem_description, "empty") !== false) {
+                            /**
+                             * getting the station problem configurations
+                             * problem criticality and max_counter
+                              */
+                                if ($stn_prb_conf !== null || $stn_prb_conf !== '') {
+                                    foreach ($stn_prb_conf as $prb_conf) {
+                                        if ($prb_conf->problem_id === $problem->id) {
+                                            $criticality = $prb_conf->criticality;
+                                            $max_track_counter = $prb_conf->max_track_counter;
+                                        }
+                                    }
+                                }
                             // check data in the problems table to see if problem has been reported yet. // id, source_id, track_counter
-                            $prob = DB::table('problems')-select('id','source_id','track_counter')->where('source_id','=',$nd_id)->get();
+                            $prob = DB::table('problems')->select('id','source_id','track_counter')->where('source_id','=',$nd_id)->get();
                             if ($prob !== null || $prob !== '') {
-                                # code...
+                                /**
+                                 * problem exists
+                                 */
                             }
                             else {
                                 /**
+                                 * hence record doesn't exit in the database and so..
                                  * insert into the the problem into the database
                                  * at this point, we get the criticality of this problem
                                   */
                                 // id, source[enum('sensor','station','2m_node','10m_node','sink_node','ground_node')], source_id, criticality[enum('critical', 'non-critical')], classification_id, track_counter, status[enum('reported', 'investigation', 'solved')]
+                                
                                 DB::table('problems')->insert(
-                                    ['source'=>$nd_name,'source_id'=>$nd_id,'criticality'=>]
+                                    ['source'=>$nd_name,'source_id'=>$nd_id,'criticality'=>$criticality,'classification_id'=>$problem->id,'track_counter'=>1,''=>'investigation']
                                 );
                             }
                             break;
@@ -346,8 +362,8 @@ Route::get('/tester',function(){
 
     $string = "V_IN nulls: ".$vinNull."\n"."V_IN mins: ".$vinMin."\n"."V_IN max: ".$vinMax."\n"."V_MCU nulls: ".$vmcuNull."\n"."V_MCU mins: ".$vmcuMin."\n"."V_MCU max: ".$vmcuMax."\n"."Date nulls: ".$dateNull."\n"."Date mins: ".$dateMin."\n"."Date Max: ".$dateMax."\n"."Problems : ".$probs."\n"."Wrong Dates: ".$wrongDateString."\n"."V_IN nulls: ".$vinNulls."\n"."V_IN nulls: ".$vmcuNulls;
 
-    //$funcs = get_defined_functions();
-    dd($string);
+    $funcs = 'non-critical'.PHP_EOL;
+    dd($funcs);
 
     // return $datas;
     return view('layouts/tester', compact('datas'));
