@@ -15,9 +15,10 @@ class CreateStationProblemSettingsTable extends Migration
     {
         Schema::create('station_problem_settings', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('station_id');
+            $table->integer('station_id')->unsigned();
             $table->integer('problem_id')->unsigned();
             $table->integer('max_track_counter')->unsigned();
+            $table->integer('reporting_time_interval')->unsigned();
             $table->enum('criticality',["critical","non_critical"]);
             $table->timestamps();
         });
