@@ -19,6 +19,7 @@ class CreateProblemsTable extends Migration
             $table->string('source_id');
             $table->integer('classification_id')->unsigned();
             $table->enum('criticality',["critical","non-critical"]);
+            $table->integer('track_counter')->unsigned();
             $table->enum('status',["reported","investigation","solved"]);
             $table->timestamps();
         });

@@ -208,23 +208,30 @@ Route::get('/tester',function(){
                                     }
                                 }
                             // check data in the problems table to see if problem has been reported yet. // id, source_id, track_counter
-                            $prob = DB::table('problems')->select('id','source_id','track_counter')->where('source_id','=',$nd_id)->get();
-                            if ($prob !== null || $prob !== '') {
-                                /**
-                                 * problem exists
-                                 */
-                            }
-                            else {
+                            $prob = DB::table('problems')->select('id','source_id','track_counter')->where([
+                                ['source_id','=',$nd_id],
+                                ['status','<>','solved'],
+                            ])->get();
+                            if (empty($prob)) {
                                 /**
                                  * hence record doesn't exit in the database and so..
                                  * insert into the the problem into the database
                                  * at this point, we get the criticality of this problem
                                   */
-                                // id, source[enum('sensor','station','2m_node','10m_node','sink_node','ground_node')], source_id, criticality[enum('critical', 'non-critical')], classification_id, track_counter, status[enum('reported', 'investigation', 'solved')]
+                                // id, source[enum('sensor','station','2m_node','10m_node','sink_node','ground_node')], source_id, criticality[enum('critical', 'non-critical')], classification_id, track_counter, status[enum('reported', 'investigation', 'solved')], created_at, updated_at
                                 
                                 DB::table('problems')->insert(
                                     ['source'=>$nd_name,'source_id'=>$nd_id,'criticality'=>$criticality,'classification_id'=>$problem->id,'track_counter'=>1,''=>'investigation']
                                 );
+                            }
+                            else {
+                                /**
+                                 * problem exists
+                                 * if problem is not yet reported, then increment the counter
+                                 * after increment, check if the counter has reached max, if so, call the reporter and then set the status to reported.
+                                 * if status is reported, then just update the 'updated_at' column to show that the problem was realised
+                                 */
+                                
                             }
                             break;
                         }
