@@ -51,8 +51,9 @@ class TwoMNodeController extends Controller
                         ->select(DB::raw("CONCAT(date,' ',time)  AS y"),
                                     'V_MCU','V_IN')
                         ->oldest('date_time_recorded')
-                        ->limit(25)
+                        ->limit(1000)
                         ->get();
+        
         
         
 
@@ -65,7 +66,19 @@ class TwoMNodeController extends Controller
             }
         }
 
-        $data["vin_vmcu_2m"]=$nodeStatus;
+        
+        
+        $dyGraph_data=array();
+        $i=1;
+
+        //need to change instead of i pass the value of y but need to pass it as a string
+        foreach($nodeStatus as $status){
+            $temp_array=array($i,(float)$status->V_MCU,(float)$status->V_IN);
+            $dyGraph_data[]=$temp_array;
+            $i++;
+        }
+        $data["vin_vmcu_2m"]=$dyGraph_data;
+
         //get values for other graphs as well
         
         //get precipitation for ground node
@@ -76,14 +89,23 @@ class TwoMNodeController extends Controller
                         ->select(DB::raw("CONCAT(date,' ',time)  AS y"),
                                     'DurationOfPeriodOfPrecipitation')
                         ->oldest('creationDate')
-                        ->limit(25)
+                        ->limit(100)
                         ->get();
 
-        // foreach($precipitations as $precipitation){
-        //     $precipitation->DurationOfPeriodOfPrecipitation=$precipitation->DurationOfPeriodOfPrecipitation*0.2;
-        // }
+        
 
-        $data["humidity"]=$humidity;
+        $humidity_graph_data=array();
+        $i=1;
+
+        //need to change instead of i pass the value of y but need to pass it as a string
+        foreach($humidity as $humid){
+            $temp_array=array($i,(float)$humid->DurationOfPeriodOfPrecipitation);
+            $humidity_graph_data[]=$temp_array;
+            $i++;
+        }
+
+
+        $data["humidity"]=$humidity_graph_data;
 
 
         //get soil teplature
@@ -95,9 +117,21 @@ class TwoMNodeController extends Controller
                         ->limit(50)
                         ->get();
         
-        $data["templature"]=$templature;
+
+        $temp_graph_data=array();
+        $i=1;
+
+        //need to change instead of i pass the value of y but need to pass it as a string
+        foreach($templature as $temp){
+            $temp_array=array($i,(float)$temp->Wind_Speed);
+            $temp_graph_data[]=$temp_array;
+            $i++;
+        }
+
+        $data["templature"]=$temp_graph_data;
         //get soil moisture
 
+       
         
         $data["action"]="/reports2m";
         $data["stations"]=Station::all();

@@ -29,6 +29,15 @@ Route::post('/reportsGnd','GroundNodeController@getGndStationReports');
 Route::post('/reportsSink','SinkNodeController@getSinkStationReports');
 Route::post('/reports2m','TwoMNodeController@get2mStationReports');
 
+Route::get('/send_test_email', function(){
+	Mail::raw('Sending emails with Mailgun and Laravel is easy!', function($message)
+	{
+		$message->subject('Mailgun and Laravel are awesome!');
+		$message->from('byarus90@gmail.com', 'Website Name');
+		$message->to('kibsysapps@gmail.com');
+	});
+});
+
 Route::get('/', function () {
     return view('main');
 });

@@ -62,7 +62,7 @@
          <!-- Modal-Effect -->
          <script src="assets/modal-effect/js/classie.js"></script>
         <script src="assets/modal-effect/js/modalEffects.js"></script>
-
+        <script src="assets/dygraph/dygraph.min.js" ></script>
         
 
         <script type="text/javascript">

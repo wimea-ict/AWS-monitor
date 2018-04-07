@@ -53,21 +53,25 @@ class TenMNodeController extends Controller
                         ->select(DB::raw("CONCAT(date,' ',time)  AS y"),
                                     'V_MCU','V_IN')
                         ->oldest('date_time_recorded')
-                        ->limit(10)
+                        ->limit(1000)
                         ->get();
         
         
-
-        foreach ($nodeStatus as $status){
+        $dyGraph_data=array();
+        $i=1;
+        foreach($nodeStatus as $status){
             if($status->V_MCU=="" || $status->V_MCU==null){
               $status->V_MCU=0;  
             }
             if($status->V_IN=="" || $status->V_IN==null){
               $status->V_IN=0;  
             }
-        }
 
-        $data["vin_vmcu_10m"]=$nodeStatus;
+            $temp_array=array($i,(float)$status->V_MCU,(float)$status->V_IN);
+            $dyGraph_data[]=$temp_array;
+            $i++;
+        }
+        $data["vin_vmcu_10m"]=$dyGraph_data;
         //get values for other graphs as well
         
         //get precipitation for ground node
@@ -77,14 +81,19 @@ class TenMNodeController extends Controller
                         ->select(DB::raw("CONCAT(date,' ',time)  AS y"),
                                     'DurationOfPeriodOfPrecipitation')
                         ->oldest('creationDate')
-                        ->limit(25)
+                        ->limit(1000)
                         ->get();
 
-        // foreach($precipitations as $precipitation){
-        //     $precipitation->DurationOfPeriodOfPrecipitation=$precipitation->DurationOfPeriodOfPrecipitation*0.2;
-        // }
+        
+        $insulation_data=array();
+        $i=1;
+        foreach($insulation as $insulation){
+            $temp_array=array($i,(float)$insulation->DurationOfPeriodOfPrecipitation);
+            $insulation_data[]=$temp_array;
+            $i++;
+        }
 
-        $data["insulation_sensor"]=$insulation;
+        $data["insulation_sensor"]=$insulation_data;
 
 
         //get soil teplature
@@ -96,7 +105,16 @@ class TenMNodeController extends Controller
                         ->limit(50)
                         ->get();
         
-        $data["windspeed_sensor"]=$windspeed;
+        $windspeed_data=array();
+        $i=1;
+        foreach($windspeed as $windsp){
+            $temp_array=array($i,(float)$windsp->Wind_Speed);
+            $windspeed_data[]=$temp_array;
+            $i++;
+        }
+        
+
+        $data["windspeed_sensor"]=$windspeed_data;
         //get soil moisture
 
         $wind_direction=ObservationSlip::where('station','=',$station_id)
@@ -107,7 +125,16 @@ class TenMNodeController extends Controller
                         ->limit(50)
                         ->get();
 
-        $data["wind_direction_sensor"]=$wind_direction;
+        $wind_direction_data=array();
+        $i=1;
+        foreach($wind_direction as $wind_d){
+            $temp_array=array($i,(float)$wind_d->Wind_Direction);
+            $wind_direction_data[]=$temp_array;
+            $i++;
+        }
+        
+
+        $data["wind_direction_sensor"]=$wind_direction_data;
 
         $data["action"]="/reports10m";
         $data["stations"]=Station::all();

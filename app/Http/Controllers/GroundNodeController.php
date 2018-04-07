@@ -51,21 +51,29 @@ class GroundNodeController extends Controller
                         ->select(DB::raw("CONCAT(date,' ',time)  AS y"),
                                     'V_MCU','V_IN')
                         ->oldest('date_time_recorded')
-                        ->limit(25)
+                        ->limit(1000)
                         ->get();
         
         
 
-        foreach ($nodeStatus as $status){
-            if($status->V_MCU=="" || $status->V_MCU==null){
+        $dyGraph_data=array();
+        $i=1;
+
+        //need to change instead of i pass the value of y but need to pass it as a string
+        foreach($nodeStatus as $status){
+             if($status->V_MCU=="" || $status->V_MCU==null){
               $status->V_MCU=0;  
             }
             if($status->V_IN=="" || $status->V_IN==null){
               $status->V_IN=0;  
             }
+
+            $temp_array=array($i,(float)$status->V_MCU,(float)$status->V_IN);
+            $dyGraph_data[]=$temp_array;
+            $i++;
         }
 
-        $data["vin_vmcu"]=$nodeStatus;
+        $data["vin_vmcu"]=$dyGraph_data;
         //get values for other graphs as well
         
         //get precipitation for ground node
@@ -75,13 +83,20 @@ class GroundNodeController extends Controller
                         ->select(DB::raw("CONCAT(date,' ',time)  AS y"),
                                     'DurationOfPeriodOfPrecipitation')
                         ->oldest('creationDate')
-                        ->limit(25)
+                        ->limit(1000)
                         ->get();
+        
+        $precipitation_graph_data=array();
+        $i=1;
+
+        //need to change instead of i pass the value of y but need to pass it as a string
         foreach($precipitations as $precipitation){
-            $precipitation->DurationOfPeriodOfPrecipitation=$precipitation->DurationOfPeriodOfPrecipitation*0.2;
+            $temp_array=array($i,(float)$precipitation->DurationOfPeriodOfPrecipitation);
+            $precipitation_graph_data[]=$temp_array;
+            $i++;
         }
 
-        $data["precipitation"]=$precipitations;
+        $data["precipitation"]=$precipitation_graph_data;
 
 
         //get soil teplature
@@ -90,10 +105,20 @@ class GroundNodeController extends Controller
                         ->select(DB::raw("CONCAT(date,' ',time)  AS y"),
                                     'SoilTemperature')
                         ->oldest('creationDate')
-                        ->limit(50)
+                        ->limit(1000)
                         ->get();
         
-        $data["soil_templature"]=$soilTemplature;
+        $soilTemplature_graph_data=array();
+        $i=1;
+
+        //need to change instead of i pass the value of y but need to pass it as a string
+        foreach($soilTemplature as $soilTemp){
+            $temp_array=array($i,(float)$soilTemp->SoilTemperature);
+            $soilTemplature_graph_data[]=$temp_array;
+            $i++;
+        }
+
+        $data["soil_templature"]=$soilTemplature_graph_data;
         //get soil moisture
 
         $SoilMoisture=ObservationSlip::where('station','=',$station_id)
@@ -101,10 +126,20 @@ class GroundNodeController extends Controller
                         ->select(DB::raw("CONCAT(date,' ',time)  AS y"),
                                     'SoilMoisture')
                         ->oldest('creationDate')
-                        ->limit(50)
+                        ->limit(1000)
                         ->get();
 
-        $data["soil_moisture"]=$SoilMoisture;
+        $SoilMoisture_graph_data=array();
+        $i=1;
+
+        //need to change instead of i pass the value of y but need to pass it as a string
+        foreach($SoilMoisture as $SoilMois){
+            $temp_array=array($i,(float)$SoilMois->SoilMoisture);
+            $SoilMoisture_graph_data[]=$temp_array;
+            $i++;
+        }
+
+        $data["soil_moisture"]=$SoilMoisture_graph_data;
 
         $data["action"]="/reportsGnd";
         $data["stations"]=Station::all();

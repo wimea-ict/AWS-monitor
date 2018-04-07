@@ -36,6 +36,8 @@
         <!-- DataTables -->
         <link href="assets/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
 
+        <link href="assets/dygraph/dygraph.css" rel="stylesheet" />
+
         <style>
             .nopadding {
                 padding: 0 !important;

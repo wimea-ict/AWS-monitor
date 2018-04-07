@@ -59,9 +59,6 @@
         </div> <!-- /Portlet -->
     </div> <!-- col -->
 
-   
-    
-
 </div>
 @endsection
 
@@ -70,28 +67,18 @@
     <script>
         $(function() {
 
-            var vin_vmcu_sink1 = Morris.Line({
-            element: "vin_vmcu_sink",
-            data: <?=json_encode($vin_vmcu_sink)?>,
-            xkey: "y",
-            ykeys: ["V_MCU", "V_IN"],
-            labels: ["V_MCU", "V_IN"],
-            parseTime: false,
-            resize: true,
-            lineColors: ["#3bc0c3", "#1a2942"]});
+            new Dygraph(document.getElementById("vin_vmcu_sink"),
+              <?=json_encode($vin_vmcu_sink)?>,
+              {
+                  labels: [ "x", "V_MCU", "V_IN" ]
+              });
 
-         //creating bar chart
-         var pressure1 = Morris.Line({
-            element: "pressure",
-            data: <?=json_encode($pressure)?>,
-            xkey: "y",
-            ykeys: ["pressure"],
-            labels: ["pressure"],
-            parseTime: false,
-            resize: true,
-            lineColors: ["#dcdcdc"]});
-
-        
+              new Dygraph(document.getElementById("pressure"),
+              <?=json_encode($pressure)?>,
+              {
+                  labels: [ "x", "pressure" ]
+              });
+           
         });//end out function
     </script>
 @endsection

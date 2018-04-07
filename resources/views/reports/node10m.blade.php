@@ -114,48 +114,31 @@
     <script>
         $(function() {
 
-            var vin_vmcu_10m = Morris.Line({
-            element: "vin_vmcu_10m",
-            data: <?=json_encode($vin_vmcu_10m)?>,
-            xkey: "y",
-            ykeys: ["V_MCU", "V_IN"],
-            labels: ["V_MCU", "V_IN"],
-            parseTime: false,
-            resize: true,
-            lineColors: ["#3bc0c3", "#1a2942"]});
+            new Dygraph(document.getElementById("vin_vmcu_10m"),
+              <?=json_encode($vin_vmcu_10m)?>,
+              {
+                  labels: [ "x", "V_MCU", "V_IN" ]
+              });
+              
+            new Dygraph(document.getElementById("insulation_sensor"),
+              <?=json_encode($insulation_sensor)?>,
+              {
+                  labels: [ "x", "insulation"]
+              });
 
-         //creating bar chart
-         var insulation_sensor = Morris.Line({
-            element: "insulation_sensor",
-            data: <?=json_encode($insulation_sensor)?>,
-            xkey: "y",
-            ykeys: ["insulation"],
-            labels: ["insulation"],
-            parseTime: false,
-            resize: true,
-            lineColors: ["#dcdcdc"]});
-
+         
+              new Dygraph(document.getElementById("windspeed_sensor"),
+              <?=json_encode($windspeed_sensor)?>,
+              {
+                  labels: [ "x", "windspeed"]
+              });
         
-            var windspeed_sensor = Morris.Line({
-            element: "windspeed_sensor",
-            data: <?=json_encode($windspeed_sensor)?>,
-            xkey: "y",
-            ykeys: ["windspeed"],
-            labels: ["windspeed"],
-            parseTime: false,
-            resize: true,
-            lineColors: ["#dcdcdc"]});
-  
-            var wind_direction_sensor = Morris.Line({
-            element: "wind_direction_sensor",
-            data: <?=json_encode($wind_direction_sensor)?>,
-            xkey: "y",
-            ykeys: ["wind_direction"],
-            labels: ["wind_direction"],
-            parseTime: false,
-            resize: true,
-            lineColors: ["#dcdcdc"]});
-
+              new Dygraph(document.getElementById("wind_direction_sensor"),
+              <?=json_encode($wind_direction_sensor)?>,
+              {
+                  labels: [ "x", "wind_direction"]
+              });
+           
 
         });//end out function
 

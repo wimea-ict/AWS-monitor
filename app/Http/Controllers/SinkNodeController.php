@@ -50,21 +50,26 @@ class SinkNodeController extends Controller
                         ->select(DB::raw("CONCAT(date,' ',time)  AS y"),
                                     'V_MCU','V_IN')
                         ->oldest('date_time_recorded')
-                        ->limit(25)
+                        ->limit(1000)
                         ->get();
         
-        
+        $dyGraph_data=array();
+        $i=1;
+        foreach($nodeStatus as $status){
 
-        foreach ($nodeStatus as $status){
             if($status->V_MCU=="" || $status->V_MCU==null){
               $status->V_MCU=0;  
             }
             if($status->V_IN=="" || $status->V_IN==null){
               $status->V_IN=0;  
             }
+
+            $temp_array=array($i,(float)$status->V_MCU,(float)$status->V_IN);
+            $dyGraph_data[]=$temp_array;
+            $i++;
         }
 
-        $data["vin_vmcu_sink"]=$nodeStatus;
+        $data["vin_vmcu_sink"]=$dyGraph_data;
         //get values for other graphs as well
         
         //get precipitation for ground node
@@ -81,8 +86,15 @@ class SinkNodeController extends Controller
         // foreach($precipitations as $precipitation){
         //     $precipitation->DurationOfPeriodOfPrecipitation=$precipitation->DurationOfPeriodOfPrecipitation*0.2;
         // }
+        $pressure_data=array();
+        $i=1;
+        foreach($pressure as $pres){
+            $temp_array=array($i,(float)$pres->VapourPressure);
+            $pressure_data[]=$temp_array;
+            $i++;
+        }
 
-        $data["pressure"]=$pressure;
+        $data["pressure"]=$pressure_data;
 
 
         $data["action"]="/reportsSink";
