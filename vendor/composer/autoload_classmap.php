@@ -3297,6 +3297,7 @@ return array(
     'station\\Http\\Controllers\\ConfigureStaion' => $baseDir . '/app/Http/Controllers/ConfigureStaion.php',
     'station\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'station\\Http\\Controllers\\GroundNodeController' => $baseDir . '/app/Http/Controllers/GroundNodeController.php',
+    'station\\Http\\Controllers\\NodeStatusAnalyzerController' => $baseDir . '/app/Http/Controllers/AnalyzerController.php',
     'station\\Http\\Controllers\\SensorsController' => $baseDir . '/app/Http/Controllers/SensorsController.php',
     'station\\Http\\Controllers\\SinkNodeController' => $baseDir . '/app/Http/Controllers/SinkNodeController.php',
     'station\\Http\\Controllers\\StationsController' => $baseDir . '/app/Http/Controllers/StationsController.php',

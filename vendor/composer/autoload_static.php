@@ -3598,6 +3598,7 @@ class ComposerStaticInit87b9326ddaef55773641bf54eaf4d0ef
         'station\\Http\\Controllers\\ConfigureStaion' => __DIR__ . '/../..' . '/app/Http/Controllers/ConfigureStaion.php',
         'station\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'station\\Http\\Controllers\\GroundNodeController' => __DIR__ . '/../..' . '/app/Http/Controllers/GroundNodeController.php',
+        'station\\Http\\Controllers\\NodeStatusAnalyzerController' => __DIR__ . '/../..' . '/app/Http/Controllers/AnalyzerController.php',
         'station\\Http\\Controllers\\SensorsController' => __DIR__ . '/../..' . '/app/Http/Controllers/SensorsController.php',
         'station\\Http\\Controllers\\SinkNodeController' => __DIR__ . '/../..' . '/app/Http/Controllers/SinkNodeController.php',
         'station\\Http\\Controllers\\StationsController' => __DIR__ . '/../..' . '/app/Http/Controllers/StationsController.php',

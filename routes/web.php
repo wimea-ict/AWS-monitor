@@ -45,4 +45,4 @@ Route::get('/configuresensor', function () {
     return view('layouts/configuresensor');
 });
 
-Route::get('/tester', 'AnalyzerController@analyze');
+Route::get('/tester', 'NodeStatusAnalyzerController@analyze');

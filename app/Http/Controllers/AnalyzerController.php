@@ -3,34 +3,59 @@
 namespace station\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use station\Http\Controllers\Controller;
 
-class AnalyzerController extends Controller
+class NodeStatusAnalyzerController extends Controller
 {
     
-    private $node_status_configurations_tb;
+    private $problem_classifn_tb;
+    private $stns_tb;
+    private $statn_prob_sttngs_tb;
+    private $prob_tb;
+    private $gnd_nd_tb;
+    private $twoM_nd_tb;
+    private $tenM_nd_tb;
+    private $sink_nd_tb;
 
     public function __construct() {
-        $this->node_status_configurations_tb = 'node_status_configurations';
+        $this->problem_classifn_tb = 'problem_classification';
+        $this->stns_tb = 'stations';
+        $this->statn_prob_sttngs_tb = 'station_problem_settings';
+        $this->prob_tb = 'problems';
+        $this->gnd_nd_tb = 'groundNode';
+        $this->twoM_nd_tb = 'twoMeterNode';
+        $this->tenM_nd_tb = 'tenMeterNode';
+        $this->sink_nd_tb = 'sinkNode';
     }
 
-    private function getNodeConf(){
-        $nodeConf = DB::table($node_status_configurations_tb)->select('txt_value','v_in_min_value','v_in_max_value','v_mcu_min_value','v_mcu_max_value')->get();
-        return $nodeConf;
-    }
-
+    /**
+     * getProblemClassifications()
+     * gets all the problem classifications in the table
+     * @returns $problemClassfications
+     */
     private function getProblemClassifications(){
-        $problemClassfications = DB::table('problem_classification')->select('id','problem_description','source')->get();
+        $problemClassfications = DB::table($this->problem_classifn_tb)->select('id','problem_description','source')->get();
         return $problemClassfications;
     }
 
+    /**
+     * getStations();
+     * @returns $stations
+     */
     private function getStations(){
-        $stations = DB::table('stations')->select('station_id', 'StationName', 'StationNumber')->get();
+        $stations = DB::table($this->stns_tb)->select('station_id', 'StationName', 'StationNumber')->get();
         return $stations;
     }
     
+    /**
+     *  getStationName($stn_id)
+     *  @param stn_id
+     * @returns $station_name;
+     */
     private function getStationName($stn_id){
         $station_name = '';
-        $stations = getStations(); 
+        $stations = $this->getStations(); 
 
         foreach ($stations as $station) {
             if ($station->station_id === $stn_id) {
@@ -43,25 +68,36 @@ class AnalyzerController extends Controller
 
     /**
      * pick problem station configurations
-     * getNodeConfigurations(): returns assocative array of values
-     * Get the config data for each node
-     * This is the point where we get the the vinMaxVal, vinMinVal, vmcuMaxVal, vmcuMinVal
-     * Since only configured nodes are saved to the database, there shouldn't be an unassigned variable.
+     * getNodeConfigurations():
+     * @returns $stn_prb_conf;
      */
     private function getStationProbConfigs($stn_id){
         
         // problem_id, station_id, max_track_counter, criticality
-        $stn_prb_conf = DB::table('station_problem_settings')->where('station_id',$stn_id)->select('problem_id','max_track_counter','criticality')->get();
+        $stn_prb_conf = DB::table($this->statn_prob_sttngs_tb)->where('station_id',$stn_id)->select('problem_id','max_track_counter','criticality')->get();
 
         return $stn_prb_conf;
     }
 
     /**
-     * getNodeAndStationIds(): returns assocative array of values
+     * get all the node status data
+     */
+    private function getNodeData($nd_tb, $txt)
+    {
+        $node_tb = DB::table($nd_tb)->select('node_id','station_id',$txt,'v_in_max_value','v_in_min_value','v_mcu_max_value','v_mcu_min_value')->get();
+        
+        return $node_tb;
+    }
+
+    /**
+     * getNodeAndStationIds()
+     * it also gets the node configurations
+     * @returns array('stn_id' => $stn_id, 'nd_id' => $nd_id, 'nd_name' => $nd_name, 'vinMaxVal' => $vinMaxVal, 'vinMinVal' => $vinMinVal, 'vmcuMaxVal' => $vmcuMaxVal, 'vmcuMinVal' => $vmcuMinVal,);
      * Get the respective node ids
-     * '2m_node','10m_node','sink_node','ground_node'
+     * node name:- '2m_node','10m_node','sink_node','ground_node'
      * this should be separated into its own function
      * the txt identifiers should be stated as variables to manage them as they change
+     * Since only configured nodes are saved to the database, there shouldn't be an unassigned variable.
      */
     private function getNodeAndStationInfo($txt){
 
@@ -75,7 +111,7 @@ class AnalyzerController extends Controller
 
         if (stripos($txt, 'gnd') !== false) {
             // node_id, station_id, txt_gnd_value
-            $node_tb = DB::table('groundNode')->select('node_id','station_id','txt_gnd_value')->get();
+            $node_tb = $this->getNodeData($this->gnd_nd_tb,'txt_gnd_value');
             foreach ($node_tb as $nd_tb) {
                 if ($nd_tb->txt_gnd_value === $txt) {
                     $stn_id = $nd_tb->station_id;
@@ -91,7 +127,7 @@ class AnalyzerController extends Controller
         }
         else if (stripos($txt, '2m') !== false) {
             // node_id, station_id, txt_gnd_value
-            $node_tb = DB::table('twoMeterNode')->select('node_id','station_id','txt_2m_value')->get();
+            $node_tb = $this->getNodeData($this->twoM_nd_tb,'txt_2m_value');
             foreach ($node_tb as $nd_tb) {
                 if ($nd_tb->txt_2m_value === $txt) {
                     $stn_id = $nd_tb->station_id;
@@ -107,7 +143,7 @@ class AnalyzerController extends Controller
         }
         else if (stripos($txt, '10m') !== false) {
             // node_id, station_id, txt_gnd_value
-            $node_tb = DB::table('tenMeterNode')->select('node_id','station_id','txt_10m_value')->get();
+            $node_tb = $this->getNodeData($this->tenM_nd_tb,'txt_10m_value');
             foreach ($node_tb as $nd_tb) {
                 if ($nd_tb->txt_10m_value === $txt) {
                     $stn_id = $nd_tb->station_id;
@@ -123,7 +159,7 @@ class AnalyzerController extends Controller
         }
         else if (stripos($txt, 'sink') !== false) {
             // node_id, station_id, txt_gnd_value
-            $node_tb = DB::table('sinkNode')->select('node_id','station_id','txt_sink_value')->get();
+            $node_tb = $this->getNodeData($this->sink_nd_tb,'txt_sink_value');
             foreach ($node_tb as $nd_tb) {
                 if ($nd_tb->txt_sink_value === $txt) {
                     $stn_id = $nd_tb->station_id;
@@ -149,29 +185,111 @@ class AnalyzerController extends Controller
         );
     }
 
-    public function analyze()
+    /**
+     * Resetting a table
+     */
+    private function cleanDBTable($tb_name)
+    {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        DB::table($tb_name)->truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
+    }
+
+    /**
+     * insertIntoProbTb() ... Insert data into problem table
+     * Field        possible values
+     * id
+     * source       ('sensor','station','2m_node','10m_node','sink_node','ground_node')
+     * source_id
+     * criticality  ('critical', 'non-critical')
+     * classification_id
+     * track_counter
+     * status       ('reported', 'investigation', 'solved')
+     * created_at
+     * updated_at
+     */
+    private function insertIntoProbTb($nd_name,$nd_id,$criticality,$prob_id)
+    {
+        DB::table($this->prob_tb)->insert(
+            ['source'=>$nd_name,'source_id'=>$nd_id,'criticality'=>$criticality,'classification_id'=>$prob_id,'track_counter'=>1,'status'=>'investigation']
+        );
+    }
+
+    /**
+     * check data in the problems table to see if problem has been reported yet.
+     * return the problem
+     */
+    private function getProblem($nd_id)
+    {
+        // id, source_id, track_counter
+        $prob = DB::table($this->prob_tb)->select('id','source_id','track_counter','status')->where('source_id','=',$nd_id)->get();
+        
+        return $prob;
+    }
+
+    /**
+     * call reporter to report problem
+     */
+    private function getReporter($prob_id)
+    {
+        //............ call reporter here.............................
+
+        // update status if reporting was done successfully
+        DB::table($this->prob_tb)->where('id',$prob_id)->update(['status'=>'reported']);
+    }
+
+    /**
+     * update problem 
+     */
+    private function updateProblem($prob_track_counter,$nd_id,$max_track_counter,$prob_status,$prob_id)
+    {
+        if ($prob_status == 'reported') {
+            // update the updated_at column to affirm that the problem was encountered again
+            DB::table($this->prob_tb)->where('id',$prob_id)->update(['updated_at'=>NOW()]);
+        }
+        else {
+            // check if max_counter had already been reached to avoid incrementing it again.
+            if (($prob_track_counter + 1)>= $max_track_counter) {
+                $this->getReporter($prob_id);
+            }
+            DB::table($this->prob_tb)->where('id',$prob_id)->increment('track_counter');
+            // check if max_counter has been reached and if so change status and call the reporter.
+            if (($prob_track_counter + 1)>= $max_track_counter) {
+                $this->getReporter($prob_id);
+            }
+        }        
+    }
+
+    /**
+     * Get time difference to use when quering the node_status table
+     */
+    private function getTimeDiff()
     {
         // "date_time_recorded": "2018-02-28 15:40:19"
-        // $tasks = DB::table('observationslip')->where('CreationDate','>=','2018-01-01 00:00:00')
         $zone = new DateTimeZone('Africa/Kampala');// set timezone
         $date = new DateTime("now", $zone);// get current time
         // $date->sub(new DateInterval('PT1H'));// subtract one hour from current time
         $date = $date->format('Y-m-d H:m:s');// change date time object to string format used in the database.
+        return $date;
+    }
+
+    /**
+     * Function that is run
+      */
+    public function analyze()
+    {
+        //get time diff to use for querying the db
+        // $tasks = DB::table('observationslip')->where('CreationDate','>=',$this->getTimeDiff())
+        
         // test variables
         $vinNull = 0; $vmcuNull = 0; $dateNull = 0; $vinMin = 0; $vinMax = 0; $vmcuMin = 0; $vmcuMax = 0; $dateMin = 0; $dateMax = 0; $date1970 = 0; $invalidDates = array(); $nullV_IN = array(); $nullVMCU = array();
 
-        // pick configuration info
-        $nodeConf = getNodeConf();
-
         // pick problem classification data
-        $problemClassfications = getProblemClassifications();
+        $problemClassfications = $this->getProblemClassifications();
         $str = array();
 
-        // pick the availble stations // station_id, StationName, StationNumber
-        $stations = getStations();
-
         // pick only columns that we'll be using. We won't need date_time_recorded because we have
-        DB::table('nodestatus')->select('V_MCU','V_IN','date','time','TXT','StationNumber')->orderBy('id')->chunk(200, function($nodes) use(&$vinNull, &$vmcuNull, &$dateNull, &$vinMin, &$vinMax, &$vmcuMin, &$vmcuMax, &$dateMin, &$dateMax, &$date, &$date1970, &$invalidDates, &$nodeConf, &$nullV_IN, &$nullVMCU, &$problemClassfications, &$str){
+        DB::table('nodestatus')->select('V_MCU','V_IN','date','time','TXT','StationNumber')->orderBy('id')->chunk(200, function($nodes) use(&$vinNull, &$vmcuNull, &$dateNull, &$vinMin, &$vinMax, &$vmcuMin, &$vmcuMax, &$dateMin, &$dateMax, &$date, &$date1970, &$invalidDates, &$nullV_IN, &$nullVMCU, &$problemClassfications, &$str){
             foreach ($nodes as $node) {
 
                 /**
@@ -188,19 +306,19 @@ class AnalyzerController extends Controller
                 $vmcuMaxVal = '';
                 $vmcuMinVal = '';
                 
-                $nodeInfo = getNodeAndStationInfo($node->TXT);
+                $nodeInfo = $this->getNodeAndStationInfo($node->TXT);
 
                 $nd_id = $nodeInfo['nd_id'];
                 $nd_name = $nodeInfo['nd_name'];
                 $stn_id = $nodeInfo['stn_id'];
-                $stn_name = getStationName($stn_id);
+                $stn_name = $this->getStationName($stn_id);
                 $vinMaxVal = $nodeInfo['vinMaxVal'];
                 $vinMinVal = $nodeInfo['vinMinVal'];
                 $vmcuMaxVal = $nodeInfo['vmcuMaxVal'];
                 $vmcuMinVal = $nodeInfo['vmcuMinVal'];
                 
                 // pick problem station configurations
-                $stn_prb_conf = getStationProbConfigs($stn_id);
+                $stn_prb_conf = $this->getStationProbConfigs($stn_id);
                 
                 // initialize variables with default values
                 $criticality = 'non-critical';// default criticality
@@ -228,22 +346,16 @@ class AnalyzerController extends Controller
                                             }
                                         }
                                     }
-                                // check data in the problems table to see if problem has been reported yet. // id, source_id, track_counter
-                                $prob = DB::table('problems')->select('id','source_id','track_counter')->where([
-                                    ['source_id','=',$nd_id],
-                                    ['status','<>','solved'],
-                                ])->get();
+                                // check data in the problems table to see if problem has been reported yet.
+                                $prob = $this->getProblem($nd_id);
                                 if (empty($prob)) {
                                     /**
-                                     * hence record doesn't exit in the database and so..
+                                     * record doesn't exit in the database and so..
                                      * insert into the the problem into the database
                                      * at this point, we get the criticality of this problem
                                      */
-                                    // id, source[enum('sensor','station','2m_node','10m_node','sink_node','ground_node')], source_id, criticality[enum('critical', 'non-critical')], classification_id, track_counter, status[enum('reported', 'investigation', 'solved')], created_at, updated_at
                                     
-                                    DB::table('problems')->insert(
-                                        ['source'=>$nd_name,'source_id'=>$nd_id,'criticality'=>$criticality,'classification_id'=>$problem->id,'track_counter'=>1,''=>'investigation']
-                                    );
+                                    $this->insertIntoProbTb($nd_name, $nd_id, $criticality, $problem->id);
                                 }
                                 else {
                                     /**
@@ -252,14 +364,14 @@ class AnalyzerController extends Controller
                                      * after increment, check if the counter has reached max, if so, call the reporter and then set the status to reported.
                                      * if status is reported, then just update the 'updated_at' column to show that the problem was realised
                                      */
-                                    DB::table('problems')->where('source_id','=',$nd_id)->increment('track_counter');
+                                     $this->updateProblem($prob->track_counter,$nd_id,$max_track_counter,$prob->status,$prob->id);
                                 }
                                 break;
                             }
                         }
                     }
                 }
-                if ($node->V_IN == '' || $node->V_IN == null) {
+                if (empty($node->V_IN)) {
                     $vinNull++;
                     $nullVMCU[] = $node->TXT . $stn_name;
                     // get problem
@@ -273,7 +385,7 @@ class AnalyzerController extends Controller
                         }
                     }
                 }
-                if ($node->date == '' || $node->date == null) {
+                if (empty($node->date)) {
                     $dateNull++;
                 }    
                 // check for mins        
