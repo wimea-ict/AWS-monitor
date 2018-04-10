@@ -262,6 +262,7 @@ class NodeStatusAnalyzerController extends Controller
             // check if max_counter had already been reached to avoid incrementing it again.
             if (($prob_track_counter + 1)>= $max_track_counter) {
                 $this->getReporter($prob_id);
+                return;// exit method
             }
             DB::table($this->prob_tb)->where('id',$prob_id)->increment('track_counter');
             // check if max_counter has been reached and if so change status and call the reporter.
