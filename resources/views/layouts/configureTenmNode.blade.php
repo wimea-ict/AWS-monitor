@@ -44,13 +44,14 @@
                            <div class="modal-body">
                            <div class="row">
                     <div class="col-md-12">
-                    <form id="" method="post" action="{{url('updateStation')}}">
+                    <form id="" method="post" action="{{url('updateTenMNode')}}">
                             
                         <div class="panel panel-default">
                              
                             <div class="panel-body"> 
                                     <div>
                                     {{csrf_field()}}
+                                    <input type="hidden" name="10node_id" id="10node_id"/>
                                     <div class="col-lg-12"> 
                                             <div class="panel-group panel-group-joined" id="accordion-test-2"> 
                                                 <div class="panel panel-default"> 

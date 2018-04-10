@@ -31,7 +31,7 @@
                                                         <td><?php echo e($sinkNode['txt_sink']); ?></td>
                                                         <td><?php echo e($sinkNode['e64_sink']); ?></td>
                                                         <td><?php echo e($sinkNode['node_status']); ?></td>
-                                                        <td><button class="btn btn-icon btn-success m-b-5" data-toggle="modal" data-target="#full-width-modal5" id="<?php echo e(htmlspecialchars(json_encode($sinkNode))); ?>"> <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
+                                                        <td><button class="btn btn-icon btn-success m-b-5" data-toggle="modal" data-target="#full-width-modal5" id="<?php echo e(htmlspecialchars(json_encode(array($sinkNode, $pressuresensors)))); ?>"> <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
                                                     </tr>
                                                     <div id="full-width-modal5" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="full-width-modalLabel" aria-hidden="true" style="display: none;">
                     <div class="modal-dialog modal-full">
@@ -42,8 +42,10 @@
                            <div class="modal-body">
                            <div class="row">
                            <div class="col-lg-12">
-                            <form id="" method="post" action="<?php echo e(url('updateStation')); ?>">
-                     
+                            <form id="" method="post" action="<?php echo e(url('updateSinkNode')); ?>">
+                            <?php echo e(csrf_field()); ?>
+
+                            <input type="hidden" name="sinknode_id" id="sinknode_id"/>
                                             <div class="panel-group panel-group-joined" id="accordion-test-3"> 
                                             <div class="panel panel-default"> 
                                                     <div class="panel-heading"> 

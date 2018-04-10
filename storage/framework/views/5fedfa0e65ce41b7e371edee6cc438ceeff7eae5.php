@@ -42,7 +42,7 @@
                            <div class="modal-body">
                            <div class="row">
                     <div class="col-md-12">
-                    <form id="" method="post" action="<?php echo e(url('updateStation')); ?>">
+                    <form id="" method="post" action="<?php echo e(url('updateTenMNode')); ?>">
                             
                         <div class="panel panel-default">
                              
@@ -50,6 +50,7 @@
                                     <div>
                                     <?php echo e(csrf_field()); ?>
 
+                                    <input type="hidden" name="10node_id" id="10node_id"/>
                                     <div class="col-lg-12"> 
                                             <div class="panel-group panel-group-joined" id="accordion-test-2"> 
                                                 <div class="panel panel-default"> 

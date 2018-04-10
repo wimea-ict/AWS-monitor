@@ -15,11 +15,19 @@ Route::resource('configurestation', 'ConfigureStaion');
 Route::post('updateStation','ConfigureStaion@update');
 
 Route::resource('configure10mnode', 'TenMNodeController');
+Route::post('updateTenMNode', 'TenMNodeController@update');
 Route::resource('configure2mnode', 'TwoMNodeController');
+Route::post('updateTwoMNode', 'TwoMNodeController@update');
 Route::resource('configuresinknode', 'SinkNodeController');
+Route::post('updateSinkNode', 'SinkNodeController@update');
 Route::resource('configuregroundnode', 'GroundNodeController');
+Route::post('updateGroundNode', 'GroundNodeController@update');
+Route::resource('configureproblem', 'ProblemConfigurationsController');
+Route::resource('editProblemConfigurations', 'ProblemsController');
+Route::post('updateProblemConfigurations', 'ProblemsController@update');
+
 Route::get('/', function () {
-    return view('main');
+    return view('/auth/login');
 });
 
 Route::get('/ajax-model', function () {
@@ -44,3 +52,6 @@ Route::get('/addsensor', function () {
 Route::get('/configuresensor', function () {
     return view('layouts/configuresensor');
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

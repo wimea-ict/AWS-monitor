@@ -33,7 +33,7 @@
                                                         <td>{{$groundNode['txt_gnd']}}</td>
                                                         <td>{{$groundNode['e64_gnd']}}</td>
                                                         <td>{{$groundNode['node_status']}}</td>
-                                                        <td><button class="btn btn-icon btn-success m-b-5" data-toggle="modal" data-target="#full-width-modal4" id="{{htmlspecialchars(json_encode($groundNode))}}"> <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
+                                                        <td><button class="btn btn-icon btn-success m-b-5" data-toggle="modal" data-target="#full-width-modal4" id="{{htmlspecialchars(json_encode(array($groundNode,$precipitationsensors,$soilTempsensors,$soilMoisturesensors)))}}"> <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
                                                     </tr>
                                                     <div id="full-width-modal4" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="full-width-modalLabel" aria-hidden="true" style="display: none;">
                     <div class="modal-dialog modal-full">
@@ -44,8 +44,9 @@
                            <div class="modal-body">
                            <div class="row">
                            <div class="col-lg-12">
-                           <form id="" method="post" action="{{url('updateStation')}}">
-                     
+                           <form novalidate method="post" action="{{url('updateGroundNode')}}">
+                           {{csrf_field()}}
+                           <input type="hidden" name="gndnode_id" id="gndnode_id"/>
                                             <div class="panel-group panel-group-joined" id="accordion-test-4"> 
                                             <div class="panel panel-default"> 
                                                     <div class="panel-heading"> 
@@ -158,23 +159,13 @@
                                                                                 <div class="col-lg-4">
                                                                                     <input id="groundps" name="groundps" type="text" class="form-control" value="">
                                                                                 </div>
-                                                                                <label class="col-lg-2 control-label " for="groundrain_pulses">Rain Pulses</label>
-                                                                                <div class="col-lg-4">
-                                                                                    <input id="groundrain_pulses" name="groundrain_pulses" type="text" class="form-control" value="">
-                                                                                </div>
-                                                                                
-                                                                            </div>
-                                                                            <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="groundpo">PO key</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="groundpo" name="groundpo" type="text" class="form-control" value="">
                                                                                 </div>
-                                                                                <label class="col-lg-2 control-label " for="groundup">Rain Pulses</label>
-                                                                                <div class="col-lg-4">
-                                                                                    <input id="groundup" name="groundup" type="text" class="form-control" value="">
-                                                                                </div>
                                                                                 
                                                                             </div>
+                                                                            
 
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="gndps">UP key</label>

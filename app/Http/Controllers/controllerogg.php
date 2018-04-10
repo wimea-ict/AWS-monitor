@@ -407,7 +407,7 @@ class StationsController extends Controller
             'identifier_used'=>$request->get('ppidentifier_used'),
             'min_value'=>$request->get('ppmin_value'),
             'max_value'=>$request->get('ppmax_value'),
-            'node_type'=>'sink_node',
+            'node_type'=>'grnd_node',
             'sensor_status'=>$this->getStatus($request,'ppsensor_status'),
             'report_time_interval'=>$request->get('pprptTime'),
 
@@ -420,7 +420,7 @@ class StationsController extends Controller
             'identifier_used'=>$request->get('smidentifier_used'),
             'min_value'=>$request->get('smmin_value'),
             'max_value'=>$request->get('smmax_value'),
-            'node_type'=>'sink_node',
+            'node_type'=>'grnd_node',
             'sensor_status'=>$this->getStatus($request,'smsensor_status'),
             'report_time_interval'=>$request->get('smrptTime'),
 
@@ -433,7 +433,7 @@ class StationsController extends Controller
             'identifier_used'=>$request->get('stidentifier_used'),
             'min_value'=>$request->get('stmin_value'),
             'max_value'=>$request->get('stmax_value'),
-            'node_type'=>'sink_node',
+            'node_type'=>'grnd_node',
             'sensor_status'=>$this->getStatus($request,'stsensor_status'),
             'report_time_interval'=>$request->get('strptTime'),
 
