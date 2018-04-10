@@ -17,7 +17,12 @@ class SinkNodeController extends Controller
      */
     public function index()
     {
-        return view('layouts.configureSinkNode');
+        $stations = Station::all()->toArray();
+        $sinkNodes = SinkNode::all()->toArray();
+        
+        return view('layouts.configureSinkNode',compact('sinkNodes','stations'));
+    
+        
     }
 
     public function report1(){

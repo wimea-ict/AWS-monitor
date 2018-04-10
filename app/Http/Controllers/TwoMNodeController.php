@@ -17,7 +17,9 @@ class TwoMNodeController extends Controller
      */
     public function index()
     {
-        return view('layouts.configureTwomNode');
+        $stations = Station::all()->toArray();
+        $twoMeterNodes = TwoMeterNode::all()->toArray();
+        return view('layouts.configureTwomNode', compact('twoMeterNodes','stations'));
     }
 
     public function report1(){
@@ -146,7 +148,7 @@ class TwoMNodeController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**

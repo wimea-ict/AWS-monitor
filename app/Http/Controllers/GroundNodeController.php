@@ -17,7 +17,12 @@ class GroundNodeController extends Controller
      */
     public function index()
     {
-        return view('layouts.configureGroundNode');
+        $stations = Station::all()->toArray();
+        $groundNodes = GroundNode::all()->toArray();
+        
+        return view('layouts.configureGroundNode',compact('groundNodes','stations'));
+    
+        
     }
 
 

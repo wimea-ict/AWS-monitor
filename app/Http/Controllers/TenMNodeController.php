@@ -17,7 +17,10 @@ class TenMNodeController extends Controller
      */
     public function index()
     {
-        return view('layouts.configureTenmNode');
+        $stations = Station::all()->toArray();
+        $tenMeterNodes = TenMeterNode::all()->toArray();
+        
+        return view('layouts.configureTenmNode',compact('tenMeterNodes','stations'));
     }
 
    

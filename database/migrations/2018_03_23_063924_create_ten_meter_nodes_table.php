@@ -13,7 +13,7 @@ class CreateTenMeterNodesTable extends Migration
      */
     public function up()
     {
-        Schema::create('ten_meter_nodes', function (Blueprint $table) {
+        /* Schema::create('ten_meter_nodes', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('station_id');
             $table->string('date_10m');
@@ -30,12 +30,18 @@ class CreateTenMeterNodesTable extends Migration
             $table->string('lqi_10m');
             $table->string('drp_10m');
             $table->string('txt_10m');
+            $table->string('ps_10m');
+            $table->string('txt_value_10m');
+            $table->string('v_in_10m');
+            $table->string('v_mcu_10m');
             $table->double('v_in_min_value');
             $table->double('v_in_max_value');
             $table->double('v_mcu_min_value');
             $table->double('v_mcu_max_value');
+            $table->enum('node_status',["off","on"]);
+            
             $table->timestamps();
-        });
+        }); */
     }
 
     /**

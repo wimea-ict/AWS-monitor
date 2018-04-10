@@ -16,13 +16,12 @@ class CreateSensorsTable extends Migration
         Schema::create('sensors', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('node_id')->unsigned();
+            $table->enum('node_type',["twoMeterNode","tenMeterNode","groundNode","sinkNode"])->comment('this should be the table of the node e.g twoMeterNode');
             $table->string('parameter_read');
             $table->string('identifier_used');
             $table->string('min_value');
             $table->string('max_value');
-            $table->enum('node_type',["2m_node","10m_node","grnd_node","sink_node"]);
             $table->string('report_time_interval');
-            $table->foreign('node_id')->references('node_id')->on('nodes'); 
             $table->timestamps();
         });
     }

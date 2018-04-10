@@ -3714,6 +3714,10 @@ class ComposerStaticInit87b9326ddaef55773641bf54eaf4d0ef
         'station\\Http\\Controllers\\SensorsController' => __DIR__ . '/../..' . '/app/Http/Controllers/SensorsController.php',
         'station\\Http\\Controllers\\SinkNodeController' => __DIR__ . '/../..' . '/app/Http/Controllers/SinkNodeController.php',
         'station\\Http\\Controllers\\StationsController' => __DIR__ . '/../..' . '/app/Http/Controllers/controllerogg.php',
+        'station\\Http\\Controllers\\NodeStatusAnalyzerController' => __DIR__ . '/../..' . '/app/Http/Controllers/AnalyzerController.php',
+        'station\\Http\\Controllers\\SensorsController' => __DIR__ . '/../..' . '/app/Http/Controllers/SensorsController.php',
+        'station\\Http\\Controllers\\SinkNodeController' => __DIR__ . '/../..' . '/app/Http/Controllers/SinkNodeController.php',
+        'station\\Http\\Controllers\\StationsController' => __DIR__ . '/../..' . '/app/Http/Controllers/StationsController.php',
         'station\\Http\\Controllers\\TenMNodeController' => __DIR__ . '/../..' . '/app/Http/Controllers/TenMNodeController.php',
         'station\\Http\\Controllers\\TwoMNodeController' => __DIR__ . '/../..' . '/app/Http/Controllers/TwoMNodeController.php',
         'station\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
@@ -3729,6 +3733,9 @@ class ComposerStaticInit87b9326ddaef55773641bf54eaf4d0ef
         'station\\PotentialProblem' => __DIR__ . '/../..' . '/app/PotentialProblem.php',
         'station\\ProblemConfiguration' => __DIR__ . '/../..' . '/app/ProblemConfiguration.php',
         'station\\ProblemTracker' => __DIR__ . '/../..' . '/app/ProblemTracker.php',
+        'station\\NodeStatus' => __DIR__ . '/../..' . '/app/NodeStatus.php',
+        'station\\NodeStatusConfiguration' => __DIR__ . '/../..' . '/app/NodeStatusConfiguration.php',
+        'station\\Observationslip' => __DIR__ . '/../..' . '/app/Observationslip.php',
         'station\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'station\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'station\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
@@ -3739,9 +3746,8 @@ class ComposerStaticInit87b9326ddaef55773641bf54eaf4d0ef
         'station\\Station' => __DIR__ . '/../..' . '/app/Station.php',
         'station\\Tenmeternode' => __DIR__ . '/../..' . '/app/TenMeterNode.php',
         'station\\Twometernode' => __DIR__ . '/../..' . '/app/TwoMeterNode.php',
+        'station\\TwoMeterNode' => __DIR__ . '/../..' . '/app/TwoMeterNode.php',
         'station\\User' => __DIR__ . '/../..' . '/app/User.php',
-    );
-
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {

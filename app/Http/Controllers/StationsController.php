@@ -198,7 +198,7 @@ class StationsController extends Controller
             'region' => $request->get('region'),
             'date_opened' => $request->get('date_opened'),
             'date_closed' => $request->get('date_closed'),
-            'station_type' => $request->get('station_type')
+            'station_type' => $request->get('station_type'),
             
           ]);
 
@@ -210,23 +210,23 @@ class StationsController extends Controller
         $TwomnodeCreation = new TwoMeterNode([
             
             'station_id' => $request->get($station->station_id),
-            'txt_2m' => $request->get('txt_key'),
-            'e64_2m' => $request->get('mac_add'),
-            'v_in_2m' => $request->get('vin_label'),
-            'time_2m' => $request->get('time'),
-            'ut_2m' => $request->get('ut'),
-            'date_2m' => $request->get('date'),
-            'gw_lat_2m' => $request->get('gwlat'),
-            'gw_long_2m' => $request->get('gwlong'),
-            'v_in_min_value' => $request->get('v_in_max_value'),
-            'v_in_max_value' => $request->get('v_in_min_value'),
-            'ttl_2m' => $request->get('ttl'),
-            'rssi_2m' => $request->get('rssi'),
-            'drp_2m' => $request->get('drp'),
-            'lqi_2m' => $request->get('lqi'),
-            'v_mcu_max_value' => $request->get('v_mcu_max_value'),
-            'v_mcu_min_value' => $request->get('v_mcu_min_value'),
-            'v_mcu_2m' => $request->get('v_mcu_label'),
+            'txt_2m' => $request->get('2txt_key'),
+            'e64_2m' => $request->get('2mac_add'),
+            'v_in_2m' => $request->get('2mvin_label'),
+            'time_2m' => $request->get('2time'),
+            'ut_2m' => $request->get('2ut'),
+            'date_2m' => $request->get('2date'),
+            'gw_lat_2m' => $request->get('2gwlat'),
+            'gw_long_2m' => $request->get('2gwlong'),
+            'v_in_min_value' => $request->get('2mv_in_max_value'),
+            'v_in_max_value' => $request->get('2mv_in_min_value'),
+            'ttl_2m' => $request->get('2ttl'),
+            'rssi_2m' => $request->get('2rssi'),
+            'drp_2m' => $request->get('2drp'),
+            'lqi_2m' => $request->get('2lqi'),
+            'v_mcu_max_value' => $request->get('2mv_mcu_max_value'),
+            'v_mcu_min_value' => $request->get('2mv_mcu_min_value'),
+            'v_mcu_2m' => $request->get('2mv_mcu_label'),
                          
             
         ]);

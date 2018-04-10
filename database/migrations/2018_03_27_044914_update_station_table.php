@@ -13,6 +13,7 @@ class UpdateStationTable extends Migration
      */
     public function up()
     {
+<<<<<<< HEAD
         Schema::create('nodes', function (Blueprint $table) {
          
         $table->increments('node_id');
@@ -22,6 +23,9 @@ class UpdateStationTable extends Migration
             $table->foreign('station_id')->references('station_id')->on('stations'); 
             $table->timestamps();
         });
+=======
+        //
+>>>>>>> 9ab67d001672b87a9a98cf05e1d85285142d40e7
     }
 
     /**
