@@ -80,7 +80,7 @@ class SinkNodeController extends Controller
                         ->select(DB::raw("CONCAT(date,' ',time)  AS y"),
                                     'VapourPressure')
                         ->oldest('creationDate')
-                        ->limit(25)
+                        ->limit(1000)
                         ->get();
 
         // foreach($precipitations as $precipitation){
