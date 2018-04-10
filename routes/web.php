@@ -18,6 +18,7 @@ Route::resource('configure10mnode', 'TenMNodeController');
 Route::resource('configure2mnode', 'TwoMNodeController');
 Route::resource('configuresinknode', 'SinkNodeController');
 Route::resource('configuregroundnode', 'GroundNodeController');
+
 Route::get('/', function () {
     return view('main');
 });

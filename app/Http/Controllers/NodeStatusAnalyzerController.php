@@ -5,6 +5,8 @@ namespace station\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use station\Http\Controllers\Controller;
+use DateTimeZone;
+use DateTime;
 
 class NodeStatusAnalyzerController extends Controller
 {
@@ -17,6 +19,7 @@ class NodeStatusAnalyzerController extends Controller
     private $twoM_nd_tb;
     private $tenM_nd_tb;
     private $sink_nd_tb;
+    private $timezone;
 
     public function __construct() {
         $this->problem_classifn_tb = 'problem_classification';
@@ -27,6 +30,7 @@ class NodeStatusAnalyzerController extends Controller
         $this->twoM_nd_tb = 'twoMeterNode';
         $this->tenM_nd_tb = 'tenMeterNode';
         $this->sink_nd_tb = 'sinkNode';
+        $this->timezone = 'Africa/Kampala';
     }
 
     /**
@@ -211,18 +215,25 @@ class NodeStatusAnalyzerController extends Controller
     private function insertIntoProbTb($nd_name,$nd_id,$criticality,$prob_id)
     {
         DB::table($this->prob_tb)->insert(
-            ['source'=>$nd_name,'source_id'=>$nd_id,'criticality'=>$criticality,'classification_id'=>$prob_id,'track_counter'=>1,'status'=>'investigation']
+            ['source'=>$nd_name,'source_id'=>$nd_id,'criticality'=>$criticality,'classification_id'=>$prob_id,'track_counter'=>1,'status'=>'investigation', 'created_at'=>$this->getCurrentDateTime()]
         );
     }
 
     /**
      * check data in the problems table to see if problem has been reported yet.
-     * return the problem
+     * @return problem
+     * it excludes the solved problems and so should return only one record
+     * this is because we don't record a problem again before it has been solved.
      */
-    private function getProblem($nd_id)
+    private function getProblem($nd_id,$source,$classification_id)
     {
         // id, source_id, track_counter
-        $prob = DB::table($this->prob_tb)->select('id','source_id','track_counter','status')->where('source_id','=',$nd_id)->get();
+        $prob = DB::table($this->prob_tb)->select('id','source_id','track_counter','status')->where([
+            ['source_id','=',$nd_id],
+            ['source','=',$source],
+            ['status','<>','solved'],
+            ['classification_id','=',$classification_id],
+        ])->get();
         
         return $prob;
     }
@@ -245,7 +256,7 @@ class NodeStatusAnalyzerController extends Controller
     {
         if ($prob_status == 'reported') {
             // update the updated_at column to affirm that the problem was encountered again
-            DB::table($this->prob_tb)->where('id',$prob_id)->update(['updated_at'=>NOW()]);
+            DB::table($this->prob_tb)->where('id',$prob_id)->update(['updated_at'=>$this->getCurrentDateTime()]);
         }
         else {
             // check if max_counter had already been reached to avoid incrementing it again.
@@ -261,13 +272,23 @@ class NodeStatusAnalyzerController extends Controller
     }
 
     /**
+     * get current date
+     */
+    private function getCurrentDateTime()
+    {
+        $zone = new DateTimeZone($this->timezone);// set timezone
+        $date = new DateTime("now", $zone);// get current time
+        
+        return $date;
+    }
+
+    /**
      * Get time difference to use when quering the node_status table
      */
     private function getTimeDiff()
     {
         // "date_time_recorded": "2018-02-28 15:40:19"
-        $zone = new DateTimeZone('Africa/Kampala');// set timezone
-        $date = new DateTime("now", $zone);// get current time
+        $date = $this->getCurrentDateTime();// get current time
         // $date->sub(new DateInterval('PT1H'));// subtract one hour from current time
         $date = $date->format('Y-m-d H:m:s');// change date time object to string format used in the database.
         return $date;
@@ -278,9 +299,11 @@ class NodeStatusAnalyzerController extends Controller
       */
     public function analyze()
     {
+        // first clean DB
+        $this->cleanDBTable($this->prob_tb);
         //get time diff to use for querying the db
         // $tasks = DB::table('observationslip')->where('CreationDate','>=',$this->getTimeDiff())
-        
+        $date = $this->getTimeDiff();
         // test variables
         $vinNull = 0; $vmcuNull = 0; $dateNull = 0; $vinMin = 0; $vinMax = 0; $vmcuMin = 0; $vmcuMax = 0; $dateMin = 0; $dateMax = 0; $date1970 = 0; $invalidDates = array(); $nullV_IN = array(); $nullVMCU = array();
 
@@ -347,14 +370,23 @@ class NodeStatusAnalyzerController extends Controller
                                         }
                                     }
                                 // check data in the problems table to see if problem has been reported yet.
-                                $prob = $this->getProblem($nd_id);
-                                if (empty($prob)) {
+                                $prob = $this->getProblem($nd_id,$nd_name,$problem->id); 
+                                // dd($prob->isEmpty());
+                                // dd($prob);
+
+                                // $casted = get_object_vars($prob);
+                                // dd($casted);
+                                // dd(empty($casted));
+                                
+                                // $bool = get_object_vars($prob) ? TRUE : FALSE;
+                                // dd(get_object_vars($prob));
+                                // dd($bool);
+                                if ($prob->isEmpty()) {
                                     /**
                                      * record doesn't exit in the database and so..
                                      * insert into the the problem into the database
                                      * at this point, we get the criticality of this problem
                                      */
-                                    
                                     $this->insertIntoProbTb($nd_name, $nd_id, $criticality, $problem->id);
                                 }
                                 else {
@@ -364,7 +396,17 @@ class NodeStatusAnalyzerController extends Controller
                                      * after increment, check if the counter has reached max, if so, call the reporter and then set the status to reported.
                                      * if status is reported, then just update the 'updated_at' column to show that the problem was realised
                                      */
-                                     $this->updateProblem($prob->track_counter,$nd_id,$max_track_counter,$prob->status,$prob->id);
+
+                                    // dd($prob);
+                                    // dd($prob->isEmpty());
+                                    // dd($prob->toArray());
+                                    $prob = $prob->toArray();
+                                    // dd($prob[0]['track_counter']);
+                                    // dd($prob->get('track_counter'));
+                                    // dd($prob->flatten(2));
+                                    // dd($prob[0]->id);  
+                                    // dd(count($prob));  
+                                    $this->updateProblem($prob[0]->track_counter,$nd_id,$max_track_counter,$prob[0]->status,$prob[0]->id);
                                 }
                                 break;
                             }
