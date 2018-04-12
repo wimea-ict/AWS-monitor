@@ -28,6 +28,7 @@ Route::post('/reports10m','TenMNodeController@get10mStationReports');
 Route::post('/reportsGnd','GroundNodeController@getGndStationReports');
 Route::post('/reportsSink','SinkNodeController@getSinkStationReports');
 Route::post('/reports2m','TwoMNodeController@get2mStationReports');
+Route::get('/report_problems','ReportController@report');
 
 Route::get('/send_test_email', function(){
 	Mail::raw('Sending emails with Mailgun and Laravel is easy!', function($message)
