@@ -12,7 +12,12 @@ return [
     | default location for this type of information, allowing packages
     | to have a conventional place to find your various credentials.
     |
-    */
+//     */
+//     'driver' => env('MAIL_DRIVER', 'smtp'),
+// 'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+// 'port' => env('MAIL_PORT', 587),
+// 'username' => env('MAIL_USERNAME'),
+// 'password' => env('MAIL_PASSWORD'),
 
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),

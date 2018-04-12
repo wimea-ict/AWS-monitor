@@ -23,10 +23,10 @@ class CreateProblemsTable extends Migration
             $table->enum('status',["reported","investigation","solved"]);
             $table->timestamps();
         });
-
-        Schema::table('problems', function (Blueprint $table) {
-            $table->foreign('classification_id')->references('id')->on('problem_classification');
-        });
+        
+        // Schema::table('problems', function (Blueprint $table) {
+        //     $table->foreign('classification_id')->references('id')->on('problem_classification');
+        // });
     }
 
     /**

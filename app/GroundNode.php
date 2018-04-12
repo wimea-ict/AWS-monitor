@@ -4,29 +4,41 @@ namespace station;
 
 use Illuminate\Database\Eloquent\Model;
 
-class GroundNode extends Model
-{
+class Groundnode extends Model  {
+
     /**
-     * The table associated with the model
-     * 
+     * The database table used by the model.
+     *
      * @var string
      */
-    protected $table = 'groundNode';
+    protected $table = 'groundnode';
 
     /**
-     * Indicates if the model should be timestamped
-     * 
-     * @var bool
+     * Attributes that should be mass-assignable.
+     *
+     * @var array
      */
-    public $timestamps = false;
+    protected $fillable = ['node_id', 'station_id', 'date_gnd', 'time_gnd', 'ut_gnd', 'gw_lat_gnd', 'gw_long_gnd', 'ps_gnd', 'p0_gnd', 'v_mcu_gnd', 'v_in_gnd', 'p0_lst60_gnd', 'up_gnd', 'v_a1_gnd', 'v_a2_gnd', 'ttl_gnd', 'rssi_gnd', 'lqi_gnd', 'drp_gnd', 'e64_gnd', 'txt_gnd', 'txt_gnd_value'];
 
-    const CREATED_AT = 'CreationDate';
-    //
-        
-    protected $fillable = ['station_id','date_gnd','time_gnd','ps_gnd','up_gnd',
-    'po_lst60_gnd','ut_gnd','gw_lat_gnd','gw_long_gnd','v_mcu_gnd',
-    'v_in_gnd','ttl_gnd','rssi_gnd','lqi_gnd','drp_gnd','e64_gnd','txt_gnd',
-    'txt_value_gnd','v_in_min_value','v_in_max_value','v_mcu_min_value',
-    'v_mcu_max_value','v_a1_gnd','v_a2_gnd','node_status'];
+    /**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+    protected $hidden = [];
+
+    /**
+     * The attributes that should be casted to native types.
+     *
+     * @var array
+     */
+    protected $casts = [];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [];
 
 }

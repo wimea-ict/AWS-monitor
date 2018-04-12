@@ -4,24 +4,41 @@ namespace station;
 
 use Illuminate\Database\Eloquent\Model;
 
-class NodeStatus extends Model
-{
+class Nodestatus extends Model  {
+
     /**
-     * The table associated with the model
-     * 
+     * The database table used by the model.
+     *
      * @var string
      */
     protected $table = 'nodestatus';
 
     /**
-     * Indicates if the model should be timestamped
-     * 
-     * @var bool
+     * Attributes that should be mass-assignable.
+     *
+     * @var array
      */
-    public $timestamps = false;
+    protected $fillable = ['V_MCU', 'V_IN', 'RSSI', 'LQI', 'DRP', 'date', 'time', 'TXT', 'E64', 'StationNumber', 'date_time_recorded'];
 
-    const CREATED_AT = 'CreationDate';
-    protected $fillable=["node_id","v_in","rssi","drop","vmcu","lqi","date_time"];
+    /**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+    protected $hidden = [];
 
-    
+    /**
+     * The attributes that should be casted to native types.
+     *
+     * @var array
+     */
+    protected $casts = [];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['date', 'date_time_recorded'];
+
 }
