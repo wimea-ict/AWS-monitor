@@ -22,6 +22,7 @@ class CreateSensorsTable extends Migration
             $table->string('min_value');
             $table->string('max_value');
             $table->string('report_time_interval');
+            $table->enum('sensor_status',["off","on"]);
             $table->timestamps();
         });
     }

@@ -3602,6 +3602,11 @@ class ComposerStaticInit87b9326ddaef55773641bf54eaf4d0ef
         'station\\Http\\Controllers\\SensorsController' => __DIR__ . '/../..' . '/app/Http/Controllers/SensorsController.php',
         'station\\Http\\Controllers\\SinkNodeController' => __DIR__ . '/../..' . '/app/Http/Controllers/SinkNodeController.php',
         'station\\Http\\Controllers\\StationsController' => __DIR__ . '/../..' . '/app/Http/Controllers/StationsController.php',
+        'station\\Http\\Controllers\\ProblemConfigurationsController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProblemConfigurationsController.php',
+        'station\\Http\\Controllers\\ProblemsController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProblemsController.php',
+        'station\\Http\\Controllers\\SensorsController' => __DIR__ . '/../..' . '/app/Http/Controllers/SensorsController.php',
+        'station\\Http\\Controllers\\SinkNodeController' => __DIR__ . '/../..' . '/app/Http/Controllers/SinkNodeController.php',
+        'station\\Http\\Controllers\\StationsController' => __DIR__ . '/../..' . '/app/Http/Controllers/controllerogg.php',
         'station\\Http\\Controllers\\TenMNodeController' => __DIR__ . '/../..' . '/app/Http/Controllers/TenMNodeController.php',
         'station\\Http\\Controllers\\TwoMNodeController' => __DIR__ . '/../..' . '/app/Http/Controllers/TwoMNodeController.php',
         'station\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
@@ -3625,6 +3630,8 @@ class ComposerStaticInit87b9326ddaef55773641bf54eaf4d0ef
         'station\\TenMeterNode' => __DIR__ . '/../..' . '/app/TenMeterNode.php',
         'station\\TwoMeterNode' => __DIR__ . '/../..' . '/app/TwoMeterNode.php',
         'station\\User' => __DIR__ . '/../..' . '/app/User.php',
+        'station\\problemConfigurations' => __DIR__ . '/../..' . '/app/problemConfigurations.php',
+        'station\\problem_settings' => __DIR__ . '/../..' . '/app/problem_settings.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

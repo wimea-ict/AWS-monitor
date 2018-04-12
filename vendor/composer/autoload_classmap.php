@@ -3301,6 +3301,11 @@ return array(
     'station\\Http\\Controllers\\SensorsController' => $baseDir . '/app/Http/Controllers/SensorsController.php',
     'station\\Http\\Controllers\\SinkNodeController' => $baseDir . '/app/Http/Controllers/SinkNodeController.php',
     'station\\Http\\Controllers\\StationsController' => $baseDir . '/app/Http/Controllers/StationsController.php',
+    'station\\Http\\Controllers\\ProblemConfigurationsController' => $baseDir . '/app/Http/Controllers/ProblemConfigurationsController.php',
+    'station\\Http\\Controllers\\ProblemsController' => $baseDir . '/app/Http/Controllers/ProblemsController.php',
+    'station\\Http\\Controllers\\SensorsController' => $baseDir . '/app/Http/Controllers/SensorsController.php',
+    'station\\Http\\Controllers\\SinkNodeController' => $baseDir . '/app/Http/Controllers/SinkNodeController.php',
+    'station\\Http\\Controllers\\StationsController' => $baseDir . '/app/Http/Controllers/controllerogg.php',
     'station\\Http\\Controllers\\TenMNodeController' => $baseDir . '/app/Http/Controllers/TenMNodeController.php',
     'station\\Http\\Controllers\\TwoMNodeController' => $baseDir . '/app/Http/Controllers/TwoMNodeController.php',
     'station\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
@@ -3324,4 +3329,6 @@ return array(
     'station\\TenMeterNode' => $baseDir . '/app/TenMeterNode.php',
     'station\\TwoMeterNode' => $baseDir . '/app/TwoMeterNode.php',
     'station\\User' => $baseDir . '/app/User.php',
+    'station\\problemConfigurations' => $baseDir . '/app/problemConfigurations.php',
+    'station\\problem_settings' => $baseDir . '/app/problem_settings.php',
 );
