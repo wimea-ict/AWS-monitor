@@ -13,8 +13,8 @@ class CreateSinkNodesTable extends Migration
      */
     public function up()
     {
-        Schema::create('sink_nodes', function (Blueprint $table) {
-            $table->increments('node_id');
+        /* Schema::create('sink_nodes', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('station_id');
             $table->string('date_sink');
             $table->string('time_sink');
@@ -33,8 +33,14 @@ class CreateSinkNodesTable extends Migration
             $table->string('drp_sink');
             $table->string('rssi_sink');
             $table->string('txt_sink');
+            $table->string('txt_value_sink');
+            $table->double('v_in_min_value');
+            $table->double('v_in_max_value');
+            $table->double('v_mcu_min_value');
+            $table->double('v_mcu_max_value');
+            $table->enum('node_status',["off","on"]);
             $table->timestamps();
-        });
+        }); */
     }
 
     /**
