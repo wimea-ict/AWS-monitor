@@ -43,12 +43,14 @@ class ReportController extends Controller
 
             
 
-            if(!empty($reporting_mthd_track_counter)){
+            if(!empty($reporting_mthd_interval)){
                 $reporting_type=$reporting_mthd_interval->report_method;
                 $interval=$reporting_mthd_interval->reporting_time_interval;
+               
             }else{
                 //use default
                 $reporting_type="email";
+                
                 $interval=10;
             }
             
@@ -84,7 +86,7 @@ class ReportController extends Controller
                     "report_counter"=>(++$problem_report->report_counter)
                     ]);
                     
-                    $message=$problem_station["source"]." \n".$problem_description->problem_description;
+                    $message=$problem_station["source"]." ".$problem_description->problem_description;
                     $this->sendReport($reporting_type,$problem_station["source"],$message);
                 }else{
                     //do nothing
@@ -127,8 +129,10 @@ class ReportController extends Controller
                     'body' => $message// the body of the text message
                 )
             );
+            return "okay";
         } catch (Exception $e) {
-            //Log::error($e->getMessage());
+            Log::error($e->getMessage());
+            return $e->getMessage();
         }
 
         //end sms 
