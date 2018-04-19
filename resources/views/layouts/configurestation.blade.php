@@ -26,11 +26,11 @@
                                             <tbody>
                                             @foreach($stations as $station)
                                                 <tr>
-                                                    <td>{{$station['station_name']}}</td>
-                                                    <td>{{$station['station_number']}}</td>
-                                                    <td>{{$station['station_location']}}</td>
-                                                    <td>{{$station['longitude']}}</td>
-                                                    <td>{{$station['latitude']}}</td>
+                                                    <td>{{$station['StationName']}}</td>
+                                                    <td>{{$station['StationNumber']}}</td>
+                                                    <td>{{$station['Location']}}</td>
+                                                    <td>{{$station['Longitude']}}</td>
+                                                    <td>{{$station['Latitude']}}</td>
                                                     <td><button class="btn btn-icon btn-success m-b-5 edit-station-button" data-toggle="modal" id="{{htmlspecialchars(json_encode($station))}}" data-target="#full-width-modal"  data-delete-link="" > <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
                                                 </tr>
                                                 @endforeach    
@@ -81,11 +81,10 @@
                                                     <input id="slocation" name="slocation" type="text" class="form-control">
 
                                                 </div>
-                                                <label class="col-lg-2 control-label " for="city" >City</label>
+                                                <label class="col-lg-2 control-label " for="region">Region</label>
                                                 <div class="col-lg-4">
-                                                    <input id="city" name="city" type="text" class="form-control">
-
-                                                </div>
+                                                    <input id="region" name="region" type="text" class="form-control">
+                                                </div>                                              
                                             </div>
 
                                             <div class="form-group clearfix">
@@ -98,16 +97,17 @@
                                                     <input id="latitude" name="latitude" type="number" class="form-control">
                                                 </div>
                                             </div>
-                                            <div class="form-group clearfix">
+                                            {{--  <div class="form-group clearfix">
                                                 <label class="col-lg-2 control-label " for="code">Code</label>
                                                 <div class="col-lg-4">
                                                     <input id="code" name="code" type="text" class="form-control">
                                                 </div>
-                                                <label class="col-lg-2 control-label " for="region">Region</label>
+                                                <label class="col-lg-2 control-label " for="city" >City</label>
                                                 <div class="col-lg-4">
-                                                    <input id="region" name="region" type="number" class="form-control">
+                                                    <input id="city" name="city" type="text" class="form-control">
+
                                                 </div>
-                                            </div>
+                                            </div>  --}}
                                             
                                             <div class="form-group clearfix">
                                                 <label class="col-lg-2 control-label " for="dateopened">Date opened</label>
@@ -128,7 +128,7 @@
                                             <div class="form-group clearfix">
                                                 <label class="col-lg-2 control-label " for="station_type">station Type</label>
                                                 <div class="col-lg-4">
-                                                    <input id="station_type" name="station_type" type="number" class="form-control">
+                                                    <input id="station_type" name="station_type" type="text" class="form-control">
                                                 </div>
                                                 
                                             </div>

@@ -21,15 +21,14 @@
                                                     <th>Edit</th>
                                                 </tr>
                                             </thead>
-
                                      
                                             <tbody>
                                             @foreach($tenMeterNodes as $tenMeterNode)
                                                 @foreach($stations as $station)
                                                     @if($station['station_id']== $tenMeterNode['station_id'] )
                                                     <tr>
-                                                        <td>{{$station['station_name']}}</td>
-                                                        <td>{{$station['station_location']}}</td>
+                                                        <td>{{$station['StationName']}}</td>
+                                                        <td>{{$station['Location']}}</td>
                                                         <td>{{$tenMeterNode['txt_10m']}}</td>
                                                         <td>{{$tenMeterNode['e64_10m']}}</td>
                                                         <td>{{$tenMeterNode['node_status']}}</td>

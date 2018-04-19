@@ -21,16 +21,16 @@
                                                     <th>Edit</th>
                                                 </tr>
                                             </thead>
-
+{{--  'station_id', 'StationName', 'StationNumber', 'StationRegNumber', 'Location', 'Indicator', 'StationRegion', 'Country', 'Latitude', 'Longitude', 'Altitude', 'StationStatus', 'StationType', 'Opened', 'Closed', 'SubmittedBy', 'CreationDate','UpdateDate'  --}}
                                      
                                             <tbody>
                                             @foreach($stations as $station)
                                                 <tr>
-                                                    <td>{{$station['station_name']}}</td>
-                                                    <td>{{$station['station_number']}}</td>
-                                                    <td>{{$station['station_location']}}</td>
-                                                    <td>{{$station['longitude']}}</td>
-                                                    <td>{{$station['latitude']}}</td>
+                                                    <td>{{$station['StationName']}}</td>
+                                                    <td>{{$station['StationNumber']}}</td>
+                                                    <td>{{$station['Location']}}</td>
+                                                    <td>{{$station['Longitude']}}</td>
+                                                    <td>{{$station['Latitude']}}</td>
                                                     <td><button class="btn btn-icon btn-success m-b-5 edit-station-button" data-toggle="modal" id="{{htmlspecialchars(json_encode(array($station, $problemConfigurationvalues)))}}" data-target="#full-width-modal7"  data-delete-link="" > <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
                                                 </tr>
                                                 @endforeach    

@@ -27,9 +27,10 @@
                                             @foreach($sinkNodes as $sinkNode)
                                                 @foreach($stations as $station)
                                                     @if($station['station_id']== $sinkNode['station_id'] )
+                                                    
                                                     <tr>
-                                                        <td>{{$station['station_name']}}</td>
-                                                        <td>{{$station['station_location']}}</td>
+                                                        <td>{{$station['StationName']}}</td>
+                                                        <td>{{$station['Location']}}</td>
                                                         <td>{{$sinkNode['txt_sink']}}</td>
                                                         <td>{{$sinkNode['e64_sink']}}</td>
                                                         <td>{{$sinkNode['node_status']}}</td>

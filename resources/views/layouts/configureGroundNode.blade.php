@@ -28,8 +28,8 @@
                                                 @foreach($stations as $station)
                                                     @if($station['station_id']== $groundNode['station_id'] )
                                                     <tr>
-                                                        <td>{{$station['station_name']}}</td>
-                                                        <td>{{$station['station_location']}}</td>
+                                                        <td>{{$station['StationName']}}</td>
+                                                        <td>{{$station['Location']}}</td>
                                                         <td>{{$groundNode['txt_gnd']}}</td>
                                                         <td>{{$groundNode['e64_gnd']}}</td>
                                                         <td>{{$groundNode['node_status']}}</td>

@@ -22,14 +22,14 @@
                                                 </tr>
                                             </thead>
 
-                                     
+                                     {{--  StationName  Location  --}}
                                             <tbody>
                                             @foreach($twoMeterNodes as $twoMeterNode)
                                                 @foreach($stations as $station)
                                                     @if($station['station_id']== $twoMeterNode['station_id'] )
                                                     <tr>
-                                                        <td>{{$station['station_name']}}</td>
-                                                        <td>{{$station['station_location']}}</td>
+                                                        <td>{{$station['StationName']}}</td>
+                                                        <td>{{$station['Location']}}</td>
                                                         <td>{{$twoMeterNode['txt_2m']}}</td>
                                                         <td>{{$twoMeterNode['e64_2m']}}</td>
                                                         <td>{{$twoMeterNode['node_status']}}</td>

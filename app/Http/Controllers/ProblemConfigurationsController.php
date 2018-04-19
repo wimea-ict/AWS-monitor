@@ -38,11 +38,11 @@ class ProblemConfigurationsController extends Controller
     public function store(Request $request)
     {
         
-        $station = Station::where('station_name', $request->get('station_selected'))->first();
+        $station = Station::where('StationName', $request->get('station_selected'))->first();
         
         $stationOffconfiguration = new problemConfigurations([
             'station_id'=> $station['station_id'],
-            'investigation_hours'=>1,
+            'max_track_counter'=>1,
             'problem_id'=>1,
             'report_method'=>$request->get('sorptmethod'),
             'criticality'=>$request->get('socriticallity'),
@@ -53,7 +53,7 @@ class ProblemConfigurationsController extends Controller
         $NodeOffconfiguration = new problemConfigurations([
             'station_id'=> $station['station_id'],
             'problem_id'=>2,
-            'investigation_hours'=>$request->get('nooccurencesConsider'),
+            'max_track_counter'=>$request->get('nooccurencesConsider'),
             'report_method'=>$request->get('norptmethod'),
             'criticality'=>$request->get('nocriticallity'),
             'reporting_time_interval'=>$request->get('noprobRptTime'),
@@ -63,7 +63,7 @@ class ProblemConfigurationsController extends Controller
         $sensorOffconfiguration = new problemConfigurations([
             'station_id'=> $station['station_id'],
             'problem_id'=>3,
-            'investigation_hours'=>$request->get('ssoccurencesConsider'),
+            'max_track_counter'=>$request->get('ssoccurencesConsider'),
             'report_method'=>$request->get('ssorptmethod'),
             'criticality'=>$request->get('ssocriticallity'),
             'reporting_time_interval'=>$request->get('ssoprobRptTime'),
@@ -73,7 +73,7 @@ class ProblemConfigurationsController extends Controller
         $lownodeValuesconfiguration = new problemConfigurations([
             'station_id'=> $station['station_id'],
             'problem_id'=>4,
-            'investigation_hours'=>$request->get('lpoccurencesConsider'),
+            'max_track_counter'=>$request->get('lpoccurencesConsider'),
             'report_method'=>$request->get('lprptmethod'),
             'criticality'=>$request->get('lpcriticallity'),
             'reporting_time_interval'=>$request->get('lpprobRptTime'),
@@ -84,7 +84,7 @@ class ProblemConfigurationsController extends Controller
         $missingSensorValuesconfiguration = new problemConfigurations([
             'station_id'=> $station['station_id'],
             'problem_id'=>5,
-            'investigation_hours'=>$request->get('msoccurencesConsider'),
+            'max_track_counter'=>$request->get('msoccurencesConsider'),
             'report_method'=>$request->get('msrptmethod'),
             'criticality'=>$request->get('mscriticallity'),
             'reporting_time_interval'=>$request->get('msprobRptTime'),
@@ -93,7 +93,7 @@ class ProblemConfigurationsController extends Controller
         $missingnodeValuesconfiguration = new problemConfigurations([
             'station_id'=> $station['station_id'],
             'problem_id'=>6,
-            'investigation_hours'=>$request->get('nmoccurencesConsider'),
+            'max_track_counter'=>$request->get('nmoccurencesConsider'),
             'report_method'=>$request->get('nmrptmethod'),
             'criticality'=>$request->get('nmcriticallity'),
             'reporting_time_interval'=>$request->get('nmprobRptTime'),
@@ -102,7 +102,7 @@ class ProblemConfigurationsController extends Controller
         $incorrectDateValuesconfiguration = new problemConfigurations([
             'station_id'=> $station['station_id'],
             'problem_id'=>7,
-            'investigation_hours'=>$request->get('idoccurencesConsider'),
+            'max_track_counter'=>$request->get('idoccurencesConsider'),
             'report_method'=>$request->get('idrptmethod'),
             'criticality'=>$request->get('idcriticallity'),
             'reporting_time_interval'=>$request->get('idprobRptTime'),
@@ -113,7 +113,7 @@ class ProblemConfigurationsController extends Controller
         $incorrectSensorValuesconfiguration = new problemConfigurations([
             'station_id'=> $station['station_id'],
             'problem_id'=>8,
-            'investigation_hours'=>$request->get('isoccurencesConsider'),
+            'max_track_counter'=>$request->get('isoccurencesConsider'),
             'report_method'=>$request->get('isrptmethod'),
             'criticality'=>$request->get('iscriticallity'),
             'reporting_time_interval'=>$request->get('isprobRptTime'),
