@@ -12,13 +12,18 @@ class Station extends Model  {
      * @var string
      */
     protected $table = 'stations';
+    protected $primaryKey = 'station_id';
+    // protected $timestamps = false;
+    const CREATED_AT = 'CreationDate';
+    const UPDATED_AT = 'UpdateDate';
+
 
     /**
      * Attributes that should be mass-assignable.
      *
      * @var array
      */
-    protected $fillable = ['station_id', 'StationName', 'StationNumber', 'StationRegNumber', 'Location', 'Indicator', 'StationRegion', 'Country', 'Latitude', 'Longitude', 'Altitude', 'StationStatus', 'StationType', 'Opened', 'Closed', 'SubmittedBy', 'CreationDate'];
+    protected $fillable = ['station_id', 'StationName', 'StationNumber', 'StationRegNumber', 'Location', 'Indicator', 'StationRegion', 'Country', 'Latitude', 'Longitude', 'Altitude', 'StationStatus', 'StationType', 'Opened', 'Closed', 'SubmittedBy', 'CreationDate','UpdateDate'];
 
     /**
      * The attributes excluded from the model's JSON form.

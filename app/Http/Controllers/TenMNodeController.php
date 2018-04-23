@@ -21,13 +21,13 @@ class TenMNodeController extends Controller
     {
         $stations = Station::all()->toArray();
         $tenMeterNodes = TenMeterNode::all()->toArray();
-        $insulationsensors = Sensor::where('node_type','10m_node')
+        $insulationsensors = Sensor::where('node_type','tenMeterNode')
                                     ->where('parameter_read', 'insulation')
                                     ->get();
-        $windspeedsensors = Sensor::where('node_type','10m_node')
+        $windspeedsensors = Sensor::where('node_type','tenMeterNode')
                                     ->where('parameter_read', 'wind speed')
                                     ->get();
-        $winddirectionsensors = Sensor::where('node_type','10m_node')
+        $winddirectionsensors = Sensor::where('node_type','tenMeterNode')
                                     ->where('parameter_read', 'wind direction')
                                     ->get();
         
@@ -213,7 +213,7 @@ class TenMNodeController extends Controller
     {
         if($request->get('10node_id')!= null){
             $id=$request->get('10node_id');
-            $TenmNode = TenMeterNode::where('id',$id)->first();
+            $TenmNode = TenMeterNode::where('node_id',$id)->first();
             $TenmNode->txt_10m = $request->get('10txt_key');
             $TenmNode->e64_10m = $request->get('10mac_add');
             $TenmNode->v_in_10m = $request->get('10vin_label');
@@ -236,7 +236,7 @@ class TenMNodeController extends Controller
             $TenmNode->v_a2_10m= $request->get('wsidentifier_used');
             $TenmNode->v_a3_10m= $request->get('wdidentifier_used');
             $TenmNode->node_status= $this->getStatus($request,'10mnode_status');
-            $TenmNode->txt_value_10m= $request->get('10txt_value');              
+            $TenmNode->txt_10m_value= $request->get('10txt_value');              
             
             $TenmNode->save();
         $insulation = Sensor::where('node_id',$id)

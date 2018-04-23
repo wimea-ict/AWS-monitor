@@ -21,7 +21,7 @@ class SinkNodeController extends Controller
     {
         $stations = Station::all()->toArray();
         $sinkNodes = SinkNode::all()->toArray();
-        $pressuresensors = Sensor::where('node_type','sink_node')
+        $pressuresensors = Sensor::where('node_type','sinkNode')
                                     ->where('parameter_read', 'pressure')
                                     ->get();
         return view('layouts.configureSinkNode',compact('sinkNodes','stations','pressuresensors'));
@@ -167,7 +167,7 @@ class SinkNodeController extends Controller
     {
         if($request->get('sinknode_id')!= null){
             $id=$request->get('sinknode_id');
-            $sinkNode = SinkNode::where('id',$id)->first();
+            $sinkNode = SinkNode::where('node_id',$id)->first();
             $sinkNode->txt_sink = $request->get('sinktxt_key');
             $sinkNode->e64_sink = $request->get('sinkmac_add');
             $sinkNode->v_in_sink = $request->get('sinkvin_label');
@@ -189,7 +189,7 @@ class SinkNodeController extends Controller
             $sinkNode->t_sink= 'T';
             $sinkNode->ps_sink = $request->get('sinkps');
             $sinkNode->node_status= $this->getStatus($request,'sinknode_status');
-            $sinkNode->txt_value_sink= $request->get('sinktxt_value');
+            $sinkNode->txt_sink_value= $request->get('sinktxt_value');
             $sinkNode->up_sink =$request->get('sinkup');
             $sinkNode->save();
         $pressure = Sensor::where('node_id',$id)

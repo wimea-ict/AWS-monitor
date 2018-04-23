@@ -16,7 +16,7 @@
                                         <div class="col-sm-4">
                                             <select class="form-control" name="station_selected">
                                                 @foreach($stations as $station)
-                                                    <option value="{{$station['station_name']}}">{{$station['station_name']}}</option>
+                                                    <option value="{{$station['StationName']}}">{{$station['StationName']}}</option>
                                                 @endforeach
                                                 
                                             </select>

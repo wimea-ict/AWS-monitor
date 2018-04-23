@@ -84,23 +84,22 @@
             } );
             
             
-
             $('#full-width-modal').on('show.bs.modal', function(e) {
                 var station = e.relatedTarget.id;
                 var obj = jQuery.parseJSON(station);
                 //$('#wizard-validation-form').attr('action', "/updatestation");
-                $('#station_number').val(obj["station_id"]);
-                $('#station_name').val(obj["station_name"]);
-                $('#snumber').val(obj["station_number"]);
-                $('#slocation').val(obj["station_location"]);
-                $('#latitude').val(obj["latitude"]);
-                $('#longitude').val(obj["longitude"]);
-                $('#city').val(obj["city"]);
-                $('#code').val(obj["code"]);
-                $('#region').val(obj["region"]);
-                $('#date_opened').val(obj["date_opened"]);
-                $('#date_closed').val(obj["date_closed"]);
-                $('#station_type').val(obj["station_type"]);
+                $('#station_number').val(obj["StationNumber"]);
+                $('#station_name').val(obj["StationName"]);
+                $('#snumber').val(obj["StationNumber"]);
+                $('#slocation').val(obj["Location"]);
+                $('#latitude').val(obj["Latitude"]);
+                $('#longitude').val(obj["Longitude"]);
+                //$('#city').val(obj["city"]);
+                //$('#code').val(obj["code"]);
+                $('#region').val(obj["StationRegion"]);
+                $('#date_opened').val(obj["Opened"]);
+                $('#date_closed').val(obj["Closed"]);
+                $('#station_type').val(obj["StationType"]);
 
                 
             });
@@ -123,10 +122,10 @@
                                 
                             }
                 }
-                //'station_id','problem_id','investigation_hours','report_method',
+                //'station_id','problem_id','max_track_counter','report_method',
                 //'criticality','reporting_time_interval'
                
-                $('#station_selected').val(station["station_name"]);
+                $('#station_selected').val(station["StationName"]);
                 $('#station_id').val(station["station_id"]);
                 $('#problem_1').val(conigurations[0]['problem_id']);
                 $('#problem_2').val(conigurations[1]['problem_id']);
@@ -146,48 +145,48 @@
                         $('#soprobRptTime').val(conigurations[i]['reporting_time_interval']);
                     }
                     else if(conigurations[i]['problem_id']==2){
-                        $('#nooccurencesConsider').val(conigurations[i]['investigation_hours']);
+                        $('#nooccurencesConsider').val(conigurations[i]['max_track_counter']);
                         $('#norptmethod').val(conigurations[i]['report_method']);
                         $('#nocriticallity').val(conigurations[i]['criticality']);
                         $('#noprobRptTime').val(conigurations[i]['reporting_time_interval']);
                     }
                     
                     else if(conigurations[i]['problem_id']==3){
-                        $('#lpoccurencesConsider').val(conigurations[i]['investigation_hours']);
+                        $('#lpoccurencesConsider').val(conigurations[i]['max_track_counter']);
                         $('#lprptmethod').val(conigurations[i]['report_method']);
                         $('#lpcriticallity').val(conigurations[i]['criticality']);
                         $('#lpprobRptTime').val(conigurations[i]['reporting_time_interval']);
                     }
                     else if(conigurations[i]['problem_id']==4){
-                        $('#msoccurencesConsider').val(conigurations[i]['investigation_hours']);
+                        $('#msoccurencesConsider').val(conigurations[i]['max_track_counter']);
                         $('#msrptmethod').val(conigurations[i]['report_method']);
                         $('#mscriticallity').val(conigurations[i]['criticality']);
                         $('#msprobRptTime').val(conigurations[i]['reporting_time_interval']);
                     
                     }
                     else if(conigurations[i]['problem_id']==5){
-                        $('#nmoccurencesConsider').val(conigurations[i]['investigation_hours']);
+                        $('#nmoccurencesConsider').val(conigurations[i]['max_track_counter']);
                         $('#nmrptmethod').val(conigurations[i]['report_method']);
                         $('#nmcriticallity').val(conigurations[i]['criticality']);
                         $('#nmprobRptTime').val(conigurations[i]['reporting_time_interval']);
                     
                     }
                     else if(conigurations[i]['problem_id']==6){
-                        $('#idoccurencesConsider').val(conigurations[i]['investigation_hours']);
+                        $('#idoccurencesConsider').val(conigurations[i]['max_track_counter']);
                         $('#idrptmethod').val(conigurations[i]['report_method']);
                         $('#idcriticallity').val(conigurations[i]['criticality']);
                         $('#idprobRptTime').val(conigurations[i]['reporting_time_interval']);
                     
                     }
                     else if(conigurations[i]['problem_id']==7){
-                        $('#isoccurencesConsider').val(conigurations[i]['investigation_hours']);
+                        $('#isoccurencesConsider').val(conigurations[i]['max_track_counter']);
                         $('#isrptmethod').val(conigurations[i]['report_method']);
                         $('#iscriticallity').val(conigurations[i]['criticality']);
                         $('#isprobRptTime').val(conigurations[i]['reporting_time_interval']);
                     
                     }
                     else if(conigurations[i]['problem_id']==8){
-                        $('#ssoccurencesConsider').val(conigurations[i]['investigation_hours']);
+                        $('#ssoccurencesConsider').val(conigurations[i]['max_track_counter']);
                         $('#ssorptmethod').val(conigurations[i]['report_method']);
                         $('#ssocriticallity').val(conigurations[i]['criticality']);
                         $('#ssoprobRptTime').val(conigurations[i]['reporting_time_interval']);
@@ -202,7 +201,7 @@
             //configure ten meter nodes setting in the modal
             $('#full-width-modal2').on('show.bs.modal', function(e) {
                 var tenMeterNode = e.relatedTarget.id;
-                alert(tenMeterNode);
+                //alert(tenMeterNode);
                 var tenMeterData = jQuery.parseJSON(tenMeterNode);
 
                 obj=tenMeterData[0];
@@ -210,35 +209,35 @@
                 var windSpeedSensors = new Array();
                 var windDirectionSensors = new Array();
                 insulationSensors=tenMeterData[1];
-                        for (var i = 0; i < insulationSensors.length; i++) {
-                            if (insulationSensors[i]['node_id'] === obj["id"]) {
-                                insulatorsensors.push(insulationSensors[i]);
+                        for (var i = 0; i < tenMeterData[1].length; i++) {
+                            if (tenMeterData[1][i]['node_id'] === obj["node_id"]) {
+                                insulatorsensors.push(tenMeterData[1][i]);
                                 break;
                             }
                         }
                         for (var i = 0; i < tenMeterData[2].length; i++) {
-                            if (tenMeterData[2][i]['node_id'] === obj["id"]) {
+                            if (tenMeterData[2][i]['node_id'] === obj["node_id"]) {
                                 windSpeedSensors.push(tenMeterData[2][i]);
                                 break;
                             }
                         }
                         for (var i = 0; i < tenMeterData[3].length; i++) {
-                            if (tenMeterData[3][i]['node_id'] === obj["id"]) {
+                            if (tenMeterData[3][i]['node_id'] === obj["node_id"]) {
                                 windDirectionSensors.push(tenMeterData[3][i]);
                                 break;
                             }
                         }
                         
-                alert(insulatorsensors[0]["identifier_used"]);
-                alert(windSpeedSensors[0]["identifier_used"]);
-                alert(windDirectionSensors[0]["identifier_used"]);
+                //alert(insulatorsensors[0]);
+                //alert(windSpeedSensors[0]["identifier_used"]);
+                //alert(windDirectionSensors[0]["identifier_used"]);
 
 
                 windSpeedSensors=tenMeterData[2];
                 windDirectionSensors=tenMeterData[3];
                 
                 //$('#wizard-validation-form').attr('action', "/updatestation");
-                $('#10node_id').val(obj["id"]);
+                $('#10node_id').val(obj["node_id"]);
                 $('#10txt_key').val(obj["txt_10m"]);
                 $('#10vin_label').val(obj["v_in_10m"]);
                 $('#10mac_add').val(obj["e64_10m"]);
@@ -257,7 +256,7 @@
                 $('#10ttl').val(obj["ttl_10m"]);
                 $('#10date').val(obj["date_10m"]);
                 $('#10time').val(obj["time_10m"]);
-                $('#10txt_value').val(obj["txt_value_10m"]);
+                $('#10txt_value').val(obj["txt_10m_value"]);
                 if(obj["node_status"]=="on")
                     $('#10mnode_status').prop('checked', true);
                 else 
@@ -303,19 +302,21 @@
                 var temperatureSensors = new Array();
 
                 var obj = twoMeterData[0]
+                //alert(obj["node_id"]);
                 for (var i = 0; i < twoMeterData[1].length; i++) {
-                            if (twoMeterData[1][i]['node_id'] === obj["id"]) {
+                            if (twoMeterData[1][i]['node_id'] === obj["node_id"]) {
                                 relativeHumiditysensors.push(twoMeterData[1][i]);
                                 break;
                             }
                         }
                 for (var i = 0; i < twoMeterData[2].length; i++) {
-                            if (twoMeterData[2][i]['node_id'] === obj["id"]) {
+                            if (twoMeterData[2][i]['node_id'] === obj["node_id"]) {
                                 temperatureSensors.push(twoMeterData[2][i]);
                                 break;
                             }
                   }
-                $('#2mnode_id').val(obj["id"]);
+                alert(temperatureSensors);
+                $('#2mnode_id').val(obj["node_id"]);
                 $('#2txt_key').val(obj["txt_2m"]);
                 $('#2mvin_label').val(obj["v_in_2m"]);
                 $('#2mac_add').val(obj["e64_2m"]);
@@ -334,7 +335,7 @@
                 $('#2ttl').val(obj["ttl_2m"]);
                 $('#2date').val(obj["date_2m"]);
                 $('#2time').val(obj["time_2m"]);
-                $('#2txt_value').val(obj["txt_value2m"]);
+                $('#2txt_value').val(obj["txt_2m_value"]);
                 
 
                 if(obj["node_status"]=="on")
@@ -379,24 +380,24 @@
                 alert(groundNodeData[1])
 
                 for (var i = 0; i < groundNodeData[1].length; i++) {
-                            if (groundNodeData[1][i]['node_id'] === obj["id"]) {
+                            if (groundNodeData[1][i]['node_id'] === obj["node_id"]) {
                                 preciptationsensors.push(groundNodeData[1][i]);
                                 break;
                             }
                         }
                 for (var i = 0; i < groundNodeData[2].length; i++) {
-                            if (groundNodeData[2][i]['node_id'] === obj["id"]) {
+                            if (groundNodeData[2][i]['node_id'] === obj["node_id"]) {
                                 soilTemperatureSensors.push(groundNodeData[2][i]);
                                 break;
                             }
                   }
                 for (var i = 0; i < groundNodeData[3].length; i++) {
-                            if (groundNodeData[3][i]['node_id'] === obj["id"]) {
+                            if (groundNodeData[3][i]['node_id'] === obj["node_id"]) {
                                 soilMoistureSensors.push(groundNodeData[3][i]);
                                 break;
                             }
                   }
-                $('#gndnode_id').val(obj["id"]);
+                $('#gndnode_id').val(obj["node_id"]);
                 $('#gndtxt_key').val(obj["txt_gnd"]);
                 $('#gndvin_label').val(obj["v_in_gnd"]);
                 $('#gndmac_add').val(obj["e64_gnd"]);
@@ -416,10 +417,10 @@
                 $('#gnddate').val(obj["date_gnd"]);
                 $('#grndtime').val(obj["time_gnd"]);
                 $('#groundps').val(obj["ps_gnd"]);
-                $('#groundpo').val(obj["po_lst60_gnd"]);
+                $('#groundpo').val(obj["p0_lst60_gnd"]);
                 $('#gndup').val(obj["up_gnd"]);
                 $('#groundrain_pulses').val(obj["ps_gnd"]);
-                $('#gndtxt_value').val(obj["txt_value_gnd"]);
+                $('#gndtxt_value').val(obj["txt_gnd_value"]);
                 
 
                 if(obj["node_status"]=="on")
@@ -467,12 +468,12 @@
                 var temperatureSensors = new Array();
                 var obj = sinkData[0]
                 for (var i = 0; i < sinkData[1].length; i++) {
-                            if (sinkData[1][i]['node_id'] === obj["id"]) {
+                            if (sinkData[1][i]['node_id'] === obj["node_id"]) {
                                 Pressuresensors.push(sinkData[1][i]);
                                 break;
                             }
                 }
-                $('#sinknode_id').val(obj["id"]);
+                $('#sinknode_id').val(obj["node_id"]);
                 $('#sinktxt_key').val(obj["txt_sink"]);
                 $('#sinkvin_label').val(obj["v_in_sink"]);
                 $('#sinkmac_add').val(obj["e64_sink"]);
@@ -493,11 +494,7 @@
                 $('#sinktime').val(obj["time_sink"]);
                 $('#sinkps').val(obj["ps_sink"]);
                 $('#sinkup').val(obj["up_sink"]);
-                $('#sinktxt_value').val(obj["txt_value_sink"]);
-                $('#psparameter_read').val(obj["txt_value_sink"]);
-                $('#psidentifier_used').val(obj["p_ms5611_sink"]);
-                $('#psmax_value').val(obj["txt_value_sink"]);
-                $('#psmin_value').val(obj["txt_value_sink"]);
+                $('#sinktxt_value').val(obj["txt_sink_value"]);
                 if(obj["node_status"]=="on")
                     $('#sinknode_status').prop('checked', true);
                 else 

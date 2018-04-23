@@ -21,13 +21,13 @@ class GroundNodeController extends Controller
     {
         $stations = Station::all()->toArray();
         $groundNodes = GroundNode::all()->toArray();
-        $precipitationsensors = Sensor::where('node_type','grnd_node')
+        $precipitationsensors = Sensor::where('node_type','groundNode')
                                     ->where('parameter_read', 'preciptation')
                                     ->get();
-        $soilTempsensors = Sensor::where('node_type','grnd_node')
+        $soilTempsensors = Sensor::where('node_type','groundNode')
                                     ->where('parameter_read', 'soil temperature')
                                     ->get();
-        $soilMoisturesensors = Sensor::where('node_type','grnd_node')
+        $soilMoisturesensors = Sensor::where('node_type','groundNode')
                                     ->where('parameter_read', 'soil moisture')
                                     ->get();
         
@@ -218,7 +218,7 @@ class GroundNodeController extends Controller
     {
         if($request->get('gndnode_id')!= null){
             $id=$request->get('gndnode_id');
-            $groundNode = GroundNode::where('id',$id)->first();
+            $groundNode = GroundNode::where('node_id',$id)->first();
             $groundNode->txt_gnd = $request->get('gndtxt_key');
             $groundNode->e64_gnd = $request->get('gndmac_add');
             $groundNode->v_in_gnd = $request->get('gndvin_label');
@@ -240,9 +240,9 @@ class GroundNodeController extends Controller
             $groundNode->v_a2_gnd =$request->get('stidentifier_used');
             $groundNode->ps_gnd =$request->get('groundps');
             $groundNode->node_status= $this->getStatus($request,'gndnode_status');
-            $groundNode->txt_value_gnd = $request->get('gndtxt_value');
+            $groundNode->txt_gnd_value = $request->get('gndtxt_value');
             $groundNode->up_gnd = $request->get('gndup');
-            $groundNode->po_lst60_gnd = $request->get('groundpo');
+            $groundNode->p0_lst60_gnd = $request->get('groundpo');
                      
             $groundNode->save();
         $soilTemperature = Sensor::where('node_id',$id)

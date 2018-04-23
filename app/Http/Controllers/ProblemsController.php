@@ -90,7 +90,7 @@ class ProblemsController extends Controller
         $node_off = problemConfigurations::where('station_id',$id)
                                     ->where('problem_id', 2)
                                     ->first();
-            $node_off->investigation_hours = $request->get('nooccurencesConsider');
+            $node_off->max_track_counter = $request->get('nooccurencesConsider');
             $node_off->report_method =$request->get('norptmethod');
             $node_off->criticality= $request->get('nocriticallity');
             $node_off->reporting_time_interval= $request->get('noprobRptTime');
@@ -99,7 +99,7 @@ class ProblemsController extends Controller
         $sensor_off = problemConfigurations::where('station_id',$id)
                                     ->where('problem_id', 3)
                                     ->first();
-            $sensor_off->investigation_hours = $request->get('ssoccurencesConsider');
+            $sensor_off->max_track_counter = $request->get('ssoccurencesConsider');
             $sensor_off->report_method =$request->get('ssorptmethod');
             $sensor_off->criticality= $request->get('ssocriticallity');
             $sensor_off->reporting_time_interval= $request->get('ssoprobRptTime');
@@ -108,7 +108,7 @@ class ProblemsController extends Controller
         $lownode_values = problemConfigurations::where('station_id',$id)
                                     ->where('problem_id', 4)
                                     ->first();  
-            $lownode_values->investigation_hours = $request->get('lpoccurencesConsider');
+            $lownode_values->max_track_counter = $request->get('lpoccurencesConsider');
             $lownode_values->report_method =$request->get('lprptmethod');
             $lownode_values->criticality= $request->get('lpcriticallity');
             $lownode_values->reporting_time_interval= $request->get('lpprobRptTime');
@@ -116,7 +116,7 @@ class ProblemsController extends Controller
         $missing_sensor_values = problemConfigurations::where('station_id',$id)
                                     ->where('problem_id', 5)
                                     ->first();
-            $missing_sensor_values->investigation_hours = $request->get('msoccurencesConsider');
+            $missing_sensor_values->max_track_counter = $request->get('msoccurencesConsider');
             $missing_sensor_values->report_method =$request->get('msrptmethod');
             $missing_sensor_values->criticality= $request->get('mscriticallity');
             $missing_sensor_values->reporting_time_interval= $request->get('msprobRptTime');
@@ -124,7 +124,7 @@ class ProblemsController extends Controller
         $missing_node_values = problemConfigurations::where('station_id',$id)
                                     ->where('problem_id', 6)
                                     ->first();
-            $missing_node_values->investigation_hours = $request->get('nmoccurencesConsider');
+            $missing_node_values->max_track_counter = $request->get('nmoccurencesConsider');
             $missing_node_values->report_method =$request->get('nmrptmethod');
             $missing_node_values->criticality= $request->get('nmcriticallity');
             $missing_node_values->reporting_time_interval= $request->get('nmprobRptTime');
@@ -132,7 +132,7 @@ class ProblemsController extends Controller
         $incorrect_dates = problemConfigurations::where('station_id',$id)
                                     ->where('problem_id', 7)
                                     ->first();
-            $incorrect_dates->investigation_hours = $request->get('idoccurencesConsider');
+            $incorrect_dates->max_track_counter = $request->get('idoccurencesConsider');
             $incorrect_dates->report_method =$request->get('idrptmethod');
             $incorrect_dates->criticality= $request->get('idcriticallity');
             $incorrect_dates->reporting_time_interval= $request->get('idprobRptTime');
@@ -140,7 +140,7 @@ class ProblemsController extends Controller
         $incorrect_sensor_values = problemConfigurations::where('station_id',$id)
                                     ->where('problem_id', 8)
                                     ->first();      
-            $incorrect_sensor_values->investigation_hours = $request->get('isoccurencesConsider');
+            $incorrect_sensor_values->max_track_counter = $request->get('isoccurencesConsider');
             $incorrect_sensor_values->report_method =$request->get('isrptmethod');
             $incorrect_sensor_values->criticality= $request->get('iscriticallity');
             $incorrect_sensor_values->reporting_time_interval= $request->get('isprobRptTime');

@@ -73,12 +73,15 @@ class ConfigureStaion extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    /* 
+        'station_id', 'StationName', 'StationNumber', 'StationRegNumber', 'Location', 'Indicator', 'StationRegion', 'Country', 'Latitude', 'Longitude', 'Altitude', 'StationStatus', 'StationType', 'Opened', 'Closed', 'SubmittedBy', 'CreationDate'
+        */
     public function update(Request $request)
     {
         if($request->get('station_number')!= null){
             $id=$request->get('station_number');
-        $station = Station::where('station_id', $id)->first();
-        $station->station_name = $request->get('station_name');
+        $station = Station::where('StationNumber', $id)->first();
+        $station->StationName = $request->get('station_name');
         $station->save();
         }
         return redirect('/configurestation');
