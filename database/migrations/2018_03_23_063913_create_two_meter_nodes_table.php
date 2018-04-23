@@ -13,7 +13,7 @@ class CreateTwoMeterNodesTable extends Migration
      */
     public function up()
     {
-        Schema::create('two_meter_nodes', function (Blueprint $table) {
+        /* Schema::create('two_meter_nodes', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('station_id');
             $table->string('date_2m');
@@ -38,7 +38,7 @@ class CreateTwoMeterNodesTable extends Migration
             $table->double('v_mcu_max_value');
             $table->enum('node_status',["off","on"]);
             $table->timestamps();
-        });
+        }); */
     }
 
     /**

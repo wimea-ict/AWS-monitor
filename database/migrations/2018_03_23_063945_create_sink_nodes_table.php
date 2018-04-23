@@ -13,7 +13,7 @@ class CreateSinkNodesTable extends Migration
      */
     public function up()
     {
-        Schema::create('sink_nodes', function (Blueprint $table) {
+        /* Schema::create('sink_nodes', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('station_id');
             $table->string('date_sink');
@@ -40,7 +40,7 @@ class CreateSinkNodesTable extends Migration
             $table->double('v_mcu_max_value');
             $table->enum('node_status',["off","on"]);
             $table->timestamps();
-        });
+        }); */
     }
 
     /**

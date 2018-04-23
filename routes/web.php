@@ -31,6 +31,27 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('viewStationStatus', 'StationStatusController');
     
     
+
+    Route::get('/node10m_report','TenMNodeController@report1');
+    Route::get('/node2m_report','TwoMNodeController@report1');
+    Route::get('/nodesink_report','SinkNodeController@report1');
+    Route::get('/nodegnd_report','GroundNodeController@report1');
+
+    Route::post('/reports10m','TenMNodeController@get10mStationReports');
+    Route::post('/reportsGnd','GroundNodeController@getGndStationReports');
+    Route::post('/reportsSink','SinkNodeController@getSinkStationReports');
+    Route::post('/reports2m','TwoMNodeController@get2mStationReports');
+    Route::get('/report_problems','ReportController@report');
+
+    Route::get('/send_test_email', function(){
+        Mail::raw('Sending emails with Mailgun and Laravel is easy!', function($message)
+        {
+            $message->subject('Mailgun and Laravel are awesome!');
+            $message->from('byarus90@gmail.com', 'Website Name');
+            $message->to('kibsysapps@gmail.com');
+        });
+    });
+
 });
 
 Route::get('/', function () {
@@ -59,6 +80,8 @@ Route::get('/addsensor', function () {
 Route::get('/configuresensor', function () {
     return view('layouts/configuresensor');
 });
+
+Route::get('/tester', 'NodeStatusAnalyzerController@analyze');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
