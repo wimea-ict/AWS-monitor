@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
     <?php echo $__env->make('layouts.links', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
        
 </head>

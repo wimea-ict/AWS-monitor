@@ -37,4 +37,13 @@
         <!-- DataTables -->
         <link href="assets/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
 
-        
+        <link href="assets/dygraph/dygraph.css" rel="stylesheet" />
+
+        <style>
+            .nopadding {
+                padding: 0 !important;
+                margin: 0 !important;
+                }
+        </style>
+
+        <?php echo $__env->yieldContent("page_specific_css_files"); ?>;

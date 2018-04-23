@@ -119,55 +119,64 @@ class StationsController extends Controller
                                     "identifier_used"=>"T_SHT2X",
                                     "max_value"=>"6",
                                     "min_value"=>"2",
+                                    "rpt_intvl"=>"1",
                                 ),
                                 
                                 "wind_speed_semsor"=>array(
                                     "parameter_read"=>"wind speed",
-                                    "identifier_used"=>"v_a2",
+                                    "identifier_used"=>"V_A2",
                                     "max_value"=>"5",
                                     "min_value"=>"3",
+                                    "rpt_intvl"=>"1",
                                 ),
                                 "wind_direction_semsor"=>array(
                                     "parameter_read"=>"wind direction",
-                                    "identifier_used"=>"v_a3",
+                                    "identifier_used"=>"V_A3",
                                     "max_value"=>"4",
                                     "min_value"=>"1",
+                                    "rpt_intvl"=>"1",
                                 ),
                                 "insulation_sensor"=>array(
                                     "parameter_read"=>"insulation",
-                                    "identifier_used"=>"v_a1",
+                                    "identifier_used"=>"V_A1",
                                     "max_value"=>"2",
                                     "min_value"=>"1",
+                                    "rpt_intvl"=>"1",
                                 ),
                                 "relative_humidity_semsor"=>array(
                                     "parameter_read"=>"relative humidity",
                                     "identifier_used"=>"RH_SHT2X",
                                     "max_value"=>"6",
                                     "min_value"=>"1",
+                                    "rpt_intvl"=>"1",
                                 ),
                                 "soil_moisture_semsor"=>array(
                                     "parameter_read"=>"soil moisture",
-                                    "identifier_used"=>"v_a1",
+                                    "identifier_used"=>"V_A1",
                                     "max_value"=>"5",
                                     "min_value"=>"2",
+                                    "rpt_intvl"=>"1",
                                 ),
                                 "soil_temp_semsor"=>array(
                                     "parameter_read"=>"soil temperature",
-                                    "identifier_used"=>"v_a2",
+                                    "identifier_used"=>"V_A2",
                                     "max_value"=>"2",
                                     "min_value"=>"1",
+                                    "rpt_intvl"=>"1",
                                 ),
                                 "preciptation_semsor"=>array(
                                     "parameter_read"=>"preciptation",
-                                    "identifier_used"=>"v_a1",
+                                    "identifier_used"=>"V_A1",
                                     "max_value"=>"4.5",
                                     "min_value"=>"4.7",
+                                    "rpt_intvl"=>"1",
                                 ),
                                 "pressure_semsor"=>array(
                                     "parameter_read"=>"pressure",
                                     "identifier_used"=>"P_MS5611",
                                     "max_value"=>"8",
                                     "min_value"=>"1",
+                                    "rpt_intvl"=>"1",
                                 ));
 
         return view('layouts.addstation')
@@ -215,6 +224,10 @@ class StationsController extends Controller
             'date_opened' => $request->get('date_opened'),
             'date_closed' => $request->get('date_closed'),
             'station_type' => $request->get('station_type'),
+            'station_status'=>$request->get('station_status'),
+            'country'=>$request->get('country'),
+            ''
+            
             
           ]);
 

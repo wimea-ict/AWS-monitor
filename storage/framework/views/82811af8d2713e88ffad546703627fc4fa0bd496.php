@@ -16,6 +16,14 @@
                                         <h3>Station Credentials</h3>
                                         <section style="padding-bottom:30px;">
                                             <div class="form-group clearfix">
+                                                <div class="col-sm-12  control-label text-right">
+                                                                                    <label class="switch">
+                                                                                            <input type="checkbox" name="wssensor_status" value="Yes" checked>
+                                                                                            <span class="slider round"></span>
+                                                                                    </label>
+                                                </div>
+                                            </div>    
+                                            <div class="form-group clearfix">
                                                 <label class="col-lg-2 control-label" for="sname">Station name</label>
                                                 <div class="col-lg-4">
                                                     <input class="form-control" id="sname" name="sname" type="text">
@@ -79,6 +87,11 @@
                                                 <label class="col-lg-2 control-label " for="station_type">station Type</label>
                                                 <div class="col-lg-4">
                                                     <input id="station_type" name="station_type" type="text" class="form-control">
+                                                </div>
+                                            
+                                                <label class="col-lg-2 control-label " for="station_type">Country</label>
+                                                <div class="col-lg-4">
+                                                    <input id="country" name="country" type="text" class="form-control">
                                                 </div>
                                                 
                                             </div>
@@ -233,7 +246,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="10rptTime">Report time interval</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="10rptTime" name="10rptTime" type="text" class="form-control" required>
+                                                                                    <input id="10rptTime" name="10rptTime" type="text" class="form-control" value="<?php echo e($stationdetails['insulation_sensor']['rpt_intvl']); ?>" required>
                                                                                 </div>
                                                                                 <div class="col-sm-6  control-label text-right">
                                                                                     <label class="switch">
@@ -289,7 +302,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="wsrptTime">Report time interval</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="wsrptTime" name="wsrptTime" type="text" class="form-control" required>
+                                                                                    <input id="wsrptTime" name="wsrptTime" type="text" class="form-control" value="<?php echo e($stationdetails['wind_speed_semsor']['rpt_intvl']); ?>" required>
                                                                                 </div>
                                                                                 <div class="col-sm-6  control-label text-right">
                                                                                     <label class="switch">
@@ -336,7 +349,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="wdrptTime">Report time interval</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="wdrptTime" name="wdrptTime" type="text" class="form-control" required>
+                                                                                    <input id="wdrptTime" name="wdrptTime" type="text" class="form-control" value="<?php echo e($stationdetails['wind_direction_semsor']['rpt_intvl']); ?>" required>
                                                                                 </div>
                                                                                 <div class="col-sm-6  control-label text-right">
                                                                                     <label class="switch">
@@ -529,7 +542,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="rhrptTime">Report time interval</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="rhrptTime" name="rhrptTime" type="text" class="form-control" required>
+                                                                                    <input id="rhrptTime" name="rhrptTime" type="text" class="form-control" value="<?php echo e($stationdetails['wind_speed_semsor']['rpt_intvl']); ?>" required>
                                                                                 </div>
                                                                                 <div class="col-sm-6  control-label text-right">
                                                                                     <label class="switch">
@@ -579,7 +592,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="tsrptTime">Report time interval</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="tsrptTime" name="tsrptTime" type="text" class="form-control" required>
+                                                                                    <input id="tsrptTime" name="tsrptTime" type="text" class="form-control" value="<?php echo e($stationdetails['Temp_semsor']['rpt_intvl']); ?>" required>
                                                                                 </div>
                                                                                 <div class="col-sm-6  control-label text-right">
                                                                                     <label class="switch">
@@ -789,7 +802,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="pprptTime">Report time interval</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="pprptTime" name="pprptTime" type="text" class="form-control" required>
+                                                                                    <input id="pprptTime" name="pprptTime" type="text" class="form-control" value="<?php echo e($stationdetails['preciptation_semsor']['rpt_intvl']); ?>" required>
                                                                                 </div>
                                                                                 <div class="col-sm-6  control-label text-right">
                                                                                     <label class="switch">
@@ -838,7 +851,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="strptTime">Report time interval</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="strptTime" name="strptTime" type="text" class="form-control" required>
+                                                                                    <input id="strptTime" name="strptTime" type="text" class="form-control" value="<?php echo e($stationdetails['soil_temp_semsor']['rpt_intvl']); ?>" required>
                                                                                 </div>
                                                                                 <div class="col-sm-6  control-label text-right">
                                                                                     <label class="switch">
@@ -889,7 +902,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="smrptTime">Report time interval</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="smrptTime" name="smrptTime" type="text" class="form-control" required>
+                                                                                    <input id="smrptTime" name="smrptTime" type="text" class="form-control" value="<?php echo e($stationdetails['soil_moisture_semsor']['rpt_intvl']); ?>" required>
                                                                                 </div>
                                                                                 <div class="col-sm-6  control-label text-right">
                                                                                     <label class="switch">
@@ -1086,7 +1099,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="psrptTime">Report time interval</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="psrptTime" name="psrptTime" type="text" class="form-control" required>
+                                                                                    <input id="psrptTime" name="psrptTime" type="text" class="form-control" value="<?php echo e($stationdetails['pressure_semsor']['rpt_intvl']); ?>" required>
                                                                                 </div>
                                                                                 <div class="col-sm-6  control-label text-right">
                                                                                 <label class="switch">
