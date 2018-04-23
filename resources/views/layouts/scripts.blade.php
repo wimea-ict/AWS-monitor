@@ -61,8 +61,10 @@
         <script src="assets/select2/select2.min.js" type="text/javascript"></script>
 
 
-
-
+        <script src="assets/toggles/toggles.min.js"></script>
+       
+    
+        
 
         <script type="text/javascript">
             $(document).ready(function() {
@@ -71,6 +73,7 @@
                 jQuery(".select2").select2({
                     width: '100%'
                 });
+                jQuery('.toggle').toggles({on: true});
             } );
             
             

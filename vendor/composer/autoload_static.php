@@ -3598,6 +3598,7 @@ class ComposerStaticInit87b9326ddaef55773641bf54eaf4d0ef
         'station\\Http\\Controllers\\ConfigureStaion' => __DIR__ . '/../..' . '/app/Http/Controllers/ConfigureStaion.php',
         'station\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'station\\Http\\Controllers\\GroundNodeController' => __DIR__ . '/../..' . '/app/Http/Controllers/GroundNodeController.php',
+        'station\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'station\\Http\\Controllers\\ProblemConfigurationsController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProblemConfigurationsController.php',
         'station\\Http\\Controllers\\ProblemsController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProblemsController.php',
         'station\\Http\\Controllers\\SensorsController' => __DIR__ . '/../..' . '/app/Http/Controllers/SensorsController.php',
@@ -3619,11 +3620,11 @@ class ComposerStaticInit87b9326ddaef55773641bf54eaf4d0ef
         'station\\Sensor' => __DIR__ . '/../..' . '/app/Sensor.php',
         'station\\SinkNode' => __DIR__ . '/../..' . '/app/SinkNode.php',
         'station\\Station' => __DIR__ . '/../..' . '/app/Station.php',
+        'station\\StationStatusController' => __DIR__ . '/../..' . '/app/StationStatusController.php',
         'station\\TenMeterNode' => __DIR__ . '/../..' . '/app/TenMeterNode.php',
         'station\\TwoMeterNode' => __DIR__ . '/../..' . '/app/TwoMeterNode.php',
         'station\\User' => __DIR__ . '/../..' . '/app/User.php',
         'station\\problemConfigurations' => __DIR__ . '/../..' . '/app/problemConfigurations.php',
-        'station\\problem_settings' => __DIR__ . '/../..' . '/app/problem_settings.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

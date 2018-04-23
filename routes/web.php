@@ -28,6 +28,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('configureproblem', 'ProblemConfigurationsController');
     Route::resource('editProblemConfigurations', 'ProblemsController');
     Route::post('updateProblemConfigurations', 'ProblemsController@update');
+    Route::resource('viewStationStatus', 'StationStatusController');
+    
     
 });
 

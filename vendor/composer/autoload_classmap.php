@@ -3297,6 +3297,7 @@ return array(
     'station\\Http\\Controllers\\ConfigureStaion' => $baseDir . '/app/Http/Controllers/ConfigureStaion.php',
     'station\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'station\\Http\\Controllers\\GroundNodeController' => $baseDir . '/app/Http/Controllers/GroundNodeController.php',
+    'station\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
     'station\\Http\\Controllers\\ProblemConfigurationsController' => $baseDir . '/app/Http/Controllers/ProblemConfigurationsController.php',
     'station\\Http\\Controllers\\ProblemsController' => $baseDir . '/app/Http/Controllers/ProblemsController.php',
     'station\\Http\\Controllers\\SensorsController' => $baseDir . '/app/Http/Controllers/SensorsController.php',
@@ -3318,9 +3319,9 @@ return array(
     'station\\Sensor' => $baseDir . '/app/Sensor.php',
     'station\\SinkNode' => $baseDir . '/app/SinkNode.php',
     'station\\Station' => $baseDir . '/app/Station.php',
+    'station\\StationStatusController' => $baseDir . '/app/StationStatusController.php',
     'station\\TenMeterNode' => $baseDir . '/app/TenMeterNode.php',
     'station\\TwoMeterNode' => $baseDir . '/app/TwoMeterNode.php',
     'station\\User' => $baseDir . '/app/User.php',
     'station\\problemConfigurations' => $baseDir . '/app/problemConfigurations.php',
-    'station\\problem_settings' => $baseDir . '/app/problem_settings.php',
 );
