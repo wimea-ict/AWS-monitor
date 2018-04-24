@@ -414,6 +414,7 @@ class StationsController extends Controller
             'p0_lst60_gnd'=> $request->get('ppidentifier_used'),
             't1_gnd'=> $request->get('stidentifier_used'),
             't_gnd'=> $request->get('gndt'),
+            'p0_gnd'=> $request->get('groundpo'),
                           
             
         ]);
