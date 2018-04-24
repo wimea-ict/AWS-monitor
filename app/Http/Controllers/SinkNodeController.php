@@ -30,7 +30,7 @@ class SinkNodeController extends Controller
     }
 
     public function report1(){
-        $data["action"]="/reportsSink";
+        $data["action"]="{{ URL::to('reportsSink') }}";
         $data["stations"]=Station::all();
         $data["heading"]="Sink Node Reports";
         

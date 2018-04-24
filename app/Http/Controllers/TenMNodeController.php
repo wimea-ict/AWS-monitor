@@ -37,7 +37,7 @@ class TenMNodeController extends Controller
 
    
     public function report1(){
-        $data["action"]="/reports10m";
+        $data["action"]="{{ URL::to('reports10m') }}";
         $data["stations"]=Station::all();
         $data["heading"]="10m Node Reports";
            

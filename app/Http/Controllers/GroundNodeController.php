@@ -157,7 +157,7 @@ class GroundNodeController extends Controller
 
         $data["soil_moisture"]=$SoilMoisture_graph_data;
 
-        $data["action"]="/reportsGnd";
+        $data["action"]="{{ URL::to('reportsGnd') }}";
         $data["stations"]=Station::all();
         $data["heading"]="Ground Node Reports";
         return view("reports.nodegnd",$data);

@@ -31,7 +31,7 @@ class TwoMNodeController extends Controller
     }
 
     public function report1(){
-        $data["action"]="/reports2m";
+        $data["action"]="{{ URL::to('reports2m') }}";
         $data["stations"]=Station::all();
         $data["heading"]="2m Node Reports";
            
