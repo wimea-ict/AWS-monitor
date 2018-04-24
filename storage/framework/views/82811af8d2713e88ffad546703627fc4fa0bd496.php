@@ -1138,12 +1138,12 @@
                                                 
                                             </div> 
                                         </div>
-                                        <div class="form-group clearfix">
+                                        <!-- <div class="form-group clearfix">
                                                                                 <div class="col-lg-4 text-right">
                                                                                     <input type="submit" name="finish" class="btn btn-primary" value="Submit">
                                                                                 </div>
                                                                                 
-                                                                            </div> 
+                                                                            </div>  -->
                                         </section>
                                     </div>
                                 </form>
