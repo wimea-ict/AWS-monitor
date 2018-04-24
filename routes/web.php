@@ -28,6 +28,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('configureproblem', 'ProblemConfigurationsController');
     Route::resource('editProblemConfigurations', 'ProblemsController');
     Route::post('updateProblemConfigurations', 'ProblemsController@update');
+    Route::resource('viewStationStatus', 'StationStatusController');
+    
+    
 
     Route::get('/node10m_report','TenMNodeController@report1');
     Route::get('/node2m_report','TwoMNodeController@report1');

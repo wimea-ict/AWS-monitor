@@ -38,6 +38,7 @@
                         </ul>
                     </li>
                     <li class="has-submenu"><a href="#"><i class="ion-calendar"></i> <span class="nav-label">Reports</span></a></li>
+                    <li class="has-submenu"><a href="/viewStationStatus"><i class="ion-calendar"></i> <span class="nav-label">Station Status</span></a></li>
                     <li class="has-submenu"><a href="{{ route('register') }}"><i class="ion-calendar"></i> <span class="nav-label">Register Users</span></a></li>
                     <li class="has-submenu"><a href="#"><i class="ion-close"></i> <span class="nav-label">Problems Identified</span></a></li>
                     
@@ -50,6 +51,7 @@
                             
                         </ul>
                     </li>
+                    
                     
                     
                 </ul>

@@ -24,7 +24,8 @@
         <link rel="stylesheet" type="text/css" href="assets/form-wizard/jquery.steps.css" />
 
         <link href="assets/modal-effect/css/component.css" rel="stylesheet">
-
+        <link href="assets/toggles/toggles.css" rel="stylesheet" />
+        
 
         <!-- Custom styles for this template -->
         <link href="css/style.css" rel="stylesheet">

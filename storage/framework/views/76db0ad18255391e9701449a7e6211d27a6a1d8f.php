@@ -24,7 +24,8 @@
         <link rel="stylesheet" type="text/css" href="assets/form-wizard/jquery.steps.css" />
 
         <link href="assets/modal-effect/css/component.css" rel="stylesheet">
-
+        <link href="assets/toggles/toggles.css" rel="stylesheet" />
+        
 
         <!-- Custom styles for this template -->
         <link href="css/style.css" rel="stylesheet">
@@ -36,4 +37,13 @@
         <!-- DataTables -->
         <link href="assets/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
 
-        
+        <link href="assets/dygraph/dygraph.css" rel="stylesheet" />
+
+        <style>
+            .nopadding {
+                padding: 0 !important;
+                margin: 0 !important;
+                }
+        </style>
+
+        <?php echo $__env->yieldContent("page_specific_css_files"); ?>;

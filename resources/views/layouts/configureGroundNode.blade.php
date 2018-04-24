@@ -177,10 +177,18 @@
                                                                                     <input id="gndut" name="gndut" type="text" class="form-control" value="">
                                                                                 </div>
                                                                             </div>
+                                                                            <div class="form-group clearfix">
+                                                                                <label class="col-lg-2 control-label " for="gndps">Box Temperature key</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="gndt" name="gndt" type="text" class="form-control" >
+                                                                                </div>
+                                                                                <label class="col-lg-2 control-label " for="gndps">V A2 key</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="v_a2" name="v_a2" type="text" class="form-control" >
+                                                                                </div>
+                                                                                
+                                                                            </div>
                                                                             
-                                                                            
-                                                                            
-                                                                                                                                                              
                                                         </div> 
                                                     </div> 
                                                 </div>

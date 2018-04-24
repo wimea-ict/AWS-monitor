@@ -1,6 +1,7 @@
 <?php
 
 namespace station\Http\Controllers;
+use Auth;
 
 use Illuminate\Http\Request;
 use App\layouts;
@@ -67,9 +68,12 @@ class StationsController extends Controller
                                     "v_mcu_max_value"=>"3",
                                     "v_mcu_min_value"=>"1",
                                     "v_mcu_label"=>"VMCU",
-                                    "po"=>"PO",
-                                    "rain_pulses"=>"PO_IST60",
+                                    "po"=>"P0",
+                                    "rain_pulses"=>"P0_IST60",
                                     "up"=>"UP",
+                                    "t"=>"T",
+                                    "v_a2"=>"V_A2",
+                                    
                                 ),
                                 "sink_node"=>array(
                                     "name"=>"Sink node",
@@ -92,6 +96,7 @@ class StationsController extends Controller
                                     "v_mcu_label"=>"VMCU",
                                     "ut"=>"UT",
                                     "up"=>"UP",
+                                    
                                 ),
                                 "2m_node"=>array(
                                     "name"=>"2m node",
@@ -119,55 +124,64 @@ class StationsController extends Controller
                                     "identifier_used"=>"T_SHT2X",
                                     "max_value"=>"6",
                                     "min_value"=>"2",
+                                    "rpt_intvl"=>"1",
                                 ),
                                 
                                 "wind_speed_semsor"=>array(
                                     "parameter_read"=>"wind speed",
-                                    "identifier_used"=>"v_a2",
+                                    "identifier_used"=>"V_A2",
                                     "max_value"=>"5",
                                     "min_value"=>"3",
+                                    "rpt_intvl"=>"1",
                                 ),
                                 "wind_direction_semsor"=>array(
                                     "parameter_read"=>"wind direction",
-                                    "identifier_used"=>"v_a3",
+                                    "identifier_used"=>"V_A3",
                                     "max_value"=>"4",
                                     "min_value"=>"1",
+                                    "rpt_intvl"=>"1",
                                 ),
                                 "insulation_sensor"=>array(
                                     "parameter_read"=>"insulation",
-                                    "identifier_used"=>"v_a1",
+                                    "identifier_used"=>"V_A1",
                                     "max_value"=>"2",
                                     "min_value"=>"1",
+                                    "rpt_intvl"=>"1",
                                 ),
                                 "relative_humidity_semsor"=>array(
                                     "parameter_read"=>"relative humidity",
                                     "identifier_used"=>"RH_SHT2X",
                                     "max_value"=>"6",
                                     "min_value"=>"1",
+                                    "rpt_intvl"=>"1",
                                 ),
                                 "soil_moisture_semsor"=>array(
                                     "parameter_read"=>"soil moisture",
-                                    "identifier_used"=>"v_a1",
+                                    "identifier_used"=>"V_A1",
                                     "max_value"=>"5",
                                     "min_value"=>"2",
+                                    "rpt_intvl"=>"1",
                                 ),
                                 "soil_temp_semsor"=>array(
                                     "parameter_read"=>"soil temperature",
-                                    "identifier_used"=>"v_a2",
+                                    "identifier_used"=>"T1",
                                     "max_value"=>"2",
                                     "min_value"=>"1",
+                                    "rpt_intvl"=>"1",
                                 ),
                                 "preciptation_semsor"=>array(
                                     "parameter_read"=>"preciptation",
-                                    "identifier_used"=>"v_a1",
+                                    "identifier_used"=>"P0_IST60",
                                     "max_value"=>"4.5",
                                     "min_value"=>"4.7",
+                                    "rpt_intvl"=>"1",
                                 ),
                                 "pressure_semsor"=>array(
                                     "parameter_read"=>"pressure",
                                     "identifier_used"=>"P_MS5611",
                                     "max_value"=>"8",
                                     "min_value"=>"1",
+                                    "rpt_intvl"=>"1",
                                 ));
 
         return view('layouts.addstation')
@@ -215,6 +229,9 @@ class StationsController extends Controller
             'Opened' => $request->get('date_opened'),
             'Closed' => $request->get('date_closed'),
             'StationType' => $request->get('station_type'),
+            'StationStatus'=>$request->get('station_status'),
+            'Country'=>$request->get('country'),
+            'SubmittedBy'=>Auth::user()->name,
             
           ]);
 
@@ -389,12 +406,14 @@ class StationsController extends Controller
             'v_mcu_min_value' => $request->get('gdv_mcu_min_value'),
             'v_mcu_gnd' => $request->get('gdv_mcu_label'),
             'v_a1_gnd'=>$request->get('smidentifier_used'),
-            'v_a2_gnd'=>$request->get('stidentifier_used'),
+            'v_a2_gnd'=>$request->get('v_a2'),
             'ps_gnd'=>$request->get('groundps'),
             'node_status'=>$this->getStatus($request,'gndnode_status'),
             'txt_gnd_value'=>$request->get('gndtxt_value'),
             'up_gnd'=>$request->get('gndup'),
-            'p0_lst60_gnd'=> $request->get('groundrain_pulses'),
+            'p0_lst60_gnd'=> $request->get('ppidentifier_used'),
+            't1_gnd'=> $request->get('stidentifier_used'),
+            't_gnd'=> $request->get('gndt'),
                           
             
         ]);
