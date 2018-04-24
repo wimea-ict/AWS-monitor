@@ -112,7 +112,7 @@ class NodeStatusAnalyzerController extends Controller
         $vinMinVal = '';
         $vmcuMaxVal = '';
         $vmcuMinVal = '';
-
+        /* 'sensor','station','2m_node','10m_node','sink_node','ground_node' */
         if (stripos($txt, 'gnd') !== false) {
             // node_id, station_id, txt_gnd_value
             $node_tb = $this->getNodeData($this->gnd_nd_tb,'txt_gnd_value');
@@ -344,16 +344,26 @@ class NodeStatusAnalyzerController extends Controller
         //get time diff to use for querying the db
         // $tasks = DB::table('observationslip')->where('CreationDate','>=',$this->getTimeDiff())
         $date = $this->getTimeDiff();
-        // test variables
-        $vinNull = 0; $vmcuNull = 0; $dateNull = 0; $vinMin = 0; $vinMax = 0; $vmcuMin = 0; $vmcuMax = 0; $dateMin = 0; $dateMax = 0; $date1970 = 0; $invalidDates = array(); $nullV_IN = array(); $nullVMCU = array();
+        
+        // store the first and last id checked  ->where()
+        $id_first_checked = 0;
+        $id_last_checked = 0;
+        $counter = 1;
 
         // pick problem classification data
         $problemClassfications = $this->getProblemClassifications();
-        $str = array();
 
         // pick only columns that we'll be using. We won't need date_time_recorded because we have
-        DB::table('nodestatus')->orderBy('id')->select('V_MCU','V_IN','date','time','TXT','StationNumber')->chunk(500, function($nodes) use(&$date, &$problemClassfications){
+        // ->get(500) at a time
+        DB::table('nodestatus')->orderBy('id')->select('id','V_MCU','V_IN','date','time','TXT','StationNumber')->chunk(100, function($nodes) use(&$date, &$problemClassfications, &$id_first_checked, &$id_last_checked, &$counter){
             foreach ($nodes as $node) {
+
+                //store first id
+                if ($id_first_checked == 0) {// ensure it's not yet set
+                    $id_first_checked = $node->id;
+                }
+                //store last id checked
+                $id_last_checked = $node->id;// keep overwritting to keep the last checked
 
                 /**
                  * get the data about the station to which this data belongs 
@@ -372,7 +382,7 @@ class NodeStatusAnalyzerController extends Controller
                 $yearRec = substr($node->date,0,4);
                 
                 $nodeInfo = $this->getNodeAndStationInfo($node->TXT);
-
+                // dd($nodeInfo);
                 $nd_id = $nodeInfo['nd_id'];
                 $nd_name = $nodeInfo['nd_name'];
                 $stn_id = $nodeInfo['stn_id'];
@@ -645,40 +655,33 @@ class NodeStatusAnalyzerController extends Controller
                             }
                         }
                     }
-                }        
+                } 
+                
+                $counter++;
+                if ($counter == 500) { // check if max has been reached.
+                    break; // stop loop...
+                }
+            }
+
+            dd($counter);
+            if ($counter == 500) { // check if max has been reached.
+                return false; // stop chucking...
             }
         });
 
-        $wrongDateString = "\n";
-        $wrongDates = array_count_values($invalidDates);
-        foreach ($wrongDates as $key => $value) {
-            $wrongDateString .= $key." appears ". $value." time(s). \n";
-        };
+        /**
+         * analyzer_last_check
+         * Store the changes to the db
+         */
+        DB::table('analyzer_last_check')->insert(
+            ['id_first_checked'=>$id_first_checked,'id_last_checked'=>$id_last_checked]
+        );
 
-        $probs = "\n";
-        $probData = array_count_values($str);
-        foreach ($probData as $key => $value) {
-            $probs .= $key." ---> ". $value." time(s). \n";
-        };
+        //get data in problems table   problems
+        //source, source_id, criticality, classification_id, track_counter, status
+        $data = DB::table('problems')->get();
 
-        $vinNulls = "\n";
-        $nullsvin = array_count_values($nullV_IN);
-        foreach ($nullsvin as $key => $value) {
-            $vinNulls .= $key." appears ". $value." time(s). \n";
-        };
-
-        $vmcuNulls = "\n";
-        $nullsvmcu = array_count_values($nullV_IN);
-        foreach ($nullsvmcu as $key => $value) {
-            $vmcuNulls .= $key." appears ". $value." time(s). \n";
-        };
-
-        $string = "V_IN nulls: ".$vinNull."\n"."V_IN mins: ".$vinMin."\n"."V_IN max: ".$vinMax."\n"."V_MCU nulls: ".$vmcuNull."\n"."V_MCU mins: ".$vmcuMin."\n"."V_MCU max: ".$vmcuMax."\n"."Date nulls: ".$dateNull."\n"."Date mins: ".$dateMin."\n"."Date Max: ".$dateMax."\n"."Problems : ".$probs."\n"."Wrong Dates: ".$wrongDateString."\n"."V_IN nulls: ".$vinNulls."\n"."V_IN nulls: ".$vmcuNulls;
-
-        $funcs = 'non-critical'.PHP_EOL;
-        dd($string);
-
-        // return $datas;
-        return view('layouts/tester', compact('datas'));
+        // return $data;
+        return view('layouts.analyzer', compact('data'));
     }
 }

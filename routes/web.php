@@ -78,7 +78,8 @@ Route::get('/configuresensor', function () {
     return view('layouts/configuresensor');
 });
 
-Route::get('/tester', 'NodeStatusAnalyzerController@analyze');
+Route::get('/analyze', 'NodeStatusAnalyzerController@analyze');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

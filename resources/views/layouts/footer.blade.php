@@ -1,3 +1,3 @@
 <footer class="footer">
-                2018 © Wimea ICT production. Rights reserved
+                &copy; 2018 - <?php echo date('Y'); ?> Wimea AWS Monitor ICT production. All Rights reserved.
 </footer>
