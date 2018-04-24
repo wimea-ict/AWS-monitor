@@ -100,7 +100,12 @@
                 $('#date_opened').val(obj["Opened"]);
                 $('#date_closed').val(obj["Closed"]);
                 $('#station_type').val(obj["StationType"]);
-
+                $('#country').val(obj["Country"]);
+                
+                if(obj["stationStatus"]=="on")
+                    $('#station_status').prop('checked', true);
+                else 
+                    $('#station_status').prop('checked', false);
                 
             });
 
@@ -419,6 +424,8 @@
                 $('#groundps').val(obj["ps_gnd"]);
                 $('#groundpo').val(obj["p0_lst60_gnd"]);
                 $('#gndup').val(obj["up_gnd"]);
+                $('#gndt').val(obj["t_gnd"]);
+                $('#v_a2').val(obj["v_a2_gnd"]);
                 $('#groundrain_pulses').val(obj["ps_gnd"]);
                 $('#gndtxt_value').val(obj["txt_gnd_value"]);
                 

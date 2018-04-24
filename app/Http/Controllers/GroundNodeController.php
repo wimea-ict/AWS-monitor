@@ -237,12 +237,14 @@ class GroundNodeController extends Controller
             $groundNode->v_mcu_min_value = $request->get('gdv_mcu_min_value');
             $groundNode->v_mcu_gnd  = $request->get('gdv_mcu_label');
             $groundNode->v_a1_gnd= $request->get('smidentifier_used');
-            $groundNode->v_a2_gnd =$request->get('stidentifier_used');
+            $groundNode->v_a2_gnd =$request->get('v_a2');
             $groundNode->ps_gnd =$request->get('groundps');
             $groundNode->node_status= $this->getStatus($request,'gndnode_status');
             $groundNode->txt_gnd_value = $request->get('gndtxt_value');
             $groundNode->up_gnd = $request->get('gndup');
             $groundNode->p0_lst60_gnd = $request->get('groundpo');
+            $groundNode->t1_gnd = $request->get('stidentifier_used');
+            $groundNode->t_gnd = $request->get('gndt');
                      
             $groundNode->save();
         $soilTemperature = Sensor::where('node_id',$id)

@@ -65,6 +65,14 @@
                                                     <input class="form-control" id="station_number" name="station_number" type="text">
                                                 </div>
                                         <section style="padding-bottom:30px;">
+                                        <div class="form-group clearfix">
+                                                <div class="col-sm-12  control-label text-right">
+                                                                                    <label class="switch">
+                                                                                            <input type="checkbox" name="station_status" value="Yes" checked>
+                                                                                            <span class="slider round"></span>
+                                                                                    </label>
+                                                </div>
+                                            </div>
                                             <div class="form-group clearfix">
                                                 <label class="col-lg-2 control-label" for="sname">Station name</label>
                                                 <div class="col-lg-4">
@@ -130,8 +138,13 @@
                                                 <div class="col-lg-4">
                                                     <input id="station_type" name="station_type" type="text" class="form-control">
                                                 </div>
+                                                <label class="col-lg-2 control-label " for="station_type">Country</label>
+                                                <div class="col-lg-4">
+                                                    <input id="country" name="country" type="text" class="form-control">
+                                                </div>
                                                 
                                             </div>
+
                                             
                                         </section>
 

@@ -18,7 +18,7 @@
                                             <div class="form-group clearfix">
                                                 <div class="col-sm-12  control-label text-right">
                                                                                     <label class="switch">
-                                                                                            <input type="checkbox" name="wssensor_status" value="Yes" checked>
+                                                                                            <input type="checkbox" name="station_status" value="Yes" checked>
                                                                                             <span class="slider round"></span>
                                                                                     </label>
                                                 </div>
@@ -39,10 +39,9 @@
                                                     <input id="slocation" name="slocation" type="text" class="form-control">
 
                                                 </div>
-                                                <label class="col-lg-2 control-label " for="city" >City</label>
+                                                <label class="col-lg-2 control-label " for="region">Region</label>
                                                 <div class="col-lg-4">
-                                                    <input id="city" name="city" type="text" class="form-control">
-
+                                                    <input id="region" name="region" type="text" class="form-control">
                                                 </div>
                                             </div>
 
@@ -56,16 +55,7 @@
                                                     <input id="latitude" name="latitude" type="number" class="form-control">
                                                 </div>
                                             </div>
-                                            <div class="form-group clearfix">
-                                                <label class="col-lg-2 control-label " for="code">Code</label>
-                                                <div class="col-lg-4">
-                                                    <input id="code" name="code" type="text" class="form-control">
-                                                </div>
-                                                <label class="col-lg-2 control-label " for="region">Region</label>
-                                                <div class="col-lg-4">
-                                                    <input id="region" name="region" type="text" class="form-control">
-                                                </div>
-                                            </div>
+                                            
                                             
                                             <div class="form-group clearfix">
                                                 <label class="col-lg-2 control-label " for="dateopened">Date opened</label>
@@ -121,13 +111,13 @@
                                                 <div class="panel panel-default"> 
                                                     <div class="panel-heading"> 
                                                         <h4 class="panel-title"> 
-                                                            <a data-toggle="collapse" data-parent="#accordion-test-2" href="#collapsefour-2" aria-expanded="false" class="collapsed" >
+                                                            <a data-toggle="collapse" data-parent="#accordion-test-2" href="#collapsefour-2" aria-expanded="true" class="collapsed" >
                                                                 Node Status Configurations
 
                                                                </a> 
                                                         </h4> 
                                                     </div> 
-                                                    <div id="collapsefour-2" class="panel-collapse collapse"> 
+                                                    <div id="collapsefour-2" class="panel-collapse collapse in"> 
                                                         <div class="panel-body">
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 col-lg-offset-3 control-label " for="10txt_value">TXT value</label>
@@ -415,13 +405,13 @@
                                                 <div class="panel panel-default"> 
                                                     <div class="panel-heading"> 
                                                         <h4 class="panel-title"> 
-                                                            <a data-toggle="collapse" data-parent="#accordion-test-5" href="#collapsesix-2" aria-expanded="false" class="collapsed" >
+                                                            <a data-toggle="collapse" data-parent="#accordion-test-5" href="#collapsesix-2" aria-expanded="true" class="collapsed" >
                                                                 Node Status Configurations
 
                                                                </a> 
                                                         </h4> 
                                                     </div> 
-                                                    <div id="collapsesix-2" class="panel-collapse collapse"> 
+                                                    <div id="collapsesix-2" class="panel-collapse collapse in"> 
                                                         <div class="panel-body">
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 col-lg-offset-3 control-label " for="2txt_value">TXT value</label>
@@ -651,13 +641,13 @@
                                             <div class="panel panel-default"> 
                                                     <div class="panel-heading"> 
                                                         <h4 class="panel-title"> 
-                                                            <a data-toggle="collapse" data-parent="#accordion-test-4" href="#collapsenight-2" aria-expanded="false" class="collapsed" >
+                                                            <a data-toggle="collapse" data-parent="#accordion-test-4" href="#collapsenight-2" aria-expanded="true" class="collapsed" >
                                                                 Node Status Configurations
 
                                                                </a> 
                                                         </h4> 
                                                     </div> 
-                                                    <div id="collapsenight-2" class="panel-collapse collapse"> 
+                                                    <div id="collapsenight-2" class="panel-collapse collapse in"> 
                                                         <div class="panel-body">
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 col-lg-offset-3 control-label " for="2txt_value">TXT value</label>
@@ -780,6 +770,17 @@
                                                                                 <div class="col-lg-4">
                                                                                     <input id="gndut" name="gndut" type="text" class="form-control" value="<?php echo e($stationdetails['ground_node']['ut']); ?>">
                                                                                 </div>
+                                                                            </div>
+                                                                            <div class="form-group clearfix">
+                                                                                <label class="col-lg-2 control-label " for="gndps">Box Temperature key</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="gndup" name="gndt" type="text" class="form-control" value="<?php echo e($stationdetails['ground_node']['t']); ?>">
+                                                                                </div>
+                                                                                <label class="col-lg-2 control-label " for="gndps">V A2 label</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="gndup" name="v_a2" type="text" class="form-control" value="<?php echo e($stationdetails['ground_node']['v_a2']); ?>">
+                                                                                </div>
+                                                                                
                                                                             </div>
                                                                             
                                                                             
@@ -964,13 +965,13 @@
                                             <div class="panel panel-default"> 
                                                     <div class="panel-heading"> 
                                                         <h4 class="panel-title"> 
-                                                            <a data-toggle="collapse" data-parent="#accordion-test-3" href="#collapsethirteen-2" aria-expanded="false" class="collapsed" >
+                                                            <a data-toggle="collapse" data-parent="#accordion-test-3" href="#collapsethirteen-2" aria-expanded="true" class="collapsed" >
                                                                 Node Status Configurations
 
                                                                </a> 
                                                         </h4> 
                                                     </div> 
-                                                    <div id="collapsethirteen-2" class="panel-collapse collapse"> 
+                                                    <div id="collapsethirteen-2" class="panel-collapse collapse in"> 
                                                         <div class="panel-body">
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 col-lg-offset-3 control-label " for="2txt_value">TXT value</label>

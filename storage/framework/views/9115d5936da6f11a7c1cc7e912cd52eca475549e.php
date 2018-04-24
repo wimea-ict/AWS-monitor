@@ -24,11 +24,11 @@
                                             <tbody>
                                             <?php $__currentLoopData = $stations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $station): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <tr>
-                                                    <td><?php echo e($station['station_name']); ?></td>
-                                                    <td><?php echo e($station['station_number']); ?></td>
-                                                    <td><?php echo e($station['station_location']); ?></td>
-                                                    <td><?php echo e($station['longitude']); ?></td>
-                                                    <td><?php echo e($station['latitude']); ?></td>
+                                                    <td><?php echo e($station['StationName']); ?></td>
+                                                    <td><?php echo e($station['StationNumber']); ?></td>
+                                                    <td><?php echo e($station['Location']); ?></td>
+                                                    <td><?php echo e($station['Longitude']); ?></td>
+                                                    <td><?php echo e($station['Latitude']); ?></td>
                                                     <td><button class="btn btn-icon btn-success m-b-5 edit-station-button" data-toggle="modal" id="<?php echo e(htmlspecialchars(json_encode($station))); ?>" data-target="#full-width-modal"  data-delete-link="" > <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
                                                 </tr>
                                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>    
@@ -64,6 +64,14 @@
                                                     <input class="form-control" id="station_number" name="station_number" type="text">
                                                 </div>
                                         <section style="padding-bottom:30px;">
+                                        <div class="form-group clearfix">
+                                                <div class="col-sm-12  control-label text-right">
+                                                                                    <label class="switch">
+                                                                                            <input type="checkbox" name="station_status" value="Yes" checked>
+                                                                                            <span class="slider round"></span>
+                                                                                    </label>
+                                                </div>
+                                            </div>
                                             <div class="form-group clearfix">
                                                 <label class="col-lg-2 control-label" for="sname">Station name</label>
                                                 <div class="col-lg-4">
@@ -80,11 +88,10 @@
                                                     <input id="slocation" name="slocation" type="text" class="form-control">
 
                                                 </div>
-                                                <label class="col-lg-2 control-label " for="city" >City</label>
+                                                <label class="col-lg-2 control-label " for="region">Region</label>
                                                 <div class="col-lg-4">
-                                                    <input id="city" name="city" type="text" class="form-control">
-
-                                                </div>
+                                                    <input id="region" name="region" type="text" class="form-control">
+                                                </div>                                              
                                             </div>
 
                                             <div class="form-group clearfix">
@@ -97,16 +104,7 @@
                                                     <input id="latitude" name="latitude" type="number" class="form-control">
                                                 </div>
                                             </div>
-                                            <div class="form-group clearfix">
-                                                <label class="col-lg-2 control-label " for="code">Code</label>
-                                                <div class="col-lg-4">
-                                                    <input id="code" name="code" type="text" class="form-control">
-                                                </div>
-                                                <label class="col-lg-2 control-label " for="region">Region</label>
-                                                <div class="col-lg-4">
-                                                    <input id="region" name="region" type="number" class="form-control">
-                                                </div>
-                                            </div>
+                                            
                                             
                                             <div class="form-group clearfix">
                                                 <label class="col-lg-2 control-label " for="dateopened">Date opened</label>
@@ -127,10 +125,15 @@
                                             <div class="form-group clearfix">
                                                 <label class="col-lg-2 control-label " for="station_type">station Type</label>
                                                 <div class="col-lg-4">
-                                                    <input id="station_type" name="station_type" type="number" class="form-control">
+                                                    <input id="station_type" name="station_type" type="text" class="form-control">
+                                                </div>
+                                                <label class="col-lg-2 control-label " for="station_type">Country</label>
+                                                <div class="col-lg-4">
+                                                    <input id="country" name="country" type="text" class="form-control">
                                                 </div>
                                                 
                                             </div>
+
                                             
                                         </section>
 

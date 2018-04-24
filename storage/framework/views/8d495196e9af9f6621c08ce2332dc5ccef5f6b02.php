@@ -26,8 +26,8 @@
                                                 <?php $__currentLoopData = $stations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $station): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                     <?php if($station['station_id']== $groundNode['station_id'] ): ?>
                                                     <tr>
-                                                        <td><?php echo e($station['station_name']); ?></td>
-                                                        <td><?php echo e($station['station_location']); ?></td>
+                                                        <td><?php echo e($station['StationName']); ?></td>
+                                                        <td><?php echo e($station['Location']); ?></td>
                                                         <td><?php echo e($groundNode['txt_gnd']); ?></td>
                                                         <td><?php echo e($groundNode['e64_gnd']); ?></td>
                                                         <td><?php echo e($groundNode['node_status']); ?></td>
@@ -176,10 +176,18 @@
                                                                                     <input id="gndut" name="gndut" type="text" class="form-control" value="">
                                                                                 </div>
                                                                             </div>
+                                                                            <div class="form-group clearfix">
+                                                                                <label class="col-lg-2 control-label " for="gndps">Box Temperature key</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="gndt" name="gndt" type="text" class="form-control" >
+                                                                                </div>
+                                                                                <label class="col-lg-2 control-label " for="gndps">V A2 key</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="v_a2" name="v_a2" type="text" class="form-control" >
+                                                                                </div>
+                                                                                
+                                                                            </div>
                                                                             
-                                                                            
-                                                                            
-                                                                                                                                                              
                                                         </div> 
                                                     </div> 
                                                 </div>
