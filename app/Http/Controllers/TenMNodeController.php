@@ -9,6 +9,7 @@ use station\Sensor;
 use station\TenMeterNode;
 use station\NodeStatus;
 use DB;
+use URL;
 use station\ObservationSlip;
 class TenMNodeController extends Controller
 {
@@ -37,7 +38,7 @@ class TenMNodeController extends Controller
 
    
     public function report1(){
-        $data["action"]="{{ URL::to('reports10m') }}";
+        $data["action"]=URL::to('reports10m');
         $data["stations"]=Station::all();
         $data["heading"]="10m Node Reports";
            

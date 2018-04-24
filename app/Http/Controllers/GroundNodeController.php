@@ -10,6 +10,7 @@ use station\GroundNode;
 use station\NodeStatus;
 use station\ObservationSlip;
 use DB;
+use URL;
 class GroundNodeController extends Controller
 {
     /**
@@ -38,7 +39,7 @@ class GroundNodeController extends Controller
 
 
     public function report1(){
-        $data["action"]="/reportsGnd";
+        $data["action"]=URL::to('reportsGnd');
         $data["stations"]=Station::all();
         $data["heading"]="Ground Node Reports";
         

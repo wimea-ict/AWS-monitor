@@ -9,6 +9,7 @@ use station\TwoMeterNode;
 use station\NodeStatus;
 use station\ObservationSlip;
 use DB;
+use URL;
 class TwoMNodeController extends Controller
 {
     /**
@@ -31,7 +32,7 @@ class TwoMNodeController extends Controller
     }
 
     public function report1(){
-        $data["action"]="{{ URL::to('reports2m') }}";
+        $data["action"]=URL::to('reports2m');
         $data["stations"]=Station::all();
         $data["heading"]="2m Node Reports";
            
