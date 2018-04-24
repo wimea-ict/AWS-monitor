@@ -431,7 +431,7 @@ header {
 
 .content {
   margin-left: 230px;
-  padding-bottom: 50px;
+  padding-bottom: 5px;
 }
 
 .content > .container-fluid {
@@ -1247,7 +1247,7 @@ lesshat-selector {
 
 .wizard > .content {
   background: #fff;
-  min-height: 800px;
+  
 }
 
 .wizard > .content > .body {
