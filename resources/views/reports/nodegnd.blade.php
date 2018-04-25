@@ -134,6 +134,9 @@
                   labels: [ "x", "soil_moisture"]
               });
            
+            $('#station_id').find('option[selected="selected"]').each(function(){
+                $(this).prop('selected', true);
+            });
     
         });//end out function
 

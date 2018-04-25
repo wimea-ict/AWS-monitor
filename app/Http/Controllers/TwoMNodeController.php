@@ -55,7 +55,7 @@ class TwoMNodeController extends Controller
             ->select('txt_2m_value')
             ->first();
        
-        
+        if(sizeof($station2mNodeCofigs)>0){
         //get node status where the configulations are the ones specifie above
         $nodeStatus=NodeStatus::where('TXT','=',$station2mNodeCofigs->txt_2m_value)
                         
@@ -65,7 +65,9 @@ class TwoMNodeController extends Controller
                         ->limit(1000)
                         ->get();
         
-        
+        }else{
+            $nodeStatus=array();//set to empty array if no configulations were returned
+        }
         
 
         foreach ($nodeStatus as $status){
@@ -145,6 +147,7 @@ class TwoMNodeController extends Controller
        
         
         $data["action"]="/reports2m";
+        $data["selected_station"]=$station_id;
         $data["stations"]=Station::all();
         $data["heading"]="2m Node Reports";
         return view("reports.node2m",$data);

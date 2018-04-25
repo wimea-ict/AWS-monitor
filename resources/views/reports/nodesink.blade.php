@@ -78,7 +78,10 @@
               {
                   labels: [ "x", "pressure" ]
               });
-           
+              
+           $('#station_id').find('option[selected="selected"]').each(function(){
+                $(this).prop('selected', true);
+            });
         });//end out function
     </script>
 @endsection

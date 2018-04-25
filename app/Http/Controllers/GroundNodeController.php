@@ -62,14 +62,20 @@ class GroundNodeController extends Controller
             ->select('txt_gnd_value')
             ->first();
        
-        //get node status where the configulations are the ones specifie above
-        $nodeStatus=NodeStatus::where('TXT','=',$stationgndNodeCofigs->txt_gnd_value)
+        if(sizeof($stationgndNodeCofigs)>0){
+             //get node status where the configulations are the ones specifie above
+            $nodeStatus=NodeStatus::where('TXT','=',$stationgndNodeCofigs->txt_gnd_value)
                         
                         ->select(DB::raw("CONCAT(date,' ',time)  AS y"),
                                     'V_MCU','V_IN')
                         ->oldest('date_time_recorded')
                         ->limit(1000)
                         ->get();
+        }else{
+            $nodeStatus=array();//set it to an empty array
+        }
+
+       
         
         
 
@@ -159,6 +165,7 @@ class GroundNodeController extends Controller
         $data["soil_moisture"]=$SoilMoisture_graph_data;
 
         $data["action"]="{{ URL::to('reportsGnd') }}";
+        $data["selected_station"]=$station_id;
         $data["stations"]=Station::all();
         $data["heading"]="Ground Node Reports";
         return view("reports.nodegnd",$data);
