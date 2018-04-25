@@ -146,7 +146,7 @@ class TwoMNodeController extends Controller
 
        
         
-        $data["action"]="/reports2m";
+        $data["action"]=URL::to('reports2m');
         $data["selected_station"]=$station_id;
         $data["stations"]=Station::all();
         $data["heading"]="2m Node Reports";

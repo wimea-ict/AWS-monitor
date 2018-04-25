@@ -115,7 +115,7 @@ class SinkNodeController extends Controller
         $data["pressure"]=$pressure_data;
 
         $data["selected_station"]=$station_id;
-        $data["action"]="/reportsSink";
+        $data["action"]=URL::to('reportsSink');
         $data["stations"]=Station::all();
         $data["heading"]="Sink Node Reports";
         return view("reports.nodesink",$data);

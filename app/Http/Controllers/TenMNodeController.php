@@ -147,7 +147,7 @@ class TenMNodeController extends Controller
 
         $wind_direction_data=array();
         $i=1;
-        foreach($wind_direction as $wind_d){
+    foreach($wind_direction as $wind_d){
             $temp_array=array($i,(float)$wind_d->Wind_Direction);
             $wind_direction_data[]=$temp_array;
             $i++;
@@ -156,7 +156,7 @@ class TenMNodeController extends Controller
 
         $data["wind_direction_sensor"]=$wind_direction_data;
         $data["selected_station"]=$station_id;
-        $data["action"]="/reports10m";
+        $data["action"]=URL::to('reports10m');
         $data["stations"]=Station::all();
         $data["heading"]="Ground Node Reports";
         return view("reports.node10m",$data);
