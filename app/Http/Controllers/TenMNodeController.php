@@ -61,9 +61,9 @@ class TenMNodeController extends Controller
             ->select('txt_10m_value')
             ->first();
        
-        
-        //get node status where the configulations are the ones specifie above
-        $nodeStatus=NodeStatus::where('TXT','=',$station10mNodeCofigs->txt_10m_value)
+        if(sizeof($station10mNodeCofigs)>0){
+             //get node status where the configulations are the ones specifie above
+            $nodeStatus=NodeStatus::where('TXT','=',$station10mNodeCofigs->txt_10m_value)
                         
                         ->select(DB::raw("CONCAT(date,' ',time)  AS y"),
                                     'V_MCU','V_IN')
@@ -71,6 +71,10 @@ class TenMNodeController extends Controller
                         ->limit(1000)
                         ->get();
         
+        }else{
+            $nodeStatus=array();// set to empty array if no configulations where returned
+        }
+       
         
         $dyGraph_data=array();
         $i=1;
@@ -150,7 +154,7 @@ class TenMNodeController extends Controller
         
 
         $data["wind_direction_sensor"]=$wind_direction_data;
-
+        $data["selected_station"]=$station_id;
         $data["action"]="/reports10m";
         $data["stations"]=Station::all();
         $data["heading"]="Ground Node Reports";

@@ -52,8 +52,10 @@ class SinkNodeController extends Controller
             ->select('txt_sink_value')
             ->first();
        
-        
-        //get node status where the configulations are the ones specifie above
+            //check if any configulations for this station where returned
+        if(sizeof($stationSinkNodeCofigs)>0){
+
+            //get node status where the configulations are the ones specifie above
         $nodeStatus=NodeStatus::where('TXT','=',$stationSinkNodeCofigs->txt_sink_value)
                         
                         ->select(DB::raw("CONCAT(date,' ',time)  AS y"),
@@ -61,6 +63,12 @@ class SinkNodeController extends Controller
                         ->oldest('date_time_recorded')
                         ->limit(1000)
                         ->get();
+
+        }else{
+            $nodeStatus=array();//set node status to empty array 
+        }
+        
+        
         
         $dyGraph_data=array();
         $i=1;
@@ -105,7 +113,7 @@ class SinkNodeController extends Controller
 
         $data["pressure"]=$pressure_data;
 
-
+        $data["selected_station"]=$station_id;
         $data["action"]="/reportsSink";
         $data["stations"]=Station::all();
         $data["heading"]="Sink Node Reports";
