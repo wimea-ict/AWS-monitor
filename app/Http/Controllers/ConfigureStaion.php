@@ -3,7 +3,7 @@
 namespace station\Http\Controllers;
 use App\layouts;
 use station\Station;
-
+use Auth;
 use Illuminate\Http\Request;
 
 class ConfigureStaion extends Controller
@@ -82,6 +82,20 @@ class ConfigureStaion extends Controller
             $id=$request->get('station_number');
         $station = Station::where('StationNumber', $id)->first();
         $station->StationName = $request->get('station_name');
+       
+        $station->StationNumber = $request->get('snumber');
+        $station->Location = $request->get('slocation');
+        $station->Latitude = $request->get('latitude');
+        $station->Longitude = $request->get('longitude');
+            /* 'city' => $request->get('city'),
+            'code' => $request->get('code'), */
+            $station->StationRegion = $request->get('region');
+            $station->Opened = $request->get('date_opened');
+            $station->Closed = $request->get('date_closed');
+            $station->StationType = $request->get('station_type');
+            $station->StationStatus= $request->get('station_status');
+            $station->Country= $request->get('country');
+            $station->SubmittedBy= Auth::user()->name;
         $station->save();
         }
         return redirect('/configurestation');

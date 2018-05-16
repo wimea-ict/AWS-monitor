@@ -97,8 +97,9 @@
                 //$('#city').val(obj["city"]);
                 //$('#code').val(obj["code"]);
                 $('#region').val(obj["StationRegion"]);
-                $('#date_opened').val(obj["Opened"]);
-                $('#date_closed').val(obj["Closed"]);
+                alert(obj["Opened"]);
+                $('#date_opened').val(Date.parse(obj["Opened"]));
+                $('#date_closed').val(Date.parse(obj["Closed"]));
                 $('#station_type').val(obj["StationType"]);
                 $('#country').val(obj["Country"]);
                 

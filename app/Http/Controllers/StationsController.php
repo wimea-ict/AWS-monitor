@@ -32,7 +32,7 @@ class StationsController extends Controller
                                     "txt_key"=>"TXT",
                                     "mac_add"=>"E64",
                                     "date"=>"D",
-                                    "vin_label"=>"VIN",
+                                    "vin_label"=>"V_IN",
                                     "time"=>"TZ",
                                     "gwlat"=>"GW_LAT",
                                     "gwlong"=>"GW_LONG",
@@ -45,7 +45,7 @@ class StationsController extends Controller
                                     "ps"=>"PS",
                                     "v_mcu_max_value"=>"3",
                                     "v_mcu_min_value"=>"1",
-                                    "v_mcu_label"=>"VMCU",
+                                    "v_mcu_label"=>"V_MCU",
                                     "ut"=>"UT",
                                 ),
                                 "ground_node"=>array(
@@ -53,7 +53,7 @@ class StationsController extends Controller
                                     "txt_key"=>"TXT",
                                     "mac_add"=>"E64",
                                     "date"=>"D",
-                                    "vin_label"=>"VIN",
+                                    "vin_label"=>"V_IN",
                                     "time"=>"TZ",
                                     "ut"=>"UT",
                                     "gwlat"=>"GW_LAT",
@@ -67,7 +67,7 @@ class StationsController extends Controller
                                     "ps"=>"PS",
                                     "v_mcu_max_value"=>"3",
                                     "v_mcu_min_value"=>"1",
-                                    "v_mcu_label"=>"VMCU",
+                                    "v_mcu_label"=>"V_MCU",
                                     "po"=>"P0",
                                     "rain_pulses"=>"P0_IST60",
                                     "up"=>"UP",
@@ -80,7 +80,7 @@ class StationsController extends Controller
                                     "txt_key"=>"TXT",
                                     "mac_add"=>"E64",
                                     "date"=>"D",
-                                    "vin_label"=>"VIN",
+                                    "vin_label"=>"V_IN",
                                     "time"=>"TZ",
                                     "gwlat"=>"GW_LAT",
                                     "gwlong"=>"GW_LONG",
@@ -93,7 +93,7 @@ class StationsController extends Controller
                                     "ps"=>"PS",
                                     "v_mcu_max_value"=>"3",
                                     "v_mcu_min_value"=>"1",
-                                    "v_mcu_label"=>"VMCU",
+                                    "v_mcu_label"=>"V_MCU",
                                     "ut"=>"UT",
                                     "up"=>"UP",
                                     
@@ -103,7 +103,7 @@ class StationsController extends Controller
                                     "txt_key"=>"TXT",
                                     "mac_add"=>"E64",
                                     "date"=>"D",
-                                    "vin_label"=>"VIN",
+                                    "vin_label"=>"V_IN",
                                     "time"=>"TZ",
                                     "gwlat"=>"GW_LAT",
                                     "gwlong"=>"GW_LONG",
@@ -116,7 +116,7 @@ class StationsController extends Controller
                                     "ps"=>"PS",
                                     "v_mcu_max_value"=>"3",
                                     "v_mcu_min_value"=>"1",
-                                    "v_mcu_label"=>"VMCU",
+                                    "v_mcu_label"=>"V_MCU",
                                     "ut"=>"UT",
                                 ),
                                 "Temp_semsor"=>array(
@@ -506,7 +506,7 @@ class StationsController extends Controller
             ]);
             $PressureSensorCreation->save();
             
-          return redirect('/addstation');
+          return redirect('/configurestation');
     }
 
     /**

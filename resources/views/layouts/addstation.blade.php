@@ -27,43 +27,43 @@
                                             <div class="form-group clearfix">
                                                 <label class="col-lg-2 control-label" for="sname">Station name</label>
                                                 <div class="col-lg-4">
-                                                    <input class="form-control" id="sname" name="sname" type="text">
+                                                    <input class="form-control" id="sname" name="sname" type="text" required>
                                                 </div>
                                                 <label class="col-lg-2 control-label" for="snumber">Station number</label>
                                                 <div class="col-lg-4">
-                                                    <input class="form-control" id="snumber" name="snumber" type="text">
+                                                    <input class="form-control" id="snumber" name="snumber" type="text" required>
                                                 </div>
                                             </div>
                                             <div class="form-group clearfix">
                                                 <label class="col-lg-2 control-label " for="slocation">Station location</label>
                                                 <div class="col-lg-4">
-                                                    <input id="slocation" name="slocation" type="text" class="form-control">
+                                                    <input id="slocation" name="slocation" type="text" class="form-control" required>
 
                                                 </div>
                                                 <label class="col-lg-2 control-label " for="region">Region</label>
                                                 <div class="col-lg-4">
-                                                    <input id="region" name="region" type="text" class="form-control">
+                                                    <input id="region" name="region" type="text" class="form-control" required>
                                                 </div>
                                             </div>
 
                                             <div class="form-group clearfix">
                                                 <label class="col-lg-2 control-label " for="longitude">Longitude</label>
                                                 <div class="col-lg-4">
-                                                    <input id="longitude" name="longitude" type="number" class="form-control">
+                                                    <input id="longitude" name="longitude" type="number" class="form-control" required>
                                                 </div>
                                                 <label class="col-lg-2 control-label " for="latitude">Latitude</label>
                                                 <div class="col-lg-4">
-                                                    <input id="latitude" name="latitude" type="number" class="form-control">
+                                                    <input id="latitude" name="latitude" type="number" class="form-control" required>
                                                 </div>
                                             </div>
                                             {{--  <div class="form-group clearfix">
                                                 <label class="col-lg-2 control-label " for="code">Code</label>
                                                 <div class="col-lg-4">
-                                                    <input id="code" name="code" type="text" class="form-control">
+                                                    <input id="code" name="code" type="text" class="form-control" required>
                                                 </div>
                                                 <label class="col-lg-2 control-label " for="city" >City</label>
                                                 <div class="col-lg-4">
-                                                    <input id="city" name="city" type="text" class="form-control">
+                                                    <input id="city" name="city" type="text" class="form-control" required>
 
                                                 </div>
                                             </div>  --}}
@@ -72,14 +72,14 @@
                                                 <label class="col-lg-2 control-label " for="dateopened">Date opened</label>
                                                 <div class="col-lg-4">
                                                     <div class="input-group">
-                                                        <input type="date" class="form-control" placeholder="mm/dd/yyyy" id="datepicker" name="date_opened">
+                                                        <input type="date" class="form-control" placeholder="mm/dd/yyyy" id="datepicker" name="date_opened" required>
                                                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                                     </div>
                                                 </div>
                                                 <label class="col-lg-2 control-label " for="dateclosed">Date closed</label>
                                                 <div class="col-lg-4">
                                                 <div class="input-group">
-                                                        <input type="date" class="form-control" placeholder="mm/dd/yyyy" id="datepicker" name="date_closed">
+                                                        <input type="date" class="form-control" placeholder="mm/dd/yyyy" id="datepicker" name="date_closed" required>
                                                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                                     </div>
                                                 </div>
@@ -87,12 +87,12 @@
                                             <div class="form-group clearfix">
                                                 <label class="col-lg-2 control-label " for="station_type">station Type</label>
                                                 <div class="col-lg-4">
-                                                    <input id="station_type" name="station_type" type="text" class="form-control">
+                                                    <input id="station_type" name="station_type" type="text" class="form-control" required>
                                                 </div>
                                             
                                                 <label class="col-lg-2 control-label " for="station_type">Country</label>
                                                 <div class="col-lg-4">
-                                                    <input id="country" name="country" type="text" class="form-control">
+                                                    <input id="country" name="country" type="text" class="form-control" required>
                                                 </div>
                                                 
                                             </div>
@@ -139,7 +139,7 @@
                                                                             </div>
                              
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="10vin_label">v_in label</label>
+                                                                                <label class="col-lg-2 control-label " for="10vin_label">v in label</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="10vin_label" name="10vin_label" type="text" class="form-control" value="{{ $stationdetails['10m_node']['vin_label']}}">
                                                                                 </div>
@@ -153,17 +153,17 @@
                                                                                 <div class="col-lg-4">
                                                                                     <input id="10mac_add" name="10mac_add" type="text" class="form-control" value="{{ $stationdetails['10m_node']['mac_add']}}">
                                                                                 </div>
-                                                                                <label class="col-lg-2 control-label " for="10v_in_min_value">v_in min value</label>
+                                                                                <label class="col-lg-2 control-label " for="10v_in_min_value">v in min value</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="10v_in_min_value" name="10v_in_min_value" type="number" class="form-control" value="{{ $stationdetails['10m_node']['v_in_min_value']}}">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="10v_in_max_value">v_in max value</label>
+                                                                                <label class="col-lg-2 control-label " for="10v_in_max_value">v in max value</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="10v_in_max_value" name="10v_in_max_value" type="number" class="form-control" value="{{ $stationdetails['10m_node']['v_in_max_value']}}">
                                                                                 </div>
-                                                                                <label class="col-lg-2 control-label " for="userName2">v_mcu label</label>
+                                                                                <label class="col-lg-2 control-label " for="userName2">v mcu label</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="10v_mcu_label" name="10v_mcu_label" type="text" class="form-control" value="{{ $stationdetails['10m_node']['v_mcu_label']}}">
                                                                                 </div>
@@ -179,11 +179,11 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="10v_mcu_max_value">v_mcu max value</label>
+                                                                                <label class="col-lg-2 control-label " for="10v_mcu_max_value">v mcu max value</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="10v_mcu_max_value" name="10v_mcu_max_value" type="number" class="form-control" value="{{ $stationdetails['10m_node']['v_mcu_max_value']}}">
                                                                                 </div>
-                                                                                <label class="col-lg-2 control-label " for="10v_mcu_min_value">v_mcu min value</label>
+                                                                                <label class="col-lg-2 control-label " for="10v_mcu_min_value">v mcu min value</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="10v_mcu_min_value" name="10v_mcu_min_value" type="text" class="form-control" value="{{ $stationdetails['10m_node']['v_mcu_min_value']}}">
                                                                                 </div>
@@ -269,21 +269,16 @@
                                                                             </div>
                                                                             
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="10max_value">max_value</label>
+                                                                                <label class="col-lg-2 control-label " for="10max_value">maximum value</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="10max_value" name="10max_value" type="number" class="form-control" value="{{ $stationdetails['insulation_sensor']['max_value']}}">
                                                                                 </div>
-                                                                                <label class="col-lg-2 control-label " for="10min_value">min_value</label>
+                                                                                <label class="col-lg-2 control-label " for="10min_value">minimum value</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="10min_value" name="10min_value" type="number" class="form-control" value="{{ $stationdetails['insulation_sensor']['min_value']}}">
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="10max_value">max_value</label>
-                                                                                <div class="col-lg-4">
-                                                                                    <input id="10max_value" name="10max_value" type="number" class="form-control" value="{{ $stationdetails['insulation_sensor']['max_value']}}">
-                                                                                </div>
-                                                                            </div>
+                                                                            
                                                                                
                                                         </div> 
                                                     </div> 
@@ -324,11 +319,11 @@
                                                                             </div>
                                                                             
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="wsmax_value">max_value</label>
+                                                                                <label class="col-lg-2 control-label " for="wsmax_value">maximum value</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="wsmax_value" name="wsmax_value" type="number" class="form-control" value="{{ $stationdetails['wind_speed_semsor']['max_value']}}">
                                                                                 </div>
-                                                                                <label class="col-lg-2 control-label " for="wsmin_value">min_value</label>
+                                                                                <label class="col-lg-2 control-label " for="wsmin_value">minimum value</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="wsmin_value" name="wsmin_value" type="number" class="form-control" value="{{ $stationdetails['wind_speed_semsor']['min_value']}}">
                                                                                 </div>
@@ -372,11 +367,11 @@
                                                                             </div>
                                                                         
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="confirm2">max_value</label>
+                                                                                <label class="col-lg-2 control-label " for="confirm2">maximum value</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="wdmax_value" name="wdmax_value" type="number" class="form-control" value="{{ $stationdetails['wind_direction_semsor']['max_value']}}">
                                                                                 </div>
-                                                                                <label class="col-lg-2 control-label " for="wdmin_value">min_value</label>
+                                                                                <label class="col-lg-2 control-label " for="wdmin_value">minimum value</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="wdmin_value" name="wdmin_value" type="number" class="form-control" value="{{ $stationdetails['wind_direction_semsor']['min_value']}}">
                                                                                 </div>
@@ -433,11 +428,11 @@
                                                                                 
                              
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="2mvin_label">v_in_label</label>
+                                                                                <label class="col-lg-2 control-label " for="2mvin_label">v in label</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="2mvin_label" name="2mvin_label" type="text" class="form-control" value="{{ $stationdetails['2m_node']['vin_label']}}">
                                                                                 </div>
-                                                                                <label class="col-lg-2 control-label " for="2mv_in_min_value">v_in_min_value</label>
+                                                                                <label class="col-lg-2 control-label " for="2mv_in_min_value">vin min value</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="2mv_in_min_value" name="2mv_in_min_value" type="number" class="form-control" value="{{ $stationdetails['2m_node']['v_in_min_value']}}">
                                                                                 </div>
@@ -454,22 +449,22 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="2mv_in_max_value">v_in_max_value</label>
+                                                                                <label class="col-lg-2 control-label " for="2mv_in_max_value">vin max value</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="2mv_in_max_value" name="2mv_in_max_value" type="number" class="form-control" value="{{ $stationdetails['2m_node']['v_in_max_value']}}">
                                                                                 </div>
-                                                                                <label class="col-lg-2 control-label " for="2mv_mcu_label">v_mcu_label</label>
+                                                                                <label class="col-lg-2 control-label " for="2mv_mcu_label">vmcu label</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="2mv_mcu_label" name="2mv_mcu_label" type="text" class="form-control" value="{{ $stationdetails['2m_node']['v_mcu_label']}}">
                                                                                 </div>
                                                                             </div>
                                                                             
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="2mv_mcu_max_value">v_mcu_max_value</label>
+                                                                                <label class="col-lg-2 control-label " for="2mv_mcu_max_value">vmcu max value</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="2mv_mcu_max_value" name="2mv_mcu_max_value" type="number" class="form-control" value="{{ $stationdetails['2m_node']['v_mcu_max_value']}}">
                                                                                 </div>
-                                                                                <label class="col-lg-2 control-label " for="2mv_mcu_min_value">v_mcu_min_value</label>
+                                                                                <label class="col-lg-2 control-label " for="2mv_mcu_min_value">vmcu min value</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="2mv_mcu_min_value" name="2mv_mcu_min_value" type="text" class="form-control" value="{{ $stationdetails['2m_node']['v_mcu_min_value']}}">
                                                                                 </div>
@@ -564,11 +559,11 @@
                                                                             </div>
                                                                             
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="rhmax_value">max_value</label>
+                                                                                <label class="col-lg-2 control-label " for="rhmax_value">max value</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="rhmax_value" name="rhmax_value" type="number" class="form-control" value="{{ $stationdetails['relative_humidity_semsor']['max_value']}}">
                                                                                 </div>
-                                                                                <label class="col-lg-2 control-label " for="rhmin_value">min_value</label>
+                                                                                <label class="col-lg-2 control-label " for="rhmin_value">minimum value</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="rhmin_value" name="rhmin_value" type="number" class="form-control" value="{{ $stationdetails['relative_humidity_semsor']['min_value']}}">
                                                                                 </div>
@@ -614,11 +609,11 @@
                                                                             </div>
                                                                            
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="tsmax_value">max_value</label>
+                                                                                <label class="col-lg-2 control-label " for="tsmax_value">maximum value</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="tsmax_value" name="tsmax_value" type="number" class="form-control" value="{{ $stationdetails['Temp_semsor']['max_value']}}">
                                                                                 </div>
-                                                                                <label class="col-lg-2 control-label " for="tsmin_value">min_value</label>
+                                                                                <label class="col-lg-2 control-label " for="tsmin_value">minimum value</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="tsmin_value" name="tsmin_value" type="number" class="form-control" value="{{ $stationdetails['Temp_semsor']['min_value']}}">
                                                                                 </div>
@@ -668,7 +663,7 @@
                                                                             </div>
                              
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="gndvin_label">v_in label</label>
+                                                                                <label class="col-lg-2 control-label " for="gndvin_label">vin label</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="gndvin_label" name="gndvin_label" type="text" class="form-control" value="{{ $stationdetails['10m_node']['vin_label']}}">
                                                                                 </div>
@@ -678,21 +673,21 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="gdv_mcu_max_value">v_mcu_max_value</label>
+                                                                                <label class="col-lg-2 control-label " for="gdv_mcu_max_value">vmcu max value</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="gdv_mcu_max_value" name="gdv_mcu_max_value" type="number" class="form-control" value="{{ $stationdetails['ground_node']['v_mcu_max_value']}}">
                                                                                 </div>
-                                                                                <label class="col-lg-2 control-label " for="gdv_mcu_min_value">v_mcu_min_value</label>
+                                                                                <label class="col-lg-2 control-label " for="gdv_mcu_min_value">vmcu min value</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="gdv_mcu_min_value" name="gdv_mcu_min_value" type="text" class="form-control" value="{{ $stationdetails['ground_node']['v_mcu_min_value']}}">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="gdv_in_max_value">v_in_max_value</label>
+                                                                                <label class="col-lg-2 control-label " for="gdv_in_max_value">vin max value</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="gdv_in_max_value" name="gdv_in_max_value" type="number" class="form-control" value="{{ $stationdetails['ground_node']['v_in_max_value']}}">
                                                                                 </div>
-                                                                                <label class="col-lg-2 control-label " for="gdv_mcu_label">v_mcu_label</label>
+                                                                                <label class="col-lg-2 control-label " for="gdv_mcu_label">vmcu label</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="gdv_mcu_label" name="gdv_mcu_label" type="text" class="form-control" value="{{ $stationdetails['ground_node']['v_mcu_label']}}">
                                                                                 </div>
@@ -702,7 +697,7 @@
                                                                                 <div class="col-lg-4">
                                                                                     <input id="gndmac_add" name="gndmac_add" type="text" class="form-control" value="{{ $stationdetails['ground_node']['mac_add']}}">
                                                                                 </div>
-                                                                                <label class="col-lg-2 control-label " for="gndv_in_min_value">v_in min value</label>
+                                                                                <label class="col-lg-2 control-label " for="gndv_in_min_value">vin min value</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="gndv_in_min_value" name="gndv_in_min_value" type="number" class="form-control" value="{{ $stationdetails['ground_node']['v_in_min_value']}}">
                                                                                 </div>
@@ -834,11 +829,11 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="ppmax_value">max_value</label>
+                                                                                <label class="col-lg-2 control-label " for="ppmax_value">maximum value</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="ppmax_value" name="ppmax_value" type="number" class="form-control" value="{{ $stationdetails['preciptation_semsor']['max_value']}}">
                                                                                 </div>
-                                                                                <label class="col-lg-2 control-label " for="ppmin_value">min_value</label>
+                                                                                <label class="col-lg-2 control-label " for="ppmin_value">minimum value</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="ppmin_value" name="ppmin_value" type="number" class="form-control" value="{{ $stationdetails['preciptation_semsor']['min_value']}}">
                                                                                 </div>
@@ -883,11 +878,11 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="stmax_value">max_value</label>
+                                                                                <label class="col-lg-2 control-label " for="stmax_value">maximum value</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="stmax_value" name="stmax_value" type="number" class="form-control" value="{{ $stationdetails['soil_temp_semsor']['max_value']}}">
                                                                                 </div>
-                                                                                <label class="col-lg-2 control-label " for="stmin_value">min_value</label>
+                                                                                <label class="col-lg-2 control-label " for="stmin_value">minimum value</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="stmin_value" name="stmin_value" type="number" class="form-control" value="{{ $stationdetails['soil_temp_semsor']['min_value']}}">
                                                                                 </div>
@@ -934,11 +929,11 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="smmax_value">max_value</label>
+                                                                                <label class="col-lg-2 control-label " for="smmax_value">maximum value</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="smmax_value" name="smmax_value" type="number" class="form-control" value="{{ $stationdetails['soil_moisture_semsor']['max_value']}}">
                                                                                 </div>
-                                                                                <label class="col-lg-2 control-label " for="smmin_value">min_value</label>
+                                                                                <label class="col-lg-2 control-label " for="smmin_value">minimum value</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="smmin_value" name="smmin_value" type="number" class="form-control" value="{{ $stationdetails['soil_moisture_semsor']['min_value']}}">
                                                                                 </div>
@@ -1002,21 +997,21 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="sinkv_mcu_max_value">v_mcu_max_value</label>
+                                                                                <label class="col-lg-2 control-label " for="sinkv_mcu_max_value">vmcu max value</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="sinkv_mcu_max_value" name="sinkv_mcu_max_value" type="number" class="form-control" value="{{ $stationdetails['sink_node']['v_mcu_max_value']}}">
                                                                                 </div>
-                                                                                <label class="col-lg-2 control-label " for="sinkv_mcu_min_value">v_mcu_min_value</label>
+                                                                                <label class="col-lg-2 control-label " for="sinkv_mcu_min_value">vmcu min value</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="sinkv_mcu_min_value" name="sinkv_mcu_min_value" type="text" class="form-control" value="{{ $stationdetails['sink_node']['v_mcu_min_value']}}">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="sinkv_in_max_value">v_in_max_value</label>
+                                                                                <label class="col-lg-2 control-label " for="sinkv_in_max_value">vin max value</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="sinkv_in_max_value" name="sinkv_in_max_value" type="number" class="form-control" value="{{ $stationdetails['sink_node']['v_in_max_value']}}">
                                                                                 </div>
-                                                                                <label class="col-lg-2 control-label " for="sinkv_mcu_label">v_mcu_label</label>
+                                                                                <label class="col-lg-2 control-label " for="sinkv_mcu_label">vmcu label</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="sinkv_mcu_label" name="sinkv_mcu_label" type="text" class="form-control" value="{{ $stationdetails['sink_node']['v_mcu_label']}}">
                                                                                 </div>
@@ -1026,7 +1021,7 @@
                                                                                 <div class="col-lg-4">
                                                                                     <input id="sinkmac_add" name="sinkmac_add" type="text" class="form-control" value="{{ $stationdetails['sink_node']['mac_add']}}">
                                                                                 </div>
-                                                                                <label class="col-lg-2 control-label " for="sinkv_in_min_value">v_in min value</label>
+                                                                                <label class="col-lg-2 control-label " for="sinkv_in_min_value">vin minimum value</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="sinkv_in_min_value" name="sinkv_in_min_value" type="number" class="form-control" value="{{ $stationdetails['sink_node']['v_in_min_value']}}">
                                                                                 </div>
@@ -1132,11 +1127,11 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="psmax_value">max_value</label>
+                                                                                <label class="col-lg-2 control-label " for="psmax_value">maximum value</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="psmax_value" name="psmax_value" type="number" class="form-control" value="{{ $stationdetails['pressure_semsor']['max_value']}}">
                                                                                 </div>
-                                                                                <label class="col-lg-2 control-label " for="psmin_value">min_value</label>
+                                                                                <label class="col-lg-2 control-label " for="psmin_value">minimum value</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="psmin_value" name="psmin_value" type="number" class="form-control" value="{{ $stationdetails['pressure_semsor']['min_value']}}">
                                                                                 </div>
