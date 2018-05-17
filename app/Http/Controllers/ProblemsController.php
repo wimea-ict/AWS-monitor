@@ -19,6 +19,7 @@ class ProblemsController extends Controller
     {
         $stations = Station::all()->toArray();
         $problemConfigurationvalues = problemConfigurations::all()->toArray();
+        //$stations = Station::whereIn('station_id', $problemConfigurationvalues)->get();
         return view('layouts.editProblemConfigurations', compact('stations','problemConfigurationvalues'));
     
     }

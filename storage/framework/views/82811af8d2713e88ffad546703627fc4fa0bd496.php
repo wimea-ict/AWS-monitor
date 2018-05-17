@@ -93,7 +93,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 col-lg-offset-2 control-label" for="10name">Node name</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input class="form-control" id="10name" name="10name" type="text" value="<?php echo e($stationdetails['10m_node']['name']); ?>" disabled>
+                                                                                    <input class="form-control" id="10name" name="10name" type="text" value="<?php echo e($stationdetails['10m_node']['name']); ?>" readonly>
                                                                                 </div>
                                                                                 <div class="col-sm-4 control-label text-right">
                                                                                     <label class="switch">
@@ -249,7 +249,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="10parameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="10parameter_read" name="10parameter_read" type="text" class="form-control" value="<?php echo e($stationdetails['insulation_sensor']['parameter_read']); ?>" disabled>
+                                                                                    <input id="10parameter_read" name="10parameter_read" type="text" class="form-control" value="<?php echo e($stationdetails['insulation_sensor']['parameter_read']); ?>" readonly>
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="10identifier_used">Identifier used</label>
                                                                                 <div class="col-lg-4">
@@ -299,7 +299,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="wsparameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="wsparameter_read" name="wsparameter_read" type="text" class="form-control" value="<?php echo e($stationdetails['wind_speed_semsor']['parameter_read']); ?>">
+                                                                                    <input id="wsparameter_read" name="wsparameter_read" type="text" class="form-control" value="<?php echo e($stationdetails['wind_speed_semsor']['parameter_read']); ?>" readonly>
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="wsidentifier_used">Identifier used</label>
                                                                                 <div class="col-lg-4">
@@ -347,7 +347,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="wdparameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="wdparameter_read" name="wdparameter_read" type="text" class="form-control" value="<?php echo e($stationdetails['wind_direction_semsor']['parameter_read']); ?>">
+                                                                                    <input id="wdparameter_read" name="wdparameter_read" type="text" class="form-control" value="<?php echo e($stationdetails['wind_direction_semsor']['parameter_read']); ?>" readonly>
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="wdidentifier_used">Identifier used</label>
                                                                                 <div class="col-lg-4">
@@ -380,7 +380,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 col-lg-offset-2 control-label" for="10name">Node name</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input class="form-control" id="2mname" name="2mname" type="text" value="<?php echo e($stationdetails['2m_node']['name']); ?>" disabled>
+                                                                                    <input class="form-control" id="2mname" name="2mname" type="text" value="<?php echo e($stationdetails['2m_node']['name']); ?>" readonly>
                                                                                 </div>
                                                                                 <div class="col-sm-4 control-label text-right">
                                                                                     <label class="switch">
@@ -539,7 +539,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="rhparameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="rhparameter_read" name="rhparameter_read" type="text" class="form-control" value="<?php echo e($stationdetails['relative_humidity_semsor']['parameter_read']); ?>">
+                                                                                    <input id="rhparameter_read" name="rhparameter_read" type="text" class="form-control" value="<?php echo e($stationdetails['relative_humidity_semsor']['parameter_read']); ?>" readonly>
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="rhidentifier_used">Identifier used</label>
                                                                                 <div class="col-lg-4">
@@ -589,7 +589,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="tsparameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="tsparameter_read" name="tsparameter_read" type="text" class="form-control" value="<?php echo e($stationdetails['Temp_semsor']['parameter_read']); ?>">
+                                                                                    <input id="tsparameter_read" name="tsparameter_read" type="text" class="form-control" value="<?php echo e($stationdetails['Temp_semsor']['parameter_read']); ?>" readonly>
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="tsidentifier_used">Identifier used</label>
                                                                                 <div class="col-lg-4">
@@ -810,7 +810,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="ppparameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="ppparameter_read" name="ppparameter_read" type="text" class="form-control" value="<?php echo e($stationdetails['preciptation_semsor']['parameter_read']); ?>">
+                                                                                    <input id="ppparameter_read" name="ppparameter_read" type="text" class="form-control" value="<?php echo e($stationdetails['preciptation_semsor']['parameter_read']); ?>" readonly>
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="ppidentifier_used">Identifier used</label>
                                                                                 <div class="col-lg-4">
@@ -859,7 +859,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="stparameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="stparameter_read" name="stparameter_read" type="text" class="form-control" value="<?php echo e($stationdetails['soil_temp_semsor']['parameter_read']); ?>">
+                                                                                    <input id="stparameter_read" name="stparameter_read" type="text" class="form-control" value="<?php echo e($stationdetails['soil_temp_semsor']['parameter_read']); ?>" readonly>
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="stidentifier_used">Identifier used</label>
                                                                                 <div class="col-lg-4">
@@ -910,7 +910,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="smparameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="smparameter_read" name="smparameter_read" type="text" class="form-control" value="<?php echo e($stationdetails['soil_moisture_semsor']['parameter_read']); ?>">
+                                                                                    <input id="smparameter_read" name="smparameter_read" type="text" class="form-control" value="<?php echo e($stationdetails['soil_moisture_semsor']['parameter_read']); ?>" readonly>
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="smidentifier_used">Identifier used</label>
                                                                                 <div class="col-lg-4">
@@ -1108,7 +1108,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="psparameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="psparameter_read" name="psparameter_read" type="text" class="form-control" value="<?php echo e($stationdetails['pressure_semsor']['parameter_read']); ?>">
+                                                                                    <input id="psparameter_read" name="psparameter_read" type="text" class="form-control" value="<?php echo e($stationdetails['pressure_semsor']['parameter_read']); ?>" readonly>
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="psidentifier_used">Identifier used</label>
                                                                                 <div class="col-lg-4">

@@ -64,7 +64,7 @@
                                     <div class="form-group clearfix">
                                         <label class="col-sm-2 col-sm-offset-3 control-label">Station</label>
                                         <div class="col-sm-4">
-                                            <input class="form-control" id="station_selected" name="station_selected" type="text" disabled>  
+                                            <input class="form-control" id="station_selected" name="station_selected" type="text" readonly>  
                                         </div>
                                     </div>
                                 </div>   

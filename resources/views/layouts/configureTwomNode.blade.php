@@ -202,7 +202,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="rhparameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="rhparameter_read" name="rhparameter_read" type="text" class="form-control" value="" disabled>
+                                                                                    <input id="rhparameter_read" name="rhparameter_read" type="text" class="form-control" value="" readonly>
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="rhidentifier_used">Identifier used</label>
                                                                                 <div class="col-lg-4">
@@ -253,7 +253,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="tsparameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="tsparameter_read" name="tsparameter_read" type="text" class="form-control" value="" disabled>
+                                                                                    <input id="tsparameter_read" name="tsparameter_read" type="text" class="form-control" value="" readonly>
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="tsidentifier_used">Identifier used</label>
                                                                                 <div class="col-lg-4">

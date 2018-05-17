@@ -219,7 +219,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="ppparameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="ppparameter_read" name="ppparameter_read" type="text" class="form-control" value="" disabled>
+                                                                                    <input id="ppparameter_read" name="ppparameter_read" type="text" class="form-control" value="" readonly>
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="ppidentifier_used">Identifier used</label>
                                                                                 <div class="col-lg-4">
@@ -269,7 +269,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="stparameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="stparameter_read" name="stparameter_read" type="text" class="form-control" value="" disabled>
+                                                                                    <input id="stparameter_read" name="stparameter_read" type="text" class="form-control" value="" readonly>
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="stidentifier_used">Identifier used</label>
                                                                                 <div class="col-lg-4">
@@ -320,7 +320,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="smparameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="smparameter_read" name="smparameter_read" type="text" class="form-control" value="" disabled>
+                                                                                    <input id="smparameter_read" name="smparameter_read" type="text" class="form-control" value="" readonly>
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="smidentifier_used">Identifier used</label>
                                                                                 <div class="col-lg-4">

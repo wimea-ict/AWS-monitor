@@ -30,7 +30,7 @@
                                                         <td><?php echo e($tenMeterNode['txt_10m']); ?></td>
                                                         <td><?php echo e($tenMeterNode['e64_10m']); ?></td>
                                                         <td><?php echo e($tenMeterNode['node_status']); ?></td>
-                                                        <td><button class="btn btn-icon btn-success m-b-5" data-toggle="modal" data-target="#full-width-modal2" id="<?php echo e(htmlspecialchars(json_encode(array($tenMeterNode, $insulationsensors,$windspeedsensors, $winddirectionsensors)))); ?>" > <i class="fa fa-thumbs-o-up" ></i> Edit </button></td>
+                                                        <td><button class="btn btn-icon btn-success m-b-5" data-toggle="modal" data-target="#full-width-modal2" id="<?php echo e(htmlspecialchars(json_encode(array($tenMeterNode, $insulationsensors,$windspeedsensors, $winddirectionsensors)))); ?>" > <i class="fa fa-edit" ></i> Edit </button></td>
                                                     </tr>
                                                     <div id="full-width-modal2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="full-width-modalLabel" aria-hidden="true" style="display: none;">
                     <div class="modal-dialog modal-full">
@@ -198,7 +198,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="10parameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="10parameter_read" name="10parameter_read" type="text" class="form-control" value="" >
+                                                                                    <input id="10parameter_read" name="10parameter_read" type="text" class="form-control" value="" readonly>
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="10identifier_used">Identifier used</label>
                                                                                 <div class="col-lg-4">
@@ -248,7 +248,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="wsparameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="wsparameter_read" name="wsparameter_read" type="text" class="form-control" value="">
+                                                                                    <input id="wsparameter_read" name="wsparameter_read" type="text" class="form-control" value="" readonly>
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="wsidentifier_used">Identifier used</label>
                                                                                 <div class="col-lg-4">
@@ -296,7 +296,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="wdparameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="wdparameter_read" name="wdparameter_read" type="text" class="form-control" value="">
+                                                                                    <input id="wdparameter_read" name="wdparameter_read" type="text" class="form-control" value="" readonly>
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="wdidentifier_used">Identifier used</label>
                                                                                 <div class="col-lg-4">

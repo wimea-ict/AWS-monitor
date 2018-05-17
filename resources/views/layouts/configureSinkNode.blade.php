@@ -207,7 +207,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="psparameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="psparameter_read" name="psparameter_read" type="text" class="form-control" value="" disabled>
+                                                                                    <input id="psparameter_read" name="psparameter_read" type="text" class="form-control" value="" readonly>
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="psidentifier_used">Identifier used</label>
                                                                                 <div class="col-lg-4">
