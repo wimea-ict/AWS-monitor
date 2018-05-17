@@ -14,7 +14,7 @@
                                         <div class="col-sm-4">
                                             <select class="form-control" name="station_selected">
                                                 <?php $__currentLoopData = $stations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $station): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                    <option value="<?php echo e($station['station_name']); ?>"><?php echo e($station['station_name']); ?></option>
+                                                    <option value="<?php echo e($station['StationName']); ?>"><?php echo e($station['StationName']); ?></option>
                                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                 
                                             </select>

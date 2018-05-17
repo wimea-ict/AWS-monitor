@@ -33,7 +33,7 @@
                                                         <td>{{$groundNode['txt_gnd']}}</td>
                                                         <td>{{$groundNode['e64_gnd']}}</td>
                                                         <td>{{$groundNode['node_status']}}</td>
-                                                        <td><button class="btn btn-icon btn-success m-b-5" data-toggle="modal" data-target="#full-width-modal4" id="{{htmlspecialchars(json_encode(array($groundNode,$precipitationsensors,$soilTempsensors,$soilMoisturesensors)))}}"> <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
+                                                        <td><button class="btn btn-icon btn-success m-b-5" data-toggle="modal" data-target="#full-width-modal4" id="{{htmlspecialchars(json_encode(array($groundNode,$precipitationsensors,$soilTempsensors,$soilMoisturesensors)))}}"> <i class="fa fa-edit"></i> Edit </button></td>
                                                     </tr>
                                                     <div id="full-width-modal4" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="full-width-modalLabel" aria-hidden="true" style="display: none;">
                     <div class="modal-dialog modal-full">
@@ -219,7 +219,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="ppparameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="ppparameter_read" name="ppparameter_read" type="text" class="form-control" value="">
+                                                                                    <input id="ppparameter_read" name="ppparameter_read" type="text" class="form-control" value="" disabled>
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="ppidentifier_used">Identifier used</label>
                                                                                 <div class="col-lg-4">
@@ -269,7 +269,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="stparameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="stparameter_read" name="stparameter_read" type="text" class="form-control" value="">
+                                                                                    <input id="stparameter_read" name="stparameter_read" type="text" class="form-control" value="" disabled>
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="stidentifier_used">Identifier used</label>
                                                                                 <div class="col-lg-4">
@@ -320,7 +320,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="smparameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="smparameter_read" name="smparameter_read" type="text" class="form-control" value="">
+                                                                                    <input id="smparameter_read" name="smparameter_read" type="text" class="form-control" value="" disabled>
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="smidentifier_used">Identifier used</label>
                                                                                 <div class="col-lg-4">

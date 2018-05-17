@@ -310,7 +310,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="wsparameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="wsparameter_read" name="wsparameter_read" type="text" class="form-control" value="{{ $stationdetails['wind_speed_semsor']['parameter_read']}}">
+                                                                                    <input id="wsparameter_read" name="wsparameter_read" type="text" class="form-control" value="{{ $stationdetails['wind_speed_semsor']['parameter_read']}}" disabled>
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="wsidentifier_used">Identifier used</label>
                                                                                 <div class="col-lg-4">
@@ -358,7 +358,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="wdparameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="wdparameter_read" name="wdparameter_read" type="text" class="form-control" value="{{ $stationdetails['wind_direction_semsor']['parameter_read']}}">
+                                                                                    <input id="wdparameter_read" name="wdparameter_read" type="text" class="form-control" value="{{ $stationdetails['wind_direction_semsor']['parameter_read']}}" disabled>
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="wdidentifier_used">Identifier used</label>
                                                                                 <div class="col-lg-4">
@@ -550,7 +550,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="rhparameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="rhparameter_read" name="rhparameter_read" type="text" class="form-control" value="{{ $stationdetails['relative_humidity_semsor']['parameter_read']}}">
+                                                                                    <input id="rhparameter_read" name="rhparameter_read" type="text" class="form-control" value="{{ $stationdetails['relative_humidity_semsor']['parameter_read']}}" disabled>
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="rhidentifier_used">Identifier used</label>
                                                                                 <div class="col-lg-4">
@@ -600,7 +600,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="tsparameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="tsparameter_read" name="tsparameter_read" type="text" class="form-control" value="{{ $stationdetails['Temp_semsor']['parameter_read']}}">
+                                                                                    <input id="tsparameter_read" name="tsparameter_read" type="text" class="form-control" value="{{ $stationdetails['Temp_semsor']['parameter_read']}}" disabled>
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="tsidentifier_used">Identifier used</label>
                                                                                 <div class="col-lg-4">
@@ -821,7 +821,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="ppparameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="ppparameter_read" name="ppparameter_read" type="text" class="form-control" value="{{ $stationdetails['preciptation_semsor']['parameter_read']}}">
+                                                                                    <input id="ppparameter_read" name="ppparameter_read" type="text" class="form-control" value="{{ $stationdetails['preciptation_semsor']['parameter_read']}}" disabled>
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="ppidentifier_used">Identifier used</label>
                                                                                 <div class="col-lg-4">
@@ -870,7 +870,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="stparameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="stparameter_read" name="stparameter_read" type="text" class="form-control" value="{{ $stationdetails['soil_temp_semsor']['parameter_read']}}">
+                                                                                    <input id="stparameter_read" name="stparameter_read" type="text" class="form-control" value="{{ $stationdetails['soil_temp_semsor']['parameter_read']}}" disabled>
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="stidentifier_used">Identifier used</label>
                                                                                 <div class="col-lg-4">
@@ -921,7 +921,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="smparameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="smparameter_read" name="smparameter_read" type="text" class="form-control" value="{{ $stationdetails['soil_moisture_semsor']['parameter_read']}}">
+                                                                                    <input id="smparameter_read" name="smparameter_read" type="text" class="form-control" value="{{ $stationdetails['soil_moisture_semsor']['parameter_read']}}" disabled>
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="smidentifier_used">Identifier used</label>
                                                                                 <div class="col-lg-4">
@@ -1119,7 +1119,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="psparameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="psparameter_read" name="psparameter_read" type="text" class="form-control" value="{{ $stationdetails['pressure_semsor']['parameter_read']}}">
+                                                                                    <input id="psparameter_read" name="psparameter_read" type="text" class="form-control" value="{{ $stationdetails['pressure_semsor']['parameter_read']}}" disabled>
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="psidentifier_used">Identifier used</label>
                                                                                 <div class="col-lg-4">

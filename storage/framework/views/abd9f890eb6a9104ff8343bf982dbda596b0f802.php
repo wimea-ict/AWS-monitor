@@ -25,13 +25,14 @@
                                             <?php $__currentLoopData = $sinkNodes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $sinkNode): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <?php $__currentLoopData = $stations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $station): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                     <?php if($station['station_id']== $sinkNode['station_id'] ): ?>
+                                                    
                                                     <tr>
-                                                        <td><?php echo e($station['station_name']); ?></td>
-                                                        <td><?php echo e($station['station_location']); ?></td>
+                                                        <td><?php echo e($station['StationName']); ?></td>
+                                                        <td><?php echo e($station['Location']); ?></td>
                                                         <td><?php echo e($sinkNode['txt_sink']); ?></td>
                                                         <td><?php echo e($sinkNode['e64_sink']); ?></td>
                                                         <td><?php echo e($sinkNode['node_status']); ?></td>
-                                                        <td><button class="btn btn-icon btn-success m-b-5" data-toggle="modal" data-target="#full-width-modal5" id="<?php echo e(htmlspecialchars(json_encode(array($sinkNode, $pressuresensors)))); ?>"> <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
+                                                        <td><button class="btn btn-icon btn-success m-b-5" data-toggle="modal" data-target="#full-width-modal5" id="<?php echo e(htmlspecialchars(json_encode(array($sinkNode, $pressuresensors)))); ?>"> <i class="fa fa-edit"></i> Edit </button></td>
                                                     </tr>
                                                     <div id="full-width-modal5" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="full-width-modalLabel" aria-hidden="true" style="display: none;">
                     <div class="modal-dialog modal-full">
@@ -205,7 +206,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="psparameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="psparameter_read" name="psparameter_read" type="text" class="form-control" value="">
+                                                                                    <input id="psparameter_read" name="psparameter_read" type="text" class="form-control" value="" disabled>
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="psidentifier_used">Identifier used</label>
                                                                                 <div class="col-lg-4">

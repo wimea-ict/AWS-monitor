@@ -19,15 +19,14 @@
                                                     <th>Edit</th>
                                                 </tr>
                                             </thead>
-
                                      
                                             <tbody>
                                             <?php $__currentLoopData = $tenMeterNodes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tenMeterNode): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <?php $__currentLoopData = $stations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $station): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                     <?php if($station['station_id']== $tenMeterNode['station_id'] ): ?>
                                                     <tr>
-                                                        <td><?php echo e($station['station_name']); ?></td>
-                                                        <td><?php echo e($station['station_location']); ?></td>
+                                                        <td><?php echo e($station['StationName']); ?></td>
+                                                        <td><?php echo e($station['Location']); ?></td>
                                                         <td><?php echo e($tenMeterNode['txt_10m']); ?></td>
                                                         <td><?php echo e($tenMeterNode['e64_10m']); ?></td>
                                                         <td><?php echo e($tenMeterNode['node_status']); ?></td>

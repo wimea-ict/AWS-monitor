@@ -33,7 +33,7 @@
                                                         <td>{{$twoMeterNode['txt_2m']}}</td>
                                                         <td>{{$twoMeterNode['e64_2m']}}</td>
                                                         <td>{{$twoMeterNode['node_status']}}</td>
-                                                        <td><button class="btn btn-icon btn-success m-b-5"  data-toggle="modal" data-target="#full-width-modal3" id="{{htmlspecialchars(json_encode(array($twoMeterNode,$relativeHumiditysensors,$Temperaturesensors)))}}"> <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
+                                                        <td><button class="btn btn-icon btn-success m-b-5"  data-toggle="modal" data-target="#full-width-modal3" id="{{htmlspecialchars(json_encode(array($twoMeterNode,$relativeHumiditysensors,$Temperaturesensors)))}}"> <i class="fa fa-edit"></i> Edit </button></td>
                                                     </tr>
                                                     <div id="full-width-modal3" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="full-width-modalLabel" aria-hidden="true" style="display: none;">
                     <div class="modal-dialog modal-full">
@@ -202,7 +202,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="rhparameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="rhparameter_read" name="rhparameter_read" type="text" class="form-control" value="">
+                                                                                    <input id="rhparameter_read" name="rhparameter_read" type="text" class="form-control" value="" disabled>
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="rhidentifier_used">Identifier used</label>
                                                                                 <div class="col-lg-4">
@@ -253,7 +253,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="tsparameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="tsparameter_read" name="tsparameter_read" type="text" class="form-control" value="">
+                                                                                    <input id="tsparameter_read" name="tsparameter_read" type="text" class="form-control" value="" disabled>
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="tsidentifier_used">Identifier used</label>
                                                                                 <div class="col-lg-4">

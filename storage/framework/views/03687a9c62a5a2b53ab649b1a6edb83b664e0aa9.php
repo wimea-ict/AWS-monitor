@@ -26,8 +26,8 @@
                                                 <?php $__currentLoopData = $stations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $station): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                     <?php if($station['station_id']== $twoMeterNode['station_id'] ): ?>
                                                     <tr>
-                                                        <td><?php echo e($station['station_name']); ?></td>
-                                                        <td><?php echo e($station['station_location']); ?></td>
+                                                        <td><?php echo e($station['StationName']); ?></td>
+                                                        <td><?php echo e($station['Location']); ?></td>
                                                         <td><?php echo e($twoMeterNode['txt_2m']); ?></td>
                                                         <td><?php echo e($twoMeterNode['e64_2m']); ?></td>
                                                         <td><?php echo e($twoMeterNode['node_status']); ?></td>
@@ -201,7 +201,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="rhparameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="rhparameter_read" name="rhparameter_read" type="text" class="form-control" value="">
+                                                                                    <input id="rhparameter_read" name="rhparameter_read" type="text" class="form-control" value="" disabled>
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="rhidentifier_used">Identifier used</label>
                                                                                 <div class="col-lg-4">
@@ -252,7 +252,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="tsparameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="tsparameter_read" name="tsparameter_read" type="text" class="form-control" value="">
+                                                                                    <input id="tsparameter_read" name="tsparameter_read" type="text" class="form-control" value="" disabled>
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="tsidentifier_used">Identifier used</label>
                                                                                 <div class="col-lg-4">

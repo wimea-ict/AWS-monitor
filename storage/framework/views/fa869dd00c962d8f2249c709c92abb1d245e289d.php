@@ -24,11 +24,11 @@
                                             <tbody>
                                             <?php $__currentLoopData = $stations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $station): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <tr>
-                                                    <td><?php echo e($station['station_name']); ?></td>
-                                                    <td><?php echo e($station['station_number']); ?></td>
-                                                    <td><?php echo e($station['station_location']); ?></td>
-                                                    <td><?php echo e($station['longitude']); ?></td>
-                                                    <td><?php echo e($station['latitude']); ?></td>
+                                                    <td><?php echo e($station['StationName']); ?></td>
+                                                    <td><?php echo e($station['StationNumber']); ?></td>
+                                                    <td><?php echo e($station['Location']); ?></td>
+                                                    <td><?php echo e($station['Longitude']); ?></td>
+                                                    <td><?php echo e($station['Latitude']); ?></td>
                                                     <td><button class="btn btn-icon btn-success m-b-5 edit-station-button" data-toggle="modal" id="<?php echo e(htmlspecialchars(json_encode(array($station, $problemConfigurationvalues)))); ?>" data-target="#full-width-modal7"  data-delete-link="" > <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
                                                 </tr>
                                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>    
@@ -96,6 +96,7 @@
                                                                                     <select class="form-control" name="sorptmethod" id="sorptmethod">
                                                                                         <option value="sms">sms</option>
                                                                                         <option value="email">email</option>
+                                                                                        <option value="email">Both</option>
                                                                                     </select>
                                                                                 </div>
                                                                             </div>
@@ -135,6 +136,7 @@
                                                                                     <select class="form-control" name="lprptmethod" id="lprptmethod">
                                                                                         <option>sms</option>
                                                                                         <option>email</option>
+                                                                                        <option>Both</option>
                                                                                     </select>
                                                                                 </div>
                                                                             </div>
@@ -177,6 +179,7 @@
                                                                                     <select class="form-control" name="norptmethod" id="norptmethod">
                                                                                         <option>sms</option>
                                                                                         <option  >email</option>
+                                                                                        <option>Both</option>
                                                                                     </select>
                                                                                 </div>
                                                                             </div>
@@ -219,6 +222,7 @@
                                                                                     <select class="form-control" name="ssorptmethod" id="ssorptmethod">
                                                                                         <option>sms</option>
                                                                                         <option  >email</option>
+                                                                                        <option>Both</option>
                                                                                     </select>
                                                                                 </div>
                                                                             </div>
@@ -261,6 +265,7 @@
                                                                                     <select class="form-control" name="msrptmethod" id="msrptmethod">
                                                                                         <option>sms</option>
                                                                                         <option  >email</option>
+                                                                                        <option>Both</option>
                                                                                     </select>
                                                                                 </div>
                                                                             </div>
@@ -303,6 +308,7 @@
                                                                                     <select class="form-control" name="isrptmethod" id="isrptmethod">
                                                                                         <option>sms</option>
                                                                                         <option  >email</option>
+                                                                                        <option>Both</option>
                                                                                     </select>
                                                                                 </div>
                                                                             </div>
@@ -345,6 +351,7 @@
                                                                                     <select class="form-control" name="idrptmethod" id="idrptmethod">
                                                                                         <option>sms</option>
                                                                                         <option  >email</option>
+                                                                                        <option>Both</option>
                                                                                     </select>
                                                                                 </div>
                                                                             </div>
@@ -388,6 +395,7 @@
                                                                                     <select class="form-control" name="nmrptmethod" id="nmrptmethod">
                                                                                         <option>sms</option>
                                                                                         <option  >email</option>
+                                                                                        <option>Both</option>
                                                                                     </select>
                                                                                 </div>
                                                                             </div>

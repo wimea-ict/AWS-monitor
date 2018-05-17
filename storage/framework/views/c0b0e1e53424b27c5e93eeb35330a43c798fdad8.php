@@ -82,13 +82,7 @@
                 });
                 jQuery('.toggle').toggles({on: true});
             } );
-            function sqlTimeStampToDate(timestamp) {
-    // This function parses SQL datetime string and returns a JavaScript Date object
-    // The input has to be in this format: 2007-06-05 15:26:02
-    var regex=/^([0-9]{2,4})-([0-1][0-9])-([0-3][0-9]) (?:([0-2][0-9]):([0-5][0-9]):([0-5][0-9]))?$/;
-    var parts=timestamp.replace(regex,"$1 $2 $3 $4 $5 $6").split(' ');
-    return new Date(parts[0],parts[1]-1,parts[2],parts[3],parts[4],parts[5]);
-  }
+            
             
             $('#full-width-modal').on('show.bs.modal', function(e) {
                 var station = e.relatedTarget.id;
@@ -104,8 +98,8 @@
                 //$('#code').val(obj["code"]);
                 $('#region').val(obj["StationRegion"]);
                 alert(obj["Opened"]);
-                $('#date_opened').val(sqlTimeStampToDate(obj["Opened"]));
-                $('#date_closed').val(sqlTimeStampToDate(obj["Closed"]));
+                $('#date_opened').val(Date.parse(obj["Opened"]));
+                $('#date_closed').val(Date.parse(obj["Closed"]));
                 $('#station_type').val(obj["StationType"]);
                 $('#country').val(obj["Country"]);
                 
@@ -327,7 +321,7 @@
                                 break;
                             }
                   }
-                alert(temperatureSensors);
+                //alert(temperatureSensors);
                 $('#2mnode_id').val(obj["node_id"]);
                 $('#2txt_key').val(obj["txt_2m"]);
                 $('#2mvin_label').val(obj["v_in_2m"]);
@@ -389,7 +383,7 @@
                 var soilTemperatureSensors = new Array();
                 var soilMoistureSensors = new Array();
 
-                alert(groundNodeData[1])
+                //alert(groundNodeData[1])
 
                 for (var i = 0; i < groundNodeData[1].length; i++) {
                             if (groundNodeData[1][i]['node_id'] === obj["node_id"]) {
