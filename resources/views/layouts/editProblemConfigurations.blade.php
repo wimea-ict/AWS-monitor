@@ -65,7 +65,7 @@
                                     <div class="form-group clearfix">
                                         <label class="col-sm-2 col-sm-offset-3 control-label">Station</label>
                                         <div class="col-sm-4">
-                                            <input class="form-control" id="station_selected" name="station_selected" type="text" disabled>  
+                                            <input class="form-control" id="station_selected" name="station_selected" type="text" readonly>  
                                         </div>
                                     </div>
                                 </div>   
@@ -97,6 +97,7 @@
                                                                                     <select class="form-control" name="sorptmethod" id="sorptmethod">
                                                                                         <option value="sms">sms</option>
                                                                                         <option value="email">email</option>
+                                                                                        <option value="email">Both</option>
                                                                                     </select>
                                                                                 </div>
                                                                             </div>
@@ -136,6 +137,7 @@
                                                                                     <select class="form-control" name="lprptmethod" id="lprptmethod">
                                                                                         <option>sms</option>
                                                                                         <option>email</option>
+                                                                                        <option>Both</option>
                                                                                     </select>
                                                                                 </div>
                                                                             </div>
@@ -178,6 +180,7 @@
                                                                                     <select class="form-control" name="norptmethod" id="norptmethod">
                                                                                         <option>sms</option>
                                                                                         <option  >email</option>
+                                                                                        <option>Both</option>
                                                                                     </select>
                                                                                 </div>
                                                                             </div>
@@ -220,6 +223,7 @@
                                                                                     <select class="form-control" name="ssorptmethod" id="ssorptmethod">
                                                                                         <option>sms</option>
                                                                                         <option  >email</option>
+                                                                                        <option>Both</option>
                                                                                     </select>
                                                                                 </div>
                                                                             </div>
@@ -262,6 +266,7 @@
                                                                                     <select class="form-control" name="msrptmethod" id="msrptmethod">
                                                                                         <option>sms</option>
                                                                                         <option  >email</option>
+                                                                                        <option>Both</option>
                                                                                     </select>
                                                                                 </div>
                                                                             </div>
@@ -304,6 +309,7 @@
                                                                                     <select class="form-control" name="isrptmethod" id="isrptmethod">
                                                                                         <option>sms</option>
                                                                                         <option  >email</option>
+                                                                                        <option>Both</option>
                                                                                     </select>
                                                                                 </div>
                                                                             </div>
@@ -346,6 +352,7 @@
                                                                                     <select class="form-control" name="idrptmethod" id="idrptmethod">
                                                                                         <option>sms</option>
                                                                                         <option  >email</option>
+                                                                                        <option>Both</option>
                                                                                     </select>
                                                                                 </div>
                                                                             </div>
@@ -389,6 +396,7 @@
                                                                                     <select class="form-control" name="nmrptmethod" id="nmrptmethod">
                                                                                         <option>sms</option>
                                                                                         <option  >email</option>
+                                                                                        <option>Both</option>
                                                                                     </select>
                                                                                 </div>
                                                                             </div>

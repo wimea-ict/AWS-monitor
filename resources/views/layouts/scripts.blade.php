@@ -97,8 +97,9 @@
                 //$('#city').val(obj["city"]);
                 //$('#code').val(obj["code"]);
                 $('#region').val(obj["StationRegion"]);
-                $('#date_opened').val(obj["Opened"]);
-                $('#date_closed').val(obj["Closed"]);
+                alert(obj["Opened"]);
+                $('#date_opened').val(Date.parse(obj["Opened"]));
+                $('#date_closed').val(Date.parse(obj["Closed"]));
                 $('#station_type').val(obj["StationType"]);
                 $('#country').val(obj["Country"]);
                 
@@ -320,7 +321,7 @@
                                 break;
                             }
                   }
-                alert(temperatureSensors);
+                //alert(temperatureSensors);
                 $('#2mnode_id').val(obj["node_id"]);
                 $('#2txt_key').val(obj["txt_2m"]);
                 $('#2mvin_label').val(obj["v_in_2m"]);
@@ -382,7 +383,7 @@
                 var soilTemperatureSensors = new Array();
                 var soilMoistureSensors = new Array();
 
-                alert(groundNodeData[1])
+                //alert(groundNodeData[1])
 
                 for (var i = 0; i < groundNodeData[1].length; i++) {
                             if (groundNodeData[1][i]['node_id'] === obj["node_id"]) {

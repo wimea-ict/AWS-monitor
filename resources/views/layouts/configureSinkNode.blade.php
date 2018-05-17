@@ -34,7 +34,7 @@
                                                         <td>{{$sinkNode['txt_sink']}}</td>
                                                         <td>{{$sinkNode['e64_sink']}}</td>
                                                         <td>{{$sinkNode['node_status']}}</td>
-                                                        <td><button class="btn btn-icon btn-success m-b-5" data-toggle="modal" data-target="#full-width-modal5" id="{{htmlspecialchars(json_encode(array($sinkNode, $pressuresensors)))}}"> <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
+                                                        <td><button class="btn btn-icon btn-success m-b-5" data-toggle="modal" data-target="#full-width-modal5" id="{{htmlspecialchars(json_encode(array($sinkNode, $pressuresensors)))}}"> <i class="fa fa-edit"></i> Edit </button></td>
                                                     </tr>
                                                     <div id="full-width-modal5" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="full-width-modalLabel" aria-hidden="true" style="display: none;">
                     <div class="modal-dialog modal-full">
@@ -207,7 +207,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="psparameter_read">Parameter read</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input id="psparameter_read" name="psparameter_read" type="text" class="form-control" value="">
+                                                                                    <input id="psparameter_read" name="psparameter_read" type="text" class="form-control" value="" readonly>
                                                                                 </div>
                                                                                 <label class="col-lg-2 control-label " for="psidentifier_used">Identifier used</label>
                                                                                 <div class="col-lg-4">
