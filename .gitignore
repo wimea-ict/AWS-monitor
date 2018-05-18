@@ -1,6 +1,4 @@
-<<<<<<< HEAD
 /nbproject/private/
-=======
 /node_modules
 /public/hot
 /public/storage
@@ -17,4 +15,4 @@ yarn-error.log
 *.env
 *.log
 public/awsmonitor
->>>>>>> b838b37bc10a9bd92782f5e0213406537638fa83
+bootstrap/cache
