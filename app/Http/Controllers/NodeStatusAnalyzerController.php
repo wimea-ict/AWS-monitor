@@ -38,7 +38,7 @@ class NodeStatusAnalyzerController extends Controller
 
         // pick only columns that we'll be using. We won't need date_time_recorded because we have
         // ->get(500) at a time
-        DB::table('nodestatus')->orderBy('id')->select('id','V_MCU','V_IN','date','time','TXT','StationNumber')->chunk(100, function($nodes) use(&$date, &$problemClassfications, &$id_first_checked, &$id_last_checked, &$counter){
+        DB::table('nodestatus')->orderBy('id')->select('id','V_MCU','V_IN','date','time','TXT','StationNumber')->where()->chunk(100, function($nodes) use(&$date, &$problemClassfications, &$id_first_checked, &$id_last_checked, &$counter){
             foreach ($nodes as $node) {
 
                 //store first id
