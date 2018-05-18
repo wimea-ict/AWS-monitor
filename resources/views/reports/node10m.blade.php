@@ -63,7 +63,7 @@
     <div class="col-sm-12">
         <div class="portlet"><!-- /primary heading -->             
             <div class="portlet-heading">
-                <h3 class="portlet-title text-dark">Gragh for wind sirection readings </h3>
+                <h3 class="portlet-title text-dark">Gragh for wind direction readings </h3>
                 <div class="portlet-widgets">
                     <a href="javascript:;" data-toggle="reload"><i class="ion-refresh"></i></a>
                     <span class="divider"></span>

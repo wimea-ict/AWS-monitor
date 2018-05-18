@@ -100,7 +100,7 @@ class TwoMNodeController extends Controller
          $humidity=ObservationSlip::where('station','=',$station_id)
                         
                         ->select(DB::raw("CONCAT(date,' ',time)  AS y"),
-                                    'DurationOfPeriodOfPrecipitation')
+                                    'Wet_Bulb','Dry_Bulb')
                         ->oldest('creationDate')
                         ->limit(100)
                         ->get();
@@ -112,10 +112,26 @@ class TwoMNodeController extends Controller
 
         //need to change instead of i pass the value of y but need to pass it as a string
         foreach($humidity as $humid){
-            $temp_array=array($i,(float)$humid->DurationOfPeriodOfPrecipitation);
-            $humidity_graph_data[]=$temp_array;
-            $i++;
+
+            if(empty($humid->Dry_Bulb))
+            {
+                // do nothing
+            }else{
+
+                if($humid->Dry_Bulb!=0){
+                $hum_val=((150*$humid->Wet_Bulb)/$humid->Dry_Bulb)-50;
+                }else{
+                    $hum_val=0;
+                }
+                
+
+                $temp_array=array($i,(float)$hum_val);
+                $humidity_graph_data[]=$temp_array;
+                $i++;
+            }
+
         }
+
 
 
         $data["humidity"]=$humidity_graph_data;
@@ -125,7 +141,7 @@ class TwoMNodeController extends Controller
         $templature=ObservationSlip::where('station','=',$station_id)
                         
                         ->select(DB::raw("CONCAT(date,' ',time)  AS y"),
-                                    'Wind_Speed')
+                                    'Dry_Bulb')
                         ->oldest('creationDate')
                         ->limit(50)
                         ->get();
@@ -136,16 +152,21 @@ class TwoMNodeController extends Controller
 
         //need to change instead of i pass the value of y but need to pass it as a string
         foreach($templature as $temp){
-            $temp_array=array($i,(float)$temp->Wind_Speed);
-            $temp_graph_data[]=$temp_array;
-            $i++;
+            if(empty($temp->Dry_Bulb))
+            {
+                // do nothing
+            }else{
+                $temp_array=array($i,(float)$temp->Dry_Bulb);
+                $temp_graph_data[]=$temp_array;
+                $i++;
+            }
+            
         }
 
         $data["templature"]=$temp_graph_data;
         //get soil moisture
 
        
-        
         $data["action"]=URL::to('reports2m');
         $data["selected_station"]=$station_id;
         $data["stations"]=Station::all();
