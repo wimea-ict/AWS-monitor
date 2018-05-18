@@ -13,178 +13,24 @@ use station\SinkNode;
 use station\Sensor;
 class StationsController extends Controller
 {
-<<<<<<< HEAD
 
 
-=======
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
->>>>>>> b838b37bc10a9bd92782f5e0213406537638fa83
     public function index()
     {
         $StationDetails = array("station_name"=>"",
                                 "station_number"=>"",
-<<<<<<< HEAD
-                                "city"=>"hi",
-=======
                                 "city"=>"",
->>>>>>> b838b37bc10a9bd92782f5e0213406537638fa83
                                 "longitude"=>"",
                                 "latitude"=>"",
                                 "code"=>"",
                                 "region"=>"",
                                 "10m_node"=>array(
                                     "name"=>"10m node",
-<<<<<<< HEAD
-                                    "txt_key"=>"this",
-                                    "mac_add"=>"",
-                                    "date_reg"=>"",
-                                    "vin_label"=>"",
-                                    "v_in_key_title"=>"",
-                                    "v_in_key_value"=>"",
-                                    "v_in_max_value"=>"",
-                                    "v_in_min_value"=>"",
-                                    "v_mcu_key_title"=>"",
-                                    "v_mcu_key_value"=>"",
-                                    "v_mcu_max_value"=>"",
-                                    "v_mcu_min_value"=>"",
-                                    "v_mcu_label"=>"",
-                                ),
-                                "ground_node"=>array(
-                                    "name"=>"10m node",
-                                    "txt_key"=>"this",
-                                    "mac_add"=>"",
-                                    "date_reg"=>"",
-                                    "vin_label"=>"",
-                                    "v_in_key_title"=>"",
-                                    "v_in_key_value"=>"",
-                                    "v_in_max_value"=>"",
-                                    "v_in_min_value"=>"",
-                                    "v_mcu_key_title"=>"",
-                                    "v_mcu_key_value"=>"",
-                                    "v_mcu_max_value"=>"",
-                                    "v_mcu_min_value"=>"",
-                                    "v_mcu_label"=>"",
-                                ),
-                                "sink_node"=>array(
-                                    "name"=>"10m node",
-                                    "txt_key"=>"this",
-                                    "mac_add"=>"",
-                                    "date_reg"=>"",
-                                    "vin_label"=>"",
-                                    "v_in_key_title"=>"",
-                                    "v_in_key_value"=>"",
-                                    "v_in_max_value"=>"",
-                                    "v_in_min_value"=>"",
-                                    "v_mcu_key_title"=>"",
-                                    "v_mcu_key_value"=>"",
-                                    "v_mcu_max_value"=>"",
-                                    "v_mcu_min_value"=>"",
-                                    "v_mcu_label"=>"",
-                                ),
-                                "2m_node"=>array(
-                                    "name"=>"10m node",
-                                    "txt_key"=>"this",
-                                    "mac_add"=>"",
-                                    "date_reg"=>"",
-                                    "vin_label"=>"",
-                                    "v_in_key_title"=>"",
-                                    "v_in_key_value"=>"",
-                                    "v_in_max_value"=>"",
-                                    "v_in_min_value"=>"",
-                                    "v_mcu_key_title"=>"",
-                                    "v_mcu_key_value"=>"",
-                                    "v_mcu_max_value"=>"",
-                                    "v_mcu_min_value"=>"",
-                                    "v_mcu_label"=>"",
-                                ),
-                                "Temp_semsor"=>array(
-                                    "parameter_read"=>"",
-                                    "identifier_used"=>"",
-                                    "report_key_title"=>"",
-                                    "report_key_value"=>"",
-                                    "max_value"=>"",
-                                    "min_value"=>"",
-                                ),
-                                "insulation_semsor"=>array(
-                                    "parameter_read"=>"",
-                                    "identifier_used"=>"",
-                                    "report_key_title"=>"",
-                                    "report_key_value"=>"",
-                                    "max_value"=>"",
-                                    "min_value"=>"",
-                                ),
-                                "wind_speed_semsor"=>array(
-                                    "parameter_read"=>"",
-                                    "identifier_used"=>"",
-                                    "report_key_title"=>"",
-                                    "report_key_value"=>"",
-                                    "max_value"=>"",
-                                    "min_value"=>"",
-                                ),
-                                "wind_direction_semsor"=>array(
-                                    "parameter_read"=>"",
-                                    "identifier_used"=>"",
-                                    "report_key_title"=>"",
-                                    "report_key_value"=>"",
-                                    "max_value"=>"",
-                                    "min_value"=>"",
-                                ),
-                                "insulation_sensor"=>array(
-                                    "parameter_read"=>"",
-                                    "identifier_used"=>"",
-                                    "report_key_title"=>"",
-                                    "report_key_value"=>"",
-                                    "max_value"=>"",
-                                    "min_value"=>"",
-                                ),
-                                "relative_humidity_semsor"=>array(
-                                    "parameter_read"=>"",
-                                    "identifier_used"=>"",
-                                    "report_key_title"=>"",
-                                    "report_key_value"=>"",
-                                    "max_value"=>"",
-                                    "min_value"=>"",
-                                ),
-                                "soil_moisture_semsor"=>array(
-                                    "parameter_read"=>"",
-                                    "identifier_used"=>"",
-                                    "report_key_title"=>"",
-                                    "report_key_value"=>"",
-                                    "max_value"=>"",
-                                    "min_value"=>"",
-                                ),
-                                "soil_temp_semsor"=>array(
-                                    "parameter_read"=>"",
-                                    "identifier_used"=>"",
-                                    "report_key_title"=>"",
-                                    "report_key_value"=>"",
-                                    "max_value"=>"",
-                                    "min_value"=>"",
-                                ),
-                                "preciptation_semsor"=>array(
-                                    "parameter_read"=>"",
-                                    "identifier_used"=>"",
-                                    "report_key_title"=>"",
-                                    "report_key_value"=>"",
-                                    "max_value"=>"",
-                                    "min_value"=>"",
-                                ),
-                                "pressure_semsor"=>array(
-                                    "parameter_read"=>"",
-                                    "identifier_used"=>"",
-                                    "report_key_title"=>"",
-                                    "report_key_value"=>"",
-                                    "max_value"=>"",
-                                    "min_value"=>"",
-                                ));
-
-        return View('layouts.addstation')
-        ->with('stationdetails', $StationDetails);
-=======
                                     "txt_key"=>"TXT",
                                     "mac_add"=>"E64",
                                     "date"=>"D",
@@ -363,7 +209,6 @@ class StationsController extends Controller
                 $value = 'off';
             }
         return $value;
->>>>>>> b838b37bc10a9bd92782f5e0213406537638fa83
     }
 
     /**
