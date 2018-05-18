@@ -64,51 +64,7 @@
                                                     <td>2008/11/28</td>
                                                     <td><button class="btn btn-icon btn-success m-b-5" data-toggle="modal" data-target="#con-close-modal"> <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
                                                 </tr>
-                                                <tr>
-                                                    <td>Brielle Williamson</td>
-                                                    <td>Integration Specialist</td>
-                                                    <td>New York</td>
-                                                    <td>61</td>
-                                                    <td>2012/12/02</td>
-                                                    <td><button class="btn btn-icon btn-success m-b-5" data-toggle="modal" data-target="#con-close-modal"> <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Herrod Chandler</td>
-                                                    <td>Sales Assistant</td>
-                                                    <td>San Francisco</td>
-                                                    <td>59</td>
-                                                    <td>2012/08/06</td>
-                                                    <td><button class="btn btn-icon btn-success m-b-5" data-toggle="modal" data-target="#con-close-modal"> <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Rhona Davidson</td>
-                                                    <td>Integration Specialist</td>
-                                                    <td>Tokyo</td>
-                                                    <td>55</td>
-                                                    <td>2010/10/14</td>
-                                                    <td><button class="btn btn-icon btn-success m-b-5" data-toggle="modal" data-target="#con-close-modal"> <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Colleen Hurst</td>
-                                                    <td>Javascript Developer</td>
-                                                    <td>San Francisco</td>
-                                                    <td>39</td>
-                                                    <td>2009/09/15</td>
-                                                    <td><button class="btn btn-icon btn-success m-b-5" data-toggle="modal" data-target="#con-close-modalS"> <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
-                                                </tr>
-                                                
-                                            </tbody>
-                                        </table>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div> <!-- End Row -->
-
-                <div id="con-close-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="full-width-modalLabel" aria-hidden="true" style="display: none;">
+                                                <div id="con-close-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="full-width-modalLabel" aria-hidden="true" style="display: none;">
                 <div class="modal-dialog modal-full">
                 <div class="modal-content" style="background:#797979">
                                            
@@ -1019,5 +975,50 @@
                 </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
                 </div><!-- /.modal -->
+                                                <tr>
+                                                    <td>Brielle Williamson</td>
+                                                    <td>Integration Specialist</td>
+                                                    <td>New York</td>
+                                                    <td>61</td>
+                                                    <td>2012/12/02</td>
+                                                    <td><button class="btn btn-icon btn-success m-b-5" data-toggle="modal" data-target="#con-close-modal"> <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Herrod Chandler</td>
+                                                    <td>Sales Assistant</td>
+                                                    <td>San Francisco</td>
+                                                    <td>59</td>
+                                                    <td>2012/08/06</td>
+                                                    <td><button class="btn btn-icon btn-success m-b-5" data-toggle="modal" data-target="#con-close-modal"> <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Rhona Davidson</td>
+                                                    <td>Integration Specialist</td>
+                                                    <td>Tokyo</td>
+                                                    <td>55</td>
+                                                    <td>2010/10/14</td>
+                                                    <td><button class="btn btn-icon btn-success m-b-5" data-toggle="modal" data-target="#con-close-modal"> <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Colleen Hurst</td>
+                                                    <td>Javascript Developer</td>
+                                                    <td>San Francisco</td>
+                                                    <td>39</td>
+                                                    <td>2009/09/15</td>
+                                                    <td><button class="btn btn-icon btn-success m-b-5" data-toggle="modal" data-target="#con-close-modalS"> <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div> <!-- End Row -->
+
+                
 
 @endsection
