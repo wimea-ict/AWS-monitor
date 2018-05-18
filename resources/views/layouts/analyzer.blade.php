@@ -21,12 +21,12 @@
                                     </thead>
                                     @foreach($data as $dt)
                                         <tr>
-                                            <td>$dt->source</td>
-                                            <td>$dt->source_id</td>
-                                            <td>$dt->criticality</td>
-                                            <td>$dt->classification_id</td>
-                                            <td>$dt->track_counter</td>
-                                            <td>$dt->status</td>
+                                            <td>{{$dt->source}}</td>
+                                            <td>{{$dt->source_id}}</td>
+                                            <td>{{$dt->criticality}}</td>
+                                            <td>{{$dt->classification_id}}</td>
+                                            <td>{{$dt->track_counter}}</td>
+                                            <td>{{$dt->status}}</td>
                                         </tr>
                                     @endforeach
                                 </table>

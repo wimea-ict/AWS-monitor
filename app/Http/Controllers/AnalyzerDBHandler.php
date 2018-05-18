@@ -3,6 +3,10 @@
 namespace station\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use station\Http\Controllers\Controller;
+use DateTimeZone;
+use DateTime;
 
 class AnalyzerDBHandler extends Controller
 {
@@ -29,12 +33,17 @@ class AnalyzerDBHandler extends Controller
         $this->timezone = 'Africa/Kampala';
     }
 
+    public function getProbTbName()
+    {
+        return $this->prob_tb;
+    }
+
     /**
      * getProblemClassifications()
      * gets all the problem classifications in the table
      * @returns $problemClassfications
      */
-    private function getProblemClassifications(){
+    public function getProblemClassifications(){
         $problemClassfications = DB::table($this->problem_classifn_tb)->select('id','problem_description','source')->get();
         return $problemClassfications;
     }
@@ -43,7 +52,7 @@ class AnalyzerDBHandler extends Controller
      * getStations();
      * @returns $stations
      */
-    private function getStations(){
+    public function getStations(){
         $stations = DB::table($this->stns_tb)->select('station_id', 'StationName', 'StationNumber')->get();
         return $stations;
     }
@@ -53,7 +62,7 @@ class AnalyzerDBHandler extends Controller
      *  @param stn_id
      * @returns $station_name;
      */
-    private function getStationName($stn_id){
+    public function getStationName($stn_id){
         $station_name = '';
         $stations = $this->getStations(); 
 
@@ -71,7 +80,7 @@ class AnalyzerDBHandler extends Controller
      * getNodeConfigurations():
      * @returns $stn_prb_conf;
      */
-    private function getStationProbConfigs($stn_id){
+    public function getStationProbConfigs($stn_id){
         
         // problem_id, station_id, max_track_counter, criticality
         $stn_prb_conf = DB::table($this->statn_prob_sttngs_tb)->where('station_id',$stn_id)->select('problem_id','max_track_counter','criticality')->get();
@@ -82,7 +91,7 @@ class AnalyzerDBHandler extends Controller
     /**
      * get all the node status data
      */
-    private function getNodeData($nd_tb, $txt)
+    public function getNodeData($nd_tb, $txt)
     {
         $node_tb = DB::table($nd_tb)->select('node_id','station_id',$txt,'v_in_max_value','v_in_min_value','v_mcu_max_value','v_mcu_min_value')->get();
         
@@ -99,7 +108,7 @@ class AnalyzerDBHandler extends Controller
      * the txt identifiers should be stated as variables to manage them as they change
      * Since only configured nodes are saved to the database, there shouldn't be an unassigned variable.
      */
-    private function getNodeAndStationInfo($txt){
+    public function getNodeAndStationInfo($txt){
 
         $nd_id = '';
         $nd_name = '';
@@ -189,7 +198,7 @@ class AnalyzerDBHandler extends Controller
      * Resetting a table
      * @param $tb_name
      */
-    private function cleanDBTable($tb_name)
+    public function cleanDBTable($tb_name)
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0');
         DB::table($tb_name)->truncate();
@@ -204,7 +213,7 @@ class AnalyzerDBHandler extends Controller
      * @param $criticality
      * @return null
      */
-    private function insertIntoProbTb($nd_id, $nd_name, $prob_id, $criticality)
+    public function insertIntoProbTb($nd_id, $nd_name, $prob_id, $criticality)
     {
         /*
          * Field        possible values
@@ -229,7 +238,7 @@ class AnalyzerDBHandler extends Controller
      * it excludes the solved problems and so should return only one record
      * this is because we don't record a problem again before it has been solved.
      */
-    private function getProblem($nd_id,$source,$classification_id)
+    public function getProblem($nd_id,$source,$classification_id)
     {
         // id, source_id, track_counter
         $prob = DB::table($this->prob_tb)->select('id','source_id','track_counter','status')->where([
@@ -245,7 +254,7 @@ class AnalyzerDBHandler extends Controller
     /**
      * call reporter to report problem
      */
-    private function getReporter($prob_id)
+    public function getReporter($prob_id)
     {
         //............ call reporter here.............................
 
@@ -256,7 +265,7 @@ class AnalyzerDBHandler extends Controller
     /**
      * update problem 
      */
-    private function updateProblem($prob_track_counter,$nd_id,$max_track_counter,$prob_status,$prob_id)
+    public function updateProblem($prob_track_counter,$nd_id,$max_track_counter,$prob_status,$prob_id)
     {
         if ($prob_status == 'reported') {
             // update the updated_at column to affirm that the problem was encountered again
@@ -279,7 +288,7 @@ class AnalyzerDBHandler extends Controller
     /**
      * get current date
      */
-    private function getCurrentDateTime()
+    public function getCurrentDateTime()
     {
         $zone = new DateTimeZone($this->timezone);// set timezone
         $date = new DateTime("now", $zone);// get current time
@@ -290,7 +299,7 @@ class AnalyzerDBHandler extends Controller
     /**
      * Get time difference to use when quering the node_status table
      */
-    private function getTimeDiff()
+    public function getTimeDiff()
     {
         // "date_time_recorded": "2018-02-28 15:40:19"
         $date = $this->getCurrentDateTime();// get current time
@@ -302,7 +311,7 @@ class AnalyzerDBHandler extends Controller
     /**
      * 
      */
-    private function registerProblem($nd_id, $nd_name, $problem_id, $criticality, $max_track_counter)
+    public function registerProblem($nd_id, $nd_name, $problem_id, $criticality, $max_track_counter)
     {
         // check data in the problems table to see if problem has been reported yet.
         $prob = $this->getProblem($nd_id,$nd_name,$problem_id); 
@@ -329,4 +338,44 @@ class AnalyzerDBHandler extends Controller
             $this->updateProblem($prob[0]->track_counter,$nd_id,$max_track_counter,$prob[0]->status,$prob[0]->id);
         }
     }
+
+    /**
+     * @param $nd_id
+     * @param $nd_name
+     * @param $problemClassfications
+     * @param $param - "V_IN,V_MCU,..." paramaters being checked
+     * @param $prob - "empty, null,..." any anormally being checked
+     * @param $stn_prb_conf - the station configurations 
+     * @param $criticality
+     * @param $max_track_counter
+     */
+    public function checkoutProblem($nd_id,$nd_name,$problemClassfications,$param,$prob,$stn_prb_conf,$criticality,$max_track_counter)
+    {
+        // get problem
+        foreach ($problemClassfications as $problem) {
+            // do a case insensitive check
+            if (stripos($problem->problem_description, $param) !== false) {
+                if (stripos($problem->problem_description, $prob) !== false) {
+                    /**
+                     * getting the problem criticality and prob_max_counter
+                     */
+                    if ($stn_prb_conf->isNotEmpty()) {
+                        foreach ($stn_prb_conf as $prb_conf) {
+                            if ($prb_conf->problem_id === $problem->id) {
+                                $criticality = $prb_conf->criticality;
+                                $max_track_counter = $prb_conf->max_track_counter;
+                            }
+                        }
+                    }
+                    $this->registerProblem($nd_id, $nd_name, $problem->id, $criticality, $max_track_counter);
+                    break;
+                }
+            }
+        }
+    }
+
+    /**
+     * 
+     */
+    
 }
