@@ -96,7 +96,7 @@ class SinkNodeController extends Controller
          $pressure=ObservationSlip::where('station','=',$station_id)
                         
                         ->select(DB::raw("CONCAT(date,' ',time)  AS y"),
-                                    'VapourPressure')
+                                    'CLP')
                         ->oldest('creationDate')
                         ->limit(1000)
                         ->get();
@@ -107,9 +107,16 @@ class SinkNodeController extends Controller
         $pressure_data=array();
         $i=1;
         foreach($pressure as $pres){
-            $temp_array=array($i,(float)$pres->VapourPressure);
-            $pressure_data[]=$temp_array;
-            $i++;
+            if(empty($pres->CLP))
+            {
+                // do nothing
+            }
+            else{
+                $temp_array=array($i,(float)$pres->CLP);
+                            $pressure_data[]=$temp_array;
+                            $i++;
+            }
+            
         }
 
         $data["pressure"]=$pressure_data;
