@@ -13,6 +13,8 @@ use station\SinkNode;
 use station\Sensor;
 class StationsController extends Controller
 {
+
+
     /**
      * Display a listing of the resource.
      *

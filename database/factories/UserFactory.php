@@ -29,6 +29,22 @@ $factory->define(User::class, function (Faker $faker) {
     ];
 });
 
+<<<<<<< HEAD
+// $factory->define(station\Station::class, function (Faker $faker) {
+//     static $password;
+
+//     return [
+//         'station_name' => $faker->name,
+//         'station_location' => $faker->unique()->safeEmail,
+//         'longitude' => $faker->unique()->safeEmail,
+//         'latitude' => $faker->unique()->safeEmail,
+//         'station_number' => $faker->unique()->safeEmail,
+//         'location' => $faker->unique()->safeEmail,
+//         'city' => $faker->unique()->safeEmail,
+        
+//     ];
+// });
+=======
  $factory->define(Station::class, function (Faker $faker) {
      
      return [
@@ -107,3 +123,4 @@ $factory->define(NodeStatusConfiguration::class, function (Faker $faker) {
      ];
          
  });
+>>>>>>> b838b37bc10a9bd92782f5e0213406537638fa83

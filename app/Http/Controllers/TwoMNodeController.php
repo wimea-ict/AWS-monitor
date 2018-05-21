@@ -112,6 +112,7 @@ class TwoMNodeController extends Controller
 
         //need to change instead of i pass the value of y but need to pass it as a string
         foreach($humidity as $humid){
+
             if(empty($humid->Dry_Bulb))
             {
                 // do nothing
@@ -129,7 +130,6 @@ class TwoMNodeController extends Controller
                 $i++;
             }
 
-            
         }
 
 
