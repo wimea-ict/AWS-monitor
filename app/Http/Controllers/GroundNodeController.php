@@ -19,7 +19,7 @@ class GroundNodeController extends Controller
      */
     public function index()
     {
-        $stations = Station::all()->toArray();
+        $stations = Station::where('StationCategory', 'aws')->get();
         $groundNodes = GroundNode::all()->toArray();
         $precipitationsensors = Sensor::where('node_type','groundNode')
                                     ->where('parameter_read', 'preciptation')

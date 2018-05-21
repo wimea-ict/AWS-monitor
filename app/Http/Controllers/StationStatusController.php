@@ -3,6 +3,7 @@
 namespace station\Http\Controllers;
 use App\layouts;
 use station\Station;
+use station\Problems;
 use Illuminate\Http\Request;
 
 class StationStatusController extends Controller
@@ -14,8 +15,11 @@ class StationStatusController extends Controller
      */
     public function index()
     {
-        $stations = Station::all()->toArray();
-        return view('layouts.viewStationStatus', compact('stations'));
+        //$problems_found = Station::where('StationCategory', 'aws')->get();
+        $problems_identified = Problems::all();
+        $problems = Problems::pluck('source_id')->all();
+        $stations = Station::whereIn('station_id', $problems)->get();
+        return view('layouts.viewStationStatus', compact('stations','problems_identified'));
 
         
     }
@@ -49,7 +53,8 @@ class StationStatusController extends Controller
      */
     public function show($id)
     {
-        //
+        
+        return view('layouts.selectedStationStatus'); 
     }
 
     /**

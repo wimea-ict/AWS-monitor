@@ -1,152 +1,61 @@
 @extends('main')
 
 @section('content')
-    <div class="row">
-    <div class="col-md-10 col-md-offset-1">
-                        <div class="panel panel-default">
-                            <div class="panel-heading"><h3 class="panel-title">Node and sensor statuses</h3></div>
-                            <div class="panel-body">
+                <div class=""> 
+                    <h3 class="title">Automatic weather Station Statuses</h3> 
+                </div>
+
+               
+
+                    
+                <div class="row text-center">
+                    @foreach($stations as $station)
+                    
+                    <?php $counter=0 ?>
+                    <?php $flag=0 ?>
+                    @foreach ($problems_identified as $problem)
+                        @if($problem['status']== "reported")
+                        @if($problem['source_id']== $station['station_id'])
+                            @if($problem['criticality']=="critical")
+                            <?php $flag=1 ?>
+                            @endif
+                            @if($problem['criticality']=="non-critical")
+                                <?php print $flag=2 ?>
+                            @endif
+                            <?php print $counter++ ?>
+                        @endif
+                        @endif
+                    @endforeach
+                    <div class="col-sm-5 col-md-2">
+                        <div class="panel">
+                            <a href="{{URL::to('selectedStationStatus/'.$station['station_id'])}}">
+                            <div class="h4 text-purple">{{$station['StationName']}}</div>
+                            <span class="text-muted">{{$counter}}</span>
+                            @if($flag ==0)
+                            <div class="text-right">
+                              <i class="ion-ios7-circle-filled" style="font-size:30px; color:#2b542c"></i>
+                            </div>
+                            @endif
+                            @if($flag ==1)
+                            <div class="text-right">
+                              <i class="ion-ios7-circle-filled" style="font-size:30px; color:#a94442"></i>
+                            </div>
+                            @endif
+                            @if($flag==2)
+                            <div class="text-right">
+                              <i class="ion-ios7-circle-filled" style="font-size:30px; color:#8a6d3b"></i>
+                            </div>
+                            @endif
                             
-                                <form class="form-horizontal" role="form">
-                                    <div class="form-group clearfix">
-                                        <label class="col-sm-2 col-sm-offset-3 control-label">Select Station</label>
-                                        <div class="col-sm-4">
-                                            <select class="form-control" name="station_selected">
-                                                @foreach($stations as $station)
-                                                    <option value="{{$station['StationName']}}">{{$station['StationName']}}</option>
-                                                @endforeach
-                                                
-                                            </select>
-                                            
-                                        </div>
-                                    </div>
-                                    <div class="form-group clearfix">
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label class="col-sm-6 control-label">10m Node</label>
-                                                <div class="col-sm-6 control-label">
-                                                    <div class="toggle toggle-success"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label class="col-sm-6 control-label">Ground Node</label>
-                                                <div class="col-sm-6 control-label">
-                                                    <div class="toggle toggle-success"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group clearfix">
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label class="col-sm-6 control-label">Sink Node</label>
-                                                <div class="col-sm-6 control-label">
-                                                    <div class="toggle toggle-success"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label class="col-sm-6 control-label">2m Node</label>
-                                                <div class="col-sm-6 control-label">
-                                                    <div class="toggle toggle-success"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group clearfix">
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label class="col-sm-6 control-label">Temperature Sensor</label>
-                                                <div class="col-sm-6 control-label">
-                                                    <div class="toggle toggle-success"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label class="col-sm-6 control-label">Relative Humidity</label>
-                                                <div class="col-sm-6 control-label">
-                                                    <div class="toggle toggle-success"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group clearfix">
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label class="col-sm-6 control-label">Preciptation Sensor</label>
-                                                <div class="col-sm-6 control-label">
-                                                    <div class="toggle toggle-success"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label class="col-sm-6 control-label">Soil Temperature Sensor</label>
-                                                <div class="col-sm-6 control-label">
-                                                    <div class="toggle toggle-success"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group clearfix">
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label class="col-sm-6 control-label">Soil Moisture Sensor</label>
-                                                <div class="col-sm-6 control-label">
-                                                    <div class="toggle toggle-success"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label class="col-sm-6 control-label">Insulation Sensor</label>
-                                                <div class="col-sm-6 control-label">
-                                                    <div class="toggle toggle-success"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group clearfix" >
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label class="col-sm-6 control-label">wind Speed Sensor</label>
-                                                <div class="col-sm-6 control-label">
-                                                    <div class="toggle toggle-success"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label class="col-sm-6 control-label">Wind Direction Sensor</label>
-                                                <div class="col-sm-6 control-label">
-                                                    <div class="toggle toggle-success"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                                                                      
-                                                
-                                </form>
-                            
-                            </div> <!-- panel-body -->
-                        </div> <!-- panel -->
+                            </a>
                     </div>
-    </div>
+                          
+                    
+
+                </div>
+                @endforeach 
+                
+
+               
+
 @endsection

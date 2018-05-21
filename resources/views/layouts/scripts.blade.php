@@ -198,6 +198,13 @@
                         $('#ssoprobRptTime').val(conigurations[i]['reporting_time_interval']);
                     
                     }
+                    else if(conigurations[i]['problem_id']==9){
+                        $('#pdoccurencesConsider').val(conigurations[i]['max_track_counter']);
+                        $('#pdrptmethod').val(conigurations[i]['report_method']);
+                        $('#pdcriticallity').val(conigurations[i]['criticality']);
+                        $('#pdprobRptTime').val(conigurations[i]['reporting_time_interval']);
+                    
+                    }
                 }
                 
                 
@@ -239,8 +246,8 @@
                 //alert(windDirectionSensors[0]["identifier_used"]);
 
 
-                windSpeedSensors=tenMeterData[2];
-                windDirectionSensors=tenMeterData[3];
+                //windSpeedSensors=tenMeterData[2];
+                //windDirectionSensors=tenMeterData[3];
                 
                 //$('#wizard-validation-form').attr('action', "/updatestation");
                 $('#10node_id').val(obj["node_id"]);

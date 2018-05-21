@@ -117,7 +117,7 @@
                                                 </div>
                                             </div>  --}}
                                             
-                                            <div class="form-group clearfix">
+                                            {{-- <div class="form-group clearfix">
                                                 <label class="col-lg-2 control-label " for="dateopened">Date opened</label>
                                                 <div class="col-lg-4">
                                                     <div class="input-group">
@@ -132,7 +132,7 @@
                                                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                             <div class="form-group clearfix">
                                                 <label class="col-lg-2 control-label " for="station_type">station Type</label>
                                                 <div class="col-lg-4">

@@ -19,7 +19,7 @@ class TenMNodeController extends Controller
      */
     public function index()
     {
-        $stations = Station::all()->toArray();
+        $stations = Station::where('StationCategory', 'aws')->get();
         $tenMeterNodes = TenMeterNode::all()->toArray();
         $insulationsensors = Sensor::where('node_type','tenMeterNode')
                                     ->where('parameter_read', 'insulation')
