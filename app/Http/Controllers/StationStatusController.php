@@ -53,7 +53,7 @@ class StationStatusController extends Controller
      */
     public function show($id)
     {
-        
+        $stations = Problems::where('source_id', $id)->get();
         return view('layouts.selectedStationStatus'); 
     }
 
