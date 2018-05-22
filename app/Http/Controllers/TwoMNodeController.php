@@ -99,7 +99,7 @@ class TwoMNodeController extends Controller
         //nop
         // DB::raw("CONCAT(date,' ',time)  AS y"),
 
-         $humidity=ObservationSlip::where('Station','=',$station_id)
+         $humidity=ObservationSlip::where('Station','=',16)
 
                         ->select("CreationDate AS y",'Wet_Bulb','Dry_Bulb')
                         ->latest('CreationDate')
@@ -116,7 +116,7 @@ class TwoMNodeController extends Controller
         //                 ->limit(1500)
         //                 ->get();
 
-
+        
 
         $humidity_graph_data=array();
         $i=1;
@@ -143,7 +143,7 @@ class TwoMNodeController extends Controller
 
         }
 
-
+        
 
         $data["humidity"]=$humidity_graph_data;
 
