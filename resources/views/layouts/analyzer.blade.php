@@ -20,11 +20,13 @@
                                         <td>status</td>
                                     </thead>
                                     @foreach($data as $dt)
+
+                                        {{$problem = DB::table('problem_classification')->where('id','=',$dt->classification_id)->get()}}
                                         <tr>
                                             <td>{{$dt->source}}</td>
                                             <td>{{$dt->source_id}}</td>
                                             <td>{{$dt->criticality}}</td>
-                                            <td>{{$dt->classification_id}}</td>
+                                            <td>{{$problem->problem_description}}</td>
                                             <td>{{$dt->track_counter}}</td>
                                             <td>{{$dt->status}}</td>
                                         </tr>
