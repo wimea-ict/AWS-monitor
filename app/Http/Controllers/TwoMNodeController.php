@@ -103,20 +103,8 @@ class TwoMNodeController extends Controller
 
                         ->select("CreationDate AS y",'Wet_Bulb','Dry_Bulb')
                         ->latest('CreationDate')
-                        // ->whereNotNull('Dry_Bulb')
-                        // ->orderBy("id",'desc')
                         ->take(1000)
                         ->get();
-
-        // $humidity=ObservationSlip::where('station','=',16)
-
-        //                 ->select('wet_bulb','dry_bulb')
-        //                 ->oldest('id')
-        //                 // ->whereNotNull('Dry_Bulb')
-        //                 ->limit(1500)
-        //                 ->get();
-
-
 
         $humidity_graph_data=array();
         $i=1;
