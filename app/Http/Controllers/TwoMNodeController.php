@@ -97,12 +97,12 @@ class TwoMNodeController extends Controller
         //get precipitation for ground node
 
         //nop
-         $humidity=ObservationSlip::where('station','=',$station_id)
+         $humidity=ObservationSlip::where('Station','=',$station_id)
 
                         ->select(DB::raw("CONCAT(date,' ',time)  AS y"),
                                     'Wet_Bulb','Dry_Bulb')
                         ->oldest('id')
-                        ->whereNotNull('Dry_Bulb')
+                        // ->whereNotNull('Dry_Bulb')
                         ->limit(1500)
                         ->get();
 
