@@ -27,7 +27,7 @@ class TwoMNodeController extends Controller
         $Temperaturesensors = Sensor::where('node_type','twoMeterNode')
                                     ->where('parameter_read', 'Temperature')
                                     ->get();
-        
+
         return view('layouts.configureTwomNode', compact('twoMeterNodes','stations','relativeHumiditysensors','Temperaturesensors'));
     }
 
@@ -35,7 +35,7 @@ class TwoMNodeController extends Controller
         $data["action"]=URL::to('reports2m');
         $data["stations"]=Station::all();
         $data["heading"]="2m Node Reports";
-           
+
         $data["vin_vmcu_2m"]=array(0,0);
         $data["humidity"]=array(0,0);
         $data["templature"]=array(0,0);
@@ -46,41 +46,41 @@ class TwoMNodeController extends Controller
     public function get2mStationReports(Request $request){
         $station_id=request("id");
         $data=array();
-       
+
        //get the txt value used for the particular station 10m node
 
-       
+
        $station2mNodeCofigs = TwoMeterNode::where('station_id', '=', $station_id)
-            
+
             ->select('txt_2m_value')
             ->first();
-       
+
         if(sizeof($station2mNodeCofigs)>0){
         //get node status where the configulations are the ones specifie above
         $nodeStatus=NodeStatus::where('TXT','=',$station2mNodeCofigs->txt_2m_value)
-                        
+
                         ->select(DB::raw("CONCAT(date,' ',time)  AS y"),
                                     'V_MCU','V_IN')
                         ->oldest('date_time_recorded')
                         ->limit(1000)
                         ->get();
-        
+
         }else{
             $nodeStatus=array();//set to empty array if no configulations were returned
         }
-        
+
 
         foreach ($nodeStatus as $status){
             if($status->V_MCU=="" || $status->V_MCU==null){
-              $status->V_MCU=0;  
+              $status->V_MCU=0;
             }
             if($status->V_IN=="" || $status->V_IN==null){
-              $status->V_IN=0;  
+              $status->V_IN=0;
             }
         }
 
-        
-        
+
+
         $dyGraph_data=array();
         $i=1;
 
@@ -93,19 +93,19 @@ class TwoMNodeController extends Controller
         $data["vin_vmcu_2m"]=$dyGraph_data;
 
         //get values for other graphs as well
-        
+
         //get precipitation for ground node
 
         //nop
          $humidity=ObservationSlip::where('station','=',$station_id)
-                        
+
                         ->select(DB::raw("CONCAT(date,' ',time)  AS y"),
                                     'Wet_Bulb','Dry_Bulb')
                         ->oldest('creationDate')
-                        ->limit(100)
+                        ->limit(1000)
                         ->get();
 
-        
+
 
         $humidity_graph_data=array();
         $i=1;
@@ -123,7 +123,7 @@ class TwoMNodeController extends Controller
                 }else{
                     $hum_val=0;
                 }
-                
+
 
                 $temp_array=array($i,(float)$hum_val);
                 $humidity_graph_data[]=$temp_array;
@@ -139,13 +139,13 @@ class TwoMNodeController extends Controller
 
         //get soil teplature
         $templature=ObservationSlip::where('station','=',$station_id)
-                        
+
                         ->select(DB::raw("CONCAT(date,' ',time)  AS y"),
                                     'Dry_Bulb')
                         ->oldest('creationDate')
-                        ->limit(50)
+                        ->limit(1000)
                         ->get();
-        
+
 
         $temp_graph_data=array();
         $i=1;
@@ -160,13 +160,13 @@ class TwoMNodeController extends Controller
                 $temp_graph_data[]=$temp_array;
                 $i++;
             }
-            
+
         }
 
         $data["templature"]=$temp_graph_data;
         //get soil moisture
 
-       
+
         $data["action"]=URL::to('reports2m');
         $data["selected_station"]=$station_id;
         $data["stations"]=Station::all();
@@ -181,7 +181,7 @@ class TwoMNodeController extends Controller
      */
     public function create()
     {
-        
+
     }
 
     /**
@@ -249,13 +249,13 @@ class TwoMNodeController extends Controller
             $TwomNode->t_sht2x_2m = $request->get('tsidentifier_used');
             $TwomNode->rh_sh2x_2m = $request->get('rhidentifier_used');
             $TwomNode->node_status= $this->getStatus($request,'2mnode_status');
-            $TwomNode->txt_2m_value= $request->get('2txt_value'); 
-            
+            $TwomNode->txt_2m_value= $request->get('2txt_value');
+
             $TwomNode->save();
         $relativeHumidity = Sensor::where('node_id',$id)
                                     ->where('parameter_read', 'relative humidity')
                                     ->first();
-            
+
             $relativeHumidity->parameter_read = $request->get('rhparameter_read');
             $relativeHumidity->identifier_used= $request->get('rhidentifier_used');
             $relativeHumidity->min_value = $request->get('rhmin_value');
@@ -263,11 +263,11 @@ class TwoMNodeController extends Controller
             $relativeHumidity->sensor_status= $this->getStatus($request,'rhsensor_status');
             $relativeHumidity->report_time_interval=$request->get('rhrptTime');
             $relativeHumidity->save();
-            
+
         $temperature = Sensor::where('node_id',$id)
                                     ->where('parameter_read', 'Temperature')
                                     ->first();
-            
+
             $temperature->parameter_read = $request->get('tsparameter_read');
             $temperature->identifier_used= $request->get('tsidentifier_used');
             $temperature->min_value = $request->get('tsmin_value');
@@ -275,12 +275,12 @@ class TwoMNodeController extends Controller
             $temperature->sensor_status= $this->getStatus($request,'tssensor_status');
             $temperature->report_time_interval=$request->get('tsrptTime');
             $temperature->save();
-        
-        
-        
+
+
+
         }
         return redirect('/configure2mnode');
-    
+
     }
     public function getStatus(Request $request, $status){
         $value = 'on';
