@@ -61,8 +61,8 @@ class SinkNodeController extends Controller
 
                         ->select(DB::raw("CONCAT(date,' ',time)  AS y"),
                                     'V_MCU','V_IN')
-                        ->oldest('date_time_recorded')
-                        ->limit(1000)
+                        ->latest('date_time_recorded')
+                        ->take(1000)
                         ->get();
 
         }else{
