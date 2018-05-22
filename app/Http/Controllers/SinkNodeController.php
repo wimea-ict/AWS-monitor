@@ -95,7 +95,7 @@ class SinkNodeController extends Controller
         //nop
          $pressure=ObservationSlip::where('station','=',$station_id)
 
-                        ->select("creationDate AS y"),
+                        ->select("creationDate AS y",
                                     'CLP')
                         ->latest('creationDate')
                         ->take(1000)
