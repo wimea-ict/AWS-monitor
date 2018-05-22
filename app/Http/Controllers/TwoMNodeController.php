@@ -171,7 +171,9 @@ class TwoMNodeController extends Controller
         $data["selected_station"]=$station_id;
         $data["stations"]=Station::all();
         $data["heading"]="2m Node Reports";
-        return view("reports.node2m",$data);
+
+        retrun $data;
+        //return view("reports.node2m",$data);
     }
 
     /**
