@@ -105,7 +105,7 @@ class GroundNodeController extends Controller
 
                         ->select(DB::raw("CONCAT(date,' ',time)  AS y"),
                                     'DurationOfPeriodOfPrecipitation')
-                        ->latest('creationDate')
+                        ->latest('CreationDate')
                         ->take(1000)
                         ->get();
 
@@ -148,7 +148,7 @@ class GroundNodeController extends Controller
 
                         ->select(DB::raw("CONCAT(date,' ',time)  AS y"),
                                     'SoilMoisture')
-                        ->latest('creationDate')
+                        ->latest('CreationDate')
                         ->take(1000)
                         ->get();
 

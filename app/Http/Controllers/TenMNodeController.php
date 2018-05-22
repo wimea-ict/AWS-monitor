@@ -121,7 +121,7 @@ class TenMNodeController extends Controller
 
                         ->select(DB::raw("CONCAT(date,' ',time)  AS y"),
                                     'Wind_Speed')
-                        ->latest('creationDate')
+                        ->latest('CreationDate')
                         ->take(1000)
                         ->get();
 
@@ -141,7 +141,7 @@ class TenMNodeController extends Controller
 
                         ->select(DB::raw("CONCAT(date,' ',time)  AS y"),
                                     'Wind_Direction')
-                        ->latest('creationDate')
+                        ->latest('CreationDate')
                         ->take(1000)
                         ->get();
 
