@@ -99,7 +99,7 @@ class TwoMNodeController extends Controller
         //nop
         // DB::raw("CONCAT(date,' ',time)  AS y"),
 
-         $humidity=ObservationSlip::where('Station','=',16)
+         $humidity=ObservationSlip::where('Station','=',$station_id)
 
                         ->select("CreationDate AS y",'Wet_Bulb','Dry_Bulb')
                         ->latest('CreationDate')
