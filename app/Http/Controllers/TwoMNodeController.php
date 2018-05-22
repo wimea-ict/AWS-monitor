@@ -104,7 +104,8 @@ class TwoMNodeController extends Controller
                         ->oldest('CreationDate')
                         ->limit(1000)
                         ->get();
-
+                        
+        return $humidity;
 
 
         $humidity_graph_data=array();
