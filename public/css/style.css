@@ -431,7 +431,7 @@ header {
 
 .content {
   margin-left: 230px;
-  padding-bottom: 50px;
+  padding-bottom: 5px;
 }
 
 .content > .container-fluid {
@@ -1247,7 +1247,7 @@ lesshat-selector {
 
 .wizard > .content {
   background: #fff;
-  min-height: 600px;
+  
 }
 
 .wizard > .content > .body {
@@ -1310,6 +1310,7 @@ lesshat-selector {
   background: #3bc0c3;
   color: #fff;
   border-radius: 2px;
+  margin-top:5px;
 }
 
 .wizard > .actions .disabled a, .wizard > .actions .disabled a:hover, .wizard > .actions .disabled a:active {
@@ -1985,3 +1986,72 @@ ul.p-social-link li a {
   color: #107cb7;
 }
 
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 21px;
+}
+
+.switch input {display:none;}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 2px;
+  bottom: 1px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #33b86c;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #33b86c;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.publish-label{
+  padding-top:5px;
+}
+
+.select-border{
+  border-color: #0AC729;
+  margin-top: 20px;
+ 
+}
+
+.select-size{
+  width: 20px;
+}
