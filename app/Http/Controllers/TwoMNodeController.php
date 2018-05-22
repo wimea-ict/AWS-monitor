@@ -59,10 +59,10 @@ class TwoMNodeController extends Controller
         //get node status where the configulations are the ones specifie above
         $nodeStatus=NodeStatus::where('TXT','=',$station2mNodeCofigs->txt_2m_value)
 
-                        ->select(DB::raw("CONCAT(date,' ',time)  AS y"),
-                                    'V_MCU','V_IN')
-                        ->oldest('date_time_recorded')
-                        ->limit(1000)
+                // DB::raw("CONCAT(date,' ',time)  AS y")
+                        ->select("date_time_recorded AS y",'V_MCU','V_IN')
+                        ->latest('date_time_recorded')
+                        ->take(1000)
                         ->get();
 
         }else{
@@ -98,15 +98,24 @@ class TwoMNodeController extends Controller
 
         //nop
         // DB::raw("CONCAT(date,' ',time)  AS y"),
-        //return $station_id;
 
          $humidity=ObservationSlip::where('Station','=',16)
 
-                        ->select('Wet_Bulb','Dry_Bulb')
-                        // ->oldest('id')
+                        ->select("CreationDate AS y",'Wet_Bulb','Dry_Bulb')
+                        ->latest('CreationDate')
                         // ->whereNotNull('Dry_Bulb')
-                        ->limit(1500)
+                        // ->orderBy("id",'desc')
+                        ->take(1000)
                         ->get();
+
+        // $humidity=ObservationSlip::where('station','=',16)
+
+        //                 ->select('wet_bulb','dry_bulb')
+        //                 ->oldest('id')
+        //                 // ->whereNotNull('Dry_Bulb')
+        //                 ->limit(1500)
+        //                 ->get();
+
 
 
         $humidity_graph_data=array();
@@ -134,7 +143,7 @@ class TwoMNodeController extends Controller
 
         }
 
-        return $humidity;
+
 
         $data["humidity"]=$humidity_graph_data;
 
@@ -144,8 +153,8 @@ class TwoMNodeController extends Controller
 
                         ->select(DB::raw("CONCAT(date,' ',time)  AS y"),
                                     'Dry_Bulb')
-                        ->oldest('creationDate')
-                        ->limit(1000)
+                        ->latest('creationDate')
+                        ->take(1000)
                         ->get();
 
 
@@ -174,9 +183,9 @@ class TwoMNodeController extends Controller
         $data["stations"]=Station::all();
         $data["heading"]="2m Node Reports";
 
-        return $data;
+        // return $data;
 
-        //return view("reports.node2m",$data);
+        return view("reports.node2m",$data);
     }
 
     /**
