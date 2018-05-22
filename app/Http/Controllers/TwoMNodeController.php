@@ -101,7 +101,7 @@ class TwoMNodeController extends Controller
 
                         ->select(DB::raw("CONCAT(date,' ',time)  AS y"),
                                     'Wet_Bulb','Dry_Bulb')
-                        ->oldest('creationDate')
+                        ->oldest('CreationDate')
                         ->limit(1000)
                         ->get();
 
