@@ -105,8 +105,6 @@ class TwoMNodeController extends Controller
                         ->limit(1000)
                         ->get();
 
-        return $humidity;
-
 
         $humidity_graph_data=array();
         $i=1;
@@ -133,7 +131,7 @@ class TwoMNodeController extends Controller
 
         }
 
-
+        return $humidity;
 
         $data["humidity"]=$humidity_graph_data;
 
