@@ -10,6 +10,21 @@ use DateTime;
 
 class AnalyzerHandler extends Controller
 {
+    /* use constants instead */
+    const PROBLEM_CLASSIFN_TB =  "problem_classification";
+    const STNS_TB = "stations";
+    const STATN_PROB_STTNGS_TB = "station_problem_settings";
+    const PROB_TB = "problems";
+    const SENSORS_TB = "sensors";
+    const GND_ND_TB = "groundNode";
+    const TWOM_ND_TB = "twoMeterNode";
+    const TENM_ND_TB = "tenMeterNode";
+    const SINK_ND_TB = "sinkNode";
+    const TIMEZONE = "Africa/Kampala";
+    const GND_NAME = "ground_node";
+    const TWOMN_NAME = "2m_node";
+    const TENN_NAME = "10m_node";
+    const SINK_NAME = "sink_node";
     //
     private $problem_classifn_tb;
     private $stns_tb;
@@ -21,6 +36,11 @@ class AnalyzerHandler extends Controller
     private $tenM_nd_tb;
     private $sink_nd_tb;
     private $timezone;
+    /* names used to identify the table name of the nodes */
+    private $gnd_name;
+    private $sink_name;
+    private $towN_name;
+    private $tenN_name;
 
     public function __construct() {
         $this->problem_classifn_tb = 'problem_classification';
@@ -33,6 +53,10 @@ class AnalyzerHandler extends Controller
         $this->tenM_nd_tb = 'tenMeterNode';
         $this->sink_nd_tb = 'sinkNode';
         $this->timezone = 'Africa/Kampala';
+        $this->gnd_name = 'ground_node';
+        $this->towN_name = '2m_node';
+        $this->tenN_name = '10m_node';
+        $this->sink_name = 'sink_node';
     }
 
     public function getProbTbName()
@@ -91,32 +115,49 @@ class AnalyzerHandler extends Controller
     }
 
     /**
-     * 
+     * get all the data in node table
      */
-    public function getProbConfigs($stn_prb_conf,$stn_id)
+    public function getNodeData($nd_tb_name, $txt_col_name)
     {
-        $configs = '';
-        foreach ($stn_prb_conf as $conf) {
-            if ($conf->station_id === $stn_id) {
-                $configs = $conf;
-                break;
-            }
-        } 
-        return $configs;
-    }
-
-    /**
-     * get all the node status data
-     */
-    public function getNodeData($nd_tb, $txt)
-    {
-        $node_tb = DB::table($this->nd_tb)->select('node_id','station_id',$txt,'v_in_max_value','v_in_min_value','v_mcu_max_value','v_mcu_min_value')->get();
+        $node_tb = DB::table($nd_tb_name)->select('node_id','station_id',$txt_col_name,'v_in_max_value','v_in_min_value','v_mcu_max_value','v_mcu_min_value')->get();
         
         return $node_tb;
     }
 
     /**
-     * getConfigInfo()
+     * 
+     */
+    public function getNodeTableData($txt_col_name)
+    {
+
+        $tb_data = '';
+        /* 'sensor','station','2m_node','10m_node','sink_node','ground_node' */
+        if (stripos($txt_col_name, 'gnd') !== false) {
+            // node_id, station_id, txt_gnd_value
+            $tb_data = $this->getNodeData($this->gnd_nd_tb,'txt_gnd_value');
+            
+        }
+        else if (stripos($txt_col_name, '2m') !== false) {
+            // node_id, station_id, txt_2m_value
+            $tb_data = $this->getNodeData($this->twoM_nd_tb,'txt_2m_value');
+            
+        }
+        else if (stripos($txt_col_name, '10m') !== false) {
+            // node_id, station_id, txt_10m_value
+            $tb_data = $this->getNodeData($this->tenM_nd_tb,'txt_10m_value');
+            
+        }
+        else if (stripos($txt_col_name, 'sink') !== false) {
+            // node_id, station_id, txt_sink_value
+            $tb_data = $this->getNodeData($this->sink_nd_tb,'txt_sink_value');
+            
+        }
+
+        return $tb_data;
+    }
+
+    /**
+     * getNodeConfigurations()
      * it also gets the node configurations
      * @returns array of values
      * Get the respective node ids
@@ -125,93 +166,92 @@ class AnalyzerHandler extends Controller
      * the txt identifiers should be stated as variables to manage them as they change
      * Since only configured nodes are saved to the database, there shouldn't be an unassigned variable.
      */
-    public function getConfigInfo($type,$txt){
+    public function getNodeConfigurations($config_data, $txt){
 
-        if (strcasecmp($type,'nodestatus')) {
-            $nd_id = '';
-            $nd_name = '';
-            $stn_id = '';
-            $vinMaxVal = '';
-            $vinMinVal = '';
-            $vmcuMaxVal = '';
-            $vmcuMinVal = '';
-            /* 'sensor','station','2m_node','10m_node','sink_node','ground_node' */
-            if (stripos($txt, 'gnd') !== false) {
-                // node_id, station_id, txt_gnd_value
-                $node_tb = $this->getNodeData($this->gnd_nd_tb,'txt_gnd_value');
-                foreach ($node_tb as $nd_tb) {
-                    if ($nd_tb->txt_gnd_value === $txt) {
-                        $stn_id = $nd_tb->station_id;
-                        $nd_id = $nd_tb->node_id;
-                        $nd_name = 'ground_node';
-                        $vinMaxVal = $nd_tb->v_in_max_value;
-                        $vinMinVal = $nd_tb->v_in_min_value;
-                        $vmcuMaxVal = $nd_tb->v_mcu_max_value;
-                        $vmcuMinVal = $nd_tb->v_mcu_min_value;
-                        break;
-                    }
+        
+        $nd_id = '';
+        $nd_name = '';
+        $stn_id = '';
+        $vinMaxVal = '';
+        $vinMinVal = '';
+        $vmcuMaxVal = '';
+        $vmcuMinVal = '';
+        $node_tb = $config_data;
+        /* 'sensor','station','2m_node','10m_node','sink_node','ground_node' */
+        if (stripos($txt, 'gnd') !== false) {
+            // look up node config in the table data
+            foreach ($node_tb as $nd_tb) {
+                if ($nd_tb->txt_gnd_value === $txt) {
+                    $stn_id = $nd_tb->station_id;
+                    $nd_id = $nd_tb->node_id;
+                    $nd_name = $this->gnd_name;
+                    $vinMaxVal = $nd_tb->v_in_max_value;
+                    $vinMinVal = $nd_tb->v_in_min_value;
+                    $vmcuMaxVal = $nd_tb->v_mcu_max_value;
+                    $vmcuMinVal = $nd_tb->v_mcu_min_value;
+                    break;
                 }
             }
-            else if (stripos($txt, '2m') !== false) {
-                // node_id, station_id, txt_gnd_value
-                $node_tb = $this->getNodeData($this->twoM_nd_tb,'txt_2m_value');
-                foreach ($node_tb as $nd_tb) {
-                    if ($nd_tb->txt_2m_value === $txt) {
-                        $stn_id = $nd_tb->station_id;
-                        $nd_id = $nd_tb->node_id;
-                        $nd_name = '2m_node';
-                        $vinMaxVal = $nd_tb->v_in_max_value;
-                        $vinMinVal = $nd_tb->v_in_min_value;
-                        $vmcuMaxVal = $nd_tb->v_mcu_max_value;
-                        $vmcuMinVal = $nd_tb->v_mcu_min_value;
-                        break;
-                    }
-                }
-            }
-            else if (stripos($txt, '10m') !== false) {
-                // node_id, station_id, txt_gnd_value
-                $node_tb = $this->getNodeData($this->tenM_nd_tb,'txt_10m_value');
-                foreach ($node_tb as $nd_tb) {
-                    if ($nd_tb->txt_10m_value === $txt) {
-                        $stn_id = $nd_tb->station_id;
-                        $nd_id = $nd_tb->node_id;
-                        $nd_name = '10m_node';
-                        $vinMaxVal = $nd_tb->v_in_max_value;
-                        $vinMinVal = $nd_tb->v_in_min_value;
-                        $vmcuMaxVal = $nd_tb->v_mcu_max_value;
-                        $vmcuMinVal = $nd_tb->v_mcu_min_value;
-                        break;
-                    }
-                }
-            }
-            else if (stripos($txt, 'sink') !== false) {
-                // node_id, station_id, txt_gnd_value
-                $node_tb = $this->getNodeData($this->sink_nd_tb,'txt_sink_value');
-                foreach ($node_tb as $nd_tb) {
-                    if ($nd_tb->txt_sink_value === $txt) {
-                        $stn_id = $nd_tb->station_id;
-                        $nd_id = $nd_tb->node_id;
-                        $nd_name = 'sink_node';
-                        $vinMaxVal = $nd_tb->v_in_max_value;
-                        $vinMinVal = $nd_tb->v_in_min_value;
-                        $vmcuMaxVal = $nd_tb->v_mcu_max_value;
-                        $vmcuMinVal = $nd_tb->v_mcu_min_value;
-                        break;
-                    }
-                }
-            }
-            
-            return array(
-                'stn_id' => $stn_id, 
-                'nd_id' => $nd_id, 
-                'nd_name' => $nd_name, 
-                'vinMaxVal' => $vinMaxVal, 
-                'vinMinVal' => $vinMinVal, 
-                'vmcuMaxVal' => $vmcuMaxVal, 
-                'vmcuMinVal' => $vmcuMinVal, 
-            );
         }
-        elseif (strcasecmp($type,'observationslip')) {
+        else if (stripos($txt, '2m') !== false) {
+            // look up node config in the table data
+            foreach ($node_tb as $nd_tb) {
+                if ($nd_tb->txt_2m_value === $txt) {
+                    $stn_id = $nd_tb->station_id;
+                    $nd_id = $nd_tb->node_id;
+                    $nd_name = $this->towN_name;
+                    $vinMaxVal = $nd_tb->v_in_max_value;
+                    $vinMinVal = $nd_tb->v_in_min_value;
+                    $vmcuMaxVal = $nd_tb->v_mcu_max_value;
+                    $vmcuMinVal = $nd_tb->v_mcu_min_value;
+                    break;
+                }
+            }
+        }
+        else if (stripos($txt, '10m') !== false) {
+            // look up node config in the table data
+            foreach ($node_tb as $nd_tb) {
+                if ($nd_tb->txt_10m_value === $txt) {
+                    $stn_id = $nd_tb->station_id;
+                    $nd_id = $nd_tb->node_id;
+                    $nd_name = $this->tenN_name;
+                    $vinMaxVal = $nd_tb->v_in_max_value;
+                    $vinMinVal = $nd_tb->v_in_min_value;
+                    $vmcuMaxVal = $nd_tb->v_mcu_max_value;
+                    $vmcuMinVal = $nd_tb->v_mcu_min_value;
+                    break;
+                }
+            }
+        }
+        else if (stripos($txt, 'sink') !== false) {
+            // look up node config in the table data
+            foreach ($node_tb as $nd_tb) {
+                if ($nd_tb->txt_sink_value === $txt) {
+                    $stn_id = $nd_tb->station_id;
+                    $nd_id = $nd_tb->node_id;
+                    $nd_name = $this->sink_name;
+                    $vinMaxVal = $nd_tb->v_in_max_value;
+                    $vinMinVal = $nd_tb->v_in_min_value;
+                    $vmcuMaxVal = $nd_tb->v_mcu_max_value;
+                    $vmcuMinVal = $nd_tb->v_mcu_min_value;
+                    break;
+                }
+            }
+        }
+        
+        return array(
+            'stn_id' => $stn_id, 
+            'nd_id' => $nd_id, 
+            'nd_name' => $nd_name, 
+            'vinMaxVal' => $vinMaxVal, 
+            'vinMinVal' => $vinMinVal, 
+            'vmcuMaxVal' => $vmcuMaxVal, 
+            'vmcuMinVal' => $vmcuMinVal, 
+        );
+    }
+
+    /* 
+    elseif (strcasecmp($type,'observationslip') == 0) {
             $sensor_id = '';
             $sensor_name = '';
             $nd_id = '';
@@ -228,10 +268,8 @@ class AnalyzerHandler extends Controller
                 'minVal' => $sensor_data->min_value,
                 'param_read' => $sensor_data->parameter_read, 
             );
-        }   
-        
-        return;
-    }
+        }
+    */
 
     /**
      * Resetting a table
@@ -387,8 +425,9 @@ class AnalyzerHandler extends Controller
      * @param $stn_prb_conf - the station configurations 
      * @param $criticality
      * @param $max_track_counter
+     * @param $stn_id
      */
-    public function checkoutProblem($nd_id,$nd_name,$problemClassfications,$param,$prob,$stn_prb_conf,$criticality,$max_track_counter)
+    public function checkoutProblem($nd_id,$nd_name,$problemClassfications,$param,$prob,$stn_prb_conf,$criticality,$max_track_counter,$stn_id)
     {
         // get problem
         foreach ($problemClassfications as $problem) {
@@ -400,10 +439,12 @@ class AnalyzerHandler extends Controller
                      */
                     if ($stn_prb_conf->isNotEmpty()) {
                         foreach ($stn_prb_conf as $prb_conf) {
-                            if ($prb_conf->problem_id === $problem->id) {
-                                $criticality = $prb_conf->criticality;
-                                $max_track_counter = $prb_conf->max_track_counter;
-                            }
+                            if ($prb_conf->station_id === $stn_id) {
+                                if ($prb_conf->problem_id === $problem->id) {
+                                    $criticality = $prb_conf->criticality;
+                                    $max_track_counter = $prb_conf->max_track_counter;
+                                }
+                            }                            
                         }
                     }
                     $this->registerProblem($nd_id, $nd_name, $problem->id, $criticality, $max_track_counter);
@@ -421,7 +462,7 @@ class AnalyzerHandler extends Controller
      */
     public function getLastId($data)
     {
-        if (strcasecmp($data,'observationslip')) {
+        if (strcasecmp($data,'observationslip') == 0) {
             $checks = DB::table('observtnslp_analyzer_checks')->orderBy('id','desc')->first();
             if (empty($checks->id_last_checked)) {
                 return -1;
@@ -430,7 +471,7 @@ class AnalyzerHandler extends Controller
                 return $checks->id_last_checked;
             }
         }
-        elseif (strcasecmp($data,'nodestatus')) {
+        elseif (strcasecmp($data,'nodestatus') == 0) {
             $checks = DB::table('nodestatus_analyzer_checks')->orderBy('id','desc')->first();
             if (empty($checks->id_last_checked)) {
                 return -1;
@@ -450,13 +491,13 @@ class AnalyzerHandler extends Controller
      */
     public function updateChecksTable($data,$id_first_checked,$id_last_checked)
     {
-        if (strcasecmp($data,'nodestatus')) {
+        if (strcasecmp($data,'nodestatus') == 0) {
             
             DB::table('nodestatus_analyzer_checks')->insert(
                 ['id_first_checked'=>$id_first_checked,'id_last_checked'=>$id_last_checked]
             );
         }
-        elseif (strcasecmp($data,'observationslip')) {
+        elseif (strcasecmp($data,'observationslip') == 0) {
             
             DB::table('observtnslp_analyzer_checks')->insert(
                 ['id_first_checked'=>$id_first_checked,'id_last_checked'=>$id_last_checked]
