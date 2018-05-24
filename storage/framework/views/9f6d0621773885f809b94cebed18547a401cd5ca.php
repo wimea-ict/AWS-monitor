@@ -11,18 +11,17 @@
                     
                     <?php $counter=0 ?>
                     <?php $flag=0 ?>
-                    <?php $__currentLoopData = $problems_identified; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $problem): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <?php if($problem['status']== "reported"): ?>
-                        <?php if($problem['source_id']== $station['station_id']): ?>
-                            <?php if($problem['criticality']=="critical"): ?>
+                    <?php $__currentLoopData = $stations_with_problems; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $problem): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <?php if($problem['id']== $station['station_id']): ?>
+                            <?php if($problem['category']=="critical"): ?>
                             <?php $flag=1 ?>
                             <?php endif; ?>
-                            <?php if($problem['criticality']=="non-critical"): ?>
+                            <?php if($problem['category']=="non-critical"): ?>
                                 <?php print $flag=2 ?>
                             <?php endif; ?>
                             <?php print $counter++ ?>
                         <?php endif; ?>
-                        <?php endif; ?>
+                        
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     <div class="col-sm-5 col-md-2">
                         <div class="panel">

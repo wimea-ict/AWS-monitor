@@ -4,28 +4,24 @@
     <div class="row">
     <div class="col-md-10 col-md-offset-1">
                         <div class="panel panel-default">
-                            <div class="panel-heading"><h3 class="panel-title">Node and sensor statuses</h3></div>
+                            <div class="panel-heading"><h3 class="panel-title">Node and sensor statuses ()</h3></div>
                             <div class="panel-body">
                             
                                 <form class="form-horizontal" role="form">
-                                    <div class="form-group clearfix">
-                                        <label class="col-sm-2 col-sm-offset-3 control-label">Select Station</label>
-                                        <div class="col-sm-4">
-                                            <select class="form-control" name="station_selected">
-                                                @foreach($stations as $station)
-                                                    <option value="{{$station['StationName']}}">{{$station['StationName']}}</option>
-                                                @endforeach
-                                                
-                                            </select>
-                                            
-                                        </div>
-                                    </div>
+                                    
                                     <div class="form-group clearfix">
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label class="col-sm-6 control-label">10m Node</label>
+                                                <label class="col-sm-6 control-label">2m Node</label>
                                                 <div class="col-sm-6 control-label">
+                                                <!--'twoMFlag','tenMFlag','gndFlag','sinkFlag','Twomnodesensors','Tenmnodesensors','Groundnodesensors','sinkNodesensors'-->
+                                                @if($twoMFlag==0)
                                                     <div class="toggle toggle-success"></div>
+                                                @endif
+                                                @if($twoMFlag==1)
+                                                    <div class="toggle toggle-danger "></div>
+                                                @endif
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -35,7 +31,12 @@
                                             <div class="form-group">
                                                 <label class="col-sm-6 control-label">Ground Node</label>
                                                 <div class="col-sm-6 control-label">
+                                                @if($gndFlag==0)
                                                     <div class="toggle toggle-success"></div>
+                                                @endif
+                                                @if($gndFlag==1)
+                                                    <div class="toggle toggle-danger"></div>
+                                                @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -46,7 +47,12 @@
                                             <div class="form-group">
                                                 <label class="col-sm-6 control-label">Sink Node</label>
                                                 <div class="col-sm-6 control-label">
+                                                @if($sinkFlag==0)
                                                     <div class="toggle toggle-success"></div>
+                                                @endif
+                                                @if($sinkFlag==1)
+                                                    <div class="toggle toggle-danger"></div>
+                                                @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -54,19 +60,32 @@
                                         
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label class="col-sm-6 control-label">2m Node</label>
+                                                <label class="col-sm-6 control-label">10m Node</label>
                                                 <div class="col-sm-6 control-label">
+                                                @if($tenMFlag==0)
                                                     <div class="toggle toggle-success"></div>
+                                                @endif
+                                                @if($tenMFlag==1)
+                                                    <div class="toggle toggle-danger"></div>
+                                                @endif
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    
                                     <div class="form-group clearfix">
+                                    
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label class="col-sm-6 control-label">Temperature Sensor</label>
+                                                
                                                 <div class="col-sm-6 control-label">
+                                                @if($TempSensorFlag==0)
                                                     <div class="toggle toggle-success"></div>
+                                                @endif
+                                                @if($TempSensorFlag==1)
+                                                    <div class="toggle toggle-danger"></div>
+                                                @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -76,17 +95,28 @@
                                             <div class="form-group">
                                                 <label class="col-sm-6 control-label">Relative Humidity</label>
                                                 <div class="col-sm-6 control-label">
+                                                @if($relativeHumidity==0)
                                                     <div class="toggle toggle-success"></div>
+                                                @endif
+                                                @if($relativeHumidity==1)
+                                                    <div class="toggle toggle-danger"></div>
+                                                @endif
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group clearfix">
+                                    
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label class="col-sm-6 control-label">Preciptation Sensor</label>
                                                 <div class="col-sm-6 control-label">
+                                                @if($PreciptationFlag==0)
                                                     <div class="toggle toggle-success"></div>
+                                                @endif
+                                                @if($PreciptationFlag==1)
+                                                    <div class="toggle toggle-danger"></div>
+                                                @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -96,7 +126,12 @@
                                             <div class="form-group">
                                                 <label class="col-sm-6 control-label">Soil Temperature Sensor</label>
                                                 <div class="col-sm-6 control-label">
+                                                @if($SoilTempFlag==0)
                                                     <div class="toggle toggle-success"></div>
+                                                @endif
+                                                @if($SoilTempFlag==1)
+                                                    <div class="toggle toggle-danger"></div>
+                                                @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -106,17 +141,28 @@
                                             <div class="form-group">
                                                 <label class="col-sm-6 control-label">Soil Moisture Sensor</label>
                                                 <div class="col-sm-6 control-label">
+                                                @if($SoilMoistureFlag==0)
                                                     <div class="toggle toggle-success"></div>
+                                                @endif
+                                                @if($SoilMoistureFlag==1)
+                                                    <div class="toggle toggle-danger"></div>
+                                                @endif
                                                 </div>
                                             </div>
                                         </div>
 
                                         
                                         <div class="col-sm-6">
+                                        <!--'TempSensorFlag','SoilMoistureFlag','SoilTempFlag','PreciptationFlag','PressureFlag','RainfallFlag','WindSpeedFlag','WindDirectionFlag','insolationFlag','relativeHumidity'-->
                                             <div class="form-group">
-                                                <label class="col-sm-6 control-label">Insulation Sensor</label>
+                                                <label class="col-sm-6 control-label">Insolation Sensor</label>
                                                 <div class="col-sm-6 control-label">
+                                                @if($insolationFlag==0)
                                                     <div class="toggle toggle-success"></div>
+                                                @endif
+                                                @if($insolationFlag==1)
+                                                    <div class="toggle toggle-danger"></div>
+                                                @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -126,7 +172,12 @@
                                             <div class="form-group">
                                                 <label class="col-sm-6 control-label">wind Speed Sensor</label>
                                                 <div class="col-sm-6 control-label">
+                                                @if($WindSpeedFlag==0)
                                                     <div class="toggle toggle-success"></div>
+                                                @endif
+                                                @if($WindSpeedFlag==1)
+                                                    <div class="toggle toggle-danger"></div>
+                                                @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -136,7 +187,12 @@
                                             <div class="form-group">
                                                 <label class="col-sm-6 control-label">Wind Direction Sensor</label>
                                                 <div class="col-sm-6 control-label">
+                                                @if($WindDirectionFlag==0)
                                                     <div class="toggle toggle-success"></div>
+                                                @endif
+                                                @if($WindDirectionFlag==1)
+                                                    <div class="toggle toggle-danger"></div>
+                                                @endif
                                                 </div>
                                             </div>
                                         </div>

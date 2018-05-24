@@ -13,18 +13,17 @@
                     
                     <?php $counter=0 ?>
                     <?php $flag=0 ?>
-                    @foreach ($problems_identified as $problem)
-                        @if($problem['status']== "reported")
-                        @if($problem['source_id']== $station['station_id'])
-                            @if($problem['criticality']=="critical")
+                    @foreach ($stations_with_problems as $problem)
+                        @if($problem['id']== $station['station_id'])
+                            @if($problem['category']=="critical")
                             <?php $flag=1 ?>
                             @endif
-                            @if($problem['criticality']=="non-critical")
+                            @if($problem['category']=="non-critical")
                                 <?php print $flag=2 ?>
                             @endif
                             <?php print $counter++ ?>
                         @endif
-                        @endif
+                        
                     @endforeach
                     <div class="col-sm-5 col-md-2">
                         <div class="panel">
