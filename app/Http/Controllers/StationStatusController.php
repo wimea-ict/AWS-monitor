@@ -143,7 +143,7 @@ class StationStatusController extends Controller
 
         //$problems = Problems::where('')
 
-        //$stations = Station::where('station_id', $problems)->get();
+        $stationTaken = Station::where('station_id', $id)->first()->toArray();
         $problems = Problems::where('status', 'reported')->where('classification_id', '1')->orwhere('classification_id','2')->get()->toArray();
         //dd($problems);
         if(!empty($problems)){
@@ -253,7 +253,7 @@ class StationStatusController extends Controller
         }
         
         
-        return view('layouts.selectedStationStatus',compact('twoMFlag','tenMFlag','gndFlag','sinkFlag','TempSensorFlag','SoilMoistureFlag','SoilTempFlag','PreciptationFlag','PressureFlag','RainfallFlag','WindSpeedFlag','WindDirectionFlag','insolationFlag','relativeHumidity')); 
+        return view('layouts.selectedStationStatus',compact('twoMFlag','tenMFlag','gndFlag','sinkFlag','TempSensorFlag','SoilMoistureFlag','SoilTempFlag','PreciptationFlag','PressureFlag','RainfallFlag','WindSpeedFlag','WindDirectionFlag','insolationFlag','relativeHumidity','stationTaken')); 
     }
 
     /**
