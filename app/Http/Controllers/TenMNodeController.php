@@ -42,10 +42,10 @@ class TenMNodeController extends Controller
         $data["stations"]=Station::all();
         $data["heading"]="10m Node Reports";
 
-        $data["vin_vmcu_10m"]=array(0,0);
-        $data["insulation_sensor"]=array(0,0);
-        $data["windspeed_sensor"]=array(0,0);
-        $data["wind_direction_sensor"]=array(0,0);
+        $data["vin_vmcu_10m"]="";
+        $data["insulation_sensor"]="";
+        $data["windspeed_sensor"]="";
+        $data["wind_direction_sensor"]="";
         return view("reports.node10m",$data);
     }
 
@@ -66,9 +66,8 @@ class TenMNodeController extends Controller
              //get node status where the configulations are the ones specifie above
             $nodeStatus=NodeStatus::where('TXT','=',$station10mNodeCofigs->txt_10m_value)
 
-                        ->select(DB::raw("CONCAT(date,' ',time)  AS y"),
-                                    'V_MCU','V_IN')
-                        ->lastest('date_time_recorded')
+                        ->select("date_time_recorded AS y",'V_MCU','V_IN')
+                        ->latest('date_time_recorded')
                         ->take(1000)
                         ->get();
 
@@ -77,23 +76,23 @@ class TenMNodeController extends Controller
         }
 
 
-        $dyGraph_data=array();
-        $i=1;
+        $dyGraph_data="";
+
         foreach($nodeStatus as $status){
-            if($status->V_MCU=="" || $status->V_MCU==null){
-              $status->V_MCU=0;
-            }
-            if($status->V_IN=="" || $status->V_IN==null){
-              $status->V_IN=0;
+            if($status->V_MCU=="" || $status->V_MCU==null || $status->V_MCU==0){
+              //$status->V_MCU=0;
+            }else if($status->V_IN=="" || $status->V_IN==null || $status->V_IN==0){
+              //$status->V_IN=0;
+            }else{
+              $temp_array=$status->y.",".(float)$status->V_MCU.",".(float)$status->V_IN."\\n";
+              $dyGraph_data.=$temp_array;
             }
 
-            $temp_array=array($i,(float)$status->V_MCU,(float)$status->V_IN);
-            $dyGraph_data[]=$temp_array;
-            $i++;
         }
+
+
         $data["vin_vmcu_10m"]=$dyGraph_data;
         //get values for other graphs as well
-
         //get precipitation for ground node
 
          $insulation=ObservationSlip::where('station','=',$station_id)
@@ -105,12 +104,12 @@ class TenMNodeController extends Controller
                         ->get();
 
 
-        $insulation_data=array();
-        $i=1;
+        $insulation_data="";
+
         foreach($insulation as $insulation){
-            $temp_array=array($i,(float)$insulation->DurationOfPeriodOfPrecipitation);
-            $insulation_data[]=$temp_array;
-            $i++;
+            $temp_array=$insulation->y.",".(float)$insulation->DurationOfPeriodOfPrecipitation."\\n";
+            $insulation_data.=$temp_array;
+
         }
 
         $data["insulation_sensor"]=$insulation_data;
@@ -125,12 +124,12 @@ class TenMNodeController extends Controller
                         ->take(1000)
                         ->get();
 
-        $windspeed_data=array();
-        $i=1;
+        $windspeed_data="";
+
         foreach($windspeed as $windsp){
-            $temp_array=array($i,(float)$windsp->Wind_Speed);
-            $windspeed_data[]=$temp_array;
-            $i++;
+            $temp_array=$windsp->y.",".(float)$windsp->Wind_Speed."\\n";
+            $windspeed_data.=$temp_array;
+
         }
 
 
@@ -145,13 +144,13 @@ class TenMNodeController extends Controller
                         ->take(1000)
                         ->get();
 
-        $wind_direction_data=array();
-        $i=1;
-    foreach($wind_direction as $wind_d){
-            $temp_array=array($i,(float)$wind_d->Wind_Direction);
-            $wind_direction_data[]=$temp_array;
-            $i++;
-        }
+      $wind_direction_data="";
+
+      foreach($wind_direction as $wind_d){
+              $temp_array=$wind_d->y.",".(float)$wind_d->Wind_Direction;
+              $wind_direction_data.=$temp_array;
+
+          }
 
 
         $data["wind_direction_sensor"]=$wind_direction_data;

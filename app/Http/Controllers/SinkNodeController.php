@@ -35,8 +35,8 @@ class SinkNodeController extends Controller
         $data["stations"]=Station::all();
         $data["heading"]="Sink Node Reports";
 
-        $data["vin_vmcu_sink"]=array(0,0);
-        $data["pressure"]=array(0,0);
+        $data["vin_vmcu_sink"]="";
+        $data["pressure"]="";
         return view("reports.nodesink",$data);
     }
 
@@ -59,8 +59,7 @@ class SinkNodeController extends Controller
             //get node status where the configulations are the ones specifie above
         $nodeStatus=NodeStatus::where('TXT','=',$stationSinkNodeCofigs->txt_sink_value)
 
-                        ->select(DB::raw("CONCAT(date,' ',time)  AS y"),
-                                    'V_MCU','V_IN')
+                        ->select("date_time_recorded AS y",'V_MCU','V_IN')
                         ->latest('date_time_recorded')
                         ->take(1000)
                         ->get();
@@ -71,23 +70,25 @@ class SinkNodeController extends Controller
 
 
 
-        $dyGraph_data=array();
-        $i=1;
+        //$dyGraph_data=array();
+        $dyGraph_data="";
+
         foreach($nodeStatus as $status){
 
             if($status->V_MCU=="" || $status->V_MCU==null){
-              $status->V_MCU=0;
-            }
-            if($status->V_IN=="" || $status->V_IN==null){
-              $status->V_IN=0;
+              // $status->V_MCU=0;
+            }else if($status->V_IN=="" || $status->V_IN==null){
+              //$status->V_IN=0;
+            }else{
+              $temp_array=$status->y.",".(float)$status->V_MCU.",".(float)$status->V_IN."\\n ";
+              $dyGraph_data.=$temp_array;
             }
 
-            $temp_array=array($i,(float)$status->V_MCU,(float)$status->V_IN);
-            $dyGraph_data[]=$temp_array;
-            $i++;
         }
 
         $data["vin_vmcu_sink"]=$dyGraph_data;
+
+        // return $data["vin_vmcu_sink"];
         //get values for other graphs as well
 
         //get precipitation for ground node
@@ -101,17 +102,16 @@ class SinkNodeController extends Controller
                         ->take(1000)
                         ->get();
 
-        $pressure_data=array();
-        $i=1;
+        $pressure_data="";
+
         foreach($pressure as $pres){
             if(empty($pres->CLP) )
             {
                 // do nothing
             }
             else{
-                $temp_array=array($i,(float)$pres->CLP);
-                            $pressure_data[]=$temp_array;
-                            $i++;
+                $temp_array=$pres->y.",".(float)$pres->CLP."\\n ";
+                $pressure_data.=$temp_array;
             }
 
         }

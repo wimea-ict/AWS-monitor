@@ -36,9 +36,9 @@ class TwoMNodeController extends Controller
         $data["stations"]=Station::all();
         $data["heading"]="2m Node Reports";
 
-        $data["vin_vmcu_2m"]=array(0,0);
-        $data["humidity"]=array(0,0);
-        $data["templature"]=array(0,0);
+        $data["vin_vmcu_2m"]="";
+        $data["humidity"]="";
+        $data["templature"]="";
         return view("reports.node2m",$data);
     }
 
@@ -81,20 +81,17 @@ class TwoMNodeController extends Controller
 
 
 
-        $dyGraph_data=array();
-        $i=1;
-
+        $dyGraph_data="";
         //need to change instead of i pass the value of y but need to pass it as a string
         foreach($nodeStatus as $status){
-            $temp_array=array($i,(float)$status->V_MCU,(float)$status->V_IN);
-            $dyGraph_data[]=$temp_array;
-            $i++;
+            $temp_array=$status->y.",".(float)$status->V_MCU.",".(float)$status->V_IN."\\n";
+            $dyGraph_data.=$temp_array;
+
         }
         $data["vin_vmcu_2m"]=$dyGraph_data;
 
         //get values for other graphs as well
 
-        //get precipitation for ground node
 
         //nop
         // DB::raw("CONCAT(date,' ',time)  AS y"),
@@ -106,8 +103,7 @@ class TwoMNodeController extends Controller
                         ->take(1000)
                         ->get();
 
-        $humidity_graph_data=array();
-        $i=1;
+        $humidity_graph_data="";
 
         //need to change instead of i pass the value of y but need to pass it as a string
         foreach($humidity as $humid){
@@ -123,10 +119,9 @@ class TwoMNodeController extends Controller
                     $hum_val=0;
                 }
 
+                $temp_array=$humid->y.",".(float)$hum_val."\\n";
+                $humidity_graph_data.=$temp_array;
 
-                $temp_array=array($i,(float)$hum_val);
-                $humidity_graph_data[]=$temp_array;
-                $i++;
             }
 
         }
@@ -139,15 +134,14 @@ class TwoMNodeController extends Controller
         //get soil teplature
         $templature=ObservationSlip::where('station','=',$station_id)
 
-                        ->select(DB::raw("CONCAT(date,' ',time)  AS y"),
+                        ->select("CreationDate as y",
                                     'Dry_Bulb')
                         ->latest('CreationDate')
                         ->take(1000)
                         ->get();
 
 
-        $temp_graph_data=array();
-        $i=1;
+        $temp_graph_data="";
 
         //need to change instead of i pass the value of y but need to pass it as a string
         foreach($templature as $temp){
@@ -155,9 +149,9 @@ class TwoMNodeController extends Controller
             {
                 // do nothing
             }else{
-                $temp_array=array($i,(float)$temp->Dry_Bulb);
-                $temp_graph_data[]=$temp_array;
-                $i++;
+                $temp_array=$temp->y.",".(float)$temp->Dry_Bulb."\\n";
+                $temp_graph_data.=$temp_array;
+
             }
 
         }

@@ -67,14 +67,24 @@
     <script>
         $(function() {
 
+          /*
+            new Dygraph(document.getElementById("test"),
+              "2009/07/12 12:34:56,100,200\n"+
+              2009/08/12 13:30:20,150,201\n",
+              { labels: [ "Date", "Series1", "Series2" ] });
+          */
+
+
+
             new Dygraph(document.getElementById("vin_vmcu_sink"),
-              <?=json_encode($vin_vmcu_sink)?>,
+              "<?=$vin_vmcu_sink?>",
               {
                   labels: [ "x", "V_MCU", "V_IN" ]
               });
 
+
               new Dygraph(document.getElementById("pressure"),
-              <?=json_encode($pressure)?>,
+              "<?=$pressure?>",
               {
                   labels: [ "x", "pressure" ]
               });
