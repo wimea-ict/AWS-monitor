@@ -10,7 +10,7 @@
                                 <h3 class="panel-title">Problems</h3> 
                             </div> 
                             <div class="panel-body"> 
-                                <table>
+                                <table class="table">
                                     <thead>
                                         <td>source</td>
                                         <td>source_id</td>
@@ -20,16 +20,18 @@
                                         <td>status</td>
                                     </thead>
                                     @foreach($data as $dt)
-
-                                        {{$problem = DB::table('problem_classification')->where('id','=',$dt->classification_id)->get()}}
-                                        <tr>
-                                            <td>{{$dt->source}}</td>
-                                            <td>{{$dt->source_id}}</td>
-                                            <td>{{$dt->criticality}}</td>
-                                            <td>{{$problem->problem_description}}</td>
-                                            <td>{{$dt->track_counter}}</td>
-                                            <td>{{$dt->status}}</td>
-                                        </tr>
+                                        @foreach($problems as $problem)
+                                            @if($problem->id === $dt->classification_id)
+                                                <tr>
+                                                    <td>{{$dt->source}}</td>
+                                                    <td>{{$dt->source_id}}</td>
+                                                    <td>{{$dt->criticality}}</td>
+                                                    <td>{{$problem->problem_description}}</td>
+                                                    <td>{{$dt->track_counter}}</td>
+                                                    <td>{{$dt->status}}</td>
+                                                </tr>
+                                            @endif
+                                        @endforeach
                                     @endforeach
                                 </table>
                             </div> <!-- End panel-body -->

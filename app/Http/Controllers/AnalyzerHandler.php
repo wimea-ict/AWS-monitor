@@ -3,6 +3,7 @@
 namespace station\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use station\Http\Controllers\Controller;
 use DateTimeZone;
@@ -10,21 +11,6 @@ use DateTime;
 
 class AnalyzerHandler extends Controller
 {
-    /* use constants instead */
-    const PROBLEM_CLASSIFN_TB =  "problem_classification";
-    const STNS_TB = "stations";
-    const STATN_PROB_STTNGS_TB = "station_problem_settings";
-    const PROB_TB = "problems";
-    const SENSORS_TB = "sensors";
-    const GND_ND_TB = "groundNode";
-    const TWOM_ND_TB = "twoMeterNode";
-    const TENM_ND_TB = "tenMeterNode";
-    const SINK_ND_TB = "sinkNode";
-    const TIMEZONE = "Africa/Kampala";
-    const GND_NAME = "ground_node";
-    const TWOMN_NAME = "2m_node";
-    const TENN_NAME = "10m_node";
-    const SINK_NAME = "sink_node";
     //
     private $problem_classifn_tb;
     private $stns_tb;
@@ -249,27 +235,6 @@ class AnalyzerHandler extends Controller
             'vmcuMinVal' => $vmcuMinVal, 
         );
     }
-
-    /* 
-    elseif (strcasecmp($type,'observationslip') == 0) {
-            $sensor_id = '';
-            $sensor_name = '';
-            $nd_id = '';
-            $maxVal = '';
-            $minVal = '';
-            $param_read = '';
-           
-            $sensor_data = DB::table($this->sensors_tb)->select('id','node_id','node_type','parameter_read','min_value','max_value')->where('id','=',$txt)->get();
-            
-            return array(
-                'nd_id' => $sensor_data->node_id, 
-                'sensor_id' => $sensor_data->id, 
-                'maxVal' => $sensor_data->max_value, 
-                'minVal' => $sensor_data->min_value,
-                'param_read' => $sensor_data->parameter_read, 
-            );
-        }
-    */
 
     /**
      * Resetting a table
@@ -503,6 +468,95 @@ class AnalyzerHandler extends Controller
                 ['id_first_checked'=>$id_first_checked,'id_last_checked'=>$id_last_checked]
             );
         }
+    }
+
+    /**
+     * Function used only by class
+     */
+    private function getSensorDetails($nodeType, $nodeTable)
+    {
+        /**
+         * $sensors_tb
+         * get corresponding sensors
+         * nodetype - twoMeterNode, tenMeterNode, groundNode, sinkNode
+         */
+        $sensors = DB::table($this->sensors_tb)->select('id','node_id','node_type','sensor_status','parameter_read','min_value','max_value')->where('node_type','=',$nodeType)->get();
+        /* add station_id field to all the found sensors with a default value of 0. This is to cater for a case in which a sensor fails to map to a sensor (which is not expected) */
+        $sensors->transform(function($sensor){
+            $sensor->station_id = 0;
+            return $sensor;
+        });
+        /**
+         * $gnd_nd_tb, $twoM_nd_tb, $tenM_nd_tb, $sink_nd_tb
+         * node tables - twoMeterNode, tenMeterNode, sinkNode, groundNode,
+        */
+        $nodes = DB::table($nodeTable)->select('node_id','station_id','node_status')->get();
+
+        // dd($nodes);
+        /**
+         * map the sensors to the nodes
+         * we don't expect to have a sensor that does
+         */
+        $sensors->transform(function($sensor) use($nodes){
+            foreach ($nodes as $node) {
+                
+                if ($node->node_id === $sensor->node_id) {
+                    /* add station_id value to the collection */
+                    $sensor->station_id = $node->station_id;
+                    return $sensor;
+                }
+            }
+        });
+        /**
+         * remove nulls
+         */
+        $sensors = $sensors->reject(function($sensor){
+            return $sensor === null;
+        });
+        return $sensors;
+    }
+
+    /**
+     * 
+     */
+    public function getSensorConfigInfo($nodeType)
+    {
+        $data = '';
+        //dd($nodeType);
+        if (stripos($nodeType, 'twometer') == 0) {            
+            /**
+             * nodetype - twoMeterNode, tenMeterNode, groundNode, sinkNode 
+             * $gnd_nd_tb, $twoM_nd_tb, $tenM_nd_tb, $sink_nd_tb
+             * node tables - twoMeterNode, tenMeterNode, sinkNode, groundNode,
+            */
+            $data = $this->getSensorDetails('twoMeterNode', $this->twoM_nd_tb);
+        }
+        elseif (stripos($nodeType, 'tenmeter') == 0) {
+            /**
+             * nodetype - twoMeterNode, tenMeterNode, groundNode, sinkNode 
+             * $gnd_nd_tb, $twoM_nd_tb, $tenM_nd_tb, $sink_nd_tb
+             * node tables - twoMeterNode, tenMeterNode, sinkNode, groundNode,
+            */
+            $data = $this->getSensorDetails('tenMeterNode', $this->tenM_nd_tb);
+        }
+        elseif (stripos($nodeType, 'ground') == 0) {
+            /**
+             * nodetype - twoMeterNode, tenMeterNode, groundNode, sinkNode 
+             * $gnd_nd_tb, $twoM_nd_tb, $tenM_nd_tb, $sink_nd_tb
+             * node tables - twoMeterNode, tenMeterNode, sinkNode, groundNode,
+            */
+            $data = $this->getSensorDetails('groundNode', $this->gnd_nd_tb);
+        }
+        elseif (stripos($nodeType, 'sink') == 0) {
+            /**
+             * nodetype - twoMeterNode, tenMeterNode, groundNode, sinkNode 
+             * $gnd_nd_tb, $twoM_nd_tb, $tenM_nd_tb, $sink_nd_tb
+             * node tables - twoMeterNode, tenMeterNode, sinkNode, groundNode,
+            */
+            $data = $this->getSensorDetails('sinkNode', $this->sink_nd_tb);
+        }
+        
+        return $data;
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace station\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use station\Http\Controllers\Controller;
 use station\Http\Controllers\AnalyzerHandler;
@@ -66,9 +67,10 @@ class NodeStatusAnalyzerController extends Controller
         // pick problem classification data
         $problemClassfications = $this->problemClassfications;
 
-        // pick only columns that we'll be using. We won't need date_time_recorded because we have
+        // pick only columns that we'll be using since that will be faster. 
+        // We need date_time_recorded to verify the date time sent by the node
         // ->get(500) at a time //'SEQ' - to track packet drops
-        DB::table('nodestatus')->orderBy('id')->select('id','V_MCU','V_IN','date','time','TXT','StationNumber')->where('id','>',$lastId)->chunk(100, function($nodes) use(&$date, &$problemClassfications, &$id_first_checked, &$id_last_checked, &$counter,&$seq){
+        DB::table('nodestatus')->orderBy('id')->select('id','V_MCU','V_IN','date','time','TXT','date_time_recorded')->where('id','>',$lastId)->chunk(100, function($nodes) use(&$date, &$problemClassfications, &$id_first_checked, &$id_last_checked, &$counter,&$seq){
             foreach ($nodes as $node) {
 
                 //store first id
@@ -202,12 +204,7 @@ class NodeStatusAnalyzerController extends Controller
         // update last check table
         $this->Handler->updateChecksTable('nodestatus',$id_first_checked,$id_last_checked);
 
-        //get data in problems table   problems
-        //source, source_id, criticality, classification_id, track_counter, status
-        $data = DB::table('problems')->get();
-        // $problem = DB::table('problem_classification')->get();
-
-        // return $data;
-        return view('layouts.analyzer', compact('data','problems'));
+        //show data in the problems table
+        return redirect('/probTbData');
     }
 }
