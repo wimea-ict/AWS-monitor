@@ -15,7 +15,7 @@
                     <li class="has-submenu"><a href="#"><i class="ion-home"></i> <span class="nav-label">Stations</span></a>
                         <ul class="list-unstyled">
                             <li class=""><a href="<?php echo e(URL::to('addstation')); ?>">Add Station</a></li>
-                            <li><a href="<?php echo e(URL::to('configurestation')); ?>">Configure Station</a></li>
+                            <li><a href="<?php echo e(URL::to('configurestation ')); ?>">Configure Station</a></li>
                         </ul>
                     </li>
                     <li class="has-submenu"><a href="#"><i class="ion-flask"></i> <span class="nav-label">Node Configurations</span></a>
@@ -38,7 +38,7 @@
                         </ul>
                     </li>
                     
-                    <li class="has-submenu"><a href="/viewStationStatus"><i class="ion-calendar"></i> <span class="nav-label">Station Status</span></a></li>
+                    <li class="has-submenu"><a href="<?php echo e(URL::to('viewStationStatus')); ?>"><i class="ion-calendar"></i> <span class="nav-label">Station Status</span></a></li>
                     <li class="has-submenu"><a href="<?php echo e(route('register')); ?>"><i class="ion-calendar"></i> <span class="nav-label">Register Users</span></a></li>
                     
                     
