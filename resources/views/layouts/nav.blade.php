@@ -15,7 +15,7 @@
                     <li class="has-submenu"><a href="#"><i class="ion-home"></i> <span class="nav-label">Stations</span></a>
                         <ul class="list-unstyled">
                             <li class=""><a href="{{URL::to('addstation')}}">Add Station</a></li>
-                            <li><a href="{{URL::to('configurestation')}}">Configure Station</a></li>
+                            <li><a href="{{URL::to('configurestation ')}}">Configure Station</a></li>
                         </ul>
                     </li>
                     <li class="has-submenu"><a href="#"><i class="ion-flask"></i> <span class="nav-label">Node Configurations</span></a>
@@ -37,8 +37,8 @@
                             
                         </ul>
                     </li>
-                    
-                    <li class="has-submenu"><a href="/viewStationStatus"><i class="ion-calendar"></i> <span class="nav-label">Station Status</span></a></li>
+                    {{-- {{URL::to('viewStationStatus')}} --}}
+                    <li class="has-submenu"><a href="{{URL::to('viewStationStatus')}}"><i class="ion-calendar"></i> <span class="nav-label">Station Status</span></a></li>
                     <li class="has-submenu"><a href="{{ route('register') }}"><i class="ion-calendar"></i> <span class="nav-label">Register Users</span></a></li>
                     
                     

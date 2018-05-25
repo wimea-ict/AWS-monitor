@@ -4,17 +4,17 @@
 
 
 @section('page_specific_css_files')
-   
+
 @endsection
 
 @section('content')
 <div class="row">
-    
+
     @include("reports.select_station_section")
 
     <div class="col-sm-12">
-        
-        <div class="portlet"><!-- /primary heading -->             
+
+        <div class="portlet"><!-- /primary heading -->
             <div class="portlet-heading">
                 <h3 class="portlet-title text-dark">Line gragh  for V_IN and V_MCU against datetime </h3>
                 <div class="portlet-widgets">
@@ -28,16 +28,16 @@
             </div>
             <div id="bg-default" class="panel-collapse collapse in">
                 <div class="portlet-body">
-            
+
                     <div id="vin_vmcu_sink" style="height: 300px;"></div>
-            
+
                 </div>
             </div>
         </div> <!-- /Portlet -->
     </div> <!-- col -->
 
     <div class="col-sm-12">
-        <div class="portlet"><!-- /primary heading -->             
+        <div class="portlet"><!-- /primary heading -->
             <div class="portlet-heading">
                 <h3 class="portlet-title text-dark">Line gragh  for Pressure sensor read against datetime</h3>
                 <div class="portlet-widgets">
@@ -51,9 +51,9 @@
             </div>
             <div id="bg-default" class="panel-collapse collapse in">
                 <div class="portlet-body">
-            
+
                     <div id="pressure" style="height: 300px;"></div>
-            
+
                 </div>
             </div>
         </div> <!-- /Portlet -->
@@ -67,18 +67,31 @@
     <script>
         $(function() {
 
+          /*
+            new Dygraph(document.getElementById("test"),
+              "2009/07/12 12:34:56,100,200\n"+
+              2009/08/12 13:30:20,150,201\n",
+              { labels: [ "Date", "Series1", "Series2" ] });
+          */
+
+
+
             new Dygraph(document.getElementById("vin_vmcu_sink"),
-              <?=json_encode($vin_vmcu_sink)?>,
+              "<?=$vin_vmcu_sink?>",
               {
                   labels: [ "x", "V_MCU", "V_IN" ]
               });
 
+
               new Dygraph(document.getElementById("pressure"),
-              <?=json_encode($pressure)?>,
+              "<?=$pressure?>",
               {
                   labels: [ "x", "pressure" ]
               });
-           
+
+           $('#station_id').find('option[selected="selected"]').each(function(){
+                $(this).prop('selected', true);
+            });
         });//end out function
     </script>
 @endsection

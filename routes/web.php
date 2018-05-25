@@ -54,36 +54,14 @@ Route::group(['middleware' => 'auth'], function () {
         });
     });
 
+    Route::get('/analyze', 'NodeStatusAnalyzerController@analyze');
+
 });
 
 Route::get('/', function () {
     return view('/auth/login');
 });
 
-Route::get('/ajax-model', function () {
-
-    return view('layouts/ajax-model.php');
-});
-
-
-
-Route::get('/addnode', function () {
-    return view('layouts/addnode');
-});
-
-Route::get('/configurenode', function () {
-    return view('layouts/configurenode');
-});
-
-Route::get('/addsensor', function () {
-    return view('layouts/addsensor');
-});
-
-Route::get('/configuresensor', function () {
-    return view('layouts/configuresensor');
-});
-
-Route::get('/tester', 'NodeStatusAnalyzerController@analyze');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

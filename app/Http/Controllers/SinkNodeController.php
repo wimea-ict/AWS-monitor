@@ -10,6 +10,7 @@ use station\SinkNode;
 use station\NodeStatus;
 use station\ObservationSlip;
 use DB;
+use URL;
 class SinkNodeController extends Controller
 {
     /**
@@ -25,17 +26,17 @@ class SinkNodeController extends Controller
                                     ->where('parameter_read', 'pressure')
                                     ->get();
         return view('layouts.configureSinkNode',compact('sinkNodes','stations','pressuresensors'));
-    
-        
+
+
     }
 
     public function report1(){
-        $data["action"]="/reportsSink";
+        $data["action"]=URL::to('reportsSink');
         $data["stations"]=Station::all();
         $data["heading"]="Sink Node Reports";
-        
-        $data["vin_vmcu_sink"]=array(0,0);
-        $data["pressure"]=array(0,0);
+
+        $data["vin_vmcu_sink"]="";
+        $data["pressure"]="";
         return view("reports.nodesink",$data);
     }
 
@@ -43,70 +44,82 @@ class SinkNodeController extends Controller
     public function getSinkStationReports(Request $request){
         $station_id=request("id");
         $data=array();
-       
+
        //get the txt value used for the particular station 10m node
 
-       
+
        $stationSinkNodeCofigs = SinkNode::where('station_id', '=', $station_id)
-            
+
             ->select('txt_sink_value')
             ->first();
-       
-        
-        //get node status where the configulations are the ones specifie above
+
+            //check if any configulations for this station where returned
+        if(sizeof($stationSinkNodeCofigs)>0){
+
+            //get node status where the configulations are the ones specifie above
         $nodeStatus=NodeStatus::where('TXT','=',$stationSinkNodeCofigs->txt_sink_value)
-                        
-                        ->select(DB::raw("CONCAT(date,' ',time)  AS y"),
-                                    'V_MCU','V_IN')
-                        ->oldest('date_time_recorded')
-                        ->limit(1000)
+
+                        ->select("date_time_recorded AS y",'V_MCU','V_IN')
+                        ->latest('date_time_recorded')
+                        ->take(1000)
                         ->get();
-        
-        $dyGraph_data=array();
-        $i=1;
+
+        }else{
+            $nodeStatus=array();//set node status to empty array
+        }
+
+
+
+        //$dyGraph_data=array();
+        $dyGraph_data="";
+
         foreach($nodeStatus as $status){
 
             if($status->V_MCU=="" || $status->V_MCU==null){
-              $status->V_MCU=0;  
-            }
-            if($status->V_IN=="" || $status->V_IN==null){
-              $status->V_IN=0;  
+              // $status->V_MCU=0;
+            }else if($status->V_IN=="" || $status->V_IN==null){
+              //$status->V_IN=0;
+            }else{
+              $temp_array=$status->y.",".(float)$status->V_MCU.",".(float)$status->V_IN."\\n ";
+              $dyGraph_data.=$temp_array;
             }
 
-            $temp_array=array($i,(float)$status->V_MCU,(float)$status->V_IN);
-            $dyGraph_data[]=$temp_array;
-            $i++;
         }
 
         $data["vin_vmcu_sink"]=$dyGraph_data;
+
+        // return $data["vin_vmcu_sink"];
         //get values for other graphs as well
-        
+
         //get precipitation for ground node
 
         //nop
          $pressure=ObservationSlip::where('station','=',$station_id)
-                        
-                        ->select(DB::raw("CONCAT(date,' ',time)  AS y"),
-                                    'VapourPressure')
-                        ->oldest('creationDate')
-                        ->limit(1000)
+
+                        ->select("creationDate AS y",
+                                    'CLP')
+                        ->latest('creationDate')
+                        ->take(1000)
                         ->get();
 
-        // foreach($precipitations as $precipitation){
-        //     $precipitation->DurationOfPeriodOfPrecipitation=$precipitation->DurationOfPeriodOfPrecipitation*0.2;
-        // }
-        $pressure_data=array();
-        $i=1;
+        $pressure_data="";
+
         foreach($pressure as $pres){
-            $temp_array=array($i,(float)$pres->VapourPressure);
-            $pressure_data[]=$temp_array;
-            $i++;
+            if(empty($pres->CLP) )
+            {
+                // do nothing
+            }
+            else{
+                $temp_array=$pres->y.",".(float)$pres->CLP."\\n ";
+                $pressure_data.=$temp_array;
+            }
+
         }
 
         $data["pressure"]=$pressure_data;
 
-
-        $data["action"]="/reportsSink";
+        $data["selected_station"]=$station_id;
+        $data["action"]=URL::to('reportsSink');
         $data["stations"]=Station::all();
         $data["heading"]="Sink Node Reports";
         return view("reports.nodesink",$data);
@@ -195,7 +208,7 @@ class SinkNodeController extends Controller
         $pressure = Sensor::where('node_id',$id)
                                     ->where('parameter_read', 'pressure')
                                     ->first();
-            
+
             $pressure->parameter_read = $request->get('psparameter_read');
             $pressure->identifier_used= $request->get('psidentifier_used');
             $pressure->min_value = $request->get('psmin_value');
@@ -203,10 +216,10 @@ class SinkNodeController extends Controller
             $pressure->sensor_status= $this->getStatus($request,'pssensor_status');
             $pressure->report_time_interval=$request->get('psrptTime');
             $pressure->save();
-        
-        
-        
-        
+
+
+
+
         }
         return redirect('/configuresinknode');
     }

@@ -18,6 +18,10 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UsersTableSeeder::class);
+<<<<<<< HEAD
+        factory(station\User::class, 50)->create();
+
+=======
         factory(User::class, 50)->create();
 
         // factory(Station::class, 5)->create()->each(function($station)
@@ -49,5 +53,6 @@ class DatabaseSeeder extends Seeder
     
         
         
+>>>>>>> b838b37bc10a9bd92782f5e0213406537638fa83
     }
 }
