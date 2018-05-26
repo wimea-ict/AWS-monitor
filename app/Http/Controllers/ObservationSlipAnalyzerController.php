@@ -16,9 +16,16 @@ class ObservationSlipAnalyzerController extends Controller
     private $tenM_nd_sensors;
     private $gnd_nd_sensors;
     private $sink_nd_sensors;
+    /* variable to store the problem configurations for the different stations from the station_problem_settings table */
+    private $stn_prb_conf;
+    private $problemClassfications;
+
     public function __construct()
     {
         $this->Handler = new AnalyzerHandler();
+        /* pick configurations data */
+        $this->problemClassfications = $this->Handler->getProblemClassifications();
+        $this->stn_prb_conf = $this->Handler->getStationProbConfig();
         /**
          * get available sensors 
          * nodetype - twoMeterNode, tenMeterNode, groundNode, sinkNode
@@ -27,6 +34,11 @@ class ObservationSlipAnalyzerController extends Controller
         $this->tenM_nd_sensors = $this->Handler->getSensorConfigInfo('tenMeterNode');
         $this->gnd_nd_sensors = $this->Handler->getSensorConfigInfo('groundNode');
         $this->sink_nd_sensors = $this->Handler->getSensorConfigInfo('sinkNode');
+
+        // dd($this->twoM_nd_sensors);
+        // dd($this->tenM_nd_sensors);
+        // dd($this->gnd_nd_sensors);
+        // dd($this->sink_nd_sensors);
 
         // dd($sensorInfo);
     }
@@ -46,12 +58,8 @@ class ObservationSlipAnalyzerController extends Controller
 
         $lastId = $this->Handler->getLastId('observationslip');
 
-
-        // pick problem classification data
-        $problemClassfications = $this->Handler->getProblemClassifications();
-
         // sunduration
-        DB::table('nodestatus')->orderBy('id')->select('id','Station','Rainfall','Dry_Bulb','Wet_Bulb','Wind_Direction','Wind_Speed','SoilMoisture','SoilTemperature')->where('id','>',$lastId)->chunk(100, function($sensors) use(&$date, &$problemClassfications, &$id_first_checked, &$id_last_checked, &$counter){
+        DB::table($this->Handler->getObservationSlipTbName())->orderBy('id')->select('id','Station','Rainfall','Dry_Bulb','Wet_Bulb','Wind_Direction','Wind_Speed','SoilMoisture','SoilTemperature','CLP')->where('id','>',$lastId)->chunk(100, function($sensors) use(&$date, &$id_first_checked, &$id_last_checked, &$counter){
             foreach ($sensors as $sensor) {
 
                 //store first id
@@ -61,27 +69,8 @@ class ObservationSlipAnalyzerController extends Controller
                 //store last id checked
                 $id_last_checked = $sensor->id;// keep overwritting to keep the last checked
 
-                /**
-                 * get the data about the station to which this data belongs 
-                 * station numbers have conflicts and so we shall use the txt value to determine the station from which the data is.
-                 */ 
-                $sensor_id = '';
-                $nd_id = '';
-                $maxVal = '';
-                $minVal = '';
-                $param_read = '';
-                dd('hold it right here!');
-                // $sensorInfo = $this->Handler->getSensorConfigInfo($sensor->TXT);
-                // dd($sensorInfo);
-                $sensor_id = $sensorInfo['sensor_id'];
-                $nd_id = $sensorInfo['nd_id'];
-                // $stn_name = $this->Handler->getStationName($stn_id); // reduce number of times 
-                $maxVal = $sensorInfo['maxVal'];
-                $minVal = $sensorInfo['minVal'];
-                $param_read = $sensorInfo['param_read'];
-                
                 // pick problem station configurations
-                $stn_prb_conf = $this->Handler->getStationProbConfigs($stn_id);
+                $stn_prb_conf = $this->stn_prb_conf;
                 
                 // initialize variables with default values
                 $criticality = 'non-critical';// default criticality
@@ -89,18 +78,57 @@ class ObservationSlipAnalyzerController extends Controller
                 
                 // ------------------------------------------------------------------------------
                 /* 'id','Station','Rainfall','Dry_Bulb','Wet_Bulb','Wind_Direction','Wind_Speed','SoilMoisture','SoilTemperature' */
+                /* $this->twoM_nd_sensors, $this->tenM_nd_sensors, $this->gnd_nd_sensors, $this->sink_nd_sensors */
+                // check for nulls
+                if (!empty($sensor->Rainfall)) {
+                    // $this->gnd_nd_sensors;
+                    // parameter_read - relative humidity(2mnd), Temperature(2mnd), insulation(10mnd), wind speed(10mnd), wind direction(), preciptation(gndnd), soil moisture(gnd), soil temperature(gnd), pressure(sinknd)
+                    $this->Handler->analyzeSensorData($this->gnd_nd_sensors, $sensor->Station, 'preciptation', $sensor->Rainfall, 'incorrect', $sensor->id, $this->problemClassfications, $stn_prb_conf, $criticality, $max_track_counter);
+                }
+                elseif (!empty($sensor->Dry_Bulb) && !empty($sensor->Wet_Bulb)) {
+                    // $this->twoM_nd_sensors;
+                    // parameter_read - relative humidity(2mnd), Temperature(2mnd), insulation(10mnd), wind speed(10mnd), wind direction(), preciptation(gndnd), soil moisture(gnd), soil temperature(gnd), pressure(sinknd)
+                    // $this->Handler->analyzeSensorData($this->twoM_nd_sensors, $sensor->Station, 'Temperature', $sensor->Dry_Bulb, 'incorrect', $sensor->id, $this->problemClassfications, $stn_prb_conf, $criticality, $max_track_counter);
+
+                }
+                elseif (!empty($sensor->Wind_Direction)) {
+                    // $this->tenM_nd_sensors;
+                    // parameter_read - relative humidity(2mnd), Temperature(2mnd), insulation(10mnd), wind speed(10mnd), wind direction(), preciptation(gndnd), soil moisture(gnd), soil temperature(gnd), pressure(sinknd)
+                    $this->Handler->analyzeSensorData($this->tenM_nd_sensors, $sensor->Station, 'wind direction', $sensor->Wind_Direction, 'incorrect', $sensor->id, $this->problemClassfications, $stn_prb_conf, $criticality, $max_track_counter);
+                }
+                elseif (!empty($sensor->Wind_Speed)) {
+                    // $this->tenM_nd_sensors;
+                    // parameter_read - relative humidity(2mnd), Temperature(2mnd), insulation(10mnd), wind speed(10mnd), wind direction(), preciptation(gndnd), soil moisture(gnd), soil temperature(gnd), pressure(sinknd)
+                    $this->Handler->analyzeSensorData($this->tenM_nd_sensors, $sensor->Station, 'wind speed', $sensor->Wind_Speed, 'incorrect', $sensor->id, $this->problemClassfications, $stn_prb_conf, $criticality, $max_track_counter);
+                }
+                elseif (!empty($sensor->SoilMoisture)) {
+                    // $this->gnd_nd_sensors;
+                    // parameter_read - relative humidity(2mnd), Temperature(2mnd), insulation(10mnd), wind speed(10mnd), wind direction(10mnd), preciptation(gndnd), soil moisture(gnd), soil temperature(gnd), pressure(sinknd)
+                    $this->Handler->analyzeSensorData($this->gnd_nd_sensors, $sensor->Station, 'soil moisture', $sensor->SoilMoisture, 'incorrect', $sensor->id, $this->problemClassfications, $stn_prb_conf, $criticality, $max_track_counter);
+                }
+                elseif (!empty($sensor->SoilTemperature)) {
+                    // $this->gnd_nd_sensors;
+                    // parameter_read - relative humidity(2mnd), Temperature(2mnd), insulation(10mnd), wind speed(10mnd), wind direction(), preciptation(gndnd), soil moisture(gnd), soil temperature(gnd), pressure(sinknd)
+                    $this->Handler->analyzeSensorData($this->gnd_nd_sensors, $sensor->Station, 'soil temperature', $sensor->SoilTemperature, 'incorrect', $sensor->id, $this->problemClassfications, $stn_prb_conf, $criticality, $max_track_counter);
+                }
+                elseif (!empty($sensor->CLP)) {
+                    // $this->sink_nd_sensors;
+                    // parameter_read - relative humidity(2mnd), Temperature(2mnd), insulation(10mnd), wind speed(10mnd), wind direction(), preciptation(gndnd), soil moisture(gnd), soil temperature(gnd), pressure(sinknd)
+                    $this->Handler->analyzeSensorData($this->sink_nd_sensors, $sensor->Station, 'pressure', $sensor->CLP, 'incorrect', $sensor->id, $this->problemClassfications, $stn_prb_conf, $criticality, $max_track_counter);
+                }
                 
                 $counter++;
             }
 
             //dd($counter);
-            if ($counter == 500) { // check if max has been reached.
-                return false; // stop chucking...
-            }
+            // if ($counter === 10000) { // check if max has been reached.
+            //     // dd($counter);   
+            //     return false; // stop chucking...
+            // }
         });
 
         // update last check table
-        $this->Handler->updateChecksTable('observationslip',$id_first_checked,$id_last_checked);
+        // $this->Handler->updateChecksTable('observationslip',$id_first_checked,$id_last_checked);
 
         //get data in problems table   problems
         //source, source_id, criticality, classification_id, track_counter, status

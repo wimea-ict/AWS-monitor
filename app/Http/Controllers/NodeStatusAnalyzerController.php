@@ -54,23 +54,20 @@ class NodeStatusAnalyzerController extends Controller
         //$this->Handler->cleanDBTable($this->Handler->getProbTbName());
         //get time diff to use for querying the db
         // $tasks = DB::table('observationslip')->where('CreationDate','>=',$this->getTimeDiff())
-        $date = $this->Handler->getTimeDiff();
+        // $date = $this->Handler->getTimeDiff();
         
         // store the first and last id checked  ->where()
         $id_first_checked = 0;
         $id_last_checked = 0;
         $counter = 0;
-        $seq = -1;
+        $seq = -1;  
 
         $lastId = $this->Handler->getLastId('nodestatus');
- 
-        // pick problem classification data
-        $problemClassfications = $this->problemClassfications;
 
         // pick only columns that we'll be using since that will be faster. 
         // We need date_time_recorded to verify the date time sent by the node
         // ->get(500) at a time //'SEQ' - to track packet drops
-        DB::table('nodestatus')->orderBy('id')->select('id','V_MCU','V_IN','date','time','TXT','date_time_recorded')->where('id','>',$lastId)->chunk(100, function($nodes) use(&$date, &$problemClassfications, &$id_first_checked, &$id_last_checked, &$counter,&$seq){
+        DB::table($this->Handler->getNodeStatusTbName())->orderBy('id')->select('id','V_MCU','V_IN','date','time','TXT','date_time_recorded')->where('id','>',$lastId)->chunk(100, function($nodes) use(&$date, &$id_first_checked, &$id_last_checked, &$counter,&$seq){
             foreach ($nodes as $node) {
 
                 //store first id
@@ -135,49 +132,49 @@ class NodeStatusAnalyzerController extends Controller
                 //check for nulls                
                 if (empty($node->V_MCU)) {
                     // get problem
-                    $this->Handler->checkoutProblem($nd_id,$nd_name,$problemClassfications,"Node","missing",$stn_prb_conf,$criticality,$max_track_counter,$stn_id);
+                    $this->Handler->checkoutProblem($nd_id,$nd_name,$this->problemClassfications,"Node","missing",$stn_prb_conf,$criticality,$max_track_counter,$stn_id);
                    
                 }
                 /* if (empty($node->V_IN)) {
 
-                    $this->Handler->checkoutProblem($nd_id,$nd_name,$problemClassfications,"V_IN","empty",$stn_prb_conf,$criticality,$max_track_counter,$stn_id);
+                    $this->Handler->checkoutProblem($nd_id,$nd_name,$this->problemClassfications,"V_IN","empty",$stn_prb_conf,$criticality,$max_track_counter,$stn_id);
                     
                 } */
                 /* if (empty($node->date)) { // this problem has been ignored for now
 
-                    $this->Handler->checkoutProblem($nd_id,$nd_name,$problemClassfications,"Date","missing",$stn_prb_conf,$criticality,$max_track_counter,$stn_id);
+                    $this->Handler->checkoutProblem($nd_id,$nd_name,$this->problemClassfications,"Date","missing",$stn_prb_conf,$criticality,$max_track_counter,$stn_id);
                     
                 }   */  
                 // check for mins        
                 if ($node->V_MCU < $vmcuMinVal) {
 
-                    $this->Handler->checkoutProblem($nd_id,$nd_name,$problemClassfications,"Node power","below range",$stn_prb_conf,$criticality,$max_track_counter,$stn_id);
+                    $this->Handler->checkoutProblem($nd_id,$nd_name,$this->problemClassfications,"Node power","below range",$stn_prb_conf,$criticality,$max_track_counter,$stn_id);
                     
                 }
                 /* if ($node->V_IN < $vinMinVal) {
                     
-                    $this->Handler->checkoutProblem($nd_id,$nd_name,$problemClassfications,"V_IN","minimum",$stn_prb_conf,$criticality,$max_track_counter,$stn_id);
+                    $this->Handler->checkoutProblem($nd_id,$nd_name,$this->problemClassfications,"V_IN","minimum",$stn_prb_conf,$criticality,$max_track_counter,$stn_id);
                     
                 } */
                 if (strcasecmp($yearRec, $yearNow) == 0) {// then dates are equal
                     /* consider time diff */
                     /* if () {
-                        $this->Handler->checkoutProblem($nd_id,$nd_name,$problemClassfications,"Date","incorrect",$stn_prb_conf,$criticality,$max_track_counter,$stn_id);
+                        $this->Handler->checkoutProblem($nd_id,$nd_name,$this->problemClassfications,"Date","incorrect",$stn_prb_conf,$criticality,$max_track_counter,$stn_id);
                     } */
 
                 }
                 else {
-                    $this->Handler->checkoutProblem($nd_id,$nd_name,$problemClassfications,"Date","incorrect",$stn_prb_conf,$criticality,$max_track_counter,$stn_id);
+                    $this->Handler->checkoutProblem($nd_id,$nd_name,$this->problemClassfications,"Date","incorrect",$stn_prb_conf,$criticality,$max_track_counter,$stn_id);
                 }        
                 // check for maxs        
                 /* if ($node->V_MCU > $vmcuMaxVal) { // ignored for now
 
-                    $this->Handler->checkoutProblem($nd_id,$nd_name,$problemClassfications,"Node power","above range",$stn_prb_conf,$criticality,$max_track_counter,$stn_id);
+                    $this->Handler->checkoutProblem($nd_id,$nd_name,$this->problemClassfications,"Node power","above range",$stn_prb_conf,$criticality,$max_track_counter,$stn_id);
                     
                 } */
                 /* if ($node->V_IN > $vinMaxVal) {
 
-                    $this->Handler->checkoutProblem($nd_id,$nd_name,$problemClassfications,"V_IN","maximum",$stn_prb_conf,$criticality,$max_track_counter,$stn_id);
+                    $this->Handler->checkoutProblem($nd_id,$nd_name,$this->problemClassfications,"V_IN","maximum",$stn_prb_conf,$criticality,$max_track_counter,$stn_id);
                     
                 } */
 
@@ -188,7 +185,7 @@ class NodeStatusAnalyzerController extends Controller
                         # do nothing..
                     }
                     else { // note down problem
-                        $this->Handler->checkoutProblem($nd_id,$nd_name,$problemClassfications,"packets","dropped",$stn_prb_conf,$criticality,$max_track_counter,$stn_id);
+                        $this->Handler->checkoutProblem($nd_id,$nd_name,$this->problemClassfications,"packets","dropped",$stn_prb_conf,$criticality,$max_track_counter,$stn_id);
                     }
                 } */
                 
@@ -196,7 +193,7 @@ class NodeStatusAnalyzerController extends Controller
             }
 
             //dd($counter);
-            if ($counter == 500) { // check if max has been reached.
+            if ($counter === 500) { // check if max has been reached.
                 return false; // stop chucking...
             }
         });

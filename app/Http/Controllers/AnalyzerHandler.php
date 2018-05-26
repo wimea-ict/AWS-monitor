@@ -15,6 +15,8 @@ class AnalyzerHandler extends Controller
     private $problem_classifn_tb;
     private $stns_tb;
     private $statn_prob_sttngs_tb;
+    private $ndStatus_tb;
+    private $observSlp_tb;
     private $prob_tb;
     private $sensors_tb;
     private $gnd_nd_tb;
@@ -34,6 +36,8 @@ class AnalyzerHandler extends Controller
         $this->statn_prob_sttngs_tb = 'station_problem_settings';
         $this->prob_tb = 'problems';
         $this->sensors_tb = 'sensors';
+        $this->ndStatus_tb = 'nodestatus';
+        $this->observSlp_tb = 'observationslip';
         $this->gnd_nd_tb = 'groundNode';
         $this->twoM_nd_tb = 'twoMeterNode';
         $this->tenM_nd_tb = 'tenMeterNode';
@@ -48,6 +52,16 @@ class AnalyzerHandler extends Controller
     public function getProbTbName()
     {
         return $this->prob_tb;
+    }
+
+    public function getObservationSlipTbName()
+    {
+        return $this->observSlp_tb;
+    }
+
+    public function getNodeStatusTbName()
+    {
+        return $this->ndStatus_tb;
     }
 
     /**
@@ -92,7 +106,7 @@ class AnalyzerHandler extends Controller
      * getNodeConfigurations():
      * @returns $stn_prb_conf;
      */
-    public function getStationProbConfigs(){
+    public function getStationProbConfig(){
         
         // problem_id, station_id, max_track_counter, criticality where('station_id',$stn_id)->
         $stn_prb_conf = DB::table($this->statn_prob_sttngs_tb)->select('station_id','problem_id','max_track_counter','criticality')->get();
@@ -255,7 +269,7 @@ class AnalyzerHandler extends Controller
      * @param $criticality
      * @return null
      */
-    public function insertIntoProbTb($nd_id, $nd_name, $prob_id, $criticality)
+    public function insertIntoProbTb($source_id, $source, $prob_id, $criticality)
     {
         /*
          * Field        possible values
@@ -270,7 +284,7 @@ class AnalyzerHandler extends Controller
          * updated_at
          */
         DB::table($this->prob_tb)->insert(
-            ['source'=>$nd_name,'source_id'=>$nd_id,'criticality'=>$criticality,'classification_id'=>$prob_id,'track_counter'=>1,'status'=>'investigation', 'created_at'=>$this->getCurrentDateTime()]
+            ['source'=>$source,'source_id'=>$source_id,'criticality'=>$criticality,'classification_id'=>$prob_id,'track_counter'=>1,'status'=>'investigation', 'created_at'=>$this->getCurrentDateTime()]
         );
     }
 
@@ -307,7 +321,7 @@ class AnalyzerHandler extends Controller
     /**
      * update problem 
      */
-    public function updateProblem($prob_track_counter,$nd_id,$max_track_counter,$prob_status,$prob_id)
+    public function updateProblem($prob_track_counter,$max_track_counter,$prob_status,$prob_id)
     {
         if ($prob_status == 'reported') {
             // update the updated_at column to affirm that the problem was encountered again
@@ -353,22 +367,22 @@ class AnalyzerHandler extends Controller
     /**
      * 
      */
-    public function registerProblem($nd_id, $nd_name, $problem_id, $criticality, $max_track_counter)
+    public function registerProblem($source_id, $source, $problem_id, $criticality, $max_track_counter)
     {
         // check data in the problems table to see if problem has been reported yet.
-        $prob = $this->getProblem($nd_id,$nd_name,$problem_id); 
+        $prob = $this->getProblem($source_id,$source,$problem_id); 
         
         if ($prob->isEmpty()) {
             /**
-             * record doesn't exit in the database and so..registerProblem($nd_id, $nd_name, $problem->id, $criticality, $max_track_counter)
+             * record doesn't exit in the database and so..registerProblem($source_id, $source, $problem->id, $criticality, $max_track_counter)
              * insert into the the problem into the database
              * at this point, we get the criticality of this problem
              */
-            $this->insertIntoProbTb($nd_id, $nd_name, $problem_id, $criticality);
+            $this->insertIntoProbTb($source_id, $source, $problem_id, $criticality);
         }
         else {
             /**
-             * $nd_id, $nd_name, $problem->id, $criticality, $max_track_counter
+             * $source_id, $source, $problem->id, $criticality, $max_track_counter
              * problem exists
              * if problem is not yet reported, then increment the counter
              * after increment, check if the counter has reached max, if so, call the reporter and then set the status to reported.
@@ -377,7 +391,7 @@ class AnalyzerHandler extends Controller
 
             $prob = $prob->toArray();
             
-            $this->updateProblem($prob[0]->track_counter,$nd_id,$max_track_counter,$prob[0]->status,$prob[0]->id);
+            $this->updateProblem($prob[0]->track_counter,$max_track_counter,$prob[0]->status,$prob[0]->id);
         }
     }
 
@@ -392,7 +406,7 @@ class AnalyzerHandler extends Controller
      * @param $max_track_counter
      * @param $stn_id
      */
-    public function checkoutProblem($nd_id,$nd_name,$problemClassfications,$param,$prob,$stn_prb_conf,$criticality,$max_track_counter,$stn_id)
+    public function checkoutProblem($source_id,$source,$problemClassfications,$param,$prob,$stn_prb_conf,$criticality,$max_track_counter,$stn_id)
     {
         // get problem
         foreach ($problemClassfications as $problem) {
@@ -412,7 +426,7 @@ class AnalyzerHandler extends Controller
                             }                            
                         }
                     }
-                    $this->registerProblem($nd_id, $nd_name, $problem->id, $criticality, $max_track_counter);
+                    $this->registerProblem($source_id, $source, $problem->id, $criticality, $max_track_counter);
                     break;
                 }
             }
@@ -480,12 +494,10 @@ class AnalyzerHandler extends Controller
          * get corresponding sensors
          * nodetype - twoMeterNode, tenMeterNode, groundNode, sinkNode
          */
+
+        // dd($nodeType);
         $sensors = DB::table($this->sensors_tb)->select('id','node_id','node_type','sensor_status','parameter_read','min_value','max_value')->where('node_type','=',$nodeType)->get();
-        /* add station_id field to all the found sensors with a default value of 0. This is to cater for a case in which a sensor fails to map to a sensor (which is not expected) */
-        $sensors->transform(function($sensor){
-            $sensor->station_id = 0;
-            return $sensor;
-        });
+        // dd($sensors);
         /**
          * $gnd_nd_tb, $twoM_nd_tb, $tenM_nd_tb, $sink_nd_tb
          * node tables - twoMeterNode, tenMeterNode, sinkNode, groundNode,
@@ -494,12 +506,11 @@ class AnalyzerHandler extends Controller
 
         // dd($nodes);
         /**
-         * map the sensors to the nodes
-         * we don't expect to have a sensor that does
+         * map the sensors to the stations
+         * any sensor that fails to map to a station will be turned to a null and will thus be ignored.
          */
         $sensors->transform(function($sensor) use($nodes){
-            foreach ($nodes as $node) {
-                
+            foreach ($nodes as $node) {                
                 if ($node->node_id === $sensor->node_id) {
                     /* add station_id value to the collection */
                     $sensor->station_id = $node->station_id;
@@ -523,7 +534,8 @@ class AnalyzerHandler extends Controller
     {
         $data = '';
         //dd($nodeType);
-        if (stripos($nodeType, 'twometer') == 0) {            
+        if (stripos($nodeType, 'twoMeterNode') !== false) {  
+            // dd($nodeType);
             /**
              * nodetype - twoMeterNode, tenMeterNode, groundNode, sinkNode 
              * $gnd_nd_tb, $twoM_nd_tb, $tenM_nd_tb, $sink_nd_tb
@@ -531,7 +543,7 @@ class AnalyzerHandler extends Controller
             */
             $data = $this->getSensorDetails('twoMeterNode', $this->twoM_nd_tb);
         }
-        elseif (stripos($nodeType, 'tenmeter') == 0) {
+        elseif (stripos($nodeType, 'tenMeterNode') !== false) {
             /**
              * nodetype - twoMeterNode, tenMeterNode, groundNode, sinkNode 
              * $gnd_nd_tb, $twoM_nd_tb, $tenM_nd_tb, $sink_nd_tb
@@ -539,7 +551,7 @@ class AnalyzerHandler extends Controller
             */
             $data = $this->getSensorDetails('tenMeterNode', $this->tenM_nd_tb);
         }
-        elseif (stripos($nodeType, 'ground') == 0) {
+        elseif (stripos($nodeType, 'groundNode') !== false) {
             /**
              * nodetype - twoMeterNode, tenMeterNode, groundNode, sinkNode 
              * $gnd_nd_tb, $twoM_nd_tb, $tenM_nd_tb, $sink_nd_tb
@@ -547,7 +559,7 @@ class AnalyzerHandler extends Controller
             */
             $data = $this->getSensorDetails('groundNode', $this->gnd_nd_tb);
         }
-        elseif (stripos($nodeType, 'sink') == 0) {
+        elseif (stripos($nodeType, 'sinkNode') !== false) {
             /**
              * nodetype - twoMeterNode, tenMeterNode, groundNode, sinkNode 
              * $gnd_nd_tb, $twoM_nd_tb, $tenM_nd_tb, $sink_nd_tb
@@ -557,6 +569,51 @@ class AnalyzerHandler extends Controller
         }
         
         return $data;
+    }
+
+    /**
+     * $sensor_data, 
+     * $station_id, 
+     * $parameter_read,
+     * $rec_value
+     * $problem - "missing, incorrect
+     * $sensor_id, 
+     * $problemClassfications, 
+     * $stn_prb_conf, 
+     * $criticality, 
+     * $max_track_counter
+     */
+    public function analyzeSensorData($sensor_data, $station_id, $parameter_read, $rec_value, $problem, $sensor_id, $problemClassfications, $stn_prb_conf, $criticality, $max_track_counter)
+    {        
+        foreach ($sensor_data as $data) {
+            /**
+             * min_value, max_value 
+             * parameter_read - relative humidity(2mnd), Temperature(2mnd), insulation(10mnd), wind speed(10mnd), wind direction(), preciptation(gndnd), soil moisture(gnd), soil temperature(gnd), pressure(sinknd)536738
+             */
+            // if ($parameter_read !== 'wind direction' && $parameter_read !== 'pressure') {
+            if ($station_id === 16 ) {
+                dd('hold it right here! - '.$parameter_read. ' stn id - '. $station_id . "\n". $sensor_data);
+            }
+            if ($data->station_id === $station_id) {
+                dd('hold it right here! - '.$parameter_read. ' stn id - '. $station_id);
+                if (stripos($data->parameter_read, $parameter_read) !== false) {
+                    // dd('hold it right here! - '.$parameter_read. ' stn id - '. $station_id);
+                    if ($rec_value < $data->min_value) {
+                        # then value is less than minimum
+                        $this->checkoutProblem($sensor_id,'sensor',$problemClassfications,"sensor",$problem,$stn_prb_conf,$criticality,$max_track_counter,$station_id);
+                        // dd('hold it right here! - '.$parameter_read. ' stn id - '. $station_id);
+                        break;// exit loop
+                    }
+                    elseif ($rec_value > $data->max_value) {
+                        # then value is greater than maximum
+                        $this->checkoutProblem($sensor->id,'sensor',$problemClassfications,"sensor",$problem,$stn_prb_conf,$criticality,$max_track_counter,$station_id);
+                        // dd('hold it right here! - '.$parameter_read. ' stn id - '. $station_id);
+                        break;// exit loop
+                    }
+                }
+            }
+            
+        }
     }
 
     /**
