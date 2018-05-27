@@ -317,8 +317,10 @@ class StationsController extends Controller
 
 
         $TenMNode = TenMeterNode::where('txt_10m_value', $request->get('10txt_value'))->first();
+
+        $TwoMNode = TwoMeterNode::where('txt_2m_value', $request->get('2txt_value'))->first();
         $HumiditySensorCreation = new Sensor([
-            'node_id'=>$TenMNode['node_id'],
+            'node_id'=>$TwoMNode['node_id'],
             'parameter_read'=>$request->get('rhparameter_read'),
             'identifier_used'=>$request->get('rhidentifier_used'),
             'min_value'=>$request->get('rhmin_value'),
@@ -335,7 +337,7 @@ class StationsController extends Controller
 
         //temperature sensor creation
         $TemperatureSensorCreation = new Sensor([
-            'node_id'=>$TenMNode['node_id'],
+            'node_id'=>$TwoMNode['node_id'],
             'parameter_read'=>$request->get('tsparameter_read'),
             'identifier_used'=>$request->get('tsidentifier_used'),
             'min_value'=>$request->get('tsmin_value'),
@@ -352,7 +354,7 @@ class StationsController extends Controller
         
         //ten meter node creation
         
-        //$TenMNode = TenMeterNode::where('txt_10m_value', $request->get('2txt_value'))->first();
+        
         //insulation sensor creation
         $InsulationSensorCreation = new Sensor([
             'node_id'=>$TenMNode['node_id'],
@@ -503,9 +505,9 @@ class StationsController extends Controller
             ]);
     
             $sinkCreation->save();
-
+            $sinkNode = SinkNode::where('txt_sink_value', $request->get('sinktxt_value'))->first();
             $PressureSensorCreation = new Sensor([
-                'node_id'=>$TenMNode['node_id'],
+                'node_id'=>$sinkNode['node_id'],
                 'parameter_read'=>$request->get('psparameter_read'),
                 'identifier_used'=>$request->get('psidentifier_used'),
                 'min_value'=>$request->get('psmin_value'),
