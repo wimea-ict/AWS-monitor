@@ -82,9 +82,10 @@ class StationStatusController extends Controller
         }
         //dd($uniqueStationsWithProblems);
         $stations = Station::whereIn('station_id', $uniqueStationsWithProblems)->get()->toArray();
+        $stationsOn = Station::whereNotIn('station_id', $uniqueStationsWithProblems)->get()->toArray();
         //dd($stations);
         
-        return view('layouts.viewStationStatus', compact('stations','stations_with_problems'));
+        return view('layouts.viewStationStatus', compact('stations','stations_with_problems','stationsOn'));
 
         
     }
