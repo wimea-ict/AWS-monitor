@@ -17,9 +17,9 @@
                             <?php $flag=1 ?>
                             <?php endif; ?>
                             <?php if($problem['category']=="non-critical"): ?>
-                                <?php print $flag=2 ?>
+                                <?php $flag=2 ?>
                             <?php endif; ?>
-                            <?php print $counter++ ?>
+                            <?php $counter++ ?>
                         <?php endif; ?>
                         
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -43,6 +43,28 @@
                               <i class="ion-ios7-circle-filled" style="font-size:30px; color:#8a6d3b"></i>
                             </div>
                             <?php endif; ?>
+                            
+                            </a>
+                    </div>
+                          
+                    
+
+                </div>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+                <div class="row text-center">
+                    <?php $__currentLoopData = $stationsOn; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $station): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    
+                    <div class="col-sm-5 col-md-2">
+                        <div class="panel">
+                            <a href="<?php echo e(URL::to('selectedStationStatus/'.$station['station_id'])); ?>">
+                            <div class="h4 text-purple"><?php echo e($station['StationName']); ?></div>
+                            <span class="text-muted">0</span>
+                           
+                            <div class="text-right">
+                              <i class="ion-ios7-circle-filled" style="font-size:30px; color:#2b542c"></i>
+                            </div>
+                            
                             
                             </a>
                     </div>

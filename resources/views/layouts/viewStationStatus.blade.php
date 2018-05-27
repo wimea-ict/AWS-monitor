@@ -19,9 +19,9 @@
                             <?php $flag=1 ?>
                             @endif
                             @if($problem['category']=="non-critical")
-                                <?php print $flag=2 ?>
+                                <?php $flag=2 ?>
                             @endif
-                            <?php print $counter++ ?>
+                            <?php $counter++ ?>
                         @endif
                         
                     @endforeach
@@ -45,6 +45,28 @@
                               <i class="ion-ios7-circle-filled" style="font-size:30px; color:#8a6d3b"></i>
                             </div>
                             @endif
+                            
+                            </a>
+                    </div>
+                          
+                    
+
+                </div>
+                @endforeach
+
+                <div class="row text-center">
+                    @foreach($stationsOn as $station)
+                    
+                    <div class="col-sm-5 col-md-2">
+                        <div class="panel">
+                            <a href="{{URL::to('selectedStationStatus/'.$station['station_id'])}}">
+                            <div class="h4 text-purple">{{$station['StationName']}}</div>
+                            <span class="text-muted">0</span>
+                           
+                            <div class="text-right">
+                              <i class="ion-ios7-circle-filled" style="font-size:30px; color:#2b542c"></i>
+                            </div>
+                            
                             
                             </a>
                     </div>
