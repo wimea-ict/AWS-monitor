@@ -82,7 +82,7 @@ class StationStatusController extends Controller
         }
         //dd($uniqueStationsWithProblems);
         $stations = Station::whereIn('station_id', $uniqueStationsWithProblems)->get()->toArray();
-        $stationsOn = Station::whereNotIn('station_id', $uniqueStationsWithProblems)->get()->toArray();
+        $stationsOn = Station::whereNotIn('station_id', $uniqueStationsWithProblems)->where('stationCategory','aws')->get()->toArray();
         //dd($stations);
         
         return view('layouts.viewStationStatus', compact('stations','stations_with_problems','stationsOn'));
@@ -171,6 +171,8 @@ class StationStatusController extends Controller
                 if(!empty($TwomNode)){
                     if($problem['source_id']==$TwomNode['node_id']){
                         $twoMFlag = 1;
+                        $TempSensorFlag =1;
+                        $relativeHumidity =1;
                     }
                 }
             }
@@ -178,6 +180,9 @@ class StationStatusController extends Controller
                 if(!empty($TenmNode)){
                     if($problem['source_id']==$TenmNode['node_id']){
                         $tenMFlag =1;
+                        $WindSpeedFlag =1;
+                        $WindDirectionFlag =1;
+                        $insolationFlag =1;
                     }
                 }
             }
@@ -185,6 +190,9 @@ class StationStatusController extends Controller
                 if(!empty($groundNode)){
                     if($problem['source_id']==$groundNode['node_id']){
                         $gndFlag = 1;
+                        $SoilMoistureFlag =1;
+                        $SoilTempFlag =1;
+                        $PreciptationFlag=1;
                     }
                 }
             }
@@ -192,6 +200,7 @@ class StationStatusController extends Controller
                 if(!empty($sinknode)){
                     if($problem['source_id']==$sinknode['node_id']){
                         $sinkFlag =1;
+                        $PressureFlag =1;
                     }
                 }
             }
