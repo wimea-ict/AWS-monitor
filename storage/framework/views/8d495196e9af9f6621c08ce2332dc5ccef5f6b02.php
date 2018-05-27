@@ -59,7 +59,7 @@
                                                     <div id="collapsenight-2" class="panel-collapse collapse"> 
                                                         <div class="panel-body">
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="gndtxt_value">TXT value</label>
+                                                                                <label class="col-lg-2 control-label " for="gndtxt_value">Node name</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="gndtxt_value" name="gndtxt_value" type="text" class="form-control" required>
                                                                                 </div>
@@ -195,7 +195,7 @@
                                                     <div class="panel-heading"> 
                                                         <h4 class="panel-title"> 
                                                             <a data-toggle="collapse" data-parent="#accordion-test-4" href="#collapseten-2" aria-expanded="false" class="collapsed">
-                                                                Precipitation
+                                                                Rainfall sensor
                                                                 
                                                             </a> 
                                                         </h4> 
@@ -243,7 +243,7 @@
                                                     <div class="panel-heading"> 
                                                         <h4 class="panel-title"> 
                                                             <a data-toggle="collapse" data-parent="#accordion-test-4" href="#collapseeleven-2" class="collapsed" aria-expanded="false">
-                                                                Soil temperature
+                                                                Soil temperature sensor
 
                                                                 
                                                             </a> 

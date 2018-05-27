@@ -65,7 +65,7 @@
                                                     <div id="collapsesix-2" class="panel-collapse collapse"> 
                                                         <div class="panel-body">
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="2txt_value">TXT value</label>
+                                                                                <label class="col-lg-2 control-label " for="2txt_value">Node name</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="2txt_value" name="2txt_value" type="text" class="form-control" required>
                                                                                 </div>

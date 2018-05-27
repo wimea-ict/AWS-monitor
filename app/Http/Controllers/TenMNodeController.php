@@ -215,6 +215,9 @@ class TenMNodeController extends Controller
      */
     public function update(Request $request)
     {
+        $vadArray = explode(',', $request->get('10identifier_used'));
+        $va1Array = explode(',', $request->get('wdidentifier_used'));
+        
         if($request->get('10node_id')!= null){
             $id=$request->get('10node_id');
             $TenmNode = TenMeterNode::where('node_id',$id)->first();
@@ -236,9 +239,12 @@ class TenMNodeController extends Controller
             $TenmNode->v_mcu_max_value =  $request->get('10v_mcu_max_value');
             $TenmNode->v_mcu_min_value =  $request->get('10v_mcu_min_value');
             $TenmNode->v_mcu_10m =  $request->get('10v_mcu_label');
-            $TenmNode->v_a1_10m= $request->get('10identifier_used');
-            $TenmNode->v_a2_10m= $request->get('wsidentifier_used');
-            $TenmNode->v_a3_10m= $request->get('wdidentifier_used');
+            $TenmNode->v_a1_10m= $va1Array[0];
+            $TenmNode->v_a2_10m= $va1Array[1];
+            $TenmNode->v_a3_10m= 'V_A3';
+            $TenmNode->v_ad1_10m= $vadArray[0];
+            $TenmNode->v_ad2_10m= $vadArray[1];
+            
             $TenmNode->node_status= $this->getStatus($request,'10mnode_status');
             $TenmNode->txt_10m_value= $request->get('10txt_value');
 

@@ -64,7 +64,7 @@
                                                     <div id="collapsefour-2" class="panel-collapse collapse"> 
                                                         <div class="panel-body">
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="10txt_value">TXT value</label>
+                                                                                <label class="col-lg-2 control-label " for="10txt_value">Node name</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="10txt_value" name="10txt_value" type="text" class="form-control" required>
                                                                                 </div>
@@ -175,7 +175,7 @@
                                                     <div class="panel-heading"> 
                                                         <h4 class="panel-title"> 
                                                             <a data-toggle="collapse" data-parent="#accordion-test-2" href="#collapseOne-2" aria-expanded="false" class="collapsed">
-                                                                Insulation sensor
+                                                                Insolation sensor
                                                                 
                                                             </a> 
                                                         </h4> 
