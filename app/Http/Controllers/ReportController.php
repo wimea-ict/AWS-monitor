@@ -13,8 +13,6 @@ use Log;
 class ReportController extends Controller
 {
     public function report(){
-
-        
         //get all the problems with status reported
         
         $reported_problems = DB::table('problems')
@@ -27,7 +25,12 @@ class ReportController extends Controller
             // return array($problem->source,$problem->source_id);
             $problem_station=$this->getStationId($problem->source,$problem->source_id);
             
-           
+            $mstation_id=$problem_station["station_id"];
+
+            
+            $m_node=$problem->source;
+
+
             $problem_report=DB::table('reports')
                 ->where('problem_id',$problem->id)->orderBy('report_id', 'desc')->first();
             
@@ -62,7 +65,9 @@ class ReportController extends Controller
                 Report::create([
                     "problem_id"=>$problem->id,
                     "message"=>$problem_station["source"],
-                    "report_counter"=>1
+                    "report_counter"=>1,
+                    "station_id"=>$mstation_id,
+                    "node"=>(($m_node=="station")?"":$m_node)
                     ]);
 
                 //report the problem
@@ -83,7 +88,10 @@ class ReportController extends Controller
                     Report::create([
                     "problem_id"=>$problem->id,
                     "message"=>$problem_station["source"],
-                    "report_counter"=>(++$problem_report->report_counter)
+                    "report_counter"=>(++$problem_report->report_counter),
+                    "station_id"=>$mstation_id,
+                    "node"=>(($m_node=="station")?"":$m_node)
+                    
                     ]);
                     
                     $message=$problem_station["source"]." ".$problem_description->problem_description;

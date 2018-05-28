@@ -31,7 +31,7 @@
                                                     <td>{{$station['Location']}}</td>
                                                     <td>{{$station['Longitude']}}</td>
                                                     <td>{{$station['Latitude']}}</td>
-                                                    <td><button class="btn btn-icon btn-success m-b-5 edit-station-button" data-toggle="modal" id="{{htmlspecialchars(json_encode(array($station, $problemConfigurationvalues)))}}" data-target="#full-width-modal7"  data-delete-link="" > <i class="fa fa-thumbs-o-up"></i> Edit </button></td>
+                                                    <td><button class="btn btn-icon btn-success m-b-5 edit-station-button" data-toggle="modal" id="{{htmlspecialchars(json_encode(array($station, $problemConfigurationvalues)))}}" data-target="#full-width-modal7"  data-delete-link="" > <i class="fa fa-edit"></i> Edit </button></td>
                                                 </tr>
                                                 @endforeach    
                                                 
@@ -383,7 +383,7 @@
                                                     </div> 
                                                     <div id="collapsefourteen-11" class="panel-collapse collapse"> 
                                                         <div class="panel-body">
-                                                        <div class="form-group clearfix">
+                                                                            <div class="form-group clearfix">
                                                                                 <label class="col-sm-2 control-label">Select criticality state</label>
                                                                                 <div class="col-sm-4">
                                                                                     <select class="form-control" name="nmcriticallity" id="nmcriticallity">
@@ -409,6 +409,50 @@
                                                                                 <label class="col-lg-2 control-label " for="nmprobRptTime">Reporting time interval(hrs)</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="nmprobRptTime"  name="nmprobRptTime" type="number" class="form-control" value="">
+                                                                                </div>
+                                                                            </div>
+                                                                               
+                                                        </div> 
+                                                    </div> 
+                                                </div>
+
+                                                 <div class="panel panel-default"> 
+                                                    <div class="panel-heading"> 
+                                                        <h4 class="panel-title"> 
+                                                            <a data-toggle="collapse" data-parent="#accordion-test-3" href="#collapsefourteen-12" aria-expanded="false" class="collapsed">
+                                                                Packet Dropping Problem
+                                                               
+                                                            </a> 
+                                                        </h4> 
+                                                    </div> 
+                                                    <div id="collapsefourteen-12" class="panel-collapse collapse"> 
+                                                        <div class="panel-body">
+                                                        `                   <div class="form-group clearfix">
+                                                                                <label class="col-sm-2 control-label">Select criticality state</label>
+                                                                                <div class="col-sm-4">
+                                                                                    <select class="form-control" name="pdcriticallity">
+                                                                                        <option>Critical</option>
+                                                                                        <option selected>Non Critical</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                                <label class="col-sm-2 control-label">Select report method</label>
+                                                                                <div class="col-sm-4">
+                                                                                    <select class="form-control" name="pdrptmethod">
+                                                                                        <option>sms</option>
+                                                                                        <option selected>email</option>
+                                                                                        <option selected>Both</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                             
+                                                                            <div class="form-group clearfix">
+                                                                                <label class="col-lg-2 control-label " for="pdoccurencesConsider">Occurences to Consider</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="pdoccurencesConsider" value="4" name="pdoccurencesConsider" type="number" class="form-control" value="">
+                                                                                </div>
+                                                                                <label class="col-lg-2 control-label " for="pdprobRptTime">Reporting time interval(hrs)</label>
+                                                                                <div class="col-lg-4">
+                                                                                    <input id="pdprobRptTime" value="8" name="pdprobRptTime" type="number" class="form-control" value="">
                                                                                 </div>
                                                                             </div>
                                                                                

@@ -16,7 +16,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('addstation', 'StationsController');
     Route::resource('configurestation', 'ConfigureStaion');
     Route::post('updateStation','ConfigureStaion@update');
-    
+
     Route::resource('configure10mnode', 'TenMNodeController');
     Route::post('updateTenMNode', 'TenMNodeController@update');
     Route::resource('configure2mnode', 'TwoMNodeController');
@@ -29,8 +29,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('editProblemConfigurations', 'ProblemsController');
     Route::post('updateProblemConfigurations', 'ProblemsController@update');
     Route::resource('viewStationStatus', 'StationStatusController');
-    
-    
+    Route::get('selectedStationStatus/{id}', 'StationStatusController@show');
+
+
+
 
     Route::get('/node10m_report','TenMNodeController@report1');
     Route::get('/node2m_report','TwoMNodeController@report1');

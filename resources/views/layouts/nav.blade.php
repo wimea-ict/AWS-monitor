@@ -42,6 +42,7 @@
                     <li class="has-submenu"><a href="{{ route('register') }}"><i class="ion-calendar"></i> <span class="nav-label">Register Users</span></a></li>
                     <li class="has-submenu"><a href="{{ URL::to('probTbData') }}"><i class="ion-close"></i> <span class="nav-label">Problems Identified</span></a></li>
                     
+                    
                     <li class="has-submenu"><a href="#"><i class="ion-flask"></i> <span class="nav-label">Reports</span></a>
                         <ul class="list-unstyled">
                             <li><a href="{{URL::to('node10m_report')}}">10m Node</a></li>

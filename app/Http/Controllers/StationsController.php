@@ -13,6 +13,8 @@ use station\SinkNode;
 use station\Sensor;
 class StationsController extends Controller
 {
+
+
     /**
      * Display a listing of the resource.
      *
@@ -129,21 +131,21 @@ class StationsController extends Controller
                                 
                                 "wind_speed_semsor"=>array(
                                     "parameter_read"=>"wind speed",
-                                    "identifier_used"=>"V_A2",
+                                    "identifier_used"=>"P0_LST60",
                                     "max_value"=>"5",
                                     "min_value"=>"3",
                                     "rpt_intvl"=>"1",
                                 ),
                                 "wind_direction_semsor"=>array(
                                     "parameter_read"=>"wind direction",
-                                    "identifier_used"=>"V_A3",
-                                    "max_value"=>"4",
-                                    "min_value"=>"1",
+                                    "identifier_used"=>"V_A1,V_A2",
+                                    "max_value"=>"360",
+                                    "min_value"=>"0",
                                     "rpt_intvl"=>"1",
                                 ),
                                 "insulation_sensor"=>array(
-                                    "parameter_read"=>"insulation",
-                                    "identifier_used"=>"V_A1",
+                                    "parameter_read"=>"insolation",
+                                    "identifier_used"=>"V_AD1,V_AD2",
                                     "max_value"=>"2",
                                     "min_value"=>"1",
                                     "rpt_intvl"=>"1",
@@ -157,7 +159,7 @@ class StationsController extends Controller
                                 ),
                                 "soil_moisture_semsor"=>array(
                                     "parameter_read"=>"soil moisture",
-                                    "identifier_used"=>"V_A1",
+                                    "identifier_used"=>"V_A1,V_A2",
                                     "max_value"=>"5",
                                     "min_value"=>"2",
                                     "rpt_intvl"=>"1",
@@ -232,6 +234,7 @@ class StationsController extends Controller
             'StationStatus'=>$request->get('station_status'),
             'Country'=>$request->get('country'),
             'SubmittedBy'=>Auth::user()->name,
+            'StationCategory'=>'aws',
             
           ]);
 
@@ -275,6 +278,10 @@ class StationsController extends Controller
 
 
         $TwomnodeCreation->save();
+        $vadArray = explode(',', $request->get('10identifier_used'));
+        $va1Array = explode(',', $request->get('wdidentifier_used'));
+        
+        
         $TenmnodeCreation = new TenMeterNode([
             
             'station_id' => $station['station_id'],
@@ -296,9 +303,11 @@ class StationsController extends Controller
             'v_mcu_max_value' => $request->get('10v_mcu_max_value'),
             'v_mcu_min_value' => $request->get('10v_mcu_min_value'),
             'v_mcu_10m' => $request->get('10v_mcu_label'),
-            'v_a1_10m'=>$request->get('10identifier_used'),
-            'v_a2_10m'=>$request->get('wsidentifier_used'),
-            'v_a3_10m'=>$request->get('wdidentifier_used'),
+            'v_a1_10m'=>$va1Array[0],
+            'v_a2_10m'=>$va1Array[1],
+            'v_a3_10m'=>'V_A3',
+            'v_ad1_10m'=>$vadArray[0],
+            'v_ad2_10m'=>$vadArray[1],
             'node_status'=>$this->getStatus($request,'10mnode_status'),
             'txt_10m_value'=>$request->get('10txt_value'),              
             
@@ -308,8 +317,10 @@ class StationsController extends Controller
 
 
         $TenMNode = TenMeterNode::where('txt_10m_value', $request->get('10txt_value'))->first();
+
+        $TwoMNode = TwoMeterNode::where('txt_2m_value', $request->get('2txt_value'))->first();
         $HumiditySensorCreation = new Sensor([
-            'node_id'=>$TenMNode['node_id'],
+            'node_id'=>$TwoMNode['node_id'],
             'parameter_read'=>$request->get('rhparameter_read'),
             'identifier_used'=>$request->get('rhidentifier_used'),
             'min_value'=>$request->get('rhmin_value'),
@@ -326,7 +337,7 @@ class StationsController extends Controller
 
         //temperature sensor creation
         $TemperatureSensorCreation = new Sensor([
-            'node_id'=>$TenMNode['node_id'],
+            'node_id'=>$TwoMNode['node_id'],
             'parameter_read'=>$request->get('tsparameter_read'),
             'identifier_used'=>$request->get('tsidentifier_used'),
             'min_value'=>$request->get('tsmin_value'),
@@ -343,7 +354,7 @@ class StationsController extends Controller
         
         //ten meter node creation
         
-        //$TenMNode = TenMeterNode::where('txt_10m_value', $request->get('2txt_value'))->first();
+        
         //insulation sensor creation
         $InsulationSensorCreation = new Sensor([
             'node_id'=>$TenMNode['node_id'],
@@ -384,6 +395,7 @@ class StationsController extends Controller
         ]);
         $WindDirectionSensorCreation->save();
         
+        $va1gnd = explode(',',$request->get('smidentifier_used'));
 
         $groundnodeCreation = new GroundNode([
             
@@ -405,7 +417,7 @@ class StationsController extends Controller
             'v_mcu_max_value' => $request->get('gdv_mcu_max_value'),
             'v_mcu_min_value' => $request->get('gdv_mcu_min_value'),
             'v_mcu_gnd' => $request->get('gdv_mcu_label'),
-            'v_a1_gnd'=>$request->get('smidentifier_used'),
+            'v_a1_gnd'=>$va1gnd[0],
             'v_a2_gnd'=>$request->get('v_a2'),
             'ps_gnd'=>$request->get('groundps'),
             'node_status'=>$this->getStatus($request,'gndnode_status'),
@@ -493,9 +505,9 @@ class StationsController extends Controller
             ]);
     
             $sinkCreation->save();
-
+            $sinkNode = SinkNode::where('txt_sink_value', $request->get('sinktxt_value'))->first();
             $PressureSensorCreation = new Sensor([
-                'node_id'=>$TenMNode['node_id'],
+                'node_id'=>$sinkNode['node_id'],
                 'parameter_read'=>$request->get('psparameter_read'),
                 'identifier_used'=>$request->get('psidentifier_used'),
                 'min_value'=>$request->get('psmin_value'),

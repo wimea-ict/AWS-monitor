@@ -4,17 +4,17 @@
 
 
 @section('page_specific_css_files')
-   
+
 @endsection
 
 @section('content')
 <div class="row">
-    
+
     @include("reports.select_station_section")
 
     <div class="col-sm-12">
 
-        <div class="portlet"><!-- /primary heading -->             
+        <div class="portlet"><!-- /primary heading -->
             <div class="portlet-heading">
                 <h3 class="portlet-title text-dark">Line gragh  for V_IN and V_MCU against datetime </h3>
                 <div class="portlet-widgets">
@@ -28,19 +28,19 @@
             </div>
             <div id="bg-default" class="panel-collapse collapse in">
                 <div class="portlet-body">
-            
-                    <div id="vin_vmcu_2m" style="height: 300px;"></div>
-                    
+
+                    <div id="vin_vmcu_2m" style="height: 300px;"  class="text-center"></div>
+
                 </div>
-                
+
             </div>
         </div> <!-- /Portlet -->
     </div> <!-- col -->
 
-    
+
 
     <div class="col-sm-12">
-        <div class="portlet"><!-- /primary heading -->             
+        <div class="portlet"><!-- /primary heading -->
             <div class="portlet-heading">
                 <h3 class="portlet-title text-dark">Line gragh Relative humidity sensor read against datetime</h3>
                 <div class="portlet-widgets">
@@ -54,17 +54,17 @@
             </div>
             <div id="bg-default" class="panel-collapse collapse in">
                 <div class="portlet-body">
-            
-                    <div id="humidity" style="height: 300px;"></div>
-            
+
+                    <div id="humidity" style="height: 300px;"  class="text-center"></div>
+
                 </div>
             </div>
         </div> <!-- /Portlet -->
     </div> <!-- col -->
 
-   
+
     <div class="col-sm-12">
-        <div class="portlet"><!-- /primary heading -->             
+        <div class="portlet"><!-- /primary heading -->
             <div class="portlet-heading">
                 <h3 class="portlet-title text-dark">Gragh for Temperature Sensor readings </h3>
                 <div class="portlet-widgets">
@@ -78,15 +78,15 @@
             </div>
             <div id="bg-default" class="panel-collapse collapse in">
                 <div class="portlet-body">
-            
-                    <div id="templature" style="height: 300px;"></div>
-            
+
+                    <div id="templature" style="height: 300px;"  class="text-center"></div>
+
                 </div>
             </div>
         </div> <!-- /Portlet -->
     </div> <!-- col -->
 
-    
+
 
 </div>
 @endsection
@@ -95,30 +95,51 @@
     {{--  <script src="assets/morris/node2mcharts.js"></script>  --}}
     <script>
 
+    $( "#station_id" ).change(function() {
+          $("#report_form").submit()
+    });
+
         $(function() {
 
-             new Dygraph(document.getElementById("vin_vmcu_2m"),
-              <?=json_encode($vin_vmcu_2m)?>,
-              {
-                  labels: [ "x", "V_MCU", "V_IN" ]
-              });
+            var vin_vmcu_2m="<?=$vin_vmcu_2m?>";
+            if(vin_vmcu_2m==""){
+                $("#vin_vmcu_2m").html("<h4>No V_IN VMCU data Found</h4>");
+            }else{
+              new Dygraph(document.getElementById("vin_vmcu_2m"),
+               vin_vmcu_2m,
+               {
+                   labels: [ "x", "V_MCU", "V_IN" ]
+               });
+            }
 
-              new Dygraph(document.getElementById("humidity"),
-              <?=json_encode($humidity)?>,
-              {
-                  labels: [ "x", "humidity"]
-              });
+            var humidity="<?=$humidity?>";
 
-              new Dygraph(document.getElementById("templature"),
-              <?=json_encode($templature)?>,
-              {
-                  labels: [ "x", "templature"]
-              });
+              if(humidity==""){
+                  $("#humidity").html("<h4>No Humidity data Found</h4>");
+              }else{
+                new Dygraph(document.getElementById("humidity"),
+                humidity,
+                {
+                    labels: [ "x", "humidity"]
+                });
+              }
+
+              var templature="<?=$templature?>";
+              if(templature==""){
+                  $("#templature").html("<h4>No Templature data Found</h4>");
+              }else{
+                new Dygraph(document.getElementById("templature"),
+                templature,
+                {
+                    labels: [ "x", "templature"]
+                });
+              }
+
 
              $('#station_id').find('option[selected="selected"]').each(function(){
                 $(this).prop('selected', true);
             });
-            
+
         });//end out function
     </script>
 @endsection
