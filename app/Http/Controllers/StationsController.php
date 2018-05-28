@@ -75,7 +75,7 @@ class StationsController extends Controller
                                     "up"=>"UP",
                                     "t"=>"T",
                                     "v_a2"=>"V_A2",
-                                    
+
                                 ),
                                 "sink_node"=>array(
                                     "name"=>"Sink node",
@@ -98,7 +98,7 @@ class StationsController extends Controller
                                     "v_mcu_label"=>"V_MCU",
                                     "ut"=>"UT",
                                     "up"=>"UP",
-                                    
+
                                 ),
                                 "2m_node"=>array(
                                     "name"=>"2m node",
@@ -128,7 +128,7 @@ class StationsController extends Controller
                                     "min_value"=>"2",
                                     "rpt_intvl"=>"1",
                                 ),
-                                
+
                                 "wind_speed_semsor"=>array(
                                     "parameter_read"=>"wind speed",
                                     "identifier_used"=>"V_A2",
@@ -218,7 +218,7 @@ class StationsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {        
+    {
         $stationcreation = new Station([
             'StationName' => $request->get('sname'),
             'StationNumber' => $request->get('snumber'),
@@ -234,20 +234,20 @@ class StationsController extends Controller
             'StationStatus'=>$request->get('station_status'),
             'Country'=>$request->get('country'),
             'SubmittedBy'=>Auth::user()->name,
-            
+
           ]);
 
           $stationcreation->save();
 
           $station = Station::where('StationName', $request->get('sname'))->first();
-        
-            
-          /* 
+
+
+          /*
           'station_id','date_2m','node_status','time_2m','ut_2m','gw_lat_2m','gw_long_2m','v_mcu_2m','v_in_2m','ttl_2m','rssi_2m','lqi_2m','drp_2m','e64_2m','txt_2m','t_sht2x_2m','v_in_min_value','v_in_max_value','v_mcu_min_value','v_mcu_max_value','t_sht2x_2m','rh_sh2x_2m','txt_2m_value','v_in_max_value','v_in_min_value','v_mcu_max_value','v_mcu_min_value'
-          */  
+          */
 
         $TwomnodeCreation = new TwoMeterNode([
-            
+
             'station_id' => $station['station_id'],
             'txt_2m' => $request->get('2txt_key'),
             'e64_2m' => $request->get('2mac_add'),
@@ -269,16 +269,16 @@ class StationsController extends Controller
             't_sht2x_2m'=>$request->get('tsidentifier_used'),
             'rh_sh2x_2m'=>$request->get('rhidentifier_used'),
             'node_status'=>$this->getStatus($request,'2mnode_status'),
-            'txt_2m_value'=>$request->get('2txt_value'), 
-            
-                         
-            
+            'txt_2m_value'=>$request->get('2txt_value'),
+
+
+
         ]);
 
 
         $TwomnodeCreation->save();
         $TenmnodeCreation = new TenMeterNode([
-            
+
             'station_id' => $station['station_id'],
             'txt_10m' => $request->get('10txt_key'),
             'e64_10m' => $request->get('10mac_add'),
@@ -302,8 +302,8 @@ class StationsController extends Controller
             'v_a2_10m'=>$request->get('wsidentifier_used'),
             'v_a3_10m'=>$request->get('wdidentifier_used'),
             'node_status'=>$this->getStatus($request,'10mnode_status'),
-            'txt_10m_value'=>$request->get('10txt_value'),              
-            
+            'txt_10m_value'=>$request->get('10txt_value'),
+
         ]);
 
         $TenmnodeCreation->save();
@@ -322,7 +322,7 @@ class StationsController extends Controller
 
         ]);
 
-       
+
 
         $HumiditySensorCreation->save();
 
@@ -339,12 +339,12 @@ class StationsController extends Controller
 
         ]);
         $TemperatureSensorCreation->save();
-        
-        
-        
-        
+
+
+
+
         //ten meter node creation
-        
+
         //$TenMNode = TenMeterNode::where('txt_10m_value', $request->get('2txt_value'))->first();
         //insulation sensor creation
         $InsulationSensorCreation = new Sensor([
@@ -372,7 +372,7 @@ class StationsController extends Controller
 
         ]);
         $WindSpeedSensorCreation->save();
-        
+
         $WindDirectionSensorCreation = new Sensor([
             'node_id'=>$TenMNode['node_id'],
             'parameter_read'=>$request->get('wdparameter_read'),
@@ -385,10 +385,10 @@ class StationsController extends Controller
 
         ]);
         $WindDirectionSensorCreation->save();
-        
+
 
         $groundnodeCreation = new GroundNode([
-            
+
             'station_id' => $station['station_id'],
             'txt_gnd' => $request->get('gndtxt_key'),
             'e64_gnd' => $request->get('gndmac_add'),
@@ -417,14 +417,14 @@ class StationsController extends Controller
             't1_gnd'=> $request->get('stidentifier_used'),
             't_gnd'=> $request->get('gndt'),
             'p0_gnd'=> $request->get('groundpo'),
-                          
-            
+
+
         ]);
 
         $groundnodeCreation->save();
 
         $gndNode = GroundNode::where('txt_gnd_value', $request->get('gndtxt_value'))->first();
-        
+
         $PrecipitationSensorCreation = new Sensor([
             'node_id'=>$gndNode['node_id'],
             'parameter_read'=>$request->get('ppparameter_read'),
@@ -450,7 +450,7 @@ class StationsController extends Controller
 
         ]);
         $SoilMoistureSensorCreation->save();
-        
+
         $SoilTempSensorCreation = new Sensor([
             'node_id'=>$gndNode['node_id'],
             'parameter_read'=>$request->get('stparameter_read'),
@@ -466,7 +466,7 @@ class StationsController extends Controller
 
 
             $sinkCreation = new SinkNode([
-            
+
                 'station_id' => $station['station_id'],
                 'txt_sink' => $request->get('sinktxt_key'),
                 'e64_sink' => $request->get('sinkmac_add'),
@@ -491,9 +491,9 @@ class StationsController extends Controller
                 'node_status'=>$this->getStatus($request,'sinknode_status'),
                 'txt_sink_value'=>$request->get('sinktxt_value'),
                 'up_sink'=>$request->get('sinkup'),
-                
+
             ]);
-    
+
             $sinkCreation->save();
 
             $PressureSensorCreation = new Sensor([
@@ -505,10 +505,10 @@ class StationsController extends Controller
                 'node_type'=>'sinkNode',
                 'sensor_status'=>$this->getStatus($request,'pssensor_status'),
                 'report_time_interval'=>$request->get('psrptTime'),
-    
+
             ]);
             $PressureSensorCreation->save();
-            
+
           return redirect('/configurestation');
     }
 
@@ -531,7 +531,7 @@ class StationsController extends Controller
      */
     public function edit($id)
     {
-        
+
     }
 
     /**
