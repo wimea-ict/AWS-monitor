@@ -432,6 +432,7 @@ header {
 .content {
   margin-left: 230px;
   padding-bottom: 5px;
+  margin-top:-20px;
 }
 
 .content > .container-fluid {
@@ -2054,4 +2055,15 @@ input:checked + .slider:before {
 
 .select-size{
   width: 20px;
+}
+
+.status_btn{
+  font-size:30px; color:#2b542c;
+}
+.status_label{
+  margin-top:10px;
+}
+
+.off_status_btn{
+  font-size:30px; color:#a94442;
 }

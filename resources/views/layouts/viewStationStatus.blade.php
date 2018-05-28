@@ -1,14 +1,31 @@
 @extends('main')
 
 @section('content')
-                <div class=""> 
-                    <h3 class="title">Automatic weather Station Statuses</h3> 
-                </div>
-
-               
-
+<div class="row">
+                    <div class="col-lg-2 col-lg-offset-3">
+                        <div class="widget-panel widget-style-2 bg-danger">
+                            
+                            <h3 class="m-0 counter">Critical issues</h3>
+                            
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-sm-6">
+                        <div class="widget-panel widget-style-2 bg-warning">
+                           
+                            <h3 class="m-0 counter">Non Critical issues</h3>
+                            
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-sm-6">
+                        <div class="widget-panel widget-style-2 bg-success">
+                            
+                            <h3 class="m-0 counter">No Station issues</h3>
+                            
+                        </div>
+                    </div>
                     
-                <div class="row text-center">
+                </div> <!-- end row -->
+<div class="row text-center">
                     @foreach($stations as $station)
                     
                     <?php $counter=0 ?>
@@ -53,7 +70,6 @@
 
                 </div>
                 @endforeach
-
                 <div class="row text-center">
                     @foreach($stationsOn as $station)
                     
@@ -76,6 +92,10 @@
                 </div>
                 @endforeach 
                 
+
+               
+
+               
 
                
 

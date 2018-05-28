@@ -1,12 +1,29 @@
 <?php $__env->startSection('content'); ?>
-                <div class=""> 
-                    <h3 class="title">Automatic weather Station Statuses</h3> 
-                </div>
-
-               
-
+<div class="row">
+                    <div class="col-lg-2 col-lg-offset-3">
+                        <div class="widget-panel widget-style-2 bg-danger">
+                            
+                            <h3 class="m-0 counter">Critical issues</h3>
+                            
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-sm-6">
+                        <div class="widget-panel widget-style-2 bg-warning">
+                           
+                            <h3 class="m-0 counter">Non Critical issues</h3>
+                            
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-sm-6">
+                        <div class="widget-panel widget-style-2 bg-success">
+                            
+                            <h3 class="m-0 counter">No Station issues</h3>
+                            
+                        </div>
+                    </div>
                     
-                <div class="row text-center">
+                </div> <!-- end row -->
+<div class="row text-center">
                     <?php $__currentLoopData = $stations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $station): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     
                     <?php $counter=0 ?>
@@ -51,7 +68,6 @@
 
                 </div>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
                 <div class="row text-center">
                     <?php $__currentLoopData = $stationsOn; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $station): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     
@@ -74,6 +90,10 @@
                 </div>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> 
                 
+
+               
+
+               
 
                
 
