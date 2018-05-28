@@ -4,7 +4,7 @@
 /public/storage
 storage/
 /storage/*.key
-/vendor
+--/vendor
 /.idea
 /.vscode
 /.vagrant
