@@ -22,25 +22,28 @@ class GroundNodeController extends Controller
     {
         $stations = Station::all()->toArray();
         $groundNodes = GroundNode::all()->toArray();
+
+
         $precipitationsensors = Sensor::where('node_type','groundNode')
                                     ->where('parameter_read', 'preciptation')
                                     ->get();
+
         $soilTempsensors = Sensor::where('node_type','groundNode')
                                     ->where('parameter_read', 'soil temperature')
                                     ->get();
+
         $soilMoisturesensors = Sensor::where('node_type','groundNode')
                                     ->where('parameter_read', 'soil moisture')
                                     ->get();
 
         return view('layouts.configureGroundNode',compact('groundNodes','stations','precipitationsensors','soilTempsensors','soilMoisturesensors'));
 
-
     }
 
 
     public function report1(){
         $data["action"]=URL::to('reportsGnd');
-        $data["stations"]=Station::all();
+        $data["stations"]=Station::all()->where("stationCategory","aws");
         $data["heading"]="Ground Node Reports";
 
         $data["vin_vmcu"]="";
@@ -166,7 +169,7 @@ class GroundNodeController extends Controller
 
         $data["action"]=URL::to('reportsGnd');
         $data["selected_station"]=$station_id;
-        $data["stations"]=Station::all();
+        $data["stations"]=Station::all()->where("stationCategory","aws");
         $data["heading"]="Ground Node Reports";
         return view("reports.nodegnd",$data);
     }

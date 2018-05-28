@@ -112,6 +112,12 @@
 @section('page_specific_script_files')
     {{--  <script src="assets/morris/node10mcharts.js"></script>  --}}
     <script>
+
+        $( "#station_id" ).change(function() {
+              $("#report_form").submit()
+        });
+
+
         $(function() {
 
             new Dygraph(document.getElementById("vin_vmcu_10m"),

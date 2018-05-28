@@ -65,7 +65,12 @@
 @section('page_specific_script_files')
     {{--  <script src="assets/morris/nodesinkcharts.js"></script>  --}}
     <script>
-        $(function() {
+
+    $( "#station_id" ).change(function() {
+          $("#report_form").submit()
+    });
+
+    $(function() {
 
           /*
             new Dygraph(document.getElementById("test"),
