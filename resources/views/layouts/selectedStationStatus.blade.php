@@ -205,4 +205,44 @@
                         </div> <!-- panel -->
                     </div>
     </div>
+    <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Identified problems</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <table id="datatable" class="table table-striped table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Problem</th>
+                                                    <th>status</th>
+                                                    <th>criticality</th>
+                                                    
+                                                </tr>
+                                            </thead>
+
+                                     
+                                            <tbody>
+                                            @foreach($problemsForStation as $probs)
+                                                <tr>
+                                                    <td>{{$probs['classification_id']}}</td>
+                                                    <td>{{$probs['status']}}</td>
+                                                    <td>{{$probs['criticality']}}</td>
+                                                    
+                                                </tr>
+                                                @endforeach    
+                                                
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div> <!-- End Row -->
 @endsection

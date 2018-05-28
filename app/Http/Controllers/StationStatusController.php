@@ -119,6 +119,7 @@ class StationStatusController extends Controller
      */
     public function show($id)
     {
+        $ids = array();
         $TwomNode = TwoMeterNode::where('station_id', $id)->first()->toArray();
         //dd($TwomNode);
         $TenmNode =TenMeterNode::where('station_id', $id)->first()->toArray();
@@ -151,6 +152,7 @@ class StationStatusController extends Controller
         foreach($problems as $problem){
             if($problem['source']=="station"){
                 if($problem['source_id']== $id){
+                    array_push($ids,$id);
                     $twoMFlag =1;
                     $tenMFlag =1;
                     $gndFlag =1;
@@ -170,6 +172,7 @@ class StationStatusController extends Controller
             elseif($problem['source']=="2m_node"){
                 if(!empty($TwomNode)){
                     if($problem['source_id']==$TwomNode['node_id']){
+                        array_push($ids,$TwomNode['node_id']);
                         $twoMFlag = 1;
                         $TempSensorFlag =1;
                         $relativeHumidity =1;
@@ -179,6 +182,7 @@ class StationStatusController extends Controller
             elseif($problem['source']=="10m_node"){
                 if(!empty($TenmNode)){
                     if($problem['source_id']==$TenmNode['node_id']){
+                        array_push($ids,$TenmNode['node_id']);
                         $tenMFlag =1;
                         $WindSpeedFlag =1;
                         $WindDirectionFlag =1;
@@ -189,6 +193,7 @@ class StationStatusController extends Controller
             elseif($problem['source']=="ground_node"){
                 if(!empty($groundNode)){
                     if($problem['source_id']==$groundNode['node_id']){
+                        array_push($ids,$groundNode['node_id']);
                         $gndFlag = 1;
                         $SoilMoistureFlag =1;
                         $SoilTempFlag =1;
@@ -199,6 +204,7 @@ class StationStatusController extends Controller
             elseif($problem['source']=="sink_node"){
                 if(!empty($sinknode)){
                     if($problem['source_id']==$sinknode['node_id']){
+                        array_push($ids,$sinknode['node_id']);
                         $sinkFlag =1;
                         $PressureFlag =1;
                     }
@@ -212,9 +218,11 @@ class StationStatusController extends Controller
         if(!empty($Twomnodesensors)){
             foreach($Twomnodesensors as $Twomnodesensor){
                 if($Twomnodesensor['parameter_read']=='Temperature'){
+                    array_push($ids,$Twomnodesensor['id']);
                     $TempSensorFlag =1;
                 }
                 if($Twomnodesensor['parameter_read']=='relative humidity'){
+                    array_push($ids,$Twomnodesensor['id']);
                     $relativeHumidity =1;
                 }
             }
@@ -225,12 +233,15 @@ class StationStatusController extends Controller
          
             foreach($Tenmnodesensors as $Tenmnodesensor){
                 if($Tenmnodesensor['parameter_read']=='wind speed'){
+                    array_push($ids,$Tenmnodesensor['id']);
                     $WindSpeedFlag =1;
                 }
                 if($Tenmnodesensor['parameter_read']=='wind direction'){
+                    array_push($ids,$Tenmnodesensor['id']);
                     $WindDirectionFlag =1;
                 }
                 if($Tenmnodesensor['parameter_read']=='insolation'){
+                    array_push($ids,$Tenmnodesensor['id']);
                     $insolationFlag =1;
                 }
             }
@@ -240,12 +251,15 @@ class StationStatusController extends Controller
            
             foreach($Groundnodesensors as $Groundnodesensor){
                 if($Groundnodesensor['parameter_read']=='soil temperature'){
+                    array_push($ids,$Groundnodesensor['id']);
                     $SoilTempFlag =1;
                 }
                 if($Groundnodesensor['parameter_read']=='soil moisture'){
+                    array_push($ids,$Groundnodesensor['id']);
                     $SoilMoistureFlag =1;
                 }
                 if($Groundnodesensor['parameter_read']=='preciptation'){
+                    array_push($ids,$Groundnodesensor['id']);
                     $PreciptationFlag=1;
                 }
             }
@@ -256,14 +270,19 @@ class StationStatusController extends Controller
            
             foreach($sinkNodesensors as $sinkNodesensor){
                 if($sinkNodesensor['parameter_read']=='pressure'){
+                    array_push($ids,$sinkNodesensors['id']);
                     $PressureFlag =1;
                 }
                 
             }
         }
         
+
+        $problemsForStation = Problems::whereIn('source_id',$ids)->orderBy('id', 'DESC')->get()->toArray();
+
+        //dd($problemsForStation);
         
-        return view('layouts.selectedStationStatus',compact('twoMFlag','tenMFlag','gndFlag','sinkFlag','TempSensorFlag','SoilMoistureFlag','SoilTempFlag','PreciptationFlag','PressureFlag','RainfallFlag','WindSpeedFlag','WindDirectionFlag','insolationFlag','relativeHumidity','stationTaken')); 
+        return view('layouts.selectedStationStatus',compact('twoMFlag','tenMFlag','gndFlag','sinkFlag','TempSensorFlag','SoilMoistureFlag','SoilTempFlag','PreciptationFlag','PressureFlag','RainfallFlag','WindSpeedFlag','WindDirectionFlag','insolationFlag','relativeHumidity','stationTaken','problemsForStation')); 
     }
 
     /**
