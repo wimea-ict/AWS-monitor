@@ -3,54 +3,49 @@
 namespace station\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use station\Http\Controllers\Controller;
+use station\Http\Controllers\AnalyzerHandler;
 use DateTimeZone;
 use DateTime;
-use AnalyzerDBHandler;
 
 class NodeStatusAnalyzerController extends Controller
 {
-    
-    public function __construct(Type $var = null)
+    private $Handler;
+    /* txt col names for the different node tables */
+    private $txt_2m_col_name;
+    private $txt_10m_col_name;
+    private $txt_gnd_col_name;
+    private $txt_sink_col_name;
+    /* variable to store the problem configurations for the different stations from the station_problem_settings table */
+    private $stn_prb_conf;
+    private $problemClassfications;
+    /* variables to store table data for the different nodes */
+    private $twoM_nd_data;
+    private $tenM_nd_data;
+    private $gnd_nd_data;
+    private $sink_nd_data;
+    public function __construct()
     {
-        $DBHandler = new AnalyzerDBHandler();
-    }
+        $this->Handler = new AnalyzerHandler();
+        $this->txt_2m_col_name  = 'txt_2m_value';
+        $this->txt_10m_col_name  = 'txt_10m_value';
+        $this->txt_gnd_col_name  = 'txt_gnd_value';
+        $this->txt_sink_col_name  = 'txt_sink_value';
+        /**
+         * PICK ALL THE DATA YOU'LL NEED
+         * nodetype - twoMeterNode, tenMeterNode, groundNode, sinkNode 
+         */
+        // $this->problemClassfications = $this->Handler->getEnabledSensors('twoMeterNode');
 
-    /**
-     * @param $nd_id
-     * @param $nd_name
-     * @param $problemClassfications
-     * @param $param - "V_IN,V_MCU,..." paramaters being checked
-     * @param $prob - "empty, null,..." any anormally being checked
-     * @param $stn_prb_conf - the station configurations 
-     * @param $problemId
-     * @param $criticality
-     * @param $max_track_counter
-     */
-    private function checkoutProblem($nd_id,$nd_name,$problemClassfications,$param,$prob,$stn_prb_conf,$problemId,$criticality,$max_track_counter)
-    {
-        // get problem
-        foreach ($problemClassfications as $problem) {
-            // do a case insensitive check
-            if (stripos($problem->problem_description, $param) !== false) {
-                if (stripos($problem->problem_description, $prob) !== false) {
-                    /**
-                     * getting the problem criticality and prob_max_counter
-                     */
-                    if ($stn_prb_conf->isNotEmpty()) {
-                        foreach ($stn_prb_conf as $prb_conf) {
-                            if ($prb_conf->problem_id === $problemId) {
-                                $criticality = $prb_conf->criticality;
-                                $max_track_counter = $prb_conf->max_track_counter;
-                            }
-                        }
-                    }
-                    $DBHandler->registerProblem($nd_id, $nd_name, $problemId, $criticality, $max_track_counter);
-                    break;
-                }
-            }
-        }
+        // pick problem station configurations
+        $this->problemClassfications = $this->Handler->getProblemClassifications();
+        $this->stn_prb_conf = $this->Handler->getStationProbConfig();
+        $this->twoM_nd_data = $this->Handler->getNodeTableData($this->txt_2m_col_name);
+        $this->tenM_nd_data = $this->Handler->getNodeTableData($this->txt_10m_col_name);
+        $this->gnd_nd_data = $this->Handler->getNodeTableData($this->txt_gnd_col_name);
+        $this->sink_nd_data = $this->Handler->getNodeTableData($this->txt_sink_col_name);
     }
 
     /**
@@ -59,22 +54,41 @@ class NodeStatusAnalyzerController extends Controller
     public function analyze()
     {
         // first clean DB
-        $DBHandler->cleanDBTable($this->prob_tb);
+        //$this->Handler->cleanDBTable($this->Handler->getProbTbName());
         //get time diff to use for querying the db
         // $tasks = DB::table('observationslip')->where('CreationDate','>=',$this->getTimeDiff())
-        $date = $DBHandler->getTimeDiff();
+        // $date = $this->Handler->getTimeDiff();
         
         // store the first and last id checked  ->where()
         $id_first_checked = 0;
         $id_last_checked = 0;
-        $counter = 1;
+        $counter = 0;
+        $seq = -1;  
+        
+        $lastId = $this->Handler->getLastId('nodestatus');
 
-        // pick problem classification data
-        $problemClassfications = $DBHandler->getProblemClassifications();
+        // pick only columns that we'll be using since that will be faster. 
+        // We need date_time_recorded to verify the date time sent by the node
+        // ->get(500) at a time //'SEQ' - to track packet drops
+        DB::table($this->Handler->getNodeStatusTbName())->orderBy('id')->select('id','V_MCU','V_IN','date','time','TXT','date_time_recorded')->where('id','>',$lastId)->chunk(100, function($nodes) use(&$date, &$id_first_checked, &$id_last_checked, &$counter,&$seq){
 
-        // pick only columns that we'll be using. We won't need date_time_recorded because we have
-        // ->get(500) at a time
-        DB::table('nodestatus')->orderBy('id')->select('id','V_MCU','V_IN','date','time','TXT','StationNumber')->chunk(100, function($nodes) use(&$date, &$problemClassfications, &$id_first_checked, &$id_last_checked, &$counter){
+            /* declare a collection to store the nodes that sent data */
+            $available_nodes = array(
+                $this->Handler->getGndName() => array(),
+                $this->Handler->get2mName() => array(),
+                $this->Handler->get10mName() => array(),
+                $this->Handler->getSinkName() => array()
+            );
+
+            $recorded_ids = array();
+
+            // pick problem station configurations
+            $stn_prb_conf = $this->stn_prb_conf;
+            
+            // initialize variables with default values
+            $criticality = 'Non Critical';// default criticality
+            $max_track_counter = 12;// default criticality
+            
             foreach ($nodes as $node) {
 
                 //store first id
@@ -84,6 +98,7 @@ class NodeStatusAnalyzerController extends Controller
                 //store last id checked
                 $id_last_checked = $node->id;// keep overwritting to keep the last checked
 
+
                 /**
                  * get the data about the station to which this data belongs 
                  * station numbers have conflicts and so we shall use the txt value to determine the station from which the data is.
@@ -91,285 +106,145 @@ class NodeStatusAnalyzerController extends Controller
                 $nd_id = '';
                 $nd_name = '';
                 $stn_id = '';
-                $stn_no = '';
-                $stn_name = '';
-                $vinMaxVal = '';
-                $vinMinVal = '';
+                // $stn_name = '';// not used
+                // $vinMaxVal = ''; 
+                // $vinMinVal = '';
                 $vmcuMaxVal = '';
                 $vmcuMinVal = '';
+                $config_data = '';
+                $nd_data = '';// variable to hold the array keys
                 $yearNow = substr($date,0,4);
                 $yearRec = substr($node->date,0,4);
+
+                /* get correct config data */
+                if (stripos($node->TXT, 'gnd') !== false) {
+                    $config_data = $this->gnd_nd_data;
+                    $nd_data = $this->Handler->getGndName();
+                }
+                elseif (stripos($node->TXT, '2m') !== false) {
+                    $config_data = $this->twoM_nd_data;
+                    $nd_data = $this->Handler->get2mName();
+                }
+                elseif (stripos($node->TXT, '10m') !== false) {
+                    $config_data = $this->tenM_nd_data;
+                    $nd_data = $this->Handler->get10mName();
+                }
+                elseif (stripos($node->TXT, 'sink') !== false) {
+                    $config_data = $this->sink_nd_data;
+                    $nd_data = $this->Handler->getSinkName();
+                }
                 
-                $nodeInfo = $this->getNodeAndStationInfo($node->TXT);
-                // dd($nodeInfo);
+                /* if no configuration data was found then skip that record */
+                if ($config_data === '') {
+                    continue;
+                }
+                $nodeInfo = $this->Handler->getNodeConfigurations($config_data,$node->TXT);
                 $nd_id = $nodeInfo['nd_id'];
                 $nd_name = $nodeInfo['nd_name'];
                 $stn_id = $nodeInfo['stn_id'];
-                $stn_name = $this->getStationName($stn_id);
-                $vinMaxVal = $nodeInfo['vinMaxVal'];
-                $vinMinVal = $nodeInfo['vinMinVal'];
+                // $stn_name = $this->Handler->getStationName($stn_id); // not needed for now...
+                // $vinMaxVal = $nodeInfo['vinMaxVal'];
+                // $vinMinVal = $nodeInfo['vinMinVal'];
                 $vmcuMaxVal = $nodeInfo['vmcuMaxVal'];
                 $vmcuMinVal = $nodeInfo['vmcuMinVal'];
                 
-                // pick problem station configurations
-                $stn_prb_conf = $this->getStationProbConfigs($stn_id);
-                
-                // initialize variables with default values
-                $criticality = 'non-critical';// default criticality
-                $max_track_counter = 12;// default criticality
+                array_push($recorded_ids,$nd_id);
+                /* store the node id if it isn't there already. search strictly */
+                if ((array_search($nd_id, $available_nodes[$nd_data], true)) === false) {
+                    array_push($available_nodes[$nd_data], $nd_id);
+                }
                 
                 // ------------------------------------------------------------------------------
-                //check for nulls
+                //check for nulls                
                 if (empty($node->V_MCU)) {
                     // get problem
-                    $this->checkoutProblem($nd_id,$nd_name,$problemClassfications,"V_MCU","empty",$stn_prb_conf,$problem->id,$criticality,$max_track_counter);
-                    /* foreach ($problemClassfications as $problem) {
-                        // do a case insensitive check
-                        if (stripos($problem->problem_description, "V_MCU") !== false) {
-                            if (stripos($problem->problem_description, "empty") !== false) {
-                                
-                                if ($stn_prb_conf->isNotEmpty()) {
-                                    foreach ($stn_prb_conf as $prb_conf) {
-                                        if ($prb_conf->problem_id === $problem->id) {
-                                            $criticality = $prb_conf->criticality;
-                                            $max_track_counter = $prb_conf->max_track_counter;
-                                        }
-                                    }
-                                }
-                                $this->registerProblem($nd_id, $nd_name, $problem->id, $criticality, $max_track_counter);
-                                break;
-                            }
-                        }
-                    } */
+                    $this->Handler->checkoutProblem($nd_id,$nd_name,$this->problemClassfications,"Node","missing",$stn_prb_conf,$criticality,$max_track_counter,$stn_id,'addproblem');
+                   
+                }                     
+                elseif ($node->V_MCU < $vmcuMinVal) {// check for mins   
+
+                    $this->Handler->checkoutProblem($nd_id,$nd_name,$this->problemClassfications,"Node power","below range",$stn_prb_conf,$criticality,$max_track_counter,$stn_id,'addproblem');
+                    
                 }
-                if (empty($node->V_IN)) {
-                    $this->checkoutProblem($nd_id,$nd_name,$problemClassfications,"V_IN","empty",$stn_prb_conf,$problem->id,$criticality,$max_track_counter);
-                    // get problem
-                    /* foreach ($problemClassfications as $problem) {
-                        // do a case insensitive check
-                        if (stripos($problem->problem_description, "V_IN") !== false) {
-                            if (stripos($problem->problem_description, "empty") !== false) {
-                                
-                                if ($stn_prb_conf->isNotEmpty()) {
-                                    foreach ($stn_prb_conf as $prb_conf) {
-                                        if ($prb_conf->problem_id === $problem->id) {
-                                            $criticality = $prb_conf->criticality;
-                                            $max_track_counter = $prb_conf->max_track_counter;
-                                        }
-                                    }
-                                }
-                                $this->registerProblem($nd_id, $nd_name, $problem->id, $criticality, $max_track_counter);
-                                break;
-                            }
-                        }
-                    } */
+                /* check if there were no problems in which case we decrement the counter for the problem if they had been recorded before */
+                if (!empty($node->V_MCU)) {
+                    $this->Handler->checkoutProblem($nd_id,$nd_name,$this->problemClassfications,"Node","missing",$stn_prb_conf,$criticality,$max_track_counter,$stn_id,'removeproblem');
                 }
-                if (empty($node->date)) {
-                    $this->checkoutProblem($nd_id,$nd_name,$problemClassfications,"Date","empty",$stn_prb_conf,$problem->id,$criticality,$max_track_counter);
-                    // get problem
-                    /* foreach ($problemClassfications as $problem) {
-                        // do a case insensitive check
-                        if (stripos($problem->problem_description, "Date") !== false) {
-                            if (stripos($problem->problem_description, "empty") !== false) {
-                                
-                                if ($stn_prb_conf->isNotEmpty()) {
-                                    foreach ($stn_prb_conf as $prb_conf) {
-                                        if ($prb_conf->problem_id === $problem->id) {
-                                            $criticality = $prb_conf->criticality;
-                                            $max_track_counter = $prb_conf->max_track_counter;
-                                        }
-                                    }
-                                }
-                                $this->registerProblem($nd_id, $nd_name, $problem->id, $criticality, $max_track_counter);
-                                break;
-                            }
-                        }
-                    } */
-                }    
-                // check for mins        
-                if ($node->V_MCU < $vmcuMinVal) {
-                    $this->checkoutProblem($nd_id,$nd_name,$problemClassfications,"V_MCU","minimum",$stn_prb_conf,$problem->id,$criticality,$max_track_counter);
-                    // get problem
-                    /* foreach ($problemClassfications as $problem) {
-                        // do a case insensitive check
-                        if (stripos($problem->problem_description, "V_MCU") !== false) {
-                            if (stripos($problem->problem_description, "minimum") !== false) {
-                                
-                                if ($stn_prb_conf->isNotEmpty()) {
-                                    foreach ($stn_prb_conf as $prb_conf) {
-                                        if ($prb_conf->problem_id === $problem->id) {
-                                            $criticality = $prb_conf->criticality;
-                                            $max_track_counter = $prb_conf->max_track_counter;
-                                        }
-                                    }
-                                }
-                                $this->registerProblem($nd_id, $nd_name, $problem->id, $criticality, $max_track_counter);
-                                break;
-                            }
-                        }
-                    } */
+                elseif ($node->V_MCU >= $vmcuMinVal) {
+                    
+                    $this->Handler->checkoutProblem($nd_id,$nd_name,$this->problemClassfications,"Node power","below range",$stn_prb_conf,$criticality,$max_track_counter,$stn_id,'removeproblem');
                 }
-                if ($node->V_IN < $vinMinVal) {
-                    $this->checkoutProblem($nd_id,$nd_name,$problemClassfications,"V_IN","minimum",$stn_prb_conf,$problem->id,$criticality,$max_track_counter);
-                    // get problem
-                    /* foreach ($problemClassfications as $problem) {
-                        // do a case insensitive check
-                        if (stripos($problem->problem_description, "V_IN") !== false) {
-                            if (stripos($problem->problem_description, "minimum") !== false) {
-                                
-                                if ($stn_prb_conf->isNotEmpty()) {
-                                    foreach ($stn_prb_conf as $prb_conf) {
-                                        if ($prb_conf->problem_id === $problem->id) {
-                                            $criticality = $prb_conf->criticality;
-                                            $max_track_counter = $prb_conf->max_track_counter;
-                                        }
-                                    }
-                                }
-                                $this->registerProblem($nd_id, $nd_name, $problem->id, $criticality, $max_track_counter);
-                                break;
-                            }
-                        }
+                
+                /* if (empty($node->V_IN)) {
+
+                    $this->Handler->checkoutProblem($nd_id,$nd_name,$this->problemClassfications,"V_IN","empty",$stn_prb_conf,$criticality,$max_track_counter,$stn_id,'addproblem');
+                    
+                } */
+                /* if (empty($node->date)) { // this problem has been ignored for now
+
+                    $this->Handler->checkoutProblem($nd_id,$nd_name,$this->problemClassfications,"Date","missing",$stn_prb_conf,$criticality,$max_track_counter,$stn_id,'addproblem');
+                    
+                }   */ 
+                /* if ($node->V_IN < $vinMinVal) {
+                    
+                    $this->Handler->checkoutProblem($nd_id,$nd_name,$this->problemClassfications,"V_IN","minimum",$stn_prb_conf,$criticality,$max_track_counter,$stn_id,'addproblem');
+                    
+                } */
+                if (strcasecmp($yearRec, $yearNow) == 0) {// then dates are equal
+                    /* consider time diff */
+                    /* if () {
+                        $this->Handler->checkoutProblem($nd_id,$nd_name,$this->problemClassfications,"Date","incorrect",$stn_prb_conf,$criticality,$max_track_counter,$stn_id,'addproblem');
                     } */
+
                 }
-                if ($yearRec < $yearNow) {
-                    if ($yearRec === '1970') {
-                        $this->checkoutProblem($nd_id,$nd_name,$problemClassfications,"Date","1970",$stn_prb_conf,$problem->id,$criticality,$max_track_counter);
-                        // get problem
-                        /* foreach ($problemClassfications as $problem) {
-                            // do a case insensitive check
-                            if (stripos($problem->problem_description, "Date") !== false) {
-                                if (stripos($problem->problem_description, "1970") !== false) {
-                                    
-                                    if ($stn_prb_conf->isNotEmpty()) {
-                                        foreach ($stn_prb_conf as $prb_conf) {
-                                            if ($prb_conf->problem_id === $problem->id) {
-                                                $criticality = $prb_conf->criticality;
-                                                $max_track_counter = $prb_conf->max_track_counter;
-                                            }
-                                        }
-                                    }
-                                    $this->registerProblem($nd_id, $nd_name, $problem->id, $criticality, $max_track_counter);
-                                    break;
-                                }
-                            }
-                        } */
-                    }
-                    else{
-                        $this->checkoutProblem($nd_id,$nd_name,$problemClassfications,"Date","below",$stn_prb_conf,$problem->id,$criticality,$max_track_counter);
-                        // get problem
-                        /* foreach ($problemClassfications as $problem) {
-                            // do a case insensitive check
-                            if (stripos($problem->problem_description, "Date") !== false) {
-                                if (stripos($problem->problem_description, "below") !== false) {
-                                   
-                                    if ($stn_prb_conf->isNotEmpty()) {
-                                        foreach ($stn_prb_conf as $prb_conf) {
-                                            if ($prb_conf->problem_id === $problem->id) {
-                                                $criticality = $prb_conf->criticality;
-                                                $max_track_counter = $prb_conf->max_track_counter;
-                                            }
-                                        }
-                                    }
-                                    $this->registerProblem($nd_id, $nd_name, $problem->id, $criticality, $max_track_counter);
-                                    break;
-                                }
-                            }
-                        } */
-                    }
-                }            
+                else {
+                    $this->Handler->checkoutProblem($nd_id,$nd_name,$this->problemClassfications,"Date","incorrect",$stn_prb_conf,$criticality,$max_track_counter,$stn_id,'addproblem');
+                }        
                 // check for maxs        
-                if ($node->V_MCU > $vmcuMaxVal) {
-                    $this->checkoutProblem($nd_id,$nd_name,$problemClassfications,"V_MCU","maximum",$stn_prb_conf,$problem->id,$criticality,$max_track_counter);
-                    // get problem
-                    /* foreach ($problemClassfications as $problem) {
-                        // do a case insensitive check
-                        if (stripos($problem->problem_description, "V_MCU") !== false) {
-                            if (stripos($problem->problem_description, "maximum") !== false) {
-                                
-                                if ($stn_prb_conf->isNotEmpty()) {
-                                    foreach ($stn_prb_conf as $prb_conf) {
-                                        if ($prb_conf->problem_id === $problem->id) {
-                                            $criticality = $prb_conf->criticality;
-                                            $max_track_counter = $prb_conf->max_track_counter;
-                                        }
-                                    }
-                                }
-                                $this->registerProblem($nd_id, $nd_name, $problem->id, $criticality, $max_track_counter);
-                                break;
-                            }
-                        }
-                    } */
-                }
-                if ($node->V_IN > $vinMaxVal) {
-                    $this->checkoutProblem($nd_id,$nd_name,$problemClassfications,"V_IN","maximum",$stn_prb_conf,$problem->id,$criticality,$max_track_counter);
-                    // get problem
-                    /* foreach ($problemClassfications as $problem) {
-                        // do a case insensitive check
-                        if (stripos($problem->problem_description, "V_IN") !== false) {
-                            if (stripos($problem->problem_description, "maximum") !== false) {
-                               
-                                if ($stn_prb_conf->isNotEmpty()) {
-                                    foreach ($stn_prb_conf as $prb_conf) {
-                                        if ($prb_conf->problem_id === $problem->id) {
-                                            $criticality = $prb_conf->criticality;
-                                            $max_track_counter = $prb_conf->max_track_counter;
-                                        }
-                                    }
-                                }
-                                $this->registerProblem($nd_id, $nd_name, $problem->id, $criticality, $max_track_counter);
-                                break;
-                            }
-                        }
-                    } */
-                }
-                if ($yearRec > $yearNow) {
-                    $this->checkoutProblem($nd_id,$nd_name,$problemClassfications,"Date","above",$stn_prb_conf,$problem->id,$criticality,$max_track_counter);
-                    // get problem
-                    /* foreach ($problemClassfications as $problem) {
-                        // do a case insensitive check
-                        if (stripos($problem->problem_description, "Date") !== false) {
-                            if (stripos($problem->problem_description, "above") !== false) {
-                                
-                                if ($stn_prb_conf->isNotEmpty()) {
-                                    foreach ($stn_prb_conf as $prb_conf) {
-                                        if ($prb_conf->problem_id === $problem->id) {
-                                            $criticality = $prb_conf->criticality;
-                                            $max_track_counter = $prb_conf->max_track_counter;
-                                        }
-                                    }
-                                }
-                                $this->registerProblem($nd_id, $nd_name, $problem->id, $criticality, $max_track_counter);
-                                break;
-                            }
-                        }
-                    } */
-                } 
+                /* if ($node->V_MCU > $vmcuMaxVal) { // ignored for now
+
+                    $this->Handler->checkoutProblem($nd_id,$nd_name,$this->problemClassfications,"Node power","above range",$stn_prb_conf,$criticality,$max_track_counter,$stn_id,'addproblem');
+                    
+                } */
+                /* if ($node->V_IN > $vinMaxVal) {
+
+                    $this->Handler->checkoutProblem($nd_id,$nd_name,$this->problemClassfications,"V_IN","maximum",$stn_prb_conf,$criticality,$max_track_counter,$stn_id,'addproblem');
+                    
+                } */
+
+                /* check for packet drops */
+                /* if ($seq !== -1 && ( $seq !== ($node->SEQ + 1))) {
+                    // check if there was a reset
+                    if ($seq === 255 && $node->SEQ === 0) {
+                        # do nothing..
+                    }
+                    else { // note down problem
+                        $this->Handler->checkoutProblem($nd_id,$nd_name,$this->problemClassfications,"packets","dropped",$stn_prb_conf,$criticality,$max_track_counter,$stn_id,'addproblem');
+                    }
+                } */
                 
                 $counter++;
-                if ($counter == 500) { // check if max has been reached.
-                    break; // stop loop...
-                }
             }
 
-            dd($counter);
-            if ($counter == 500) { // check if max has been reached.
+            // dd(array_unique($recorded_ids));
+
+            // dd($available_nodes);
+
+            
+            $this->Handler->findMissingNodes($available_nodes,$criticality,$max_track_counter);
+
+            //dd($counter);
+            if ($counter === 500) { // check if max has been reached.
                 return false; // stop chucking...
             }
         });
 
-        /**
-         * analyzer_last_check
-         * Store the changes to the db
-         */
-        DB::table('analyzer_last_check')->insert(
-            ['id_first_checked'=>$id_first_checked,'id_last_checked'=>$id_last_checked]
-        );
+        // update last check table
+        $this->Handler->updateChecksTable('nodestatus',$id_first_checked,$id_last_checked);
 
-        //get data in problems table   problems
-        //source, source_id, criticality, classification_id, track_counter, status
-        $data = DB::table('problems')->get();
-
-        // return $data;
-        return view('layouts.analyzer', compact('data'));
+        //show data in the problems table
+        return redirect('/probTbData')->with([
+            'flash_message' => 'Analyzed '.($id_last_checked - $id_first_checked + 1).' records'
+        ]);
     }
 }

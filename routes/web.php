@@ -54,7 +54,11 @@ Route::group(['middleware' => 'auth'], function () {
         });
     });
 
-    Route::get('/analyze', 'NodeStatusAnalyzerController@analyze');
+    Route::get('/analyzeNodeStatus', 'NodeStatusAnalyzerController@analyze');
+
+    Route::get('/probTbData', 'ViewAnalyzerData@showProbTable');
+
+    Route::get('/analyzeObservationSlip', 'ObservationSlipAnalyzerController@analyze');
 
 });
 
