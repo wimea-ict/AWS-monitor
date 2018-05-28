@@ -25,7 +25,7 @@
             <div id="bg-default" class="panel-collapse collapse in">
                 <div class="portlet-body">
 
-                    <div id="vin_vmcu_gnd" style="height: 300px;"></div>
+                    <div id="vin_vmcu_gnd" style="height: 300px;"  class="text-center"></div>
 
                 </div>
             </div>
@@ -48,7 +48,7 @@
             <div id="bg-default" class="panel-collapse collapse in">
                 <div class="portlet-body">
 
-                    <div id="precipitation" style="height: 300px;"></div>
+                    <div id="precipitation" style="height: 300px;"  class="text-center"></div>
 
                 </div>
             </div>
@@ -72,7 +72,7 @@
             <div id="bg-default" class="panel-collapse collapse in">
                 <div class="portlet-body">
 
-                    <div id="soil_templature" style="height: 300px;"></div>
+                    <div id="soil_templature" style="height: 300px;"  class="text-center"></div>
 
                 </div>
             </div>
@@ -95,7 +95,7 @@
             <div id="bg-default" class="panel-collapse collapse in">
                 <div class="portlet-body">
 
-                    <div id="soil_moisture" style="height: 300px;"></div>
+                    <div id="soil_moisture" style="height: 300px;"  class="text-center"></div>
 
                 </div>
             </div>
@@ -115,29 +115,56 @@
 
         $(function() {
 
-            new Dygraph(document.getElementById("vin_vmcu_gnd"),
-              "<?=$vin_vmcu?>",
-              {
-                  labels: [ "x", "V_MCU", "V_IN" ]
-              });
+          var vin_vmcu="<?=$vin_vmcu?>";
+            if(vin_vmcu==""){
+                $("#vin_vmcu_gnd").html("<h4>No V_IN or V_MCU data Found</h4>");
 
+            }else{
+              new Dygraph(document.getElementById("vin_vmcu_gnd"),
+                vin_vmcu,
+                {
+                    labels: [ "x", "V_MCU", "V_IN" ]
+                });
+            }
+
+            var precipitation="<?=$precipitation?>";
+            if(precipitation==""){
+              $("#precipitation").html("<h4>No Precipitation data Found</h4>");
+
+            }else{
               new Dygraph(document.getElementById("precipitation"),
-              "<?=$precipitation?>",
+              precipitation,
               {
                   labels: [ "x", "Precipitation"]
               });
+            }
 
-              new Dygraph(document.getElementById("soil_templature"),
-              "<?=$soil_templature?>",
-              {
-                  labels: [ "x", "soil_templature"]
-              });
+            var soil_templature="<?=$soil_templature?>";
 
-              new Dygraph(document.getElementById("soil_moisture"),
-              "<?=$soil_moisture?>",
-              {
-                  labels: [ "x", "soil_moisture"]
-              });
+              if(soil_templature==""){
+                $("#soil_templature").html("<h4>No Soil Templature data Found</h4>");
+
+              }else{
+                new Dygraph(document.getElementById("soil_templature"),
+                soil_templature,
+                {
+                    labels: [ "x", "soil_templature"]
+                });
+              }
+
+              var soil_moisture="<?=$soil_moisture?>";
+              if(soil_moisture==""){
+
+                $("#soil_moisture").html("<h4>No Soil Moisture data Found</h4>");
+
+              }else{
+                  new Dygraph(document.getElementById("soil_moisture"),
+                  soil_moisture,
+                  {
+                      labels: [ "x", "soil_moisture"]
+                  });
+              }
+
 
             $('#station_id').find('option[selected="selected"]').each(function(){
                 $(this).prop('selected', true);

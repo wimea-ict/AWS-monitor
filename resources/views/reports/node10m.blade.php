@@ -29,7 +29,7 @@
             <div id="bg-default" class="panel-collapse collapse in">
                 <div class="portlet-body">
 
-                    <div id="vin_vmcu_10m" style="height: 300px;"></div>
+                    <div id="vin_vmcu_10m" style="height: 300px;"  class="text-center"></div>
 
                 </div>
             </div>
@@ -52,7 +52,7 @@
             <div id="bg-default" class="panel-collapse collapse in">
                 <div class="portlet-body">
 
-                    <div id="insulation_sensor" style="height: 300px;"></div>
+                    <div id="insulation_sensor" style="height: 300px;"  class="text-center"></div>
 
                 </div>
             </div>
@@ -76,7 +76,7 @@
             <div id="bg-default" class="panel-collapse collapse in">
                 <div class="portlet-body">
 
-                    <div id="wind_direction_sensor" style="height: 300px;"></div>
+                    <div id="wind_direction_sensor" style="height: 300px;"  class="text-center"></div>
 
                 </div>
             </div>
@@ -99,7 +99,7 @@
             <div id="bg-default" class="panel-collapse collapse in">
                 <div class="portlet-body">
 
-                    <div id="windspeed_sensor" style="height: 300px;"></div>
+                    <div id="windspeed_sensor" style="height: 300px;"  class="text-center"></div>
 
                 </div>
             </div>
@@ -120,30 +120,58 @@
 
         $(function() {
 
-            new Dygraph(document.getElementById("vin_vmcu_10m"),
-              "<?=$vin_vmcu_10m?>",
-              {
-                  labels: [ "x", "V_MCU", "V_IN" ]
-              });
+          var vin_vmcu_10m="<?=$vin_vmcu_10m?>";
 
-            new Dygraph(document.getElementById("insulation_sensor"),
-              "<?=$insulation_sensor?>",
-              {
-                  labels: [ "x", "insulation"]
-              });
+            if(vin_vmcu_10m==""){
+              $("#vin_vmcu_10m").html("<h4>No V_IV or V_MCU data Found</h4>");
+
+            }else{
+              new Dygraph(document.getElementById("vin_vmcu_10m"),
+                vin_vmcu_10m,
+                {
+                    labels: [ "x", "V_MCU", "V_IN" ]
+                });
+            }
+
+            var insulation_sensor="<?=$insulation_sensor?>";
+
+            if(insulation_sensor==""){
+              $("#insulation_sensor").html("<h4>No Insulation Sensor data Found</h4>");
+
+            }else{
+              new Dygraph(document.getElementById("insulation_sensor"),
+                insulation_sensor,
+                {
+                    labels: [ "x", "insulation"]
+                });
+            }
 
 
+            var windspeed_sens="<?=$windspeed_sensor?>";
+            if(windspeed_sens==""){
+              $("#windspeed_sensor").html("<h4>No Windspeed Sensor data Found</h4>");
+
+            }else{
               new Dygraph(document.getElementById("windspeed_sensor"),
-              "<?=$windspeed_sensor?>",
+              windspeed_sens,
               {
                   labels: [ "x", "windspeed"]
               });
+            }
 
+            var wind_direction="<?=$wind_direction_sensor?>";
+
+            if(wind_direction==""){
+              $("#wind_direction_sensor").html("<h4>No Wind Direction Sensor data Found</h4>");
+
+            }else{
               new Dygraph(document.getElementById("wind_direction_sensor"),
-              "<?=$wind_direction_sensor?>",
+              wind_direction,
               {
                   labels: [ "x", "wind_direction"]
               });
+            }
+
 
 
               $('#station_id').find('option[selected="selected"]').each(function(){
