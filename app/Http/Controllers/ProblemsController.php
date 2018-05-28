@@ -17,7 +17,7 @@ class ProblemsController extends Controller
      */
     public function index()
     {
-        $stations = Station::all()->toArray();
+        $stations = Station::where('StationCategory', 'aws')->get();
         $problemConfigurationvalues = problemConfigurations::all()->toArray();
         //$stations = Station::whereIn('station_id', $problemConfigurationvalues)->get();
         return view('layouts.editProblemConfigurations', compact('stations','problemConfigurationvalues'));
@@ -146,11 +146,23 @@ class ProblemsController extends Controller
             $incorrect_sensor_values->criticality= $request->get('iscriticallity');
             $incorrect_sensor_values->reporting_time_interval= $request->get('isprobRptTime');
         
-            $incorrect_sensor_values->save(); 
+            $incorrect_sensor_values->save();
+            
+        $packet_drop_values = problemConfigurations::where('station_id',$id)
+                                    ->where('problem_id', 9)
+                                    ->first();      
+            $packet_drop_values->max_track_counter = $request->get('pdoccurencesConsider');
+            $packet_drop_values->report_method =$request->get('pdrptmethod');
+            $packet_drop_values->criticality= $request->get('pdcriticallity');
+            $packet_drop_values->reporting_time_interval= $request->get('pdprobRptTime');
         
+            $packet_drop_values->save();
         
+            return redirect('/editProblemConfigurations');
         }
-        return redirect('/editProblemConfigurations');
+        else{
+        return redirect('/addstation');
+        }
     }
 
     /**

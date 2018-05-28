@@ -14,7 +14,7 @@ class Station extends Model  {
     protected $table = 'stations';
     protected $primaryKey = 'station_id';
     // protected $timestamps = false;
-    const CREATED_AT = 'CreationDate';
+    const CREATED_AT = 'Creation_Date';
     const UPDATED_AT = 'UpdateDate';
 
 
@@ -23,7 +23,7 @@ class Station extends Model  {
      *
      * @var array
      */
-    protected $fillable = ['station_id', 'StationName', 'StationNumber', 'StationRegNumber', 'Location', 'Indicator', 'StationRegion', 'Country', 'Latitude', 'Longitude', 'Altitude', 'StationStatus', 'StationType', 'Opened', 'Closed', 'SubmittedBy', 'CreationDate','UpdateDate'];
+    protected $fillable = ['station_id', 'StationName', 'StationNumber', 'StationRegNumber', 'Location', 'Indicator', 'StationRegion', 'Country', 'Latitude', 'Longitude', 'Altitude', 'StationStatus', 'StationType', 'Opened', 'Closed', 'SubmittedBy', 'Creation_Date','UpdateDate','StationCategory'];
 
     /**
      * The attributes excluded from the model's JSON form.

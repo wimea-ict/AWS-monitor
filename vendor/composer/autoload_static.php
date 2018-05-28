@@ -5286,6 +5286,10 @@ class ComposerStaticInit87b9326ddaef55773641bf54eaf4d0ef
         'station\\Http\\Controllers\\StationsController' => __DIR__ . '/../..' . '/app/Http/Controllers/StationsController.php',
         'station\\Http\\Controllers\\TenMNodeController' => __DIR__ . '/../..' . '/app/Http/Controllers/TenMNodeController.php',
         'station\\Http\\Controllers\\TwoMNodeController' => __DIR__ . '/../..' . '/app/Http/Controllers/TwoMNodeController.php',
+<<<<<<< HEAD
+=======
+        'station\\Http\\Controllers\\showNodeStatusController' => __DIR__ . '/../..' . '/app/Http/Controllers/showNodeStatusController.php',
+>>>>>>> 28ef8844525fa7374ccc84b2a07a5471d3333006
         'station\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'station\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
         'station\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
@@ -5298,6 +5302,10 @@ class ComposerStaticInit87b9326ddaef55773641bf54eaf4d0ef
         'station\\Observationslip' => __DIR__ . '/../..' . '/app/ObservationSlip.php',
         'station\\PotentialProblem' => __DIR__ . '/../..' . '/app/PotentialProblem.php',
         'station\\ProblemTracker' => __DIR__ . '/../..' . '/app/ProblemTracker.php',
+<<<<<<< HEAD
+=======
+        'station\\Problems' => __DIR__ . '/../..' . '/app/Problems.php',
+>>>>>>> 28ef8844525fa7374ccc84b2a07a5471d3333006
         'station\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'station\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'station\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',

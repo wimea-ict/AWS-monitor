@@ -20,7 +20,7 @@ class GroundNodeController extends Controller
      */
     public function index()
     {
-        $stations = Station::all()->toArray();
+        $stations = Station::where('StationCategory', 'aws')->get();
         $groundNodes = GroundNode::all()->toArray();
 
 
@@ -226,7 +226,7 @@ class GroundNodeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
-    {
+    { $va1gnd = explode(',',$request->get('smidentifier_used'));
         if($request->get('gndnode_id')!= null){
             $id=$request->get('gndnode_id');
             $groundNode = GroundNode::where('node_id',$id)->first();
@@ -247,7 +247,7 @@ class GroundNodeController extends Controller
             $groundNode->v_mcu_max_value = $request->get('gdv_mcu_max_value');
             $groundNode->v_mcu_min_value = $request->get('gdv_mcu_min_value');
             $groundNode->v_mcu_gnd  = $request->get('gdv_mcu_label');
-            $groundNode->v_a1_gnd= $request->get('smidentifier_used');
+            $groundNode->v_a1_gnd= $va1gnd[0];
             $groundNode->v_a2_gnd =$request->get('v_a2');
             $groundNode->ps_gnd =$request->get('groundps');
             $groundNode->node_status= $this->getStatus($request,'gndnode_status');

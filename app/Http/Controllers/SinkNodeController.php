@@ -20,7 +20,7 @@ class SinkNodeController extends Controller
      */
     public function index()
     {
-        $stations = Station::all()->toArray();
+        $stations = Station::where('StationCategory', 'aws')->get();
         $sinkNodes = SinkNode::all()->toArray();
         $pressuresensors = Sensor::where('node_type','sinkNode')
                                     ->where('parameter_read', 'pressure')

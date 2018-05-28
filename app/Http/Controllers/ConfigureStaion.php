@@ -15,7 +15,7 @@ class ConfigureStaion extends Controller
      */
     public function index()
     {
-        $stations = Station::all()->toArray();
+        $stations = Station::where('StationCategory', 'aws')->get();
         return view('layouts.configurestation', compact('stations'));
     }
 

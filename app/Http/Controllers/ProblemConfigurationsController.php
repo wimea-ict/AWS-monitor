@@ -16,7 +16,7 @@ class ProblemConfigurationsController extends Controller
     public function index()
     {
         
-        $stations = Station::all()->toArray();
+        $stations = Station::where('StationCategory', 'aws')->get();
         return view('layouts.configureProblems', compact('stations'));
     }
 
@@ -120,6 +120,17 @@ class ProblemConfigurationsController extends Controller
         
         ]);
         $incorrectSensorValuesconfiguration->save();
+
+        $packetDroppingProblems = new problemConfigurations([
+            'station_id'=> $station['station_id'],
+            'problem_id'=>9,
+            'max_track_counter'=>$request->get('pdoccurencesConsider'),
+            'report_method'=>$request->get('pdrptmethod'),
+            'criticality'=>$request->get('pdcriticallity'),
+            'reporting_time_interval'=>$request->get('pdprobRptTime'),
+        
+        ]);
+        $packetDroppingProblems->save();
 
         return redirect('/configureproblem');
 

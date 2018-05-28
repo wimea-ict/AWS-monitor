@@ -61,7 +61,7 @@
                                                     <div id="collapsethirteen-2" class="panel-collapse collapse"> 
                                                         <div class="panel-body">
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="sinktxt_value">TXT value</label>
+                                                                                <label class="col-lg-2 control-label " for="sinktxt_value">Node name</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="sinktxt_value" name="sinktxt_value" type="text" class="form-control" required>
                                                                                 </div>

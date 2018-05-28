@@ -68,7 +68,7 @@
                                                 </div>
                                             </div>  --}}
                                             
-                                            <div class="form-group clearfix">
+                                            {{--<div class="form-group clearfix">
                                                 <label class="col-lg-2 control-label " for="dateopened">Date opened</label>
                                                 <div class="col-lg-4">
                                                     <div class="input-group">
@@ -83,12 +83,21 @@
                                                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>--}}
                                             <div class="form-group clearfix">
                                                 <label class="col-lg-2 control-label " for="station_type">station Type</label>
                                                 <div class="col-lg-4">
-                                                    <input id="station_type" name="station_type" type="text" class="form-control" required>
+                                                   <select class="form-control"         name="station_type">
+                                               
+                                                    <option value="synoptic">Synoptic</option>
+                                                    <option value="Agrometrological">Agrometrological</option>
+                                                    <option value="Hydrometrological">Hydrometrological</option>
+                                                    <option value="Rainfall">Rainfall</option>
+                                                    <option value="Climatorogical">Climatorogical</option>
+                                                    </select>
                                                 </div>
+
+                                                 
                                             
                                                 <label class="col-lg-2 control-label " for="station_type">Country</label>
                                                 <div class="col-lg-4">
@@ -104,7 +113,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 col-lg-offset-2 control-label" for="10name">Node name</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input class="form-control" id="10name" name="10name" type="text" value="{{ $stationdetails['10m_node']['name']}}" readonly>
+                                                                                <input id="10txt_value" name="10txt_value" type="text" class="form-control" required>
                                                                                 </div>
                                                                                 <div class="col-sm-4 control-label text-right">
                                                                                     <label class="switch">
@@ -122,21 +131,21 @@
                                                 <div class="panel panel-default"> 
                                                     <div class="panel-heading"> 
                                                         <h4 class="panel-title"> 
-                                                            <a data-toggle="collapse" data-parent="#accordion-test-2" href="#collapsefour-2" aria-expanded="true" class="collapsed" >
+                                                            <a data-toggle="collapse" data-parent="#accordion-test-2" href="#collapsefour-2" aria-expanded="false" class="collapsed" >
                                                                 Node Status Configurations
 
                                                                </a> 
                                                         </h4> 
                                                     </div> 
-                                                    <div id="collapsefour-2" class="panel-collapse collapse in"> 
+                                                    <div id="collapsefour-2" class="panel-collapse collapse"> 
                                                         <div class="panel-body">
-                                                                            <div class="form-group clearfix">
+                                                                            {{-- <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 col-lg-offset-3 control-label " for="10txt_value">TXT value</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="10txt_value" name="10txt_value" type="text" class="form-control" required>
                                                                                 </div>
                                                                                 
-                                                                            </div>
+                                                                            </div> --}}
                              
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="10vin_label">v in label</label>
@@ -237,7 +246,7 @@
                                                     <div class="panel-heading"> 
                                                         <h4 class="panel-title"> 
                                                             <a data-toggle="collapse" data-parent="#accordion-test-2" href="#collapseOne-2" aria-expanded="false" class="collapsed">
-                                                                Insulation sensor
+                                                                Insolation sensor
                                                                 
                                                             </a> 
                                                         </h4> 
@@ -245,7 +254,7 @@
                                                     <div id="collapseOne-2" class="panel-collapse collapse"> 
                                                         <div class="panel-body">
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="10rptTime">Report time interval</label>
+                                                                                <label class="col-lg-2 control-label " for="10rptTime">Report time interval (mins)</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="10rptTime" name="10rptTime" type="text" class="form-control" value="{{ $stationdetails['insulation_sensor']['rpt_intvl']}}" required>
                                                                                 </div>
@@ -296,7 +305,7 @@
                                                     <div id="collapseTwo-2" class="panel-collapse collapse"> 
                                                         <div class="panel-body">
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="wsrptTime">Report time interval</label>
+                                                                                <label class="col-lg-2 control-label " for="wsrptTime">Report time interval (mins)</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="wsrptTime" name="wsrptTime" type="text" class="form-control" value="{{ $stationdetails['wind_speed_semsor']['rpt_intvl']}}" required>
                                                                                 </div>
@@ -343,7 +352,7 @@
                                                     <div id="collapseThree-2" class="panel-collapse collapse"> 
                                                         <div class="panel-body">
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="wdrptTime">Report time interval</label>
+                                                                                <label class="col-lg-2 control-label " for="wdrptTime">Report time interval (mins)</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="wdrptTime" name="wdrptTime" type="text" class="form-control" value="{{ $stationdetails['wind_direction_semsor']['rpt_intvl']}}" required>
                                                                                 </div>
@@ -391,7 +400,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 col-lg-offset-2 control-label" for="10name">Node name</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input class="form-control" id="2mname" name="2mname" type="text" value="{{ $stationdetails['2m_node']['name']}}" readonly>
+                                                                                <input id="2txt_value" name="2txt_value" type="text" class="form-control" required>
                                                                                 </div>
                                                                                 <div class="col-sm-4 control-label text-right">
                                                                                     <label class="switch">
@@ -411,20 +420,20 @@
                                                 <div class="panel panel-default"> 
                                                     <div class="panel-heading"> 
                                                         <h4 class="panel-title"> 
-                                                            <a data-toggle="collapse" data-parent="#accordion-test-5" href="#collapsesix-2" aria-expanded="true" class="collapsed" >
+                                                            <a data-toggle="collapse" data-parent="#accordion-test-5" href="#collapsesix-2" aria-expanded="false" class="collapsed" >
                                                                 Node Status Configurations
 
                                                                </a> 
                                                         </h4> 
                                                     </div> 
-                                                    <div id="collapsesix-2" class="panel-collapse collapse in"> 
+                                                    <div id="collapsesix-2" class="panel-collapse collapse"> 
                                                         <div class="panel-body">
-                                                                            <div class="form-group clearfix">
+                                                                            {{-- <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 col-lg-offset-3 control-label " for="2txt_value">TXT value</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="2txt_value" name="2txt_value" type="text" class="form-control" required>
                                                                                 </div>
-                                                                            </div>
+                                                                            </div> --}}
                                                                                 
                              
                                                                             <div class="form-group clearfix">
@@ -536,7 +545,7 @@
                                                     <div id="collapseseven-2" class="panel-collapse collapse"> 
                                                         <div class="panel-body">
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="rhrptTime">Report time interval</label>
+                                                                                <label class="col-lg-2 control-label " for="rhrptTime">Report time interval (mins)</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="rhrptTime" name="rhrptTime" type="text" class="form-control" value="{{ $stationdetails['wind_speed_semsor']['rpt_intvl']}}" required>
                                                                                 </div>
@@ -586,7 +595,7 @@
                                                         <div class="panel-body">
                                                         <div class="form-group clearfix">
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="tsrptTime">Report time interval</label>
+                                                                                <label class="col-lg-2 control-label " for="tsrptTime">Report time interval (mins)</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="tsrptTime" name="tsrptTime" type="text" class="form-control" value="{{ $stationdetails['Temp_semsor']['rpt_intvl']}}" required>
                                                                                 </div>
@@ -632,7 +641,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 col-lg-offset-2 control-label" for="10name">Node name</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input class="form-control" id="gdname" name="gdname" type="text" value="{{ $stationdetails['ground_node']['name']}}">
+                                                                                <input id="gndtxt_value" name="gndtxt_value" type="text" class="form-control" required>
                                                                                 </div>
                                                                                 <div class="col-sm-4 control-label text-center">
                                                                                     <label class="switch">
@@ -647,20 +656,20 @@
                                             <div class="panel panel-default"> 
                                                     <div class="panel-heading"> 
                                                         <h4 class="panel-title"> 
-                                                            <a data-toggle="collapse" data-parent="#accordion-test-4" href="#collapsenight-2" aria-expanded="true" class="collapsed" >
+                                                            <a data-toggle="collapse" data-parent="#accordion-test-4" href="#collapsenight-2" aria-expanded="false" class="collapsed" >
                                                                 Node Status Configurations
 
                                                                </a> 
                                                         </h4> 
                                                     </div> 
-                                                    <div id="collapsenight-2" class="panel-collapse collapse in"> 
+                                                    <div id="collapsenight-2" class="panel-collapse collapse"> 
                                                         <div class="panel-body">
-                                                                            <div class="form-group clearfix">
+                                                                            {{-- <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 col-lg-offset-3 control-label " for="2txt_value">TXT value</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="gndtxt_value" name="gndtxt_value" type="text" class="form-control" required>
                                                                                 </div>
-                                                                            </div>
+                                                                            </div> --}}
                              
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="gndvin_label">vin label</label>
@@ -799,7 +808,7 @@
                                                     <div class="panel-heading"> 
                                                         <h4 class="panel-title"> 
                                                             <a data-toggle="collapse" data-parent="#accordion-test-4" href="#collapseten-2" aria-expanded="false" class="collapsed">
-                                                                Precipitation
+                                                                Rainfall sensor
                                                                 
                                                             </a> 
                                                         </h4> 
@@ -807,7 +816,7 @@
                                                     <div id="collapseten-2" class="panel-collapse collapse"> 
                                                         <div class="panel-body">
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="pprptTime">Report time interval</label>
+                                                                                <label class="col-lg-2 control-label " for="pprptTime">Report time interval (mins)</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="pprptTime" name="pprptTime" type="text" class="form-control" value="{{ $stationdetails['preciptation_semsor']['rpt_intvl']}}" required>
                                                                                 </div>
@@ -846,7 +855,7 @@
                                                     <div class="panel-heading"> 
                                                         <h4 class="panel-title"> 
                                                             <a data-toggle="collapse" data-parent="#accordion-test-4" href="#collapseeleven-2" class="collapsed" aria-expanded="false">
-                                                                Soil temperature
+                                                                Soil temperature sensor
                                                             
                                                             </a> 
                                                         </h4> 
@@ -856,7 +865,7 @@
 
                                                         <div class="form-group clearfix">
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="strptTime">Report time interval</label>
+                                                                                <label class="col-lg-2 control-label " for="strptTime">Report time interval (mins)</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="strptTime" name="strptTime" type="text" class="form-control" value="{{ $stationdetails['soil_temp_semsor']['rpt_intvl']}}" required>
                                                                                 </div>
@@ -907,7 +916,7 @@
                                                                                     
                                                                             </div>
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="smrptTime">Report time interval</label>
+                                                                                <label class="col-lg-2 control-label " for="smrptTime">Report time interval (mins)</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="smrptTime" name="smrptTime" type="text" class="form-control" value="{{ $stationdetails['soil_moisture_semsor']['rpt_intvl']}}" required>
                                                                                 </div>
@@ -951,7 +960,7 @@
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 col-lg-offset-2 control-label" for="10name">Node name</label>
                                                                                 <div class="col-lg-4">
-                                                                                    <input class="form-control" id="sinkname" name="sinkname" type="text" value="{{ $stationdetails['sink_node']['name']}}">
+                                                                                    <input id="sinktxt_value" name="sinktxt_value" type="text" class="form-control"  required>
                                                                                 </div>
                                                                                 <div class="col-sm-4 control-label text-center">
                                                                                     <label class="switch">
@@ -971,20 +980,20 @@
                                             <div class="panel panel-default"> 
                                                     <div class="panel-heading"> 
                                                         <h4 class="panel-title"> 
-                                                            <a data-toggle="collapse" data-parent="#accordion-test-3" href="#collapsethirteen-2" aria-expanded="true" class="collapsed" >
+                                                            <a data-toggle="collapse" data-parent="#accordion-test-3" href="#collapsethirteen-2" aria-expanded="false" class="collapsed" >
                                                                 Node Status Configurations
 
                                                                </a> 
                                                         </h4> 
                                                     </div> 
-                                                    <div id="collapsethirteen-2" class="panel-collapse collapse in"> 
+                                                    <div id="collapsethirteen-2" class="panel-collapse collapse"> 
                                                         <div class="panel-body">
-                                                                            <div class="form-group clearfix">
+                                                                            {{-- <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 col-lg-offset-3 control-label " for="2txt_value">TXT value</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="sinktxt_value" name="sinktxt_value" type="text" class="form-control"  required>
                                                                                 </div>    
-                                                                            </div>
+                                                                            </div> --}}
                              
                                                                             <div class="form-group clearfix">
                                                                                 <label class="col-lg-2 control-label " for="sinkvin_label">v_in label</label>
@@ -1104,7 +1113,7 @@
                                                     <div id="collapsefourteen-2" class="panel-collapse collapse"> 
                                                         <div class="panel-body">
                                                                             <div class="form-group clearfix">
-                                                                                <label class="col-lg-2 control-label " for="psrptTime">Report time interval</label>
+                                                                                <label class="col-lg-2 control-label " for="psrptTime">Report time interval (mins)</label>
                                                                                 <div class="col-lg-4">
                                                                                     <input id="psrptTime" name="psrptTime" type="text" class="form-control" value="{{ $stationdetails['pressure_semsor']['rpt_intvl']}}" required>
                                                                                 </div>

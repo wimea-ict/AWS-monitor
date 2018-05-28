@@ -19,7 +19,7 @@ class TwoMNodeController extends Controller
      */
     public function index()
     {
-        $stations = Station::all()->toArray();
+        $stations = Station::where('StationCategory', 'aws')->get();
         $twoMeterNodes = TwoMeterNode::all()->toArray();
         $relativeHumiditysensors = Sensor::where('node_type','twoMeterNode')
                                     ->where('parameter_read', 'relative humidity')
