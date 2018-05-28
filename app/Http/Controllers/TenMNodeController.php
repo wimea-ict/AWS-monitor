@@ -143,7 +143,7 @@ class TenMNodeController extends Controller
                         ->latest('CreationDate')
                         ->take(1000)
                         ->get();
-
+                        
       $wind_direction_data="";
 
       foreach($wind_direction as $wind_d){
@@ -217,7 +217,7 @@ class TenMNodeController extends Controller
     {
         $vadArray = explode(',', $request->get('10identifier_used'));
         $va1Array = explode(',', $request->get('wdidentifier_used'));
-        
+
         if($request->get('10node_id')!= null){
             $id=$request->get('10node_id');
             $TenmNode = TenMeterNode::where('node_id',$id)->first();
@@ -244,7 +244,7 @@ class TenMNodeController extends Controller
             $TenmNode->v_a3_10m= 'V_A3';
             $TenmNode->v_ad1_10m= $vadArray[0];
             $TenmNode->v_ad2_10m= $vadArray[1];
-            
+
             $TenmNode->node_status= $this->getStatus($request,'10mnode_status');
             $TenmNode->txt_10m_value= $request->get('10txt_value');
 

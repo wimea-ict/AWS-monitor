@@ -4,22 +4,22 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit87b9326ddaef55773641bf54eaf4d0ef
+class ComposerStaticInit526830f57b1f62cd42a941d3f24e5673
 {
     public static $files = array (
+        '1d1b89d124cc9cb8219922c9d5569199' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
         '023d27dca8066ef29e6739335ea73bad' => __DIR__ . '/..' . '/symfony/polyfill-php70/bootstrap.php',
         '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
-        '1d1b89d124cc9cb8219922c9d5569199' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
-        'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
-        '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
+        'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         'e7223560d890eab89cda23685e711e2c' => __DIR__ . '/..' . '/psy/psysh/src/Psy/functions.php',
-        '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
+        '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
+        '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -126,8 +126,8 @@ class ComposerStaticInit87b9326ddaef55773641bf54eaf4d0ef
         'phpDocumentor\\Reflection\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
-            1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
-            2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+            1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+            2 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
         ),
         'XdgBaseDir\\' => 
         array (
@@ -5286,10 +5286,7 @@ class ComposerStaticInit87b9326ddaef55773641bf54eaf4d0ef
         'station\\Http\\Controllers\\StationsController' => __DIR__ . '/../..' . '/app/Http/Controllers/StationsController.php',
         'station\\Http\\Controllers\\TenMNodeController' => __DIR__ . '/../..' . '/app/Http/Controllers/TenMNodeController.php',
         'station\\Http\\Controllers\\TwoMNodeController' => __DIR__ . '/../..' . '/app/Http/Controllers/TwoMNodeController.php',
-<<<<<<< HEAD
-=======
         'station\\Http\\Controllers\\showNodeStatusController' => __DIR__ . '/../..' . '/app/Http/Controllers/showNodeStatusController.php',
->>>>>>> 28ef8844525fa7374ccc84b2a07a5471d3333006
         'station\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'station\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
         'station\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
@@ -5302,10 +5299,7 @@ class ComposerStaticInit87b9326ddaef55773641bf54eaf4d0ef
         'station\\Observationslip' => __DIR__ . '/../..' . '/app/ObservationSlip.php',
         'station\\PotentialProblem' => __DIR__ . '/../..' . '/app/PotentialProblem.php',
         'station\\ProblemTracker' => __DIR__ . '/../..' . '/app/ProblemTracker.php',
-<<<<<<< HEAD
-=======
         'station\\Problems' => __DIR__ . '/../..' . '/app/Problems.php',
->>>>>>> 28ef8844525fa7374ccc84b2a07a5471d3333006
         'station\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'station\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'station\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
@@ -5325,10 +5319,10 @@ class ComposerStaticInit87b9326ddaef55773641bf54eaf4d0ef
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit87b9326ddaef55773641bf54eaf4d0ef::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit87b9326ddaef55773641bf54eaf4d0ef::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit87b9326ddaef55773641bf54eaf4d0ef::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit87b9326ddaef55773641bf54eaf4d0ef::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit526830f57b1f62cd42a941d3f24e5673::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit526830f57b1f62cd42a941d3f24e5673::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit526830f57b1f62cd42a941d3f24e5673::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit526830f57b1f62cd42a941d3f24e5673::$classMap;
 
         }, null, ClassLoader::class);
     }

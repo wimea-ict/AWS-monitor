@@ -4949,10 +4949,7 @@ return array(
     'station\\Http\\Controllers\\StationsController' => $baseDir . '/app/Http/Controllers/StationsController.php',
     'station\\Http\\Controllers\\TenMNodeController' => $baseDir . '/app/Http/Controllers/TenMNodeController.php',
     'station\\Http\\Controllers\\TwoMNodeController' => $baseDir . '/app/Http/Controllers/TwoMNodeController.php',
-<<<<<<< HEAD
-=======
     'station\\Http\\Controllers\\showNodeStatusController' => $baseDir . '/app/Http/Controllers/showNodeStatusController.php',
->>>>>>> 28ef8844525fa7374ccc84b2a07a5471d3333006
     'station\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'station\\Http\\Middleware\\EncryptCookies' => $baseDir . '/app/Http/Middleware/EncryptCookies.php',
     'station\\Http\\Middleware\\RedirectIfAuthenticated' => $baseDir . '/app/Http/Middleware/RedirectIfAuthenticated.php',
@@ -4965,10 +4962,7 @@ return array(
     'station\\Observationslip' => $baseDir . '/app/ObservationSlip.php',
     'station\\PotentialProblem' => $baseDir . '/app/PotentialProblem.php',
     'station\\ProblemTracker' => $baseDir . '/app/ProblemTracker.php',
-<<<<<<< HEAD
-=======
     'station\\Problems' => $baseDir . '/app/Problems.php',
->>>>>>> 28ef8844525fa7374ccc84b2a07a5471d3333006
     'station\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'station\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
     'station\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',
