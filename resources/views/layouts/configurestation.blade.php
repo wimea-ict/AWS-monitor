@@ -98,11 +98,11 @@
                                             <div class="form-group clearfix">
                                                 <label class="col-lg-2 control-label " for="longitude">Longitude</label>
                                                 <div class="col-lg-4">
-                                                    <input id="longitude" name="longitude" type="number" class="form-control" required>
+                                                    <input id="longitude" name="longitude" type="text" class="form-control" required>
                                                 </div>
                                                 <label class="col-lg-2 control-label " for="latitude">Latitude</label>
                                                 <div class="col-lg-4">
-                                                    <input id="latitude" name="latitude" type="number" class="form-control" required>
+                                                    <input id="latitude" name="latitude" type="text" class="form-control" required>
                                                 </div>
                                             </div>
                                             {{--  <div class="form-group clearfix">
