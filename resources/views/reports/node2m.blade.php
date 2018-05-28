@@ -95,6 +95,10 @@
     {{--  <script src="assets/morris/node2mcharts.js"></script>  --}}
     <script>
 
+    $( "#station_id" ).change(function() {
+          $("#report_form").submit()
+    });
+
         $(function() {
 
              new Dygraph(document.getElementById("vin_vmcu_2m"),

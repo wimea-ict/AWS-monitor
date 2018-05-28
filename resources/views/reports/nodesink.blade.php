@@ -65,7 +65,12 @@
 @section('page_specific_script_files')
     {{--  <script src="assets/morris/nodesinkcharts.js"></script>  --}}
     <script>
-        $(function() {
+
+    $( "#station_id" ).change(function() {
+          $("#report_form").submit()
+    });
+
+    $(function() {
 
           /*
             new Dygraph(document.getElementById("test"),
@@ -73,8 +78,6 @@
               2009/08/12 13:30:20,150,201\n",
               { labels: [ "Date", "Series1", "Series2" ] });
           */
-
-
 
             new Dygraph(document.getElementById("vin_vmcu_sink"),
               "<?=$vin_vmcu_sink?>",

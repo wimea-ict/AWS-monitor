@@ -32,7 +32,7 @@ class SinkNodeController extends Controller
 
     public function report1(){
         $data["action"]=URL::to('reportsSink');
-        $data["stations"]=Station::all();
+        $data["stations"]=Station::all()->where("stationCategory","aws");
         $data["heading"]="Sink Node Reports";
 
         $data["vin_vmcu_sink"]="";
@@ -41,12 +41,11 @@ class SinkNodeController extends Controller
     }
 
 
-    public function getSinkStationReports(Request $request){
-        $station_id=request("id");
+    public function getSinkStationReports(Request $request=null,$manual_id=null){
+        $station_id=(($manual_id==null)?request("id"):$manual_id);//request("id");
         $data=array();
 
        //get the txt value used for the particular station 10m node
-
 
        $stationSinkNodeCofigs = SinkNode::where('station_id', '=', $station_id)
 
@@ -120,7 +119,7 @@ class SinkNodeController extends Controller
 
         $data["selected_station"]=$station_id;
         $data["action"]=URL::to('reportsSink');
-        $data["stations"]=Station::all();
+        $data["stations"]=Station::all()->where("stationCategory","aws");
         $data["heading"]="Sink Node Reports";
         return view("reports.nodesink",$data);
     }

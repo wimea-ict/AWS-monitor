@@ -33,7 +33,7 @@ class TwoMNodeController extends Controller
 
     public function report1(){
         $data["action"]=URL::to('reports2m');
-        $data["stations"]=Station::all();
+        $data["stations"]=Station::all()->where("stationCategory","aws");
         $data["heading"]="2m Node Reports";
 
         $data["vin_vmcu_2m"]="";
@@ -162,7 +162,7 @@ class TwoMNodeController extends Controller
 
         $data["action"]=URL::to('reports2m');
         $data["selected_station"]=$station_id;
-        $data["stations"]=Station::all();
+        $data["stations"]=Station::all()->where("stationCategory","aws");
         $data["heading"]="2m Node Reports";
 
         // return $data;

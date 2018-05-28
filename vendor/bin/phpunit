@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+../phpunit/phpunit/phpunit
+=======
 #!/usr/bin/env php
 <?php
 /*
@@ -51,3 +54,4 @@ if (!defined('PHPUNIT_COMPOSER_INSTALL')) {
 require PHPUNIT_COMPOSER_INSTALL;
 
 PHPUnit\TextUI\Command::main();
+>>>>>>> 28ef8844525fa7374ccc84b2a07a5471d3333006

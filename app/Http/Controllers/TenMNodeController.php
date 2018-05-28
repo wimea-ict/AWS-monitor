@@ -39,7 +39,7 @@ class TenMNodeController extends Controller
 
     public function report1(){
         $data["action"]=URL::to('reports10m');
-        $data["stations"]=Station::all();
+        $data["stations"]=Station::all()->where("stationCategory","aws");
         $data["heading"]="10m Node Reports";
 
         $data["vin_vmcu_10m"]="";
@@ -156,7 +156,7 @@ class TenMNodeController extends Controller
         $data["wind_direction_sensor"]=$wind_direction_data;
         $data["selected_station"]=$station_id;
         $data["action"]=URL::to('reports10m');
-        $data["stations"]=Station::all();
+        $data["stations"]=Station::all()->where("stationCategory","aws");
         $data["heading"]="Ground Node Reports";
         return view("reports.node10m",$data);
     }
