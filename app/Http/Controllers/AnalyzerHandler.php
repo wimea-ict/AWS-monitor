@@ -43,16 +43,61 @@ class AnalyzerHandler extends Controller
         $this->tenM_nd_tb = 'tenMeterNode';
         $this->sink_nd_tb = 'sinkNode';
         $this->timezone = 'Africa/Kampala';
-        $this->gnd_name = 'ground_node';
-        $this->towN_name = '2m_node';
-        $this->tenN_name = '10m_node';
-        $this->sink_name = 'sink_node';
+        // nodetype - twoMeterNode, tenMeterNode, groundNode, sinkNode
+        $this->gnd_name = 'groundNode';
+        $this->towN_name = 'twoMeterNode';
+        $this->tenN_name = 'tenMeterNode';
+        $this->sink_name = 'sinkNode';
+    }
+
+    /**
+     * get current date
+     */
+    public function getCurrentDateTime()
+    {
+        $zone = new DateTimeZone($this->timezone);// set timezone
+        $date = new DateTime("now", $zone);// get current time
+        
+        return $date;
+    }
+
+    /**
+     * Get time difference to use when quering the node_status table
+     */
+    public function getTimeDiff()
+    {
+        // "date_time_recorded": "2018-02-28 15:40:19"
+        $date = $this->getCurrentDateTime();// get current time
+        // $date->sub(new DateInterval('PT1H'));// subtract one hour from current time
+        $date = $date->format('Y-m-d H:m:s');// change date time object to string format used in the database.
+        return $date;
     }
 
     public function getProbTbName()
     {
         return $this->prob_tb;
     }
+
+    public function get2mName()
+    {
+        return $this->towN_name;
+    }
+
+    public function get10mName()
+    {
+        return $this->tenN_name;
+    }
+
+    public function getGndName()
+    {
+        return $this->gnd_name;
+    }
+
+    public function getSinkName()
+    {
+        return $this->sink_name;
+    }
+    
 
     public function getObservationSlipTbName()
     {
@@ -103,7 +148,6 @@ class AnalyzerHandler extends Controller
 
     /**
      * pick problem station configurations
-     * getNodeConfigurations():
      * @returns $stn_prb_conf;
      */
     public function getStationProbConfig(){
@@ -289,7 +333,7 @@ class AnalyzerHandler extends Controller
     }
 
     /**
-     * check data in the problems table to see if problem has been reported yet.
+     * search problems table and return problems not yet solved
      * @return problem
      * it excludes the solved problems and so should return only one record
      * this is because we don't record a problem again before it has been solved.
@@ -308,77 +352,70 @@ class AnalyzerHandler extends Controller
     }
 
     /**
-     * call reporter to report problem
-     */
-    public function getReporter($prob_id)
-    {
-        //............ call reporter here.............................
-
-        // update status if reporting was done successfully
-        DB::table($this->prob_tb)->where('id',$prob_id)->update(['status'=>'reported']);
-    }
-
-    /**
      * update problem 
      */
-    public function updateProblem($prob_track_counter,$max_track_counter,$prob_status,$prob_id)
+    public function updateProblem($prob_track_counter,$max_track_counter,$prob_status,$prob_id,$prob_action)
     {
-        if ($prob_status == 'reported') {
-            // update the updated_at column to affirm that the problem was encountered again
-            DB::table($this->prob_tb)->where('id',$prob_id)->update(['updated_at'=>$this->getCurrentDateTime()]);
-        }
+        /* first check for requested problem action */
+        if (stripos($prob_action, 'removeproblem') === false) {
+            // check if max_counter had already been reached to avoid incrementing it again. This could have happened incase the previous iteration failed to update the status for some reason...
+                if (($prob_track_counter)<= 0) {
+                    // update status to solved
+                    DB::table($this->prob_tb)->where('id',$prob_id)->update(['status'=>'solved']);
+                    return;// exit method
+                }
+            DB::table($this->prob_tb)->where('id',$prob_id)->decrement('track_counter');
+            // check if counter has reached zero in which case the status has to be changed to solved
+            if (($prob_track_counter - 1)<= 0) {
+                // update status to reported
+                DB::table($this->prob_tb)->where('id',$prob_id)->update(['status'=>'solved']);
+            }
+        } 
         else {
-            // check if max_counter had already been reached to avoid incrementing it again.
-            if (($prob_track_counter)>= $max_track_counter) {
-                $this->getReporter($prob_id);
-                return;// exit method
+            if ($prob_status == 'reported') {
+                // update the updated_at column to affirm that the problem was encountered again
+                DB::table($this->prob_tb)->where('id',$prob_id)->update(['updated_at'=>$this->getCurrentDateTime()]);
             }
-            DB::table($this->prob_tb)->where('id',$prob_id)->increment('track_counter');
-            // check if max_counter has been reached and if so change status and call the reporter.
-            if (($prob_track_counter + 1)>= $max_track_counter) {
-                $this->getReporter($prob_id);
-            }
-        }        
-    }
-
-    /**
-     * get current date
-     */
-    public function getCurrentDateTime()
-    {
-        $zone = new DateTimeZone($this->timezone);// set timezone
-        $date = new DateTime("now", $zone);// get current time
-        
-        return $date;
-    }
-
-    /**
-     * Get time difference to use when quering the node_status table
-     */
-    public function getTimeDiff()
-    {
-        // "date_time_recorded": "2018-02-28 15:40:19"
-        $date = $this->getCurrentDateTime();// get current time
-        // $date->sub(new DateInterval('PT1H'));// subtract one hour from current time
-        $date = $date->format('Y-m-d H:m:s');// change date time object to string format used in the database.
-        return $date;
+            else {
+                // check if max_counter had already been reached to avoid incrementing it again. This could have happened incase the previous iteration failed to update the status for some reason...
+                if (($prob_track_counter)>= $max_track_counter) {
+                    // update status to reported
+                    DB::table($this->prob_tb)->where('id',$prob_id)->update(['status'=>'reported']);
+                    return;// exit method
+                }
+                else {
+                    DB::table($this->prob_tb)->where('id',$prob_id)->increment('track_counter');
+                    // check if max_counter has been reached and if so change status and call the reporter.
+                    if (($prob_track_counter + 1)>= $max_track_counter) {
+                        // update status to reported
+                        DB::table($this->prob_tb)->where('id',$prob_id)->update(['status'=>'reported']);
+                    }
+                }
+                
+            } 
+        }               
     }
 
     /**
      * 
+     * @param $prob_action - this variable is used to determine if we're decrementing the counter or incrementing it
      */
-    public function registerProblem($source_id, $source, $problem_id, $criticality, $max_track_counter)
+    public function registerProblem($source_id, $source, $problem_id, $criticality, $max_track_counter,$prob_action)
     {
         // check data in the problems table to see if problem has been reported yet.
         $prob = $this->getProblem($source_id,$source,$problem_id); 
         
         if ($prob->isEmpty()) {
-            /**
-             * record doesn't exit in the database and so..registerProblem($source_id, $source, $problem->id, $criticality, $max_track_counter)
-             * insert into the the problem into the database
-             * at this point, we get the criticality of this problem
-             */
-            $this->insertIntoProbTb($source_id, $source, $problem_id, $criticality);
+            /* check problem action, a decrement means that we  */
+            if (stripos($prob_action, 'removeproblem') === false) {
+                /**
+                 * record doesn't exit in the database and so...
+                 * insert into the the problem into the database
+                 * at this point, we get the criticality of this problem
+                 */
+                $this->insertIntoProbTb($source_id, $source, $problem_id, $criticality);
+            }
+            
         }
         else {
             /**
@@ -391,7 +428,7 @@ class AnalyzerHandler extends Controller
 
             $prob = $prob->toArray();
             
-            $this->updateProblem($prob[0]->track_counter,$max_track_counter,$prob[0]->status,$prob[0]->id);
+            $this->updateProblem($prob[0]->track_counter,$max_track_counter,$prob[0]->status,$prob[0]->id,$prob_action);
         }
     }
 
@@ -405,8 +442,9 @@ class AnalyzerHandler extends Controller
      * @param $criticality
      * @param $max_track_counter
      * @param $stn_id
+     * @param $prob_action - this variable is used to determine if we're decrementing the counter or incrementing it
      */
-    public function checkoutProblem($source_id,$source,$problemClassfications,$param,$prob,$stn_prb_conf,$criticality,$max_track_counter,$stn_id)
+    public function checkoutProblem($source_id,$source,$problemClassfications,$param,$prob,$stn_prb_conf,$criticality,$max_track_counter,$stn_id,$prob_action)
     {
         // get problem
         foreach ($problemClassfications as $problem) {
@@ -426,7 +464,8 @@ class AnalyzerHandler extends Controller
                             }                            
                         }
                     }
-                    $this->registerProblem($source_id, $source, $problem->id, $criticality, $max_track_counter);
+
+                    $this->registerProblem($source_id, $source, $problem->id, $criticality, $max_track_counter,$prob_action);                    
                     break;
                 }
             }
@@ -534,37 +573,25 @@ class AnalyzerHandler extends Controller
     {
         $data = '';
         //dd($nodeType);
-        if (stripos($nodeType, 'twoMeterNode') !== false) {  
-            // dd($nodeType);
-            /**
-             * nodetype - twoMeterNode, tenMeterNode, groundNode, sinkNode 
-             * $gnd_nd_tb, $twoM_nd_tb, $tenM_nd_tb, $sink_nd_tb
-             * node tables - twoMeterNode, tenMeterNode, sinkNode, groundNode,
-            */
+        /**
+         * nodetype - twoMeterNode, tenMeterNode, groundNode, sinkNode 
+         * $gnd_nd_tb, $twoM_nd_tb, $tenM_nd_tb, $sink_nd_tb
+         * node tables - twoMeterNode, tenMeterNode, sinkNode, groundNode,
+        */
+        if (stripos($nodeType, 'twoMeterNode') !== false) { 
+            
             $data = $this->getSensorDetails('twoMeterNode', $this->twoM_nd_tb);
         }
         elseif (stripos($nodeType, 'tenMeterNode') !== false) {
-            /**
-             * nodetype - twoMeterNode, tenMeterNode, groundNode, sinkNode 
-             * $gnd_nd_tb, $twoM_nd_tb, $tenM_nd_tb, $sink_nd_tb
-             * node tables - twoMeterNode, tenMeterNode, sinkNode, groundNode,
-            */
+            
             $data = $this->getSensorDetails('tenMeterNode', $this->tenM_nd_tb);
         }
         elseif (stripos($nodeType, 'groundNode') !== false) {
-            /**
-             * nodetype - twoMeterNode, tenMeterNode, groundNode, sinkNode 
-             * $gnd_nd_tb, $twoM_nd_tb, $tenM_nd_tb, $sink_nd_tb
-             * node tables - twoMeterNode, tenMeterNode, sinkNode, groundNode,
-            */
+
             $data = $this->getSensorDetails('groundNode', $this->gnd_nd_tb);
         }
         elseif (stripos($nodeType, 'sinkNode') !== false) {
-            /**
-             * nodetype - twoMeterNode, tenMeterNode, groundNode, sinkNode 
-             * $gnd_nd_tb, $twoM_nd_tb, $tenM_nd_tb, $sink_nd_tb
-             * node tables - twoMeterNode, tenMeterNode, sinkNode, groundNode,
-            */
+            
             $data = $this->getSensorDetails('sinkNode', $this->sink_nd_tb);
         }
         
@@ -572,16 +599,16 @@ class AnalyzerHandler extends Controller
     }
 
     /**
-     * $sensor_data, 
-     * $station_id, 
-     * $parameter_read,
-     * $rec_value
-     * $problem - "missing, incorrect
-     * $sensor_id, 
-     * $problemClassfications, 
-     * $stn_prb_conf, 
-     * $criticality, 
-     * $max_track_counter
+     * @param $sensor_data, 
+     * @param $station_id, 
+     * @param $parameter_read,
+     * @param $rec_value
+     * @param $problem - "missing, incorrect
+     * @param $sensor_id, 
+     * @param $problemClassfications, 
+     * @param $stn_prb_conf, 
+     * @param $criticality, 
+     * @param $max_track_counter
      */
     public function analyzeSensorData($sensor_data, $station_id, $parameter_read, $rec_value, $problem, $sensor_id, $problemClassfications, $stn_prb_conf, $criticality, $max_track_counter)
     {        
@@ -617,10 +644,202 @@ class AnalyzerHandler extends Controller
     }
 
     /**
-     * This method returns
+     * This method returns all stations with a status of on
      */
     public function getEnabledSations()
     {
-        # code...
+        return DB::table($this->stns_tb)->select('station_id')->where('StationStatus','=','on')->get();
+    }
+
+    /**
+     * This method returns the enabled nodes from the enabled stations
+     */
+    public function getEnabledNodes($nodeType)
+    {
+        $node_data = '';
+        /**
+         * nodetype - twoMeterNode, tenMeterNode, groundNode, sinkNode 
+         * $gnd_nd_tb, $twoM_nd_tb, $tenM_nd_tb, $sink_nd_tb
+         * node tables - twoMeterNode, tenMeterNode, sinkNode, groundNode,
+        */
+        
+        // dd($nodeType);
+        if (stripos($nodeType, $this->towN_name) !== false) { 
+            
+            $node_data = DB::table($this->twoM_nd_tb)->select('node_id','station_id')->where('node_status','=','on')->get();
+        }
+        elseif (stripos($nodeType, $this->tenN_name) !== false) {
+
+            $node_data = DB::table($this->tenM_nd_tb)->select('node_id','station_id')->where('node_status','=','on')->get();
+        }
+        elseif (stripos($nodeType, $this->gnd_name) !== false) {
+
+            $node_data = DB::table($this->gnd_nd_tb)->select('node_id','station_id')->where('node_status','=','on')->get();
+        }
+        elseif (stripos($nodeType, $this->sink_name) !== false) {
+
+            $node_data = DB::table($this->sink_nd_tb)->select('node_id','station_id')->where('node_status','=','on')->get();
+        }
+
+        // dd($node_data);
+
+        $stn_data = $this->getEnabledSations();
+
+        /* check if no stations were returned */
+        if (empty($stn_data)) { 
+            /* if no stations were returned then no nodes are enabled */
+            $node_data = '';
+        }
+
+        /* check if no nodes were returned */
+        if (!empty($node_data)) {
+            /* map enabled nodes to enabled stations */
+            $node_data->transform(function($node) use($stn_data){
+                foreach ($stn_data as $stn) {
+                    if ($stn->station_id === $node->station_id) {
+                        /* return only nodes whose stations are enabled */
+                        return $node;
+                    }
+                }
+            });
+
+            // dd($node_data);
+            /* remove nulls */
+            $node_data = $node_data->reject(function($node){
+                return $node === null;
+            });
+            // dd($node_data);
+        }
+        
+        
+        return $node_data;
+    }
+
+    /**
+     * This method returns the enabled sensors from the enabled nodes
+     */
+    public function getEnabledSensors()
+    {
+        /* variable to hold all enabled sensors */
+        $enabledSensors = collect();        
+        /**
+         * $sensors_tb
+         * get corresponding sensors
+         * nodetype - twoMeterNode, tenMeterNode, groundNode, sinkNode
+         */
+        /* create array to loop through node type and get all sensors */
+        $nodeTypes = collect([
+            $this->gnd_name,
+            $this->towN_name,
+            $this->tenN_name,
+            $this->sink_name
+        ]);
+        // dd($nodeTypes);
+
+        foreach ($nodeTypes as $nodeType) {
+            // dd($nodeType); //'node_id','node_type','parameter_read'
+            $sensors = DB::table($this->sensors_tb)->select('id')->where([
+                ['node_type','=',$nodeType],
+                ['sensor_status','=','on'],
+            ])->get();
+            // dd($sensors);
+            /**
+             * $gnd_nd_tb, $twoM_nd_tb, $tenM_nd_tb, $sink_nd_tb
+             * node tables - twoMeterNode, tenMeterNode, sinkNode, groundNode,
+            */
+            $node_data = $this->getEnabledNodes($nodeType);
+            /* check if any nodes were returned */
+            if (empty($node_data)) {
+                /* if no nodes were returned then no sensors should be considered enabled */
+                $sensors = '';
+            }
+
+            if (!empty($sensors)) {
+                /* map enabled sensors to enabled nodes */
+                $sensors->transform(function($sensor) use($node_data){
+                    foreach ($node_data as $data) {
+                        if ($data->node_id === $sensor->node_id) {
+                            /* assign station_id to sensors whose nodes are enabled */
+                            $sensor->station_id = $data->station_id;
+                            return $sensor;
+                        }
+                    }
+                });
+                
+                /* remove nulls */
+                $sensors = $sensors->reject(function($sensor){
+                    return $sensor === null;
+                });
+                // dd($sensors);
+                /* add sensor to collection */
+                $enabledSensors = $enabledSensors->concat($sensors);
+            }
+        }
+        
+        // dd($enabledSensors);
+        return $enabledSensors;
+    }
+
+    /**
+     * this method finds missing nodes
+     */
+    public function findMissingNodes($available_nodes,$criticality,$max_track_counter)
+    {
+        /* check two meter nodes*/
+        $twoM_nds = $this->getEnabledNodes($this->get2mName());
+        if (!empty($twoM_nds)) {
+            foreach ($twoM_nds as $node) {
+                /* if id is not found, report the problem */
+                if(array_search($node->node_id, $available_nodes[$this->get2mName()], true) === false){
+                    $this->checkoutProblem($node->node_id,$this->get2mName(),$this->getProblemClassifications(),"Node","off",$this->getStationProbConfig(),$criticality,$max_track_counter,$node->station_id,'addproblem');
+                }
+                else {
+                    $this->checkoutProblem($node->node_id,$this->get2mName(),$this->getProblemClassifications(),"Node","off",$this->getStationProbConfig(),$criticality,$max_track_counter,$node->station_id,'removeproblem');
+                }
+            }
+        }
+        
+        /* check ten meter nodes*/
+        $tenM_nds = $this->getEnabledNodes($this->get10mName());
+        if (!empty($tenM_nds)) {
+            foreach ($tenM_nds as $node) {
+                /* if id is not found, report the problem */
+                if(array_search($node->node_id, $available_nodes[$this->get10mName()], true) === false){
+                    $this->checkoutProblem($node->node_id,$this->get10mName(),$this->getProblemClassifications(),"Node","off",$this->getStationProbConfig(),$criticality,$max_track_counter,$node->station_id,'addproblem');
+                }
+                else {
+                    $this->checkoutProblem($node->node_id,$this->get10mName(),$this->getProblemClassifications(),"Node","off",$this->getStationProbConfig(),$criticality,$max_track_counter,$node->station_id,'removeproblem');
+                }
+            }
+        }
+        
+        /* check ground nodes*/
+        $gnd_nds = $this->getEnabledNodes($this->getGndName());
+        if (!empty($gnd_nds)) {
+            foreach ($gnd_nds as $node) {
+                /* if id is not found, report the problem */
+                if(array_search($node->node_id ,$available_nodes[$this->getGndName()], true) === false){
+                    $this->checkoutProblem($node->node_id,$this->getGndName(),$this->getProblemClassifications(),"Node","off",$this->getStationProbConfig(),$criticality,$max_track_counter,$node->station_id,'addproblem');
+                }
+                else {
+                    $this->checkoutProblem($node->node_id,$this->getGndName(),$this->getProblemClassifications(),"Node","off",$this->getStationProbConfig(),$criticality,$max_track_counter,$node->station_id,'removeproblem');
+                }
+            }
+        }
+        
+        /* check sink nodes*/
+        $sink_nds = $this->getEnabledNodes($this->getSinkName());
+        if (!empty($sink_nds)) {
+            foreach ($sink_nds as $node) {
+                /* if id is not found, report the problem */
+                if(array_search($node->node_id, $available_nodes[$this->getSinkName()], true) === false){
+                    $this->checkoutProblem($node->node_id,$this->getSinkName(),$this->getProblemClassifications(),"Node","off",$this->getStationProbConfig(),$criticality,$max_track_counter,$node->station_id,'addproblem');
+                }
+                else {
+                    $this->checkoutProblem($node->node_id,$this->getSinkName(),$this->getProblemClassifications(),"Node","off",$this->getStationProbConfig(),$criticality,$max_track_counter,$node->station_id,'removeproblem');
+                }
+            }
+        }
+        
     }
 }

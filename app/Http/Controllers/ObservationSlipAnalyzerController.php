@@ -60,6 +60,16 @@ class ObservationSlipAnalyzerController extends Controller
 
         // sunduration
         DB::table($this->Handler->getObservationSlipTbName())->orderBy('id')->select('id','Station','Rainfall','Dry_Bulb','Wet_Bulb','Wind_Direction','Wind_Speed','SoilMoisture','SoilTemperature','CLP')->where('id','>',$lastId)->chunk(100, function($sensors) use(&$date, &$id_first_checked, &$id_last_checked, &$counter){
+
+            /* array to hold available sensors */
+            $available_sensors = array();
+            // pick problem station configurations
+            $stn_prb_conf = $this->stn_prb_conf;
+            
+            // initialize variables with default values
+            $criticality = 'Non Critical';// default criticality
+            $max_track_counter = 12;// default criticality
+
             foreach ($sensors as $sensor) {
 
                 //store first id
@@ -69,12 +79,10 @@ class ObservationSlipAnalyzerController extends Controller
                 //store last id checked
                 $id_last_checked = $sensor->id;// keep overwritting to keep the last checked
 
-                // pick problem station configurations
-                $stn_prb_conf = $this->stn_prb_conf;
-                
-                // initialize variables with default values
-                $criticality = 'non-critical';// default criticality
-                $max_track_counter = 12;// default criticality
+                /* store the node id if it isn't there already. search strictly */
+                if ((array_search($sensor->id, $available_sensors, true)) === false) {
+                    array_push($available_sensors, $sensor->id);
+                }
                 
                 // ------------------------------------------------------------------------------
                 /* 'id','Station','Rainfall','Dry_Bulb','Wet_Bulb','Wind_Direction','Wind_Speed','SoilMoisture','SoilTemperature' */
@@ -120,11 +128,19 @@ class ObservationSlipAnalyzerController extends Controller
                 $counter++;
             }
 
+            $enabled_sensors = $this->Handler->getEnabledSensors();
+
+            foreach ($enabled_sensors as $enabled) {
+                if (array_search($enabled->id, $enabled_sensors, true) === false) {
+                    # code...
+                }
+            }
+
             //dd($counter);
-            // if ($counter === 10000) { // check if max has been reached.
-            //     // dd($counter);   
-            //     return false; // stop chucking...
-            // }
+            if ($counter === 1000) { // check if max has been reached.
+                // dd($counter);   
+                return false; // stop chucking...
+            }
         });
 
         // update last check table
