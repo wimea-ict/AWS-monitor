@@ -38,6 +38,20 @@
                             </div>
                         </div>
 
+                        <div class="form-group<?php echo e($errors->has('phone') ? ' has-error' : ''); ?>">
+                            <label for="email" class="col-md-4 control-label">Phone Number</label>
+
+                            <div class="col-md-6">
+                                <input id="phone" type="tel" class="form-control" name="phone" value="<?php echo e(old('phone')); ?>" required>
+
+                                <?php if($errors->has('phone')): ?>
+                                    <span class="help-block">
+                                        <strong><?php echo e($errors->first('phone')); ?></strong>
+                                    </span>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+
                         <div class="form-group<?php echo e($errors->has('password') ? ' has-error' : ''); ?>">
                             <label for="password" class="col-md-4 control-label">Password</label>
 
