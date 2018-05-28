@@ -79,8 +79,6 @@
               { labels: [ "Date", "Series1", "Series2" ] });
           */
 
-
-
             new Dygraph(document.getElementById("vin_vmcu_sink"),
               "<?=$vin_vmcu_sink?>",
               {
