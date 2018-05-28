@@ -28,7 +28,6 @@ class NodeStatusAnalyzerController extends Controller
     private $sink_nd_data;
     public function __construct()
     {
-
         $this->Handler = new AnalyzerHandler();
         $this->txt_2m_col_name  = 'txt_2m_value';
         $this->txt_10m_col_name  = 'txt_10m_value';
@@ -244,6 +243,8 @@ class NodeStatusAnalyzerController extends Controller
         $this->Handler->updateChecksTable('nodestatus',$id_first_checked,$id_last_checked);
 
         //show data in the problems table
-        return redirect('/probTbData');
+        return redirect('/probTbData')->with([
+            'flash_message' => 'Analyzed '.($id_last_checked - $id_first_checked + 1).' records'
+        ]);
     }
 }
