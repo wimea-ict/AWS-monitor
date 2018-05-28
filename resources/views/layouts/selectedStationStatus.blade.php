@@ -228,7 +228,7 @@
                                             <tbody>
                                             @foreach($problemsForStation as $probs)
                                                 <tr>
-                                                    <td>{{$probs['classification_id']}}</td>
+                                                    <td>{{$probs['problem_description']}}</td>
                                                     <td>{{$probs['status']}}</td>
                                                     <td>{{$probs['criticality']}}</td>
                                                     
