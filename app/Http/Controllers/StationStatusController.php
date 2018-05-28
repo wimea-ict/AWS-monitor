@@ -9,6 +9,7 @@ use station\SinkNode;
 use station\GroundNode;
 use station\Sensor;
 use station\Problems;
+use station\PotentialProblem;
 use Illuminate\Http\Request;
 
 class StationStatusController extends Controller
@@ -278,7 +279,11 @@ class StationStatusController extends Controller
         }
         
 
-        $problemsForStation = Problems::whereIn('source_id',$ids)->orderBy('id', 'DESC')->get()->toArray();
+        $problemsForStation = Problems::whereIn('source_id',$ids)->leftJoin("problem_classification","problems.classification_id","=","problem_classification.id")->orderBy('problems.id', 'DESC')->get()->toArray();
+
+        //$problemIds = 
+        // = PotentialProblem::whereIn('id',$problemsIds);
+        
 
         //dd($problemsForStation);
         
