@@ -91,7 +91,7 @@
                                                                                 </div>
                                                                                 <div class="col-sm-4 control-label text-right">
                                                                                     <label class="switch">
-                                                                                            <input type="checkbox" name="10mnode_status" value="Yes" checked>
+                                                                                            <input type="checkbox" name="10mnode_status" value="on" checked>
                                                                                             <span class="slider round"></span>
                                                                                     </label>
                                                                                 </div>

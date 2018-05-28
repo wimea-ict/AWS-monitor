@@ -12,14 +12,16 @@
                                     <div class="form-group clearfix">
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label class="col-sm-6 control-label">2m Node</label>
-                                                <div class="col-sm-6 control-label">
+                                                <label class="col-sm-6 control-label status_label" >2m Node</label>
+                                                <div class="col-sm-2 control-label">
                                                 <!--'twoMFlag','tenMFlag','gndFlag','sinkFlag','Twomnodesensors','Tenmnodesensors','Groundnodesensors','sinkNodesensors'-->
                                                 @if($twoMFlag==0)
-                                                    <div class="toggle toggle-success"></div>
+                                                
+                                                    <i class="ion-ios7-circle-filled status_btn" ></i>
+                                                
                                                 @endif
                                                 @if($twoMFlag==1)
-                                                    <div class="toggle toggle-danger "></div>
+                                                   <i class="ion-ios7-circle-filled off_status_btn" ></i>
                                                 @endif
                                                     
                                                 </div>
@@ -29,13 +31,13 @@
                                         
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label class="col-sm-6 control-label">Ground Node</label>
-                                                <div class="col-sm-6 control-label">
+                                                <label class="col-sm-6 control-label status_label">Ground Node</label>
+                                                <div class="col-sm-2 control-label">
                                                 @if($gndFlag==0)
-                                                    <div class="toggle toggle-success"></div>
+                                                <i class="ion-ios7-circle-filled status_btn" ></i>
                                                 @endif
                                                 @if($gndFlag==1)
-                                                    <div class="toggle toggle-danger"></div>
+                                                <i class="ion-ios7-circle-filled off_status_btn" ></i>
                                                 @endif
                                                 </div>
                                             </div>
@@ -45,13 +47,13 @@
                                     <div class="form-group clearfix">
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label class="col-sm-6 control-label">Sink Node</label>
-                                                <div class="col-sm-6 control-label">
+                                                <label class="col-sm-6 control-label status_label">Sink Node</label>
+                                                <div class="col-sm-2 control-label">
                                                 @if($sinkFlag==0)
-                                                    <div class="toggle toggle-success"></div>
+                                                <i class="ion-ios7-circle-filled status_btn" ></i>
                                                 @endif
                                                 @if($sinkFlag==1)
-                                                    <div class="toggle toggle-danger"></div>
+                                                <i class="ion-ios7-circle-filled off_status_btn" ></i>
                                                 @endif
                                                 </div>
                                             </div>
@@ -60,13 +62,13 @@
                                         
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label class="col-sm-6 control-label">10m Node</label>
-                                                <div class="col-sm-6 control-label">
+                                                <label class="col-sm-6 control-label status_label">10m Node</label>
+                                                <div class="col-sm-2 control-label">
                                                 @if($tenMFlag==0)
-                                                    <div class="toggle toggle-success"></div>
+                                                <i class="ion-ios7-circle-filled status_btn" ></i>
                                                 @endif
                                                 @if($tenMFlag==1)
-                                                    <div class="toggle toggle-danger"></div>
+                                                <i class="ion-ios7-circle-filled off_status_btn" ></i>
                                                 @endif
                                                 </div>
                                             </div>
@@ -77,14 +79,14 @@
                                     
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label class="col-sm-6 control-label">Temperature Sensor</label>
+                                                <label class="col-sm-6 control-label status_label">Temperature Sensor</label>
                                                 
-                                                <div class="col-sm-6 control-label">
+                                                <div class="col-sm-2 control-label">
                                                 @if($TempSensorFlag==0)
-                                                    <div class="toggle toggle-success"></div>
+                                                <i class="ion-ios7-circle-filled status_btn" ></i>
                                                 @endif
                                                 @if($TempSensorFlag==1)
-                                                    <div class="toggle toggle-danger"></div>
+                                                <i class="ion-ios7-circle-filled off_status_btn" ></i>
                                                 @endif
                                                 </div>
                                             </div>
@@ -93,13 +95,13 @@
                                         
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label class="col-sm-6 control-label">Relative Humidity</label>
-                                                <div class="col-sm-6 control-label">
+                                                <label class="col-sm-6 control-label status_label">Relative Humidity</label>
+                                                <div class="col-sm-2 control-label">
                                                 @if($relativeHumidity==0)
-                                                    <div class="toggle toggle-success"></div>
+                                                <i class="ion-ios7-circle-filled status_btn" ></i>
                                                 @endif
                                                 @if($relativeHumidity==1)
-                                                    <div class="toggle toggle-danger"></div>
+                                                <i class="ion-ios7-circle-filled off_status_btn" ></i>
                                                 @endif
                                                 </div>
                                             </div>
@@ -109,13 +111,13 @@
                                     
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label class="col-sm-6 control-label">Preciptation Sensor</label>
-                                                <div class="col-sm-6 control-label">
+                                                <label class="col-sm-6 control-label status_label">Preciptation Sensor</label>
+                                                <div class="col-sm-2 control-label">
                                                 @if($PreciptationFlag==0)
-                                                    <div class="toggle toggle-success"></div>
+                                                <i class="ion-ios7-circle-filled status_btn" ></i>
                                                 @endif
                                                 @if($PreciptationFlag==1)
-                                                    <div class="toggle toggle-danger"></div>
+                                                <i class="ion-ios7-circle-filled off_status_btn" ></i>
                                                 @endif
                                                 </div>
                                             </div>
@@ -124,13 +126,13 @@
                                         
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label class="col-sm-6 control-label">Soil Temperature Sensor</label>
-                                                <div class="col-sm-6 control-label">
+                                                <label class="col-sm-6 control-label status_label">Soil Temperature Sensor</label>
+                                                <div class="col-sm-2 control-label">
                                                 @if($SoilTempFlag==0)
-                                                    <div class="toggle toggle-success"></div>
+                                                <i class="ion-ios7-circle-filled status_btn" ></i>
                                                 @endif
                                                 @if($SoilTempFlag==1)
-                                                    <div class="toggle toggle-danger"></div>
+                                                <i class="ion-ios7-circle-filled off_status_btn" ></i>
                                                 @endif
                                                 </div>
                                             </div>
@@ -139,13 +141,13 @@
                                     <div class="form-group clearfix">
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label class="col-sm-6 control-label">Soil Moisture Sensor</label>
-                                                <div class="col-sm-6 control-label">
+                                                <label class="col-sm-6 control-label status_label">Soil Moisture Sensor</label>
+                                                <div class="col-sm-2 control-label">
                                                 @if($SoilMoistureFlag==0)
-                                                    <div class="toggle toggle-success"></div>
+                                                <i class="ion-ios7-circle-filled status_btn" ></i>
                                                 @endif
                                                 @if($SoilMoistureFlag==1)
-                                                    <div class="toggle toggle-danger"></div>
+                                                <i class="ion-ios7-circle-filled off_status_btn" ></i>
                                                 @endif
                                                 </div>
                                             </div>
@@ -155,13 +157,13 @@
                                         <div class="col-sm-6">
                                         <!--'TempSensorFlag','SoilMoistureFlag','SoilTempFlag','PreciptationFlag','PressureFlag','RainfallFlag','WindSpeedFlag','WindDirectionFlag','insolationFlag','relativeHumidity'-->
                                             <div class="form-group">
-                                                <label class="col-sm-6 control-label">Insolation Sensor</label>
-                                                <div class="col-sm-6 control-label">
+                                                <label class="col-sm-6 control-label status_label">Insolation Sensor</label>
+                                                <div class="col-sm-2 control-label">
                                                 @if($insolationFlag==0)
-                                                    <div class="toggle toggle-success"></div>
+                                                <i class="ion-ios7-circle-filled status_btn" ></i>
                                                 @endif
                                                 @if($insolationFlag==1)
-                                                    <div class="toggle toggle-danger"></div>
+                                                <i class="ion-ios7-circle-filled off_status_btn" ></i>
                                                 @endif
                                                 </div>
                                             </div>
@@ -170,13 +172,13 @@
                                     <div class="form-group clearfix" >
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label class="col-sm-6 control-label">wind Speed Sensor</label>
-                                                <div class="col-sm-6 control-label">
+                                                <label class="col-sm-6 control-label status_label">wind Speed Sensor</label>
+                                                <div class="col-sm-2 control-label">
                                                 @if($WindSpeedFlag==0)
-                                                    <div class="toggle toggle-success"></div>
+                                                <i class="ion-ios7-circle-filled status_btn" ></i>
                                                 @endif
                                                 @if($WindSpeedFlag==1)
-                                                    <div class="toggle toggle-danger"></div>
+                                                <i class="ion-ios7-circle-filled off_status_btn" ></i>
                                                 @endif
                                                 </div>
                                             </div>
@@ -185,13 +187,13 @@
                                         
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label class="col-sm-6 control-label">Wind Direction Sensor</label>
-                                                <div class="col-sm-6 control-label">
+                                                <label class="col-sm-6 control-label status_label">Wind Direction Sensor</label>
+                                                <div class="col-sm-2 control-label">
                                                 @if($WindDirectionFlag==0)
-                                                    <div class="toggle toggle-success"></div>
+                                                <i class="ion-ios7-circle-filled status_btn" ></i>
                                                 @endif
                                                 @if($WindDirectionFlag==1)
-                                                    <div class="toggle toggle-danger"></div>
+                                                <i class="ion-ios7-circle-filled off_status_btn" ></i>
                                                 @endif
                                                 </div>
                                             </div>
