@@ -281,13 +281,16 @@ class StationStatusController extends Controller
 
         $problemsForStation = Problems::whereIn('source_id',$ids)->leftJoin("problem_classification","problems.classification_id","=","problem_classification.id")->orderBy('problems.id', 'DESC')->get()->toArray();
 
+        $problemsDesc =array_column($problemsForStation, 'problem_description');
+        $problemFrequencies =array_count_values($problemsDesc);
+
         //$problemIds = 
         // = PotentialProblem::whereIn('id',$problemsIds);
         
 
-        //dd($problemsForStation);
+        //dd($problemFrequencies);
         
-        return view('layouts.selectedStationStatus',compact('twoMFlag','tenMFlag','gndFlag','sinkFlag','TempSensorFlag','SoilMoistureFlag','SoilTempFlag','PreciptationFlag','PressureFlag','RainfallFlag','WindSpeedFlag','WindDirectionFlag','insolationFlag','relativeHumidity','stationTaken','problemsForStation')); 
+        return view('layouts.selectedStationStatus',compact('twoMFlag','tenMFlag','gndFlag','sinkFlag','TempSensorFlag','SoilMoistureFlag','SoilTempFlag','PreciptationFlag','PressureFlag','RainfallFlag','WindSpeedFlag','WindDirectionFlag','insolationFlag','relativeHumidity','stationTaken','problemsForStation','problemFrequencies')); 
     }
 
     /**
