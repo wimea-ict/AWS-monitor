@@ -29,7 +29,7 @@
             <div id="bg-default" class="panel-collapse collapse in">
                 <div class="portlet-body">
 
-                    <div id="vin_vmcu_sink" style="height: 300px;"></div>
+                    <div id="vin_vmcu_sink" style="height: 300px;" class="text-center"></div>
 
                 </div>
             </div>
@@ -52,7 +52,7 @@
             <div id="bg-default" class="panel-collapse collapse in">
                 <div class="portlet-body">
 
-                    <div id="pressure" style="height: 300px;"></div>
+                    <div id="pressure" style="height: 300px;" class="text-center"></div>
 
                 </div>
             </div>
@@ -79,18 +79,32 @@
               { labels: [ "Date", "Series1", "Series2" ] });
           */
 
-            new Dygraph(document.getElementById("vin_vmcu_sink"),
-              "<?=$vin_vmcu_sink?>",
-              {
-                  labels: [ "x", "V_MCU", "V_IN" ]
-              });
+          var vin_vmcu_data="<?=$vin_vmcu_sink?>";
 
+            if(vin_vmcu_data==""){
+                $("#vin_vmcu_sink").html("<h4>No V_IN or V_MCU data Found</h4>");
+            }else{
+
+              new Dygraph(document.getElementById("vin_vmcu_sink"),
+                vin_vmcu_data,
+                {
+                    labels: [ "x", "V_MCU", "V_IN" ]
+                });
+
+            }
+
+            var pressure="<?=$pressure?>";
+            if(pressure==""){
+                $("#pressure").html("<h4>No Pressure data Available</h4>");
+            }else{
 
               new Dygraph(document.getElementById("pressure"),
-              "<?=$pressure?>",
+              pressure,
               {
                   labels: [ "x", "pressure" ]
               });
+            }
+
 
            $('#station_id').find('option[selected="selected"]').each(function(){
                 $(this).prop('selected', true);

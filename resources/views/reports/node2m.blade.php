@@ -29,7 +29,7 @@
             <div id="bg-default" class="panel-collapse collapse in">
                 <div class="portlet-body">
 
-                    <div id="vin_vmcu_2m" style="height: 300px;"></div>
+                    <div id="vin_vmcu_2m" style="height: 300px;"  class="text-center"></div>
 
                 </div>
 
@@ -55,7 +55,7 @@
             <div id="bg-default" class="panel-collapse collapse in">
                 <div class="portlet-body">
 
-                    <div id="humidity" style="height: 300px;"></div>
+                    <div id="humidity" style="height: 300px;"  class="text-center"></div>
 
                 </div>
             </div>
@@ -79,7 +79,7 @@
             <div id="bg-default" class="panel-collapse collapse in">
                 <div class="portlet-body">
 
-                    <div id="templature" style="height: 300px;"></div>
+                    <div id="templature" style="height: 300px;"  class="text-center"></div>
 
                 </div>
             </div>
@@ -101,23 +101,40 @@
 
         $(function() {
 
-             new Dygraph(document.getElementById("vin_vmcu_2m"),
-              "<?=$vin_vmcu_2m?>",
-              {
-                  labels: [ "x", "V_MCU", "V_IN" ]
-              });
+            var vin_vmcu_2m="<?=$vin_vmcu_2m?>";
+            if(vin_vmcu_2m==""){
+                $("#vin_vmcu_2m").html("<h4>No V_IN VMCU data Found</h4>");
+            }else{
+              new Dygraph(document.getElementById("vin_vmcu_2m"),
+               vin_vmcu_2m,
+               {
+                   labels: [ "x", "V_MCU", "V_IN" ]
+               });
+            }
 
-              new Dygraph(document.getElementById("humidity"),
-              "<?=$humidity?>",
-              {
-                  labels: [ "x", "humidity"]
-              });
+            var humidity="<?=$humidity?>";
 
-              new Dygraph(document.getElementById("templature"),
-              "<?=$templature?>",
-              {
-                  labels: [ "x", "templature"]
-              });
+              if(humidity==""){
+                  $("#humidity").html("<h4>No Humidity data Found</h4>");
+              }else{
+                new Dygraph(document.getElementById("humidity"),
+                humidity,
+                {
+                    labels: [ "x", "humidity"]
+                });
+              }
+
+              var templature="<?=$templature?>";
+              if(templature==""){
+                  $("#templature").html("<h4>No Templature data Found</h4>");
+              }else{
+                new Dygraph(document.getElementById("templature"),
+                templature,
+                {
+                    labels: [ "x", "templature"]
+                });
+              }
+
 
              $('#station_id').find('option[selected="selected"]').each(function(){
                 $(this).prop('selected', true);

@@ -56,6 +56,18 @@
 
          <script src="{{ asset('assets/timepicker/bootstrap-datepicker.js') }}"></script>
 
+        <script src="assets/datatables/jquery.dataTables.min.js"></script>
+        <script src="assets/datatables/dataTables.bootstrap.js"></script>
+        
+
+        {{-- some scripts needed to for better UI with bootstrap --}}
+        {{--  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>  --}}
+
         <script src="{{ asset('assets/datatables/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('assets/datatables/dataTables.bootstrap.js') }}"></script>
 

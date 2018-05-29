@@ -2,6 +2,9 @@
 <html>
 <head>
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
     @include('layouts.links')
        
 </head>
@@ -24,7 +27,12 @@
             <!-- ================== -->
      
             <div class="wraper container-fluid">
-                
+                @if(Session::has('flash_message'))
+                    <div class="alert alert-success">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        {{ session('flash_message') }}
+                    </div>
+                @endif
 
                 @yield('content')
 
@@ -34,6 +42,9 @@
             <!-- ================== -->
 
             <!-- Footer Start -->
+            <script>
+                $('div.alert').not('.alert-important').delay(4000).slideUp(300);
+            </script>
             @include('layouts.footer')
             <!-- Footer Ends -->
 
