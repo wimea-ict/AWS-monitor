@@ -235,7 +235,7 @@ class NodeStatusAnalyzerController extends Controller
             $this->Handler->findMissingNodes($available_nodes,$criticality,$max_track_counter);
 
             //dd($counter);
-            if ($counter === 500) { // check if max has been reached.
+            if ($counter === 10000) { // check if max has been reached.
                 return false; // stop chucking...
             }
         });
