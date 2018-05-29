@@ -56,6 +56,13 @@
 
          <script src="<?php echo e(asset('assets/timepicker/bootstrap-datepicker.js')); ?>"></script>
 
+        <script src="assets/datatables/jquery.dataTables.min.js"></script>
+        <script src="assets/datatables/dataTables.bootstrap.js"></script>
+        
+
+        
+        
+
         <script src="<?php echo e(asset('assets/datatables/jquery.dataTables.min.js')); ?>"></script>
         <script src="<?php echo e(asset('assets/datatables/dataTables.bootstrap.js')); ?>"></script>
 
