@@ -627,13 +627,13 @@ class AnalyzerHandler extends Controller
                     // dd('hold it right here! - '.$parameter_read. ' stn id - '. $station_id);
                     if ($rec_value < $data->min_value) {
                         # then value is less than minimum
-                        $this->checkoutProblem($sensor_id,'sensor',$problemClassfications,"sensor",$problem,$stn_prb_conf,$criticality,$max_track_counter,$station_id);
+                        $this->checkoutProblem($sensor_id,'sensor',$problemClassfications,"sensor",$problem,$stn_prb_conf,$criticality,$max_track_counter,$station_id,"addproblem");
                         // dd('hold it right here! - '.$parameter_read. ' stn id - '. $station_id);
                         break;// exit loop
                     }
                     elseif ($rec_value > $data->max_value) {
                         # then value is greater than maximum
-                        $this->checkoutProblem($sensor->id,'sensor',$problemClassfications,"sensor",$problem,$stn_prb_conf,$criticality,$max_track_counter,$station_id);
+                        $this->checkoutProblem($sensor->id,'sensor',$problemClassfications,"sensor",$problem,$stn_prb_conf,$criticality,$max_track_counter,$station_id,"addproblem");
                         // dd('hold it right here! - '.$parameter_read. ' stn id - '. $station_id);
                         break;// exit loop
                     }
@@ -685,6 +685,7 @@ class AnalyzerHandler extends Controller
 
         $stn_data = $this->getEnabledSations();
 
+        // dd($stn_data);
         /* check if no stations were returned */
         if (empty($stn_data)) { 
             /* if no stations were returned then no nodes are enabled */
@@ -738,7 +739,7 @@ class AnalyzerHandler extends Controller
 
         foreach ($nodeTypes as $nodeType) {
             // dd($nodeType); //'node_id','node_type','parameter_read'
-            $sensors = DB::table($this->sensors_tb)->select('id')->where([
+            $sensors = DB::table($this->sensors_tb)->select('id','node_id')->where([
                 ['node_type','=',$nodeType],
                 ['sensor_status','=','on'],
             ])->get();
@@ -748,6 +749,7 @@ class AnalyzerHandler extends Controller
              * node tables - twoMeterNode, tenMeterNode, sinkNode, groundNode,
             */
             $node_data = $this->getEnabledNodes($nodeType);
+            // dd($node_data);
             /* check if any nodes were returned */
             if (empty($node_data)) {
                 /* if no nodes were returned then no sensors should be considered enabled */
@@ -755,6 +757,7 @@ class AnalyzerHandler extends Controller
             }
 
             if (!empty($sensors)) {
+                // dd($node_data);
                 /* map enabled sensors to enabled nodes */
                 $sensors->transform(function($sensor) use($node_data){
                     foreach ($node_data as $data) {
@@ -833,13 +836,30 @@ class AnalyzerHandler extends Controller
             foreach ($sink_nds as $node) {
                 /* if id is not found, report the problem */
                 if(array_search($node->node_id, $available_nodes[$this->getSinkName()], true) === false){
-                    $this->checkoutProblem($node->node_id,$this->getSinkName(),$this->getProblemClassifications(),"Node","off",$this->getStationProbConfig(),$criticality,$max_track_counter,$node->station_id,'addproblem');
+                    $this->checkoutProblem($node->node_id,$this->getSinkName(),$this->getProblemClassifications(),"Node","off",$this->getStationProbConfig(),$criticality,$max_track_counter,$node->station_id,"addproblem");
                 }
                 else {
-                    $this->checkoutProblem($node->node_id,$this->getSinkName(),$this->getProblemClassifications(),"Node","off",$this->getStationProbConfig(),$criticality,$max_track_counter,$node->station_id,'removeproblem');
+                    $this->checkoutProblem($node->node_id,$this->getSinkName(),$this->getProblemClassifications(),"Node","off",$this->getStationProbConfig(),$criticality,$max_track_counter,$node->station_id,"removeproblem");
                 }
             }
         }
         
+    }
+
+    /**
+     * 
+     */
+    public function findMissingSensors($available_sensors,$criticality,$max_track_counter)
+    {
+        $enabled_sensors = $this->getEnabledSensors();
+
+        foreach ($enabled_sensors as $enabled) {
+            if (array_search($enabled->id, $available_sensors, true) === false) {
+                $this->checkoutProblem($enabled->id,'sensor',$this->getProblemClassifications(),"sensor","off",$this->getStationProbConfig(),$criticality,$max_track_counter,$enabled->station_id,"addproblem");
+            }
+            else {
+                $this->checkoutProblem($enabled->id,'sensor',$this->getProblemClassifications(),"sensor","off",$this->getStationProbConfig(),$criticality,$max_track_counter,$enabled->station_id,"removeproblem");
+            }
+        }
     }
 }

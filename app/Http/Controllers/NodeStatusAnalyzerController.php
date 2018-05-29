@@ -38,6 +38,7 @@ class NodeStatusAnalyzerController extends Controller
          * nodetype - twoMeterNode, tenMeterNode, groundNode, sinkNode 
          */
         // $this->problemClassfications = $this->Handler->getEnabledSensors('twoMeterNode');
+        
 
         // pick problem station configurations
         $this->problemClassfications = $this->Handler->getProblemClassifications();

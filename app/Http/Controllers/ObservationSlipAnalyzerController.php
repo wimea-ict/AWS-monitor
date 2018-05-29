@@ -128,30 +128,26 @@ class ObservationSlipAnalyzerController extends Controller
                 $counter++;
             }
 
-            $enabled_sensors = $this->Handler->getEnabledSensors();
-
-            foreach ($enabled_sensors as $enabled) {
-                if (array_search($enabled->id, $enabled_sensors, true) === false) {
-                    # code...
-                }
-            }
+            $this->Handler->findMissingSensors($available_sensors,$criticality,$max_track_counter);            
 
             //dd($counter);
-            if ($counter === 1000) { // check if max has been reached.
+            if ($counter === 500) { // check if max has been reached.
                 // dd($counter);   
                 return false; // stop chucking...
             }
         });
 
         // update last check table
-        // $this->Handler->updateChecksTable('observationslip',$id_first_checked,$id_last_checked);
+        $this->Handler->updateChecksTable('observationslip',$id_first_checked,$id_last_checked);
 
         //get data in problems table   problems
         //source, source_id, criticality, classification_id, track_counter, status
         $data = DB::table('problems')->get();
         // $problem = DB::table('problem_classification')->get();
 
-        // return $data;
-        return view('layouts.analyzer', compact('data','problems'));
+        //show data in the problems table
+        return redirect('/probTbData')->with([
+            'flash_message' => 'Analyzed '.($id_last_checked - $id_first_checked + 1).' records'
+        ]);
     }
 }
