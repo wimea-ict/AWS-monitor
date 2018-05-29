@@ -17,7 +17,10 @@ class ProblemsController extends Controller
      */
     public function index()
     {
-        $stations = Station::where('StationCategory', 'aws')->get();
+        $stationIDs = problemConfigurations::pluck('station_id');
+        //dd($stations);
+
+        $stations = Station::where('StationCategory', 'aws')->whereIn('station_id',$stationIDs)->get()->toArray();
         $problemConfigurationvalues = problemConfigurations::all()->toArray();
         //$stations = Station::whereIn('station_id', $problemConfigurationvalues)->get();
         return view('layouts.editProblemConfigurations', compact('stations','problemConfigurationvalues'));
