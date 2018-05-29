@@ -170,7 +170,7 @@ class StationStatusController extends Controller
                     $relativeHumidity =1;
                 }
             }
-            elseif($problem['source']=="2m_node"){
+            elseif($problem['source']=="twoMeterNode"){
                 if(!empty($TwomNode)){
                     if($problem['source_id']==$TwomNode['node_id']){
                         array_push($ids,$TwomNode['node_id']);
@@ -180,7 +180,7 @@ class StationStatusController extends Controller
                     }
                 }
             }
-            elseif($problem['source']=="10m_node"){
+            elseif($problem['source']=="tenMeterNode"){
                 if(!empty($TenmNode)){
                     if($problem['source_id']==$TenmNode['node_id']){
                         array_push($ids,$TenmNode['node_id']);
@@ -191,7 +191,7 @@ class StationStatusController extends Controller
                     }
                 }
             }
-            elseif($problem['source']=="ground_node"){
+            elseif($problem['source']=="groundNode"){
                 if(!empty($groundNode)){
                     if($problem['source_id']==$groundNode['node_id']){
                         array_push($ids,$groundNode['node_id']);
@@ -202,7 +202,7 @@ class StationStatusController extends Controller
                     }
                 }
             }
-            elseif($problem['source']=="sink_node"){
+            elseif($problem['source']=="sinkNode"){
                 if(!empty($sinknode)){
                     if($problem['source_id']==$sinknode['node_id']){
                         array_push($ids,$sinknode['node_id']);

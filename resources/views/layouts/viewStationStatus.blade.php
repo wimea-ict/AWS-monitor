@@ -36,10 +36,10 @@
                     <?php $flag=0 ?>
                     @foreach ($stations_with_problems as $problem)
                         @if($problem['id']== $station['station_id'])
-                            @if($problem['category']=="critical")
+                            @if($problem['category']=="Critical")
                             <?php $flag=1 ?>
                             @endif
-                            @if($problem['category']=="non-critical")
+                            @if($problem['category']=="Non Critical")
                                 <?php $flag=2 ?>
                             @endif
                             <?php $counter++ ?>
