@@ -25,12 +25,7 @@
                     </div> <!-- col-->
                 </div>
               </div>
-<div class="row clearfix">
-<div class="col-lg-12 text-center">
-<h2>Automatic Weather Station Statuses</h2>
-</div>
 
-</div> 
 <div class="row" style= "margin-top:10px;">
 <div class="row text-center">
                     <?php $__currentLoopData = $stations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $station): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
