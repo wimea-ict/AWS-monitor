@@ -2,29 +2,38 @@
 
 @section('content')
 <div class="row">
-                    <div class="col-lg-2 col-lg-offset-3">
-                        <div class="widget-panel widget-style-2 bg-danger">
+                    <div class="col-md-6 col-md-offset-3">
+                        <div class="panel panel-default text-center">
+                            <div class="panel-heading">
+                                <h3 class="panel-title ">Keys</h3>
+                            </div>
+                            <div class="panel-body">
                             
-                            <h3 class="m-0 counter">Critical issues</h3>
-                            
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-sm-6">
-                        <div class="widget-panel widget-style-2 bg-warning">
-                           
-                            <h3 class="m-0 counter">Non Critical issues</h3>
-                            
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-sm-6">
-                        <div class="widget-panel widget-style-2 bg-success">
-                            
-                            <h3 class="m-0 counter">No Station issues</h3>
-                            
-                        </div>
-                    </div>
-                    
-                </div> <!-- end row -->
+                                <div class="row icon-list ionicon-list">
+
+                                    <div class="col-md-4 col-sm-4"><i class="ion-ios7-circle-filled" style="font-size:30px; color:#a94442"></i>Critical Issues
+                                    </div>
+
+                                    <div class="col-md-4 col-sm-4"><i class="ion-ios7-circle-filled" style="font-size:30px; color:#8a6d3b"></i>Non Critical Issues
+                                    </div>
+                                    <div class="col-md-4 col-sm-4"><div class="text-right">
+                              <i class="ion-ios7-circle-filled" style="font-size:30px; color:#2b542c"></i>No issues on Station
+                                    </div>
+
+
+                                </div> <!-- End row -->
+                            </div> <!-- end panel-body -->
+                        </div> <!-- Panel-default-->
+                    </div> <!-- col-->
+                </div>
+              </div>
+<div class="row clearfix">
+<div class="col-lg-12 text-center">
+<h2>Automatic Weather Station Statuses</h2>
+</div>
+
+</div> 
+<div class="row" style= "margin-top:10px;">
 <div class="row text-center">
                     @foreach($stations as $station)
                     
@@ -98,5 +107,5 @@
                
 
                
-
+</div>
 @endsection

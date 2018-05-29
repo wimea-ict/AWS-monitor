@@ -22,7 +22,7 @@
                             <span class="username">{{ Auth::user()->name }}</span> <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu extended pro-menu fadeInUp animated" tabindex="5003" style="overflow: hidden; outline: none;">
-                            <li><a href="profile.html"><i class="fa fa-briefcase"></i>Profile</a></li>
+                            
                            
                             <li>
                                         <a href="{{ route('logout') }}"
