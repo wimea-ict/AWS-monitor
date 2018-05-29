@@ -610,30 +610,43 @@ class AnalyzerHandler extends Controller
      * @param $criticality, 
      * @param $max_track_counter
      */
-    public function analyzeSensorData($sensor_data, $station_id, $parameter_read, $rec_value, $problem, $sensor_id, $problemClassfications, $stn_prb_conf, $criticality, $max_track_counter)
+    public function analyzeSensorData($sensor_data, $station_id, $parameter_read, $rec_value, $sensor_id, $problemClassfications, $stn_prb_conf, $criticality, $max_track_counter)
     {        
+        // dd('hold it right here! - '.$parameter_read. ' stn id - '. $station_id . "\n". $sensor_data);
         foreach ($sensor_data as $data) {
             /**
              * min_value, max_value 
              * parameter_read - relative humidity(2mnd), Temperature(2mnd), insulation(10mnd), wind speed(10mnd), wind direction(), preciptation(gndnd), soil moisture(gnd), soil temperature(gnd), pressure(sinknd)536738
              */
             // if ($parameter_read !== 'wind direction' && $parameter_read !== 'pressure') {
-            if ($station_id === 16 ) {
+            /* if ($station_id === 16 ) {
                 dd('hold it right here! - '.$parameter_read. ' stn id - '. $station_id . "\n". $sensor_data);
-            }
+            } */
             if ($data->station_id === $station_id) {
-                dd('hold it right here! - '.$parameter_read. ' stn id - '. $station_id);
+                // dd('hold it right here! - '.$parameter_read. ' stn id - '. $station_id);
                 if (stripos($data->parameter_read, $parameter_read) !== false) {
                     // dd('hold it right here! - '.$parameter_read. ' stn id - '. $station_id);
                     if ($rec_value < $data->min_value) {
                         # then value is less than minimum
-                        $this->checkoutProblem($sensor_id,'sensor',$problemClassfications,"sensor",$problem,$stn_prb_conf,$criticality,$max_track_counter,$station_id,"addproblem");
+                        $this->checkoutProblem($sensor_id,'sensor',$problemClassfications,"sensor","below range",$stn_prb_conf,$criticality,$max_track_counter,$station_id,"addproblem");
                         // dd('hold it right here! - '.$parameter_read. ' stn id - '. $station_id);
                         break;// exit loop
                     }
                     elseif ($rec_value > $data->max_value) {
                         # then value is greater than maximum
-                        $this->checkoutProblem($sensor->id,'sensor',$problemClassfications,"sensor",$problem,$stn_prb_conf,$criticality,$max_track_counter,$station_id,"addproblem");
+                        $this->checkoutProblem($sensor->id,'sensor',$problemClassfications,"sensor","above range",$stn_prb_conf,$criticality,$max_track_counter,$station_id,"addproblem");
+                        // dd('hold it right here! - '.$parameter_read. ' stn id - '. $station_id);
+                        break;// exit loop
+                    }
+                    if ($rec_value >= $data->min_value) {
+                        # then value is less than minimum
+                        $this->checkoutProblem($sensor_id,'sensor',$problemClassfications,"sensor","below range",$stn_prb_conf,$criticality,$max_track_counter,$station_id,"removeproblem");
+                        // dd('hold it right here! - '.$parameter_read. ' stn id - '. $station_id);
+                        break;// exit loop
+                    }
+                    elseif ($rec_value <= $data->max_value) {
+                        # then value is greater than maximum
+                        $this->checkoutProblem($sensor->id,'sensor',$problemClassfications,"sensor","above range",$stn_prb_conf,$criticality,$max_track_counter,$station_id,"removeproblem");
                         // dd('hold it right here! - '.$parameter_read. ' stn id - '. $station_id);
                         break;// exit loop
                     }
