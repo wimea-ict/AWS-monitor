@@ -34,10 +34,10 @@
                     <?php $flag=0 ?>
                     <?php $__currentLoopData = $stations_with_problems; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $problem): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <?php if($problem['id']== $station['station_id']): ?>
-                            <?php if($problem['category']=="critical"): ?>
+                            <?php if($problem['category']=="Critical"): ?>
                             <?php $flag=1 ?>
                             <?php endif; ?>
-                            <?php if($problem['category']=="non-critical"): ?>
+                            <?php if($problem['category']=="Non Critical"): ?>
                                 <?php $flag=2 ?>
                             <?php endif; ?>
                             <?php $counter++ ?>
