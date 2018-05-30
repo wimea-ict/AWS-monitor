@@ -136,14 +136,145 @@ class AnalyzerHandler extends Controller
     public function getStationName($stn_id){
         $station_name = '';
         $stations = $this->getStations(); 
-
+        // dd($stn_id);
+        // dd($stations);
+        $counter = 0;
         foreach ($stations as $station) {
-            if ($station->station_id === $stn_id) {
+            $counter++;
+            // dd($station->station_id . " - " . $stn_id);
+            if ($station->station_id == $stn_id) {
+                // dd('here');
                 $station_name = $station->StationName;
+                // dd($station_name . " - " . $stn_id);
+                // break;
+            }
+        }
+        
+        // dd($station_name . " - " . $stn_id . " -counter " . $counter . " - " . $stations->count());
+        return $station_name;
+    }
+
+    /**
+     * This method returns a node
+     */
+    public function getNode($nodeType, $nd_id)
+    {
+        $node_data = '';
+        
+        // dd(" node ". $nodeType." - ". $nd_id);    
+        if (stripos($nodeType, $this->towN_name) !== false) { 
+            
+            $node_data = DB::table($this->twoM_nd_tb)->select('node_id','station_id')->where('node_id','=',$nd_id)->get();
+        }
+        elseif (stripos($nodeType, $this->tenN_name) !== false) {
+
+            $node_data = DB::table($this->tenM_nd_tb)->select('node_id','station_id')->where('node_id','=',$nd_id)->get();
+        }
+        elseif (stripos($nodeType, $this->gnd_name) !== false) {
+
+            $node_data = DB::table($this->gnd_nd_tb)->select('node_id','station_id')->where('node_id','=',$nd_id)->get();
+        }
+        elseif (stripos($nodeType, $this->sink_name) !== false) {
+
+            $node_data = DB::table($this->sink_nd_tb)->select('node_id','station_id')->where('node_id','=',$nd_id)->get();
+        }
+        // dd($node_data);    
+        return $node_data;
+    }
+
+    /**
+     * This method returns a sensor with its a station id
+     */
+    public function getSensor($sensor_id,$nodeType)
+    {
+        $node_data = '';
+        //  dd(" sensor ". $sensor_id." - ". $nodeType);    
+        $sensors = DB::table($this->sensors_tb)->select('id','node_id','node_type','parameter_read')->where([
+            ['id','=',$sensor_id],
+        ])->get();
+        // dd($sensors);
+        
+        /* map enabled sensors to enabled nodes */
+        $sensors->transform(function($sensor) use($node_data){
+            $node_data = $this->getNode($sensor->node_type, $sensor->node_id);
+            // dd($node_data);
+            foreach ($node_data as $data) {
+                $sensor->station_id = $data->station_id;
+                return $sensor;
+            }
+        });
+        
+        /* remove nulls */
+        $sensors = $sensors->reject(function($sensor){
+            return $sensor === null;
+        });
+        // dd($sensors);
+
+        return $sensors;
+    }
+
+    /**
+     * 
+     */
+    public function problemStationNames($source, $source_id)
+    {
+        $stn_name = '';
+        $stn = 'station';
+        $sensor = 'sensor';
+        $twoM = 'twoMeterNode';
+        $tenM = 'tenMeterNode';
+        $gnd = 'groundNode';
+        $sink = 'sinkNode';
+        $parameter_read = '';
+        // dd($source . "-". $source_id);
+        if (stripos($source, $stn) !== false) {
+            $stn_name = $this->getStationName($source_id);
+            // dd($this->getStationName(10));
+            // dd($stn_name . " - " . $source_id);
+        }
+        elseif (stripos($source, $sensor) !== false) {
+            $sensor = $this->getSensor($source_id,$source);
+            foreach ($sensor as $sens) {
+                $stn_name = $this->getStationName($sens->station_id);
+                // dd($stn_name . " - " . $source_id);
+                $parameter_read = $sens->parameter_read;
                 break;
             }
         }
-        return $station_name;
+        elseif (stripos($source, $twoM) !== false) {
+            $node = $this->getNode($source, $source_id);
+            foreach ($node as $nd) {
+                $stn_name = $this->getStationName($nd->station_id);
+                break;
+            }
+        }
+        elseif (stripos($source, $tenM) !== false) {
+            $node = $this->getNode($source, $source_id);
+            foreach ($node as $nd) {
+                $stn_name = $this->getStationName($nd->station_id);
+                break;
+            }
+        }
+        elseif (stripos($source, $gnd) !== false) {
+            $node = $this->getNode($source, $source_id);
+            foreach ($node as $nd) {
+                $stn_name = $this->getStationName($nd->station_id);
+                break;
+            }
+        }
+        elseif (stripos($source, $sink) !== false) {
+            $node = $this->getNode($source, $source_id);
+            foreach ($node as $nd) {
+                $stn_name = $this->getStationName($nd->station_id);
+                break;
+            }
+        }
+
+        //  dd($stn_name);    
+        return array(
+            "stn_name" => $stn_name,
+            "parameter_read" => $parameter_read
+        );
     }
 
     /**
@@ -446,6 +577,7 @@ class AnalyzerHandler extends Controller
      */
     public function checkoutProblem($source_id,$source,$problemClassfications,$param,$prob,$stn_prb_conf,$criticality,$max_track_counter,$stn_id,$prob_action)
     {
+        // dd($problemClassfications);
         // get problem
         foreach ($problemClassfications as $problem) {
             // do a case insensitive check
@@ -464,7 +596,7 @@ class AnalyzerHandler extends Controller
                             }                            
                         }
                     }
-
+                    // dd($source_id." - ". $source, $problem->id." - ". $criticality." - ". $max_track_counter." - ".$prob_action);
                     $this->registerProblem($source_id, $source, $problem->id, $criticality, $max_track_counter,$prob_action);                    
                     break;
                 }
@@ -872,6 +1004,29 @@ class AnalyzerHandler extends Controller
             }
             else {
                 $this->checkoutProblem($enabled->id,'sensor',$this->getProblemClassifications(),"sensor","off",$this->getStationProbConfig(),$criticality,$max_track_counter,$enabled->station_id,"removeproblem");
+            }
+        }
+    }
+
+    /**
+     * 
+     */
+    public function findMissingStations($available_stations)
+    {
+        // initialize variables with default values
+        $criticality = 'Non Critical';// default criticality
+        $max_track_counter = 12;// default criticality
+
+        $enabled_stations = $this->getEnabledSations();
+
+        foreach ($enabled_stations as $enabled) {
+            if (array_search($enabled->station_id, $available_stations, true) === false) {
+                // dd("works");
+                $this->checkoutProblem($enabled->station_id,'station',$this->getProblemClassifications(),"station","inaccesible",$this->getStationProbConfig(),$criticality,$max_track_counter,$enabled->station_id,"addproblem");
+                // dd("works");
+            }
+            else {
+                $this->checkoutProblem($enabled->station_id,'station',$this->getProblemClassifications(),"station","inaccesible",$this->getStationProbConfig(),$criticality,$max_track_counter,$enabled->station_id,"removeproblem");
             }
         }
     }
