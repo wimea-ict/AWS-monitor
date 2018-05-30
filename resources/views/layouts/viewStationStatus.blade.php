@@ -2,23 +2,26 @@
 
 @section('content')
 <div class="row">
-                    <div class="col-md-6 col-md-offset-3">
-                        <div class="panel panel-default text-center">
-                            <div class="panel-heading">
-                                <h3 class="panel-title ">Keys</h3>
+                    <div class="col-md-3 col-md-offset-4">
+                        <div class="panel panel-default ">
+                            <div class="panel-heading text-center">
+                                <h3 class="panel-title">Key</h3>
                             </div>
                             <div class="panel-body">
+                                
                             
                                 <div class="row icon-list ionicon-list">
 
-                                    <div class="col-md-4 col-sm-4"><i class="ion-ios7-circle-filled" style="font-size:30px; color:#a94442"></i>Critical Issues
+                                    <div class="col-md-12"><i class="ion-ios7-circle-filled" style="font-size:30px; color:#a94442"></i>Critical Issues
                                     </div>
-
-                                    <div class="col-md-4 col-sm-4"><i class="ion-ios7-circle-filled" style="font-size:30px; color:#F7CA18"></i>Non Critical Issues
+            
+                                    <div class="col-md-12"><i class="ion-ios7-circle-filled" style="font-size:30px; color:#F7CA18"></i>Non Critical Issues
                                     </div>
-                                    <div class="col-md-4 col-sm-4"><div class="text-right">
-                              <i class="ion-ios7-circle-filled" style="font-size:30px; color:#2b542c"></i>No issues on Station
+                                    <div class="col-md-12"><div>
+                                    <i class="ion-ios7-circle-filled" style="font-size:30px; color:#2b542c"></i>No issues on Station
                                     </div>
+                                    
+                                    
 
 
                                 </div> <!-- End row -->
@@ -63,7 +66,7 @@
                             @endif
                             @if($flag==2)
                             <div class="text-right">
-                              <i class="ion-ios7-circle-filled" style="font-size:30px; color:#8a6d3b"></i>
+                              <i class="ion-ios7-circle-filled" style="font-size:30px; color:#F7CA18"></i>
                             </div>
                             @endif
                             

@@ -23,7 +23,7 @@ class StationStatusController extends Controller
     {
         $stations_with_problems = array();
         //$problems_found = Station::where('StationCategory', 'aws')->get();
-        $problems_identified = Problems::all()->toArray();
+        $problems_identified = Problems::where('status', 'reported')->get()->toArray();
         //dd( $problems_identified);
         foreach($problems_identified as $problem){
             if($problem['source']=='station'){
