@@ -131,10 +131,10 @@ class ObservationSlipAnalyzerController extends Controller
             $this->Handler->findMissingSensors($available_sensors,$criticality,$max_track_counter);            
 
             //dd($counter);
-            if ($counter === 10000) { // check if max has been reached.
-                // dd($counter);   
-                return false; // stop chucking...
-            }
+            // if ($counter === 10000) { // check if max has been reached.
+            //     // dd($counter);   
+            //     return false; // stop chucking...
+            // }
         });
 
         // update last check table
