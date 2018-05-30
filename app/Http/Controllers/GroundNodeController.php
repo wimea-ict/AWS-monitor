@@ -54,8 +54,8 @@ class GroundNodeController extends Controller
     }
 
 
-    public function getGndStationReports(Request $request){
-        $station_id=request("id");
+    public function getGndStationReports($id){
+        $station_id=$id;
         $data=array();
 
        //get the txt value used for the particular station 10m node
@@ -167,11 +167,11 @@ class GroundNodeController extends Controller
 
         $data["soil_moisture"]=$SoilMoisture_graph_data;
 
-        $data["action"]=URL::to('reportsGnd');
-        $data["selected_station"]=$station_id;
-        $data["stations"]=Station::all()->where("stationCategory","aws");
-        $data["heading"]="Ground Node Reports";
-        return view("reports.nodegnd",$data);
+        // $data["action"]=URL::to('reportsGnd');
+        // $data["selected_station"]=$station_id;
+        // $data["stations"]=Station::all()->where("stationCategory","aws");
+        // $data["heading"]="Ground Node Reports";
+        return $data;
     }
 
 

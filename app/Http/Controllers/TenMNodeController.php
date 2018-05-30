@@ -50,8 +50,8 @@ class TenMNodeController extends Controller
     }
 
 
-    public function get10mStationReports(Request $request){
-        $station_id=request("id");
+    public function get10mStationReports($id){
+        $station_id=$id;
         $data=array();
 
        //get the txt value used for the particular station 10m node
@@ -143,7 +143,7 @@ class TenMNodeController extends Controller
                         ->latest('CreationDate')
                         ->take(1000)
                         ->get();
-                        
+
       $wind_direction_data="";
 
       foreach($wind_direction as $wind_d){
@@ -154,11 +154,13 @@ class TenMNodeController extends Controller
 
 
         $data["wind_direction_sensor"]=$wind_direction_data;
-        $data["selected_station"]=$station_id;
-        $data["action"]=URL::to('reports10m');
-        $data["stations"]=Station::all()->where("stationCategory","aws");
-        $data["heading"]="Ground Node Reports";
-        return view("reports.node10m",$data);
+
+        // $data["selected_station"]=$station_id;
+        // $data["action"]=URL::to('reports10m');
+        // $data["stations"]=Station::all()->where("stationCategory","aws");
+        // $data["heading"]="Ground Node Reports";
+
+        return $data;
     }
 
 

@@ -1,16 +1,3 @@
-<!--page_specific_css_files  page_specific_script_files-->
-
-@extends('main')
-
-
-@section('page_specific_css_files')
-
-@endsection
-
-@section('content')
-<div class="row">
-
-    @include("reports.select_station_section")
 
     <div class="col-sm-12">
 
@@ -85,61 +72,3 @@
             </div>
         </div> <!-- /Portlet -->
     </div> <!-- col -->
-
-
-
-</div>
-@endsection
-
-@section('page_specific_script_files')
-    {{--  <script src="assets/morris/node2mcharts.js"></script>  --}}
-    <script>
-
-    $( "#station_id" ).change(function() {
-          $("#report_form").submit()
-    });
-
-        $(function() {
-
-            var vin_vmcu_2m="<?=$vin_vmcu_2m?>";
-            if(vin_vmcu_2m==""){
-                $("#vin_vmcu_2m").html("<h4>No V_IN VMCU data Found</h4>");
-            }else{
-              new Dygraph(document.getElementById("vin_vmcu_2m"),
-               vin_vmcu_2m,
-               {
-                   labels: [ "x", "V_MCU", "V_IN" ]
-               });
-            }
-
-            var humidity="<?=$humidity?>";
-
-              if(humidity==""){
-                  $("#humidity").html("<h4>No Humidity data Found</h4>");
-              }else{
-                new Dygraph(document.getElementById("humidity"),
-                humidity,
-                {
-                    labels: [ "x", "humidity"]
-                });
-              }
-
-              var templature="<?=$templature?>";
-              if(templature==""){
-                  $("#templature").html("<h4>No Templature data Found</h4>");
-              }else{
-                new Dygraph(document.getElementById("templature"),
-                templature,
-                {
-                    labels: [ "x", "templature"]
-                });
-              }
-
-
-             $('#station_id').find('option[selected="selected"]').each(function(){
-                $(this).prop('selected', true);
-            });
-
-        });//end out function
-    </script>
-@endsection
