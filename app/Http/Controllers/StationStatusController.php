@@ -30,41 +30,41 @@ class StationStatusController extends Controller
                 array_push($stations_with_problems,array("id"=>$problem['source_id'], "category"=>$problem['criticality']));
             }
             elseif($problem['source']=='twoMeterNode'){
-                $TwomNode = TwoMeterNode::where('station_id', $problem['source_id'])->first()->toArray();
+                $TwomNode = TwoMeterNode::where('station_id', $problem['source_id'])->first();
                 //array_push($stations_with_problems,$TwomNode['station_id']);
                 array_push($stations_with_problems,array("id"=>$TwomNode['station_id'], "category"=>$problem['criticality']));
             }
             elseif($problem['source']=='tenMeterNode'){
-                $TenmNode = TenMeterNode::where('station_id', $problem['source_id'])->first()->toArray();
+                $TenmNode = TenMeterNode::where('station_id', $problem['source_id'])->first();
                 //array_push($stations_with_problems,$TenmNode['station_id']);
                 array_push($stations_with_problems,array("id"=>$TenmNode['station_id'], "category"=>$problem['criticality']));
             }
             elseif($problem['source']=='sinkNode'){
-                $sinkNode = SinkNode::where('station_id', $problem['source_id'])->first()->toArray();
+                $sinkNode = SinkNode::where('station_id', $problem['source_id'])->first();
                 //array_push($stations_with_problems,$sinkNode['station_id']);
                 array_push($stations_with_problems,array("id"=>$sinkNode['station_id'], "category"=>$problem['criticality']));
             }
             elseif($problem['source']=='groundNode'){
-                $groundNode = GroundNode::where('station_id', $problem['source_id'])->first()->toArray();
+                $groundNode = GroundNode::where('station_id', $problem['source_id'])->first();
                 //array_push($stations_with_problems,$groundNode['station_id']);
                 array_push($stations_with_problems,array("id"=>$groundNode['station_id'], "category"=>$problem['criticality']));
             }
             elseif($problem['source']=='sensor'){
-                $sensor = Sensor::where('id',$problem['source_id'])->first()->toArray();
+                $sensor = Sensor::where('id',$problem['source_id'])->first();
                 //dd($sensor);
                 if($sensor['node_type']=='twoMeterNode'){
-                    $TwomNodeFromSensor = TwoMeterNode::where('node_id', $sensor['node_id'])->first()->toArray();
+                    $TwomNodeFromSensor = TwoMeterNode::where('node_id', $sensor['node_id'])->first();
                 //array_push($stations_with_problems,$TwomNodeFromSensor['station_id']);
                 array_push($stations_with_problems,array("id"=>$TwomNodeFromSensor['station_id'], "category"=>$problem['criticality']));
                 }
                 elseif($sensor['node_type']=='tenMeterNode'){
-                    $TenmNodeFromSensor = TenMeterNode::where('node_id', $sensor['node_id'])->first()->toArray();
+                    $TenmNodeFromSensor = TenMeterNode::where('node_id', $sensor['node_id'])->first();
                 //array_push($stations_with_problems,$TenmNodeFromSensor['station_id']);
                 array_push($stations_with_problems,array("id"=>$TenmNodeFromSensor['station_id'], "category"=>$problem['criticality']));
                 
                 }
                 elseif($sensor['node_type']=='groundNode'){
-                    $groundNodeFromSensor = GroundNode::where('node_id', $sensor['node_id'])->first()->toArray();
+                    $groundNodeFromSensor = GroundNode::where('node_id', $sensor['node_id'])->first();
                 //array_push($stations_with_problems,$groundNodeFromSensor['station_id']);
                 array_push($stations_with_problems,array("id"=>$groundNodeFromSensor['station_id'], "category"=>$problem['criticality']));
                 }
