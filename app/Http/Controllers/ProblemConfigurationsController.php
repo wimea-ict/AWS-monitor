@@ -39,104 +39,121 @@ class ProblemConfigurationsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($id)
     {
+        $problem_defaults = array (
+            "max_counter"=>"4",
+            "report_method"=>"Both",
+            "criticality"=>"Critical",
+            "rpt_interval"=>"8",
+        );
         
-        $station = Station::where('StationName', $request->get('station_selected'))->first();
+        //$station = Station::where('StationName', $request->get('station_selected'))->first();
         
         $stationOffconfiguration = new problemConfigurations([
-            'station_id'=> $station['station_id'],
-            'max_track_counter'=>1,
+            'station_id'=> $id,
+            'max_track_counter'=>$problem_defaults["max_counter"],
             'problem_id'=>1,
-            'report_method'=>$request->get('sorptmethod'),
-            'criticality'=>$request->get('socriticallity'),
-            'reporting_time_interval'=>$request->get('soprobRptTime'),
+            'report_method'=>$problem_defaults["report_method"],
+            'criticality'=>$problem_defaults["criticality"],
+            'reporting_time_interval'=>$problem_defaults["rpt_interval"],
         
         ]);
         $stationOffconfiguration->save();
         $NodeOffconfiguration = new problemConfigurations([
-            'station_id'=> $station['station_id'],
+            'station_id'=> $id,
+            'max_track_counter'=>$problem_defaults["max_counter"],
             'problem_id'=>2,
-            'max_track_counter'=>$request->get('nooccurencesConsider'),
-            'report_method'=>$request->get('norptmethod'),
-            'criticality'=>$request->get('nocriticallity'),
-            'reporting_time_interval'=>$request->get('noprobRptTime'),
+            'report_method'=>$problem_defaults["report_method"],
+            'criticality'=>$problem_defaults["criticality"],
+            'reporting_time_interval'=>$problem_defaults["rpt_interval"],
         
         ]);
         $NodeOffconfiguration->save();
         $sensorOffconfiguration = new problemConfigurations([
-            'station_id'=> $station['station_id'],
+            'station_id'=> $id,
+            'max_track_counter'=>$problem_defaults["max_counter"],
             'problem_id'=>3,
-            'max_track_counter'=>$request->get('ssoccurencesConsider'),
-            'report_method'=>$request->get('ssorptmethod'),
-            'criticality'=>$request->get('ssocriticallity'),
-            'reporting_time_interval'=>$request->get('ssoprobRptTime'),
+            'report_method'=>$problem_defaults["report_method"],
+            'criticality'=>$problem_defaults["criticality"],
+            'reporting_time_interval'=>$problem_defaults["rpt_interval"],
         
         ]);
         $sensorOffconfiguration->save();
         $lownodeValuesconfiguration = new problemConfigurations([
-            'station_id'=> $station['station_id'],
+            'station_id'=> $id,
+            'max_track_counter'=>$problem_defaults["max_counter"],
             'problem_id'=>4,
-            'max_track_counter'=>$request->get('lpoccurencesConsider'),
-            'report_method'=>$request->get('lprptmethod'),
-            'criticality'=>$request->get('lpcriticallity'),
-            'reporting_time_interval'=>$request->get('lpprobRptTime'),
+            'report_method'=>$problem_defaults["report_method"],
+            'criticality'=>$problem_defaults["criticality"],
+            'reporting_time_interval'=>$problem_defaults["rpt_interval"],
         
         ]);
         $lownodeValuesconfiguration->save();
 
         $missingSensorValuesconfiguration = new problemConfigurations([
-            'station_id'=> $station['station_id'],
+            'station_id'=> $id,
+            'max_track_counter'=>$problem_defaults["max_counter"],
             'problem_id'=>5,
-            'max_track_counter'=>$request->get('msoccurencesConsider'),
-            'report_method'=>$request->get('msrptmethod'),
-            'criticality'=>$request->get('mscriticallity'),
-            'reporting_time_interval'=>$request->get('msprobRptTime'),
+            'report_method'=>$problem_defaults["report_method"],
+            'criticality'=>$problem_defaults["criticality"],
+            'reporting_time_interval'=>$problem_defaults["rpt_interval"],
         ]);
         $missingSensorValuesconfiguration->save();
         $missingnodeValuesconfiguration = new problemConfigurations([
-            'station_id'=> $station['station_id'],
+            'station_id'=> $id,
+            'max_track_counter'=>$problem_defaults["max_counter"],
             'problem_id'=>6,
-            'max_track_counter'=>$request->get('nmoccurencesConsider'),
-            'report_method'=>$request->get('nmrptmethod'),
-            'criticality'=>$request->get('nmcriticallity'),
-            'reporting_time_interval'=>$request->get('nmprobRptTime'),
+            'report_method'=>$problem_defaults["report_method"],
+            'criticality'=>$problem_defaults["criticality"],
+            'reporting_time_interval'=>$problem_defaults["rpt_interval"],
         ]);
         $missingnodeValuesconfiguration->save();
         $incorrectDateValuesconfiguration = new problemConfigurations([
-            'station_id'=> $station['station_id'],
+            'station_id'=> $id,
+            'max_track_counter'=>$problem_defaults["max_counter"],
             'problem_id'=>7,
-            'max_track_counter'=>$request->get('idoccurencesConsider'),
-            'report_method'=>$request->get('idrptmethod'),
-            'criticality'=>$request->get('idcriticallity'),
-            'reporting_time_interval'=>$request->get('idprobRptTime'),
+            'report_method'=>$problem_defaults["report_method"],
+            'criticality'=>$problem_defaults["criticality"],
+            'reporting_time_interval'=>$problem_defaults["rpt_interval"],
         
         ]);
         $incorrectDateValuesconfiguration->save();
 
         $incorrectSensorValuesconfiguration = new problemConfigurations([
-            'station_id'=> $station['station_id'],
+            'station_id'=> $id,
+            'max_track_counter'=>$problem_defaults["max_counter"],
             'problem_id'=>8,
-            'max_track_counter'=>$request->get('isoccurencesConsider'),
-            'report_method'=>$request->get('isrptmethod'),
-            'criticality'=>$request->get('iscriticallity'),
-            'reporting_time_interval'=>$request->get('isprobRptTime'),
+            'report_method'=>$problem_defaults["report_method"],
+            'criticality'=>$problem_defaults["criticality"],
+            'reporting_time_interval'=>$problem_defaults["rpt_interval"],
         
         ]);
         $incorrectSensorValuesconfiguration->save();
 
         $packetDroppingProblems = new problemConfigurations([
-            'station_id'=> $station['station_id'],
+            'station_id'=> $id,
+            'max_track_counter'=>$problem_defaults["max_counter"],
             'problem_id'=>9,
-            'max_track_counter'=>$request->get('pdoccurencesConsider'),
-            'report_method'=>$request->get('pdrptmethod'),
-            'criticality'=>$request->get('pdcriticallity'),
-            'reporting_time_interval'=>$request->get('pdprobRptTime'),
+            'report_method'=>$problem_defaults["report_method"],
+            'criticality'=>$problem_defaults["criticality"],
+            'reporting_time_interval'=>$problem_defaults["rpt_interval"],
         
         ]);
         $packetDroppingProblems->save();
 
-        return redirect('/configureproblem');
+        $SensorsAboveLevel = new problemConfigurations([
+            'station_id'=> $id,
+            'max_track_counter'=>$problem_defaults["max_counter"],
+            'problem_id'=>10,
+            'report_method'=>$problem_defaults["report_method"],
+            'criticality'=>$problem_defaults["criticality"],
+            'reporting_time_interval'=>$problem_defaults["rpt_interval"],
+        
+        ]);
+        $SensorsAboveLevel->save();
+
+        return;
 
     }
 
