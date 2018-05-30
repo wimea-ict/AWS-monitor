@@ -24,11 +24,10 @@
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <table id="datatable" class="table table-hover table-bordered">
                             <thead class="thead-light">
+                                <th>STATION NAME</th>
                                 <th>SOURCE</th>
-                                <th>SOURCE_ID</th>
                                 <th>CRITICALITY</th>
-                                <th>CLASSIFICATION_ID</th>
-                                <th>TRACK_COUNTER</th>
+                                <th>PROBLEM </th>
                                 <th>STATUS</th>
                                 <th>DATE (1ST OCCURRENCE)</th>
                             </thead>    
@@ -36,11 +35,14 @@
                                 @foreach($problems as $problem)
                                     @if($problem->id === $dt->classification_id)
                                         <tr>
-                                            <td>{{$dt->source}}</td>
-                                            <td>{{$dt->source_id}}</td>
+                                            <td>{{$dt->stn_name}}</td>
+                                            @if(!empty($dt->parameter_read))
+                                                <td>{{$dt->parameter_read ." - ". $dt->source}}</td>
+                                            @else
+                                                <td>{{$dt->source}}</td>
+                                            @endif
                                             <td>{{$dt->criticality}}</td>
                                             <td>{{$problem->problem_description}}</td>
-                                            <td>{{$dt->track_counter}}</td>
                                             <td>{{$dt->status}}</td>
                                             <td>{{$dt->created_at}}</td>
                                         </tr>
