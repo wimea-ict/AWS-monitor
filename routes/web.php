@@ -31,13 +31,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('viewStationStatus', 'StationStatusController');
     Route::get('selectedStationStatus/{id}', 'StationStatusController@show');
 
-
-
-
     Route::get('/node10m_report','TenMNodeController@report1');
     Route::get('/node2m_report','TwoMNodeController@report1');
     Route::get('/nodesink_report','SinkNodeController@report1');
     Route::get('/nodegnd_report','GroundNodeController@report1');
+
+    Route::get('/general_reports','GeneralReportsController@index');
+    Route::post('/plot_reports','GeneralReportsController@plotGraphs');
 
     Route::post('/reports10m','TenMNodeController@get10mStationReports');
     Route::post('/reportsGnd','GroundNodeController@getGndStationReports');

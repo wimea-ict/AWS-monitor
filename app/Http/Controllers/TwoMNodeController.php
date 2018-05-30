@@ -43,8 +43,8 @@ class TwoMNodeController extends Controller
     }
 
 
-    public function get2mStationReports(Request $request){
-        $station_id=request("id");
+    public function get2mStationReports($id){
+        $station_id=$id;
         $data=array();
 
        //get the txt value used for the particular station 10m node
@@ -160,14 +160,13 @@ class TwoMNodeController extends Controller
         //get soil moisture
 
 
-        $data["action"]=URL::to('reports2m');
-        $data["selected_station"]=$station_id;
-        $data["stations"]=Station::all()->where("stationCategory","aws");
-        $data["heading"]="2m Node Reports";
+        // $data["action"]=URL::to('reports2m');
+        // $data["selected_station"]=$station_id;
+        // $data["stations"]=Station::all()->where("stationCategory","aws");
+        // $data["heading"]="2m Node Reports";
 
-        // return $data;
 
-        return view("reports.node2m",$data);
+        return $data;
     }
 
     /**
