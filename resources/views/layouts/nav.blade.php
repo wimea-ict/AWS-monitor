@@ -33,7 +33,7 @@
                     <li class="has-submenu"><a href="#"><i class="ion-close"></i> <span class="nav-label">Configure problems</span></a>
                         <ul class="list-unstyled">
                             <!--<li><a href="{{URL::to('addnode')}}">Add Node</a></li>-->
-                            <li><a href="{{URL::to('configureproblem')}}">Configure problems</a></li>
+                            {{-- <li><a href="{{URL::to('configureproblem')}}">Configure problems</a></li> --}}
                             <li><a href="{{URL::to('editProblemConfigurations')}}">Edit configurations</a></li>
 
                         </ul>
