@@ -12,7 +12,7 @@
                                     <div class="col-md-4 col-sm-4"><i class="ion-ios7-circle-filled" style="font-size:30px; color:#a94442"></i>Critical Issues
                                     </div>
 
-                                    <div class="col-md-4 col-sm-4"><i class="ion-ios7-circle-filled" style="font-size:30px; color:#8a6d3b"></i>Non Critical Issues
+                                    <div class="col-md-4 col-sm-4"><i class="ion-ios7-circle-filled" style="font-size:30px; color:#F7CA18"></i>Non Critical Issues
                                     </div>
                                     <div class="col-md-4 col-sm-4"><div class="text-right">
                               <i class="ion-ios7-circle-filled" style="font-size:30px; color:#2b542c"></i>No issues on Station
