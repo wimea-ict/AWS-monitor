@@ -54,9 +54,7 @@
                                     Login
                                 </button>
 
-                                <a class="btn btn-link" href="<?php echo e(route('password.request')); ?>">
-                                    Forgot Your Password?
-                                </a>
+                                
                             </div>
                         </div>
                     </form>

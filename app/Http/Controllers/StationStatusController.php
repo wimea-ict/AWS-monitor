@@ -23,28 +23,28 @@ class StationStatusController extends Controller
     {
         $stations_with_problems = array();
         //$problems_found = Station::where('StationCategory', 'aws')->get();
-        $problems_identified = Problems::all()->toArray();
+        $problems_identified = Problems::where('status', 'reported')->get()->toArray();
         //dd( $problems_identified);
         foreach($problems_identified as $problem){
             if($problem['source']=='station'){
                 array_push($stations_with_problems,array("id"=>$problem['source_id'], "category"=>$problem['criticality']));
             }
-            elseif($problem['source']=='2m_node'){
+            elseif($problem['source']=='twoMeterNode'){
                 $TwomNode = TwoMeterNode::where('station_id', $problem['source_id'])->first()->toArray();
                 //array_push($stations_with_problems,$TwomNode['station_id']);
                 array_push($stations_with_problems,array("id"=>$TwomNode['station_id'], "category"=>$problem['criticality']));
             }
-            elseif($problem['source']=='10m_node'){
+            elseif($problem['source']=='tenMeterNode'){
                 $TenmNode = TenMeterNode::where('station_id', $problem['source_id'])->first()->toArray();
                 //array_push($stations_with_problems,$TenmNode['station_id']);
                 array_push($stations_with_problems,array("id"=>$TenmNode['station_id'], "category"=>$problem['criticality']));
             }
-            elseif($problem['source']=='sink_node'){
+            elseif($problem['source']=='sinkNode'){
                 $sinkNode = SinkNode::where('station_id', $problem['source_id'])->first()->toArray();
                 //array_push($stations_with_problems,$sinkNode['station_id']);
                 array_push($stations_with_problems,array("id"=>$sinkNode['station_id'], "category"=>$problem['criticality']));
             }
-            elseif($problem['source']=='ground_node'){
+            elseif($problem['source']=='groundNode'){
                 $groundNode = GroundNode::where('station_id', $problem['source_id'])->first()->toArray();
                 //array_push($stations_with_problems,$groundNode['station_id']);
                 array_push($stations_with_problems,array("id"=>$groundNode['station_id'], "category"=>$problem['criticality']));
