@@ -44,15 +44,8 @@
                     <li class="has-submenu"><a href="{{ URL::to('probTbData') }}"><i class="ion-close"></i> <span class="nav-label">Problems Identified</span></a></li>
 
 
-                    <li class="has-submenu"><a href="#"><i class="ion-flask"></i> <span class="nav-label">Reports</span></a>
-                        <ul class="list-unstyled">
-                            <li><a href="{{URL::to('general_reports')}}">General Station Reports</a></li>
-                            <!-- <li><a href="{{URL::to('node10m_report')}}">10m Node</a></li>
-                            <li><a href="{{URL::to('node2m_report')}}">2m Node</a></li>
-                            <li><a href="{{URL::to('nodegnd_report')}}">Ground Node</a></li>
-                            <li><a href="{{URL::to('nodesink_report')}}">Sink Node</a></li> -->
+                    <li class="has-submenu"><a href="{{URL::to('general_reports')}}"><i class="ion-flask"></i> <span class="nav-label">Reports</span></a>
 
-                        </ul>
                     </li>
 
 
