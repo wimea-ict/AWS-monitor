@@ -14,7 +14,7 @@ class ReportController extends Controller
 {
     public function report(){
         //get all the problems with status reported
-        
+
         $reported_problems = DB::table('problems')
                 ->where('status','reported')->get();
 
@@ -24,41 +24,41 @@ class ReportController extends Controller
             //get the problems orign station to determine report method
             // return array($problem->source,$problem->source_id);
             $problem_station=$this->getStationId($problem->source,$problem->source_id);
-            
+
             $mstation_id=$problem_station["station_id"];
 
-            
+
             $m_node=$problem->source;
 
 
-            $problem_report=DB::table('reports')
-                ->where('problem_id',$problem->id)->orderBy('report_id', 'desc')->first();
-            
+
             //get reporting type
             $reporting_mthd_interval=DB::table("station_problem_settings")
                             ->select("report_method","reporting_time_interval")
                             ->where('classification_id',$problem->classification_id)
                             ->where('station_id',$problem_station["station_id"])->first();
-                        
+
             $problem_description=DB::table('problem_classification')
                 ->select("problem_description")
                 ->where('id',$problem->classification_id)->first();
 
-            
+
 
             if(!empty($reporting_mthd_interval)){
                 $reporting_type=$reporting_mthd_interval->report_method;
                 $interval=$reporting_mthd_interval->reporting_time_interval;
-               
+
             }else{
                 //use default
                 $reporting_type="email";
-                
+
                 $interval=10;
             }
-            
-            
-                
+
+            $problem_report=DB::table('reports')
+                ->where('problem_id',$problem->id)->orderBy('report_id', 'desc')->first();
+
+
             if(empty($problem_report)){
 
                 //insert the problem
@@ -77,10 +77,10 @@ class ReportController extends Controller
 
                 $date=Carbon::parse($problem_report->datetime);
 
-                
+
                 $now = Carbon::now();
                 $now=$now->addHours(3);//to change it to east african time
-                
+
                 $diff = $date->diffInHours($now);
 
                 if($diff>=$interval){
@@ -91,22 +91,22 @@ class ReportController extends Controller
                     "report_counter"=>(++$problem_report->report_counter),
                     "station_id"=>$mstation_id,
                     "node"=>(($m_node=="station")?"":$m_node)
-                    
+
                     ]);
-                    
+
                     $message=$problem_station["source"]." ".$problem_description->problem_description;
                     $this->sendReport($reporting_type,$problem_station["source"],$message);
                 }else{
                     //do nothing
                 }
-                
+
                 //check time difference btn now and last reporting time
 
-                //get the problem description from problem configuration table 
+                //get the problem description from problem configuration table
                 //check reporting type and report the problem
-                
 
-                
+
+
             }
         }
 
@@ -116,34 +116,41 @@ class ReportController extends Controller
 
     public function sendReport($type,$source,$message1){
 
+      // Create an authenticated client for the Twilio API
+      // $client = new Client(env('TWILIO_ACCOUNT_SID'), env('MTWILIO_AUTH_TOKEN'));
+      
+      $accountSid ='AC17a43cdfd181a7f3644ec5985c762ba8';//env('TWILIO_ACCOUNT_SID');
+      $authToken = 'f02338157367fed0518f0d91a67da0c1';//env('TWILIO_AUTH_TOKEN');
+      $twilioNumber ='+18055002908'; //env('TWILIO_NUMBER');
+      $to='+256706440588';
+      $client = new Client($accountSid, $authToken);
+
         if($type=="sms"){
             //send via sms
 
             // Get form inputs
-        $number = "+256706440588";
-        $message = $message1;
-        
-        // Create an authenticated client for the Twilio API
 
-        $client = new Client(env('TWILIO_ACCOUNT_SID'), env('MTWILIO_AUTH_TOKEN'));
-        
-        
-        // Use the Twilio REST API client to send a text message
+        $message = $message1;
+
         try {
-            $m=$client->messages->create(
-                $number,// the phone number the text will be sent to
-                array(
-                    'from' => env('TWILIO_NUMBER'),
-                    'body' => $message// the body of the text message
-                )
+            $client->messages->create(
+                $to,
+                [
+                    "body" => $message,
+                    "from" => $twilioNumber
+                    //   On US phone numbers, you could send an image as well!
+                    //  'mediaUrl' => $imageUrl
+                ]
             );
-            return "okay";
-        } catch (Exception $e) {
-            Log::error($e->getMessage());
-            return $e->getMessage();
+            Log::info('Message sent to ' . $twilioNumber);
+        } catch (TwilioException $e) {
+            Log::error(
+                'Could not send SMS notification.' .
+                ' Twilio replied with: ' . $e
+            );
         }
 
-        //end sms 
+        //end sms
         }else if($type=="email"){
             //send via email
             \Mail::raw($message1, function($message)
@@ -163,7 +170,28 @@ class ReportController extends Controller
                 $message->from('byarus90@gmail.com', 'WIMEA ICT');
                 $message->to('kibsysapps@gmail.com');
             });
-        }
+
+            $message = $message1;
+
+            try {
+                $client->messages->create(
+                    $to,
+                    [
+                        "body" => $message,
+                        "from" => $twilioNumber
+                        //   On US phone numbers, you could send an image as well!
+                        //  'mediaUrl' => $imageUrl
+                    ]
+                );
+                Log::info('Message sent to ' . $twilioNumber);
+            } catch (TwilioException $e) {
+                Log::error(
+                    'Could not send SMS notification.' .
+                    ' Twilio replied with: ' . $e
+                );
+            }
+
+          }
 
     }
 
@@ -180,7 +208,7 @@ class ReportController extends Controller
 
                 $data["source"]=$two_meter[0]->StationName."'s "."2m Node";
                 $data["station_id"]=$two_meter[0]->station_id;
-                
+
             break;
 
             case "10m_node":
@@ -206,7 +234,7 @@ class ReportController extends Controller
             break;
 
             case "ground_node":
-                //get station id from grnode table 
+                //get station id from grnode table
 
                 //
                 $ground_node=DB::table('groundnode')
@@ -231,7 +259,7 @@ class ReportController extends Controller
                 $data["station_id"]=$source_id;
             break;
         }
-        
+
         return $data;
     }
 }
