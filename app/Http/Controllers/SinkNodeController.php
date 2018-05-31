@@ -75,13 +75,14 @@ class SinkNodeController extends Controller
         foreach($nodeStatus as $status){
 
             if($status->V_MCU=="" || $status->V_MCU==null){
-              // $status->V_MCU=0;
+              $status->V_MCU=-1;
             }else if($status->V_IN=="" || $status->V_IN==null){
-              //$status->V_IN=0;
-            }else{
-              $temp_array=$status->y.",".(float)$status->V_MCU.",".(float)$status->V_IN."\\n ";
-              $dyGraph_data.=$temp_array;
+              $status->V_IN=-1;
             }
+
+            $temp_array=$status->y.",".(float)$status->V_MCU.",".(float)$status->V_IN."\\n ";
+            $dyGraph_data.=$temp_array;
+
 
         }
 
@@ -104,14 +105,13 @@ class SinkNodeController extends Controller
         $pressure_data="";
 
         foreach($pressure as $pres){
-            if(empty($pres->CLP) )
+            if(empty($pres->CLP))
             {
-                // do nothing
+                $pres->CLP=-1;
             }
-            else{
-                $temp_array=$pres->y.",".(float)$pres->CLP."\\n ";
-                $pressure_data.=$temp_array;
-            }
+
+            $temp_array=$pres->y.",".(float)$pres->CLP."\\n ";
+            $pressure_data.=$temp_array;
 
         }
 

@@ -70,20 +70,17 @@ class TwoMNodeController extends Controller
         }
 
 
-        foreach ($nodeStatus as $status){
-            if($status->V_MCU=="" || $status->V_MCU==null){
-              $status->V_MCU=0;
-            }
-            if($status->V_IN=="" || $status->V_IN==null){
-              $status->V_IN=0;
-            }
-        }
-
-
-
         $dyGraph_data="";
         //need to change instead of i pass the value of y but need to pass it as a string
         foreach($nodeStatus as $status){
+          if($status->V_MCU=="" || $status->V_MCU==null){
+            $status->V_MCU=-1;
+          }
+          
+          if($status->V_IN=="" || $status->V_IN==null){
+            $status->V_IN=-1;
+          }
+
             $temp_array=$status->y.",".(float)$status->V_MCU.",".(float)$status->V_IN."\\n";
             $dyGraph_data.=$temp_array;
 
@@ -110,19 +107,18 @@ class TwoMNodeController extends Controller
 
             if(empty($humid->Dry_Bulb))
             {
-                // do nothing
-            }else{
-
-                if($humid->Dry_Bulb!=0){
-                $hum_val=((150*$humid->Wet_Bulb)/$humid->Dry_Bulb)-50;
-                }else{
-                    $hum_val=0;
-                }
-
-                $temp_array=$humid->y.",".(float)$hum_val."\\n";
-                $humidity_graph_data.=$temp_array;
-
+              $humid->Dry_Bulb=-1;
             }
+
+            if($humid->Dry_Bulb!=0){
+                $hum_val=((150*$humid->Wet_Bulb)/$humid->Dry_Bulb)-50;
+            }else{
+                  $hum_val=0;
+            }
+
+            $temp_array=$humid->y.",".(float)$hum_val."\\n";
+
+            $humidity_graph_data.=$temp_array;
 
         }
 
@@ -147,12 +143,13 @@ class TwoMNodeController extends Controller
         foreach($templature as $temp){
             if(empty($temp->Dry_Bulb))
             {
-                // do nothing
-            }else{
-                $temp_array=$temp->y.",".(float)$temp->Dry_Bulb."\\n";
-                $temp_graph_data.=$temp_array;
-
+                $temp->Dry_Bulb=-1;
             }
+
+            $temp_array=$temp->y.",".(float)$temp->Dry_Bulb."\\n";
+            $temp_graph_data.=$temp_array;
+
+
 
         }
 
