@@ -68,7 +68,7 @@
                                         <div class="form-group clearfix">
                                                 <div class="col-sm-12  control-label text-right">
                                                                                     <label class="switch">
-                                                                                            <input type="checkbox" name="station_status" required value="Yes" checked>
+                                                                                            <input type="checkbox" name="station_status" required value="on" checked>
                                                                                             <span class="slider round"></span>
                                                                                     </label>
                                                 </div>

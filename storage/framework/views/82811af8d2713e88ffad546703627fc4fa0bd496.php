@@ -18,7 +18,7 @@
                                             <div class="form-group clearfix">
                                                 <div class="col-sm-12  control-label text-right">
                                                                                     <label class="switch">
-                                                                                            <input type="checkbox" name="station_status" value="Yes" checked>
+                                                                                            <input type="checkbox" name="station_status" value="on" checked>
                                                                                             <span class="slider round"></span>
                                                                                     </label>
                                                 </div>
@@ -228,7 +228,7 @@
                                                                                 </div>
                                                                                 <div class="col-sm-6  control-label text-right">
                                                                                     <label class="switch">
-                                                                                            <input type="checkbox" name="10sensor_status" value="Yes" checked>
+                                                                                            <input type="checkbox" name="10sensor_status" value="on" checked>
                                                                                             <span class="slider round"></span>
                                                                                     </label>
                                                                                 </div>
@@ -279,7 +279,7 @@
                                                                                 </div>
                                                                                 <div class="col-sm-6  control-label text-right">
                                                                                     <label class="switch">
-                                                                                            <input type="checkbox" name="wssensor_status" value="Yes" checked>
+                                                                                            <input type="checkbox" name="wssensor_status" value="on" checked>
                                                                                             <span class="slider round"></span>
                                                                                     </label>
                                                                                 </div>
@@ -326,7 +326,7 @@
                                                                                 </div>
                                                                                 <div class="col-sm-6  control-label text-right">
                                                                                     <label class="switch">
-                                                                                            <input type="checkbox" name="wdsensor_status" value="Yes" checked>
+                                                                                            <input type="checkbox" name="wdsensor_status" value="on" checked>
                                                                                             <span class="slider round"></span>
                                                                                     </label>
                                                                                 </div>
@@ -514,7 +514,7 @@
                                                                                 </div>
                                                                                 <div class="col-sm-6  control-label text-right">
                                                                                     <label class="switch">
-                                                                                            <input type="checkbox" name="rhsensor_status" value="Yes" checked>
+                                                                                            <input type="checkbox" name="rhsensor_status" value="on" checked>
                                                                                             <span class="slider round"></span>
                                                                                     </label>
                                                                                 </div>
@@ -564,7 +564,7 @@
                                                                                 </div>
                                                                                 <div class="col-sm-6  control-label text-right">
                                                                                     <label class="switch">
-                                                                                            <input type="checkbox" name="tssensor_status" value="Yes" checked>
+                                                                                            <input type="checkbox" name="tssensor_status" value="on" checked>
                                                                                             <span class="slider round"></span>
                                                                                     </label>
                                                                                 </div>
@@ -608,7 +608,7 @@
                                                                                 </div>
                                                                                 <div class="col-sm-4 control-label text-center">
                                                                                     <label class="switch">
-                                                                                            <input type="checkbox" name="gndnode_status" value="Yes" checked>
+                                                                                            <input type="checkbox" name="gndnode_status" value="on" checked>
                                                                                             <span class="slider round"></span>
                                                                                     </label>
                                                                                 </div>
@@ -780,7 +780,7 @@
                                                                                 </div>
                                                                                 <div class="col-sm-6  control-label text-right">
                                                                                     <label class="switch">
-                                                                                            <input type="checkbox" name="ppsensor_status" value="Yes" checked>
+                                                                                            <input type="checkbox" name="ppsensor_status" value="on" checked>
                                                                                             <span class="slider round"></span>
                                                                                     </label>
                                                                                 </div>
@@ -829,7 +829,7 @@
                                                                                 </div>
                                                                                 <div class="col-sm-6  control-label text-right">
                                                                                     <label class="switch">
-                                                                                            <input type="checkbox" name="stsensor_status" value="Yes" checked>
+                                                                                            <input type="checkbox" name="stsensor_status" value="on" checked>
                                                                                             <span class="slider round"></span>
                                                                                     </label>
                                                                                 </div>
@@ -880,7 +880,7 @@
                                                                                 </div>
                                                                                 <div class="col-sm-6  control-label text-right">
                                                                                     <label class="switch">
-                                                                                            <input type="checkbox" name="smsensor_status" value="Yes" checked>
+                                                                                            <input type="checkbox" name="smsensor_status" value="on" checked>
                                                                                             <span class="slider round"></span>
                                                                                     </label>
                                                                                 </div>
@@ -922,7 +922,7 @@
                                                                                 </div>
                                                                                 <div class="col-sm-4 control-label text-center">
                                                                                     <label class="switch">
-                                                                                            <input type="checkbox" name="sinknode_status" value="Yes" checked>
+                                                                                            <input type="checkbox" name="sinknode_status" value="on" checked>
                                                                                             <span class="slider round"></span>
                                                                                     </label>
                                                                                 </div>
@@ -1072,7 +1072,7 @@
                                                                                 </div>
                                                                                 <div class="col-sm-6  control-label text-right">
                                                                                 <label class="switch">
-                                                                                            <input type="checkbox" name="pssensor_status" value="Yes" checked>
+                                                                                            <input type="checkbox" name="pssensor_status" value="on" checked>
                                                                                             <span class="slider round"></span>
                                                                                     </label>
                                                                                 </div>
