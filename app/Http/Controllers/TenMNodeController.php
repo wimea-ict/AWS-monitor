@@ -79,14 +79,16 @@ class TenMNodeController extends Controller
         $dyGraph_data="";
 
         foreach($nodeStatus as $status){
-            if($status->V_MCU=="" || $status->V_MCU==null || $status->V_MCU==0){
-              //$status->V_MCU=0;
-            }else if($status->V_IN=="" || $status->V_IN==null || $status->V_IN==0){
-              //$status->V_IN=0;
-            }else{
-              $temp_array=$status->y.",".(float)$status->V_MCU.",".(float)$status->V_IN."\\n";
-              $dyGraph_data.=$temp_array;
+            if($status->V_MCU=="" || $status->V_MCU==null ){
+              $status->V_MCU=-1;
             }
+
+            if($status->V_IN=="" || $status->V_IN==null ){
+              $status->V_IN=-1;
+            }
+
+            $temp_array=$status->y.",".(float)$status->V_MCU.",".(float)$status->V_IN."\\n";
+            $dyGraph_data.=$temp_array;
 
         }
 
@@ -107,6 +109,10 @@ class TenMNodeController extends Controller
         $insulation_data="";
 
         foreach($insulation as $insulation){
+          if(empty($insulation->DurationOfPeriodOfPrecipitation)){
+            $insulation->DurationOfPeriodOfPrecipitation-1;
+          }
+
             $temp_array=$insulation->y.",".(float)$insulation->DurationOfPeriodOfPrecipitation."\\n";
             $insulation_data.=$temp_array;
 
@@ -127,6 +133,10 @@ class TenMNodeController extends Controller
         $windspeed_data="";
 
         foreach($windspeed as $windsp){
+          if(empty($windsp->Wind_Speed)){
+            $windsp->Wind_Speed=-1;
+          }
+
             $temp_array=$windsp->y.",".(float)$windsp->Wind_Speed."\\n";
             $windspeed_data.=$temp_array;
 
@@ -147,9 +157,13 @@ class TenMNodeController extends Controller
       $wind_direction_data="";
 
       foreach($wind_direction as $wind_d){
-              $temp_array=$wind_d->y.",".(float)$wind_d->Wind_Direction;
-              $wind_direction_data.=$temp_array;
+          if(empty($wind_d->Wind_Direction)){
+            $wind_d->Wind_Direction=-1;
+          }
 
+          $temp_array=$wind_d->y.",".(float)$wind_d->Wind_Direction;
+
+          $wind_direction_data.=$temp_array;
           }
 
 

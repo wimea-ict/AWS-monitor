@@ -9,6 +9,7 @@ use station\Http\Controllers\Controller;
 use station\Http\Controllers\AnalyzerHandler;
 use DateTimeZone;
 use DateTime;
+use \Carbon\Carbon;
 
 class NodeStatusAnalyzerController extends Controller
 {
@@ -28,6 +29,7 @@ class NodeStatusAnalyzerController extends Controller
     private $sink_nd_data;
     public function __construct()
     {
+        // dd(Carbon::now('Africa/Kampala'));
         $this->Handler = new AnalyzerHandler();
         $this->txt_2m_col_name  = 'txt_2m_value';
         $this->txt_10m_col_name  = 'txt_10m_value';
@@ -67,11 +69,13 @@ class NodeStatusAnalyzerController extends Controller
         $seq = -1;  
         
         $lastId = $this->Handler->getLastId('nodestatus');
+        /* declare a collection to store the stations that sent data */
+        $available_stations = array();
 
         // pick only columns that we'll be using since that will be faster. 
         // We need date_time_recorded to verify the date time sent by the node
-        // ->get(500) at a time //'SEQ' - to track packet drops
-        DB::table($this->Handler->getNodeStatusTbName())->orderBy('id')->select('id','V_MCU','V_IN','date','time','TXT','date_time_recorded')->where('id','>',$lastId)->chunk(100, function($nodes) use(&$date, &$id_first_checked, &$id_last_checked, &$counter,&$seq){
+        // ->get(500) at a time //'SEQ' - to track packet drops 173492
+        DB::table($this->Handler->getNodeStatusTbName())->orderBy('id')->select('id','V_MCU','V_IN','date','time','TXT','date_time_recorded')->where('id','>',173492)->chunk(100, function($nodes) use(&$date, &$id_first_checked, &$id_last_checked, &$counter,&$seq,&$available_stations){
 
             /* declare a collection to store the nodes that sent data */
             $available_nodes = array(
@@ -93,7 +97,7 @@ class NodeStatusAnalyzerController extends Controller
             foreach ($nodes as $node) {
 
                 //store first id
-                if ($id_first_checked == 0) {// ensure it's not yet set
+                if ($id_first_checked === 0) {// ensure it's not yet set
                     $id_first_checked = $node->id;
                 }
                 //store last id checked
@@ -153,6 +157,10 @@ class NodeStatusAnalyzerController extends Controller
                 /* store the node id if it isn't there already. search strictly */
                 if ((array_search($nd_id, $available_nodes[$nd_data], true)) === false) {
                     array_push($available_nodes[$nd_data], $nd_id);
+                }
+                /* store the station id if it isn't there already. search strictly */
+                if ((array_search($stn_id, $available_stations, true)) === false) {
+                    array_push($available_stations, $stn_id);
                 }
                 
                 // ------------------------------------------------------------------------------
@@ -235,17 +243,30 @@ class NodeStatusAnalyzerController extends Controller
             $this->Handler->findMissingNodes($available_nodes,$criticality,$max_track_counter);
 
             //dd($counter);
-            if ($counter === 10000) { // check if max has been reached.
-                return false; // stop chucking...
-            }
+            // if ($counter === 10000) { // check if max has been reached.
+            //     return false; // stop chucking...
+            // }
         });
+
+        $no_of_recs = $id_last_checked - $id_first_checked + 1;
+        if ($no_of_recs === 1) {
+            $no_of_recs = 0;
+        }
+
+        if ($id_last_checked === 0) {
+            $id_last_checked = $lastId;
+        }
+
+        // check for missing stations
+        $this->Handler->findMissingStations($available_stations);
 
         // update last check table
         $this->Handler->updateChecksTable('nodestatus',$id_first_checked,$id_last_checked);
 
+        
         //show data in the problems table
         return redirect('/probTbData')->with([
-            'flash_message' => 'Analyzed '.($id_last_checked - $id_first_checked + 1).' records'
+            'flash_message' => 'Analyzed '. $no_of_recs .' records'
         ]);
     }
 }

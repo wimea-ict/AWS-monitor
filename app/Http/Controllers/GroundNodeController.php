@@ -80,14 +80,14 @@ class GroundNodeController extends Controller
         $dyGraph_data="";
         //need to change instead of i pass the value of y but need to pass it as a string
         foreach($nodeStatus as $status){
-            if($status->V_MCU=="" || $status->V_MCU==null || $status->V_MCU==0){
-              // $status->V_MCU=0;
+            if($status->V_MCU=="" || $status->V_MCU==null){
+              $status->V_MCU=-1;
             }else if($status->V_IN=="" || $status->V_IN==null || $status->V_IN==0){
-              // $status->V_IN=0;
-            }else{
-              $temp_array=$status->y.",".(float)$status->V_MCU.",".(float)$status->V_IN."\\n";
-              $dyGraph_data.=$temp_array;
+              $status->V_IN=-1;
             }
+
+            $temp_array=$status->y.",".(float)$status->V_MCU.",".(float)$status->V_IN."\\n";
+            $dyGraph_data.=$temp_array;
 
         }
 
@@ -108,12 +108,13 @@ class GroundNodeController extends Controller
 
         //need to change instead of i pass the value of y but need to pass it as a string
         foreach($precipitations as $precipitation){
-          if(empty($precipitation->DurationOfPeriodOfPrecipitation) || $precipitation->DurationOfPeriodOfPrecipitation==0){
+          if(empty($precipitation->DurationOfPeriodOfPrecipitation)){
+            $precipitation->DurationOfPeriodOfPrecipitation=-1;
+          }
 
-          }else{
             $temp_array=$precipitation->y.",".(float)$precipitation->DurationOfPeriodOfPrecipitation."\\n";
             $precipitation_graph_data.=$temp_array;
-          }
+
 
 
         }
@@ -133,13 +134,12 @@ class GroundNodeController extends Controller
 
         //need to change instead of i pass the value of y but need to pass it as a string
         foreach($soilTemplature as $soilTemp){
-          if(empty($soilTemp->SoilTemperature) || $soilTemp->SoilTemperature==0){
-
-          }else{
-            $temp_array=$soilTemp->y.",".(float)$soilTemp->SoilTemperature."\\n";
-            $soilTemplature_graph_data.=$temp_array;
+          if(empty($soilTemp->SoilTemperature)){
+            $soilTemp->SoilTemperature=-1;
           }
 
+          $temp_array=$soilTemp->y.",".(float)$soilTemp->SoilTemperature."\\n";
+          $soilTemplature_graph_data.=$temp_array;
 
         }
 
@@ -157,12 +157,13 @@ class GroundNodeController extends Controller
 
         //need to change instead of i pass the value of y but need to pass it as a string
         foreach($SoilMoisture as $SoilMois){
-          if(empty($SoilMois->SoilMoisture) || $SoilMois->SoilMoisture==0){
-
-          }else{
-            $temp_array=$SoilMois->y.",".(float)$SoilMois->SoilMoisture."\\n";
-            $SoilMoisture_graph_data.=$temp_array;
+          if(empty($SoilMois->SoilMoisture)){
+              $SoilMois->SoilMoisture=-1;
           }
+
+          $temp_array=$SoilMois->y.",".(float)$SoilMois->SoilMoisture."\\n";
+          $SoilMoisture_graph_data.=$temp_array;
+
         }
 
         $data["soil_moisture"]=$SoilMoisture_graph_data;
