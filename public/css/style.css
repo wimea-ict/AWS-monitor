@@ -2067,3 +2067,7 @@ input:checked + .slider:before {
 .off_status_btn{
   font-size:30px; color:#a94442;
 }
+.nopadding {
+  padding: 0 !important;
+  margin: 0 !important;
+}

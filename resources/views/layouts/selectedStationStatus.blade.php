@@ -9,7 +9,7 @@
                             
                                 <form class="form-horizontal" role="form">
                                     
-                                    <div class="form-group clearfix">
+                                    <div class="row">
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label class="col-sm-6 control-label status_label" >2m Node</label>
@@ -44,7 +44,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group clearfix">
+                                    <div class="row">
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label class="col-sm-6 control-label status_label">Sink Node</label>
@@ -75,7 +75,7 @@
                                         </div>
                                     </div>
                                     
-                                    <div class="form-group clearfix">
+                                    <div class="row">
                                     
                                         <div class="col-sm-6">
                                             <div class="form-group">
@@ -107,7 +107,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group clearfix">
+                                    <div class="row">
                                     
                                         <div class="col-sm-6">
                                             <div class="form-group">
@@ -138,7 +138,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group clearfix">
+                                    <div class="row">
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label class="col-sm-6 control-label status_label">Soil Moisture Sensor</label>
@@ -169,7 +169,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group clearfix" >
+                                    <div class="row" >
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label class="col-sm-6 control-label status_label">wind Speed Sensor</label>

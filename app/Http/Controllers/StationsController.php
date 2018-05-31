@@ -242,8 +242,11 @@ class StationsController extends Controller
           ]);
 
           $stationcreation->save();
+          $station =  $stationcreation->toArray();
 
-          $station = Station::where('StationName', $request->get('sname'))->first();
+          //dd($station);
+
+          //$station = Station::where('StationName', $request->get('sname'))->first();
         
           app('station\Http\Controllers\ProblemConfigurationsController')->store($station["station_id"]);
           /* 
