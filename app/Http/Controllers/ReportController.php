@@ -199,7 +199,7 @@ class ReportController extends Controller
     public function getStationId($source,$source_id){
         $data=array();
         switch($source){
-            case "2m_node":
+            case "twoMeterNode":
                 //get station id and station name from 2m_node table
               $two_meter=DB::table('twometernode')
                 ->join('stations','stations.station_id','=','twometernode.station_id')
@@ -211,7 +211,7 @@ class ReportController extends Controller
 
             break;
 
-            case "10m_node":
+            case "tenMeterNode":
                 //get station id from 10m node table
                 $ten_meter=DB::table('tenmeternode')
                 ->join('stations','stations.station_id','=','tenmeternode.station_id')
@@ -222,7 +222,7 @@ class ReportController extends Controller
                 $data["station_id"]=$ten_meter[0]->station_id;
             break;
 
-            case "sink_node":
+            case "sinkNode":
                 //get station_id from sink node table
                 $sink_node=DB::table('sinknode')
                 ->join('stations','stations.station_id','=','sinknode.station_id')
@@ -233,7 +233,7 @@ class ReportController extends Controller
                 $data["station_id"]=$sink_node[0]->station_id;
             break;
 
-            case "ground_node":
+            case "groundNode":
                 //get station id from grnode table
 
                 //
