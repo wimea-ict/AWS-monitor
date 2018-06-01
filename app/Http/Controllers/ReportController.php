@@ -37,7 +37,7 @@ class ReportController extends Controller
                             ->select("report_method","reporting_time_interval")
                             ->where('problem_id',$problem->classification_id)
                             ->where('station_id',$problem_station["station_id"])->first();
-                            
+
             $problem_description=DB::table('problem_classification')
                 ->select("problem_description")
                 ->where('id',$problem->classification_id)->first();
@@ -160,7 +160,7 @@ class ReportController extends Controller
                 $message->to('kibsysapps@gmail.com');
             });
 
-        }else if($type=="both"){
+        }else if($type=="Both" || $type=="both"){
             //use both email and sms
 
             //send via email
