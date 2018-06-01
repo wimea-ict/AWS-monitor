@@ -201,10 +201,10 @@ class ReportController extends Controller
         switch($source){
             case "twoMeterNode":
                 //get station id and station name from 2m_node table
-              $two_meter=DB::table('twometernode')
-                ->join('stations','stations.station_id','=','twometernode.station_id')
-                ->select('twometernode.station_id as station_id','stations.StationName as StationName')
-                ->where('twometernode.node_id',$source_id)->get();
+              $two_meter=DB::table('twoMeterNode')
+                ->join('stations','stations.station_id','=','twoMeterNode.station_id')
+                ->select('twoMeterNode.station_id as station_id','stations.StationName as StationName')
+                ->where('twoMeterNode.node_id',$source_id)->get();
 
                 $data["source"]=$two_meter[0]->StationName."'s "."2m Node";
                 $data["station_id"]=$two_meter[0]->station_id;
@@ -213,10 +213,10 @@ class ReportController extends Controller
 
             case "tenMeterNode":
                 //get station id from 10m node table
-                $ten_meter=DB::table('tenmeternode')
-                ->join('stations','stations.station_id','=','tenmeternode.station_id')
-                ->select('tenmeternode.station_id as station_id','stations.StationName as StationName')
-                ->where('tenmeternode.node_id',$source_id)->get();
+                $ten_meter=DB::table('tenMeterNode')
+                ->join('stations','stations.station_id','=','tenMeterNode.station_id')
+                ->select('tenMeterNode.station_id as station_id','stations.StationName as StationName')
+                ->where('tenMeterNode.node_id',$source_id)->get();
 
                 $data["source"]=$ten_meter[0]->StationName."'s "."10m Node";
                 $data["station_id"]=$ten_meter[0]->station_id;
@@ -224,10 +224,10 @@ class ReportController extends Controller
 
             case "sinkNode":
                 //get station_id from sink node table
-                $sink_node=DB::table('sinknode')
-                ->join('stations','stations.station_id','=','sinknode.station_id')
-                ->select('sinknode.station_id as station_id','stations.StationName as StationName')
-                ->where('sinknode.node_id',$source_id)->get();
+                $sink_node=DB::table('sinkNode')
+                ->join('stations','stations.station_id','=','sinkNode.station_id')
+                ->select('sinkNode.station_id as station_id','stations.StationName as StationName')
+                ->where('sinkNode.node_id',$source_id)->get();
 
                 $data["source"]=$sink_node[0]->StationName."'s "."Sink Node";
                 $data["station_id"]=$sink_node[0]->station_id;
@@ -237,9 +237,9 @@ class ReportController extends Controller
                 //get station id from grnode table
 
                 //
-                $ground_node=DB::table('groundnode')
-                ->join('stations','stations.station_id','=','groundnode.station_id')
-                ->select('groundnode.station_id as station_id','stations.StationName as StationName')
+                $ground_node=DB::table('groundNode')
+                ->join('stations','stations.station_id','=','groundNode.station_id')
+                ->select('groundNode.station_id as station_id','stations.StationName as StationName')
                 ->where('node_id',$source_id)->get();
 
                 $data["source"]=$ground_node[0]->StationName."'s "."Ground Node";
