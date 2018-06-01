@@ -171,7 +171,10 @@ class StationStatusController extends Controller
         //$problems = Problems::where('')
 
         $stationTaken = Station::where('station_id', $id)->first()->toArray();
-        $problems = Problems::where('status', 'reported')->where('classification_id', '1')->orwhere('classification_id','2')->get()->toArray();
+        $problems = Problems::where('status', 'reported')->where( function ( $query )
+        {
+            $query->where('classification_id', '1')->orwhere('classification_id','2');
+        })->get()->toArray();
         //dd($problems);
         if(!empty($problems)){
         foreach($problems as $problem){

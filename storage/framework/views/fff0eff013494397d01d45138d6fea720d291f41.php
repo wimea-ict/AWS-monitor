@@ -38,21 +38,14 @@
 
                         </ul>
                     </li>
-                    
+
                     <li class="has-submenu"><a href="<?php echo e(URL::to('viewStationStatus')); ?>"><i class="ion-calendar"></i> <span class="nav-label">Station Status</span></a></li>
                     <li class="has-submenu"><a href="<?php echo e(route('register')); ?>"><i class="ion-calendar"></i> <span class="nav-label">Register Users</span></a></li>
                     <li class="has-submenu"><a href="<?php echo e(URL::to('probTbData')); ?>"><i class="ion-close"></i> <span class="nav-label">Problems Identified</span></a></li>
 
 
-                    <li class="has-submenu"><a href="#"><i class="ion-flask"></i> <span class="nav-label">Reports</span></a>
-                        <ul class="list-unstyled">
-                            <li><a href="<?php echo e(URL::to('general_reports')); ?>">General Station Reports</a></li>
-                            <!-- <li><a href="<?php echo e(URL::to('node10m_report')); ?>">10m Node</a></li>
-                            <li><a href="<?php echo e(URL::to('node2m_report')); ?>">2m Node</a></li>
-                            <li><a href="<?php echo e(URL::to('nodegnd_report')); ?>">Ground Node</a></li>
-                            <li><a href="<?php echo e(URL::to('nodesink_report')); ?>">Sink Node</a></li> -->
+                    <li class="has-submenu"><a href="<?php echo e(URL::to('general_reports')); ?>"><i class="ion-flask"></i> <span class="nav-label">Reports</span></a>
 
-                        </ul>
                     </li>
 
 
