@@ -808,10 +808,9 @@ class AnalyzerHandler extends Controller
      * @param $criticality, 
      * @param $max_track_counter
      */
-    public function analyzeSensorData($available_sensor_data, $station_id, $parameter_read, $rec_value, $problemClassfications, $stn_prb_conf, $criticality, $max_track_counter)
-    {        
-
-        $sensors_available = $this->getSensors();
+    public function analyzeSensorData($available_sensor_data, $station_id, $parameter_read, $rec_value, $problemClassfications, $stn_prb_conf, $criticality, $max_track_counter, $sensor_id)
+    {
+        // $sensors_available = $this->getSensors();
         // dd('hold it right here! - '.$parameter_read. ' stn id - '. $station_id . "\n". $available_sensors);
         foreach ($available_sensor_data as $data) {
             /**
@@ -825,17 +824,15 @@ class AnalyzerHandler extends Controller
             if ($data->station_id === $station_id) {
                 // dd('hold it right here! - '.$parameter_read. ' stn id - '. $station_id);
                 if (stripos($data->parameter_read, $parameter_read) !== false) {
-                    $sensor_id = -1;
-                    /* get sensor id */
-                    // 'id','node_id','node_type','parameter_read', 'station_id'
-                    foreach ($$sensors_available as $sensor) {
-                        if ($sensor->station_id === $station_id && $sensor->parameter_read === $parameter_read ) {
-                            $sensor_id = $sensor->id;
-                            break;
-                        }
-                    }
-
-                    dd($sensor_id);
+                    // $sensor_id = -1;
+                    // /* get sensor id */
+                    // // 'id','node_id','node_type','parameter_read', 'station_id'
+                    // foreach ($sensors_available as $sensor) {
+                    //     if ($sensor->station_id === $station_id && $sensor->parameter_read === $parameter_read ) {
+                    //         $sensor_id = $sensor->id;
+                    //         break;
+                    //     }
+                    // }
                     // dd('hold it right here! - '.$parameter_read. ' stn id - '. $station_id);
                     if ($rec_value < $data->min_value) {
                         # then value is less than minimum
@@ -873,12 +870,18 @@ class AnalyzerHandler extends Controller
     public function getSensorId($sensors_available, $parameter_read, $station_id)
     {
         $sensor_id = -1;
+        // dd($sensors_available);  && 
+        // dd($parameter_read . " - " .$station_id);
         /* get sensor id */
         // 'id','node_id','node_type','parameter_read', 'station_id'
         foreach ($sensors_available as $sensor) {
+            // dd($parameter_read . " - " .$station_id); 
             if ($sensor->station_id === $station_id && $sensor->parameter_read === $parameter_read) {
-                $sensor_id = $sensor->id;
-                break;
+                // dd($parameter_read . " - " .$station_id); 
+                if ($sensor->parameter_read === $parameter_read) {
+                    $sensor_id = $sensor->id;
+                    break;
+                }
             }
         }
         return $sensor_id;
@@ -889,7 +892,10 @@ class AnalyzerHandler extends Controller
      */
     public function getEnabledSations()
     {
-        return DB::table($this->stns_tb)->select('station_id')->where('StationStatus','=','on')->get();
+        return DB::table($this->stns_tb)->select('station_id')->where([
+            ['StationStatus','=','on'],
+            ['stationCategory','=','aws'],
+        ])->get();
     }
 
     /**
@@ -1015,7 +1021,7 @@ class AnalyzerHandler extends Controller
 
         foreach ($nodeTypes as $nodeType) {
             // dd($nodeType); //'node_id','node_type','parameter_read'
-            $sensors = DB::table($this->sensors_tb)->select('id','node_id')->where([
+            $sensors = DB::table($this->sensors_tb)->select('id','node_id','node_type','parameter_read')->where([
                 ['node_type','=',$nodeType],
                 ['sensor_status','=','on'],
             ])->get();
