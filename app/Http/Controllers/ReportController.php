@@ -35,9 +35,9 @@ class ReportController extends Controller
             //get reporting type
             $reporting_mthd_interval=DB::table("station_problem_settings")
                             ->select("report_method","reporting_time_interval")
-                            ->where('classification_id',$problem->classification_id)
+                            ->where('problem_id',$problem->classification_id)
                             ->where('station_id',$problem_station["station_id"])->first();
-
+                            
             $problem_description=DB::table('problem_classification')
                 ->select("problem_description")
                 ->where('id',$problem->classification_id)->first();
