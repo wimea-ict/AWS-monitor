@@ -216,7 +216,7 @@ class ObservationSlipAnalyzerController extends Controller
         });
 
         // dd($available_sensors);
-        dd($sensor_data);
+        // dd($sensor_data);
         
         $sensor_data->map(function($value, $key) use($stn_prb_conf,$criticality,$max_track_counter,$relHumidity, $temp, $insulation, $windSpeed, $windDirection, $rainfall, $soilMoisture, $soilTemp, $pressure){
 
