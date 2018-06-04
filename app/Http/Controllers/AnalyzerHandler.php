@@ -1133,6 +1133,7 @@ class AnalyzerHandler extends Controller
      */
     public function findMissingSensors($available_sensors,$criticality,$max_track_counter)
     {
+        // dd($available_sensors);
         $enabled_sensors = $this->getEnabledSensors();
 
         foreach ($enabled_sensors as $enabled) {
