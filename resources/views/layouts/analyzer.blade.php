@@ -11,10 +11,10 @@
 <!-- Wizard with Validation -->
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12 panel panel-default">
-        <div class="col-md-12 col-sm-12 col-xs-12">
+        {{-- <div class="col-md-12 col-sm-12 col-xs-12">
             <h2><a  class=" btn btn-info pull-left" href="{{ URL::to('analyzeNodeStatus') }}"> Analyze Node Status Data</a></h2>
             <h2><a  class=" btn btn-info pull-right" href="{{ URL::to('analyzeObservationSlip') }}"> Analyze ObservationSlip Data</a></h2>
-        </div>
+        </div> --}}
         <div class="col-md-12 col-sm-12 col-xs-12 panel panel-default">
             <div class="panel-heading"> 
                 <h3 class="panel-title">Problems</h3> 
