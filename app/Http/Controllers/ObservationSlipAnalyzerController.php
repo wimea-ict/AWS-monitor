@@ -209,10 +209,10 @@ class ObservationSlipAnalyzerController extends Controller
             }         
 
             // dd($counter);
-            // if ($counter === 10000) { // check if max has been reached.
-            //     // dd($counter);   
-            //     return false; // stop chucking...
-            // }
+            if ($counter === 1000) { // check if max has been reached.
+                // dd($counter);   
+                return false; // stop chucking...
+            }
         });
 
         // dd($available_sensors);
