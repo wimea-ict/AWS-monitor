@@ -11,7 +11,7 @@
                 <select class="form-control" name="id" id="station_id">
                     <option>--select station--</option>
                     @foreach ($stations as $station)
-                        <option value="{{$station->station_id}}" {{((!empty($selected_station) && $selected_station==$station->station_id)?'selected':'')}} >{{$station->StationName}}</option>
+                        <option value="{{$station->station_id}}" {{(( (!empty($selected_station) && $selected_station==$station->station_id) || $loop->iteration==1 )?'selected':'')}} >{{$station->StationName}}</option>
                     @endforeach
                 </select>
             </div>

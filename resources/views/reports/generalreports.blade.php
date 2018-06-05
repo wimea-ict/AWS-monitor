@@ -20,13 +20,14 @@
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#accordion-test-2" href="#collapseOne-2" aria-expanded="false" class="collapsed">
-                                            10m Node
+                                            2m Node
                                         </a>
                                     </h4>
                                 </div>
                                 <div id="collapseOne-2" class="panel-collapse collapse in">
                                     <div class="panel-body">
-                                          @include("reports.node10m")
+                                        @include("reports.node2m")
+
                                     </div>
                                 </div>
                             </div>
@@ -34,13 +35,13 @@
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#accordion-test-2" href="#collapseTwo-2" class="collapsed" aria-expanded="false">
-                                            2m Node
+                                            10m Node
                                         </a>
                                     </h4>
                                 </div>
                                 <div id="collapseTwo-2" class="panel-collapse collapse in">
                                     <div class="panel-body">
-                                      @include("reports.node2m")
+                                          @include("reports.node10m")
 
                                       </div>
                                 </div>
@@ -87,6 +88,9 @@
 @section('page_specific_script_files')
     {{--  <script src="assets/morris/node2mcharts.js"></script>  --}}
     <script>
+
+
+
 
     $( "#station_id" ).change(function() {
           $("#report_form").submit()
@@ -274,5 +278,14 @@
             });
 
         });//end out function
+
+        $(window).on('load', function() {
+          var first_station_submit="<?=$submit_form?>"
+
+          if(first_station_submit!=""){
+              $("#report_form").submit()
+            }
+      });
+
     </script>
 @endsection

@@ -35,7 +35,7 @@ class ReportController extends Controller
             //get reporting type
             $reporting_mthd_interval=DB::table("station_problem_settings")
                             ->select("report_method","reporting_time_interval")
-                            ->where('classification_id',$problem->classification_id)
+                            ->where('problem_id',$problem->classification_id)
                             ->where('station_id',$problem_station["station_id"])->first();
 
             $problem_description=DB::table('problem_classification')
@@ -118,7 +118,7 @@ class ReportController extends Controller
 
       // Create an authenticated client for the Twilio API
       // $client = new Client(env('TWILIO_ACCOUNT_SID'), env('MTWILIO_AUTH_TOKEN'));
-      
+
       $accountSid ='AC17a43cdfd181a7f3644ec5985c762ba8';//env('TWILIO_ACCOUNT_SID');
       $authToken = 'f02338157367fed0518f0d91a67da0c1';//env('TWILIO_AUTH_TOKEN');
       $twilioNumber ='+18055002908'; //env('TWILIO_NUMBER');
@@ -160,7 +160,7 @@ class ReportController extends Controller
                 $message->to('kibsysapps@gmail.com');
             });
 
-        }else if($type=="both"){
+        }else if($type=="Both" || $type=="both"){
             //use both email and sms
 
             //send via email
@@ -199,47 +199,47 @@ class ReportController extends Controller
     public function getStationId($source,$source_id){
         $data=array();
         switch($source){
-            case "2m_node":
+            case "twoMeterNode":
                 //get station id and station name from 2m_node table
-              $two_meter=DB::table('twometernode')
-                ->join('stations','stations.station_id','=','twometernode.station_id')
-                ->select('twometernode.station_id as station_id','stations.StationName as StationName')
-                ->where('twometernode.node_id',$source_id)->get();
+              $two_meter=DB::table('twoMeterNode')
+                ->join('stations','stations.station_id','=','twoMeterNode.station_id')
+                ->select('twoMeterNode.station_id as station_id','stations.StationName as StationName')
+                ->where('twoMeterNode.node_id',$source_id)->get();
 
                 $data["source"]=$two_meter[0]->StationName."'s "."2m Node";
                 $data["station_id"]=$two_meter[0]->station_id;
 
             break;
 
-            case "10m_node":
+            case "tenMeterNode":
                 //get station id from 10m node table
-                $ten_meter=DB::table('tenmeternode')
-                ->join('stations','stations.station_id','=','tenmeternode.station_id')
-                ->select('tenmeternode.station_id as station_id','stations.StationName as StationName')
-                ->where('tenmeternode.node_id',$source_id)->get();
+                $ten_meter=DB::table('tenMeterNode')
+                ->join('stations','stations.station_id','=','tenMeterNode.station_id')
+                ->select('tenMeterNode.station_id as station_id','stations.StationName as StationName')
+                ->where('tenMeterNode.node_id',$source_id)->get();
 
                 $data["source"]=$ten_meter[0]->StationName."'s "."10m Node";
                 $data["station_id"]=$ten_meter[0]->station_id;
             break;
 
-            case "sink_node":
+            case "sinkNode":
                 //get station_id from sink node table
-                $sink_node=DB::table('sinknode')
-                ->join('stations','stations.station_id','=','sinknode.station_id')
-                ->select('sinknode.station_id as station_id','stations.StationName as StationName')
-                ->where('sinknode.node_id',$source_id)->get();
+                $sink_node=DB::table('sinkNode')
+                ->join('stations','stations.station_id','=','sinkNode.station_id')
+                ->select('sinkNode.station_id as station_id','stations.StationName as StationName')
+                ->where('sinkNode.node_id',$source_id)->get();
 
                 $data["source"]=$sink_node[0]->StationName."'s "."Sink Node";
                 $data["station_id"]=$sink_node[0]->station_id;
             break;
 
-            case "ground_node":
+            case "groundNode":
                 //get station id from grnode table
 
                 //
-                $ground_node=DB::table('groundnode')
-                ->join('stations','stations.station_id','=','groundnode.station_id')
-                ->select('groundnode.station_id as station_id','stations.StationName as StationName')
+                $ground_node=DB::table('groundNode')
+                ->join('stations','stations.station_id','=','groundNode.station_id')
+                ->select('groundNode.station_id as station_id','stations.StationName as StationName')
                 ->where('node_id',$source_id)->get();
 
                 $data["source"]=$ground_node[0]->StationName."'s "."Ground Node";

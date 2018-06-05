@@ -76,7 +76,7 @@ class TwoMNodeController extends Controller
           if($status->V_MCU=="" || $status->V_MCU==null){
             $status->V_MCU=-1;
           }
-          
+
           if($status->V_IN=="" || $status->V_IN==null){
             $status->V_IN=-1;
           }
@@ -130,8 +130,8 @@ class TwoMNodeController extends Controller
         //get soil teplature
         $templature=ObservationSlip::where('station','=',$station_id)
 
-                        ->select("CreationDate as y",
-                                    'Dry_Bulb')
+                        ->select("CreationDate as y",'Dry_Bulb')
+                        ->where('Dry_Bulb','<>','')
                         ->latest('CreationDate')
                         ->take(1000)
                         ->get();

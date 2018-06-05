@@ -26,6 +26,13 @@ class GeneralReportsController extends Controller
       $data["stations"]=Station::all()->where("stationCategory","aws");
       $data["heading"]="General Reports";
 
+      $first_station=-1;
+      foreach ($data["stations"] as $station) {
+        $first_station=$station->station_id;
+        break;
+      }
+      
+      $data["submit_form"]=$first_station;
       //10m node
       $data["vin_vmcu_10m"]="";
       $data["insulation_sensor"]="";
@@ -55,7 +62,7 @@ class GeneralReportsController extends Controller
 
     public function plotGraphs(Request $request){
       $station_id=request("id");
-
+      $data["submit_form"]="";
       $data["action"]=URL::to('plot_reports');
       $data["stations"]=Station::all()->where("stationCategory","aws");
       $data["heading"]="General Reports";
@@ -88,7 +95,7 @@ class GeneralReportsController extends Controller
 
       $nodesink_data=(new SinkNodeController())->getSinkStationReports($station_id);
       //sink node
-      
+
       $data["vin_vmcu_sink"]=$nodesink_data["vin_vmcu_sink"];
       $data["pressure"]=$nodesink_data["pressure"];
 
