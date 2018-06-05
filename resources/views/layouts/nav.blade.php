@@ -12,7 +12,7 @@
             <!-- Navbar Start -->
             <nav class="navigation">
                 <ul class="list-unstyled">
-                    <li class="has-submenu"><a href="{{URL::to('viewStationStatus')}}"><i class="ion-connection-bars"></i> <span class="nav-label">Station Status</span></a></li>
+                    <li class="has-submenu"><a href="{{URL::to('viewStationStatus')}}"><i class="ion-connection-bars"></i> <span class="nav-label">Home</span></a></li>
                     <li class="has-submenu"><a href="#"><i class="ion-home"></i> <span class="nav-label">Stations</span></a>
                         <ul class="list-unstyled">
                             <li class=""><a href="{{URL::to('addstation')}}">Add Station</a></li>
