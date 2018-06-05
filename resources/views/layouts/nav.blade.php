@@ -13,7 +13,7 @@
             <nav class="navigation">
                 <ul class="list-unstyled">
                     <li class="has-submenu"><a href="{{URL::to('viewStationStatus')}}"><i class="ion-home"></i> <span class="nav-label">DashBoard</span></a></li>
-                    <li class="has-submenu"><a href="#"><i class="ion-android-settings"></i> <span class="nav-label">Stations Configurations</span></a>
+                    <li class="has-submenu"><a href="#"><i class="ion-android-settings"></i> <span class="nav-label">Station Configurations</span></a>
                         <ul class="list-unstyled">
                             <li class=""><a href="{{URL::to('addstation')}}">Add Station</a></li>
                             <li><a href="{{URL::to('configurestation ')}}">Configure Station</a></li>
