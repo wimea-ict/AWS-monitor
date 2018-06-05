@@ -12,8 +12,8 @@
             <!-- Navbar Start -->
             <nav class="navigation">
                 <ul class="list-unstyled">
-                    <li class="has-submenu"><a href="{{URL::to('viewStationStatus')}}"><i class="ion-connection-bars"></i> <span class="nav-label">Home</span></a></li>
-                    <li class="has-submenu"><a href="#"><i class="ion-home"></i> <span class="nav-label">Stations</span></a>
+                    <li class="has-submenu"><a href="{{URL::to('viewStationStatus')}}"><i class="ion-home"></i> <span class="nav-label">DashBoard</span></a></li>
+                    <li class="has-submenu"><a href="#"><i class="ion-android-settings"></i> <span class="nav-label">Stations Configurations</span></a>
                         <ul class="list-unstyled">
                             <li class=""><a href="{{URL::to('addstation')}}">Add Station</a></li>
                             <li><a href="{{URL::to('configurestation ')}}">Configure Station</a></li>
