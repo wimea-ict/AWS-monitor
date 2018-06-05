@@ -47,7 +47,7 @@
                     <li class="has-submenu"><a href="{{URL::to('general_reports')}}"><i class="ion-stats-bars"></i> <span class="nav-label">Reports</span></a>
 
                     </li>
-                    <li class="has-submenu"><a href="{{ route('register') }}"><i class="ion-calendar"></i> <span class="nav-label">Register Users</span></a></li>
+                    
 
 
 
