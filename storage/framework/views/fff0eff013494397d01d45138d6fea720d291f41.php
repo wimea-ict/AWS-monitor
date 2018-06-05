@@ -18,7 +18,7 @@
                             <li><a href="<?php echo e(URL::to('configurestation ')); ?>">Configure Station</a></li>
                         </ul>
                     </li>
-                    <li class="has-submenu"><a href="#"><i class="ion-flask"></i> <span class="nav-label">Node Configurations</span></a>
+                    <li class="has-submenu"><a href="#"><i class="ion-settings"></i> <span class="nav-label">Node Configurations</span></a>
                         <ul class="list-unstyled">
                             <!--<li><a href="<?php echo e(URL::to('addnode')); ?>">Add Node</a></li>-->
 
@@ -30,23 +30,24 @@
                         </ul>
                     </li>
 
-                    <li class="has-submenu"><a href="#"><i class="ion-close"></i> <span class="nav-label">Configure problems</span></a>
+                    <li class="has-submenu"><a href="#"><i class="ion-ios7-settings-strong"></i> <span class="nav-label">Configure problems</span></a>
                         <ul class="list-unstyled">
                             <!--<li><a href="<?php echo e(URL::to('addnode')); ?>">Add Node</a></li>-->
-                            <li><a href="<?php echo e(URL::to('configureproblem')); ?>">Configure problems</a></li>
+                            
                             <li><a href="<?php echo e(URL::to('editProblemConfigurations')); ?>">Edit configurations</a></li>
 
                         </ul>
                     </li>
                     
-                    <li class="has-submenu"><a href="<?php echo e(URL::to('viewStationStatus')); ?>"><i class="ion-calendar"></i> <span class="nav-label">Station Status</span></a></li>
-                    <li class="has-submenu"><a href="<?php echo e(route('register')); ?>"><i class="ion-calendar"></i> <span class="nav-label">Register Users</span></a></li>
-                    <li class="has-submenu"><a href="<?php echo e(URL::to('probTbData')); ?>"><i class="ion-close"></i> <span class="nav-label">Problems Identified</span></a></li>
+                    <li class="has-submenu"><a href="<?php echo e(URL::to('viewStationStatus')); ?>"><i class="ion-connection-bars"></i> <span class="nav-label">Station Status</span></a></li>
+                    
+                    <li class="has-submenu"><a href="<?php echo e(URL::to('probTbData')); ?>"><i class="ion-alert-circled"></i> <span class="nav-label">Problems Identified</span></a></li>
 
 
-                    <li class="has-submenu"><a href="<?php echo e(URL::to('general_reports')); ?>"><i class="ion-flask"></i> <span class="nav-label">Reports</span></a>
+                    <li class="has-submenu"><a href="<?php echo e(URL::to('general_reports')); ?>"><i class="ion-stats-bars"></i> <span class="nav-label">Reports</span></a>
 
                     </li>
+                    <li class="has-submenu"><a href="<?php echo e(route('register')); ?>"><i class="ion-calendar"></i> <span class="nav-label">Register Users</span></a></li>
 
 
 
