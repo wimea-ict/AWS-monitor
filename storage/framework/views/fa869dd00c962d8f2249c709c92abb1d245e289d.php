@@ -245,7 +245,7 @@
                                                     <div class="panel-heading"> 
                                                         <h4 class="panel-title"> 
                                                             <a data-toggle="collapse" data-parent="#accordion-test-3" href="#collapsefourteen-8" aria-expanded="false" class="collapsed">
-                                                                Missing sensor values
+                                                            Sensor values are below range
                                                                
                                                             </a> 
                                                         </h4> 

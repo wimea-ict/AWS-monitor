@@ -31,13 +31,8 @@
                         </ul>
                     </li>
 
-                    <li class="has-submenu"><a href="#"><i class="ion-ios7-settings-strong"></i> <span class="nav-label">Configure problems</span></a>
-                        <ul class="list-unstyled">
-                            <!--<li><a href="<?php echo e(URL::to('addnode')); ?>">Add Node</a></li>-->
-                            
-                            <li><a href="<?php echo e(URL::to('editProblemConfigurations')); ?>">Edit configurations</a></li>
-
-                        </ul>
+                    <li class="has-submenu"><a href="<?php echo e(URL::to('editProblemConfigurations')); ?>"><i class="ion-clipboard"></i> <span class="nav-label">Report Configurations</span></a>
+                    
                     </li>
                     
                     
