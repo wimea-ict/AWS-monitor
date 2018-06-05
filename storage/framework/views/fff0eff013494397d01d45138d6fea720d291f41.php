@@ -12,6 +12,7 @@
             <!-- Navbar Start -->
             <nav class="navigation">
                 <ul class="list-unstyled">
+                    <li class="has-submenu"><a href="<?php echo e(URL::to('viewStationStatus')); ?>"><i class="ion-connection-bars"></i> <span class="nav-label">Station Status</span></a></li>
                     <li class="has-submenu"><a href="#"><i class="ion-home"></i> <span class="nav-label">Stations</span></a>
                         <ul class="list-unstyled">
                             <li class=""><a href="<?php echo e(URL::to('addstation')); ?>">Add Station</a></li>
@@ -39,7 +40,7 @@
                         </ul>
                     </li>
                     
-                    <li class="has-submenu"><a href="<?php echo e(URL::to('viewStationStatus')); ?>"><i class="ion-connection-bars"></i> <span class="nav-label">Station Status</span></a></li>
+                    
                     
                     <li class="has-submenu"><a href="<?php echo e(URL::to('probTbData')); ?>"><i class="ion-alert-circled"></i> <span class="nav-label">Problems Identified</span></a></li>
 
@@ -47,7 +48,7 @@
                     <li class="has-submenu"><a href="<?php echo e(URL::to('general_reports')); ?>"><i class="ion-stats-bars"></i> <span class="nav-label">Reports</span></a>
 
                     </li>
-                    <li class="has-submenu"><a href="<?php echo e(route('register')); ?>"><i class="ion-calendar"></i> <span class="nav-label">Register Users</span></a></li>
+                    
 
 
 
