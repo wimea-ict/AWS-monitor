@@ -183,9 +183,9 @@ class NodeStatusAnalyzerController extends Controller
             // 
 
             //dd($counter);
-            if ($counter === 1000) { // check if max has been reached.
-                return false; // stop chucking...
-            }
+            // if ($counter === 1000) { // check if max has been reached.
+            //     return false; // stop chucking...
+            // }
         });// end of chunk
         // dd($available_nodes);
         // dd($node_data);
