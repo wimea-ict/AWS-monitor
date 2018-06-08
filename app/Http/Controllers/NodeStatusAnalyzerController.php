@@ -27,6 +27,7 @@ class NodeStatusAnalyzerController extends Controller
     private $tenM_nd_data;
     private $gnd_nd_data;
     private $sink_nd_data;
+
     public function __construct()
     {
         // dd(Carbon::now('Africa/Kampala'));
@@ -66,7 +67,7 @@ class NodeStatusAnalyzerController extends Controller
     public function analyze()
     {
         // first clean DB
-        //$this->Handler->cleanDBTable($this->Handler->getProbTbName());
+        // $this->Handler->cleanDBTable($this->Handler->getProbTbName());
         //get time diff to use for querying the db
         // $tasks = DB::table('observationslip')->where('CreationDate','>=',$this->getTimeDiff())
         // $date = $this->Handler->getTimeDiff();
@@ -100,6 +101,12 @@ class NodeStatusAnalyzerController extends Controller
         $max_track_counter = 12;// default criticality
 
         $node_data = collect();
+        /* store the available nodes */
+        /* $twoM_nodes = array();
+        $tenM_nodes = array();
+        $sink_nodes = array();
+        $gnd_nodes = array();
+        ,&$twoM_nodes,&$tenM_nodes,&$sink_nodes,&$gnd_nodes */
         
         // pick only columns that we'll be using since that will be faster. 
         // We need date_time_recorded to verify the date time sent by the node
@@ -160,7 +167,27 @@ class NodeStatusAnalyzerController extends Controller
                 if ((array_search($stn_id, $available_stations, true)) === false) {
                     array_push($available_stations, $stn_id);
                 }
-                                
+                /* twoM_nodes tenM_nodes sink_nodes gnd_nodes */
+                /* if (stripos($node->TXT, 'gnd') !== false) {
+                    if ((array_search($nd_id, $gnd_nodes, true)) === false) {
+                        array_push($gnd_nodes, $nd_id);
+                    } 
+                }
+                elseif (stripos($node->TXT, '2m') !== false) {
+                    if ((array_search($nd_id, $twoM_nodes, true)) === false) {
+                        array_push($twoM_nodes, $nd_id);
+                    } 
+                }
+                elseif (stripos($node->TXT, '10m') !== false) {
+                    if ((array_search($nd_id, $tenM_nodes, true)) === false) {
+                        array_push($tenM_nodes, $nd_id);
+                    }
+                }
+                elseif (stripos($node->TXT, 'sink') !== false) {
+                    if ((array_search($nd_id, $sink_nodes, true)) === false) {
+                        array_push($sink_nodes, $nd_id);
+                    }
+                } */
                 
                 // ------------------------------------------------------------------------------
                 
@@ -188,7 +215,21 @@ class NodeStatusAnalyzerController extends Controller
             // }
         });// end of chunk
         // dd($available_nodes);
+        // dd($available_stations);
         // dd($node_data);
+
+        // $nodes_data = collect([
+        //     $this->Handler->getGndName() => $gnd_nodes,
+        //     $this->Handler->get2mName() => $twoM_nodes,
+        //     $this->Handler->get10mName() => $tenM_nodes,
+        //     $this->Handler->getSinkName() => $sink_nodes
+        // ]);
+        // dd($nodes   _data);
+        /* twoM_nodes tenM_nodes sink_nodes gnd_nodes */
+
+        /* check for missing nodes */
+        $this->Handler->findMissingNodes($available_nodes,$criticality,$max_track_counter);
+
         $node_data->map(function($value, $key) use($stn_prb_conf,$criticality,$max_track_counter){
 
             /**
@@ -297,15 +338,13 @@ class NodeStatusAnalyzerController extends Controller
         // update last check table
         $this->Handler->updateChecksTable('nodestatus',$id_first_checked,$id_last_checked);
 
-        /* check for missing nodes */
-        $this->Handler->findMissingNodes($available_nodes,$criticality,$max_track_counter);
-
-        // check for missing stations
-        $this->Handler->findMissingStations($available_stations);
+        /* call observationslip analyzer */
+        app('station\Http\Controllers\ObservationSlipAnalyzerController')->analyze($available_stations);
 
         //show data in the problems table
-        return redirect('/probTbData')->with([
+        return;
+        /* return redirect('/probTbData')->with([
             'flash_message' => 'Analyzed '. $no_of_recs .' records'
-        ]);
+        ]); */
     }
 }

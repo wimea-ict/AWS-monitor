@@ -46,10 +46,11 @@ class ObservationSlipAnalyzerController extends Controller
     /**
      * Function that is run
       */
-    public function analyze()
-    {
+    public function analyze($available_stations)
+    {        
         // first clean DB
-        //$this->Handler->cleanDBTable($this->Handler->getProbTbName());
+        // $this->Handler->cleanDBTable($this->Handler->getProbTbName());
+
         
         // store the first and last id checked  ->where()
         $id_first_checked = 0;
@@ -90,7 +91,7 @@ class ObservationSlipAnalyzerController extends Controller
         $pressure = 'pressure';
 
         // sunduration
-        DB::table($this->Handler->getObservationSlipTbName())->orderBy('id')->select('id','Station','Rainfall','Dry_Bulb','Wet_Bulb','Wind_Direction','Wind_Speed','SoilMoisture','SoilTemperature','CLP')->where('id','>',$lastId)->chunk(100, function($sensors) use(&$date, &$id_first_checked, &$id_last_checked, &$counter, &$sensor_data, &$available_sensors, &$relHumidity, &$temp, &$insulation, &$windSpeed, &$windDirection, &$rainfall, &$soilMoisture, &$soilTemp, &$pressure, &$recorded_sensors){
+        DB::table($this->Handler->getObservationSlipTbName())->orderBy('id')->select('id','Station','Rainfall','Dry_Bulb','Wet_Bulb','Wind_Direction','Wind_Speed','SoilMoisture','SoilTemperature','CLP')->where('id','>',$lastId)->chunk(100, function($sensors) use(&$date, &$id_first_checked, &$id_last_checked, &$counter, &$sensor_data, &$available_sensors, &$relHumidity, &$temp, &$insulation, &$windSpeed, &$windDirection, &$rainfall, &$soilMoisture, &$soilTemp, &$pressure, &$recorded_sensors,&$available_stations){
 
             // parameter_read - relative humidity(2mnd), Temperature(2mnd), insulation(10mnd), wind speed(10mnd), wind direction(), preciptation(gndnd), soil moisture(gnd), soil temperature(gnd), pressure(sinknd)
             
@@ -102,6 +103,10 @@ class ObservationSlipAnalyzerController extends Controller
                 }
                 //store last id checked
                 $id_last_checked = $sensor->id;// keep overwritting to keep the last checked
+                /* store the station id if it isn't there already. search strictly */
+                if ((array_search($sensor->Station, $available_stations, true)) === false) {
+                    array_push($available_stations, $sensor->Station);
+                }
                 
                 // ------------------------------------------------------------------------------
                 /* 'id','Station','Rainfall','Dry_Bulb','Wet_Bulb','Wind_Direction','Wind_Speed','SoilMoisture','SoilTemperature' */
@@ -134,8 +139,9 @@ class ObservationSlipAnalyzerController extends Controller
                             array_push($available_sensors, $sensor_id_2);
                         }          
                         /* relHumidity - temp - insulation - windSpeed - windDirection - rainfall - soilMoisture - soilTemp - pressure */
-                        $sensor_data->put($temp.$sensor->Station,['param' => $temp, 'Station' => $sensor->Station, 'param_value' => $sensor->Dry_Bulb, 'sensor_id' => $sensor_id]);
-                        $sensor_data->put($relHumidity.$sensor->Station,['param' => $relHumidity, 'Station' => $sensor->Station, 'param_value' => $sensor->Wet_Bulb, 'sensor_id' => $sensor_id_2]);
+                        /* this is not yet handled */
+                        // $sensor_data->put($temp.$sensor->Station,['param' => $temp, 'Station' => $sensor->Station, 'param_value' => $sensor->Dry_Bulb, 'sensor_id' => $sensor_id]);
+                        // $sensor_data->put($relHumidity.$sensor->Station,['param' => $relHumidity, 'Station' => $sensor->Station, 'param_value' => $sensor->Wet_Bulb, 'sensor_id' => $sensor_id_2]);
                     }
                 }
 
@@ -193,8 +199,7 @@ class ObservationSlipAnalyzerController extends Controller
 
                 if (!empty($sensor->CLP) && stripos($sensor->CLP, "(null)") === false) {
                     // $this->sink_nd_sensors;
-                    $parameter_read = $soilTemp;
-                    $sensor_id = $this->Handler->getSensorId($recorded_sensors, $soilTemp, $sensor->Station);
+                    $sensor_id = $this->Handler->getSensorId($recorded_sensors, $pressure, $sensor->Station);
                     if ($sensor_id !== -1) {
                         /* store the node id if it isn't there already. search strictly */
                         if ((array_search($sensor_id, $available_sensors, true)) === false) {
@@ -217,6 +222,12 @@ class ObservationSlipAnalyzerController extends Controller
 
         // dd($available_sensors);
         // dd($sensor_data);
+
+        /* check for missing sensors */
+        $this->Handler->findMissingSensors($recorded_sensors,$available_sensors,$criticality,$max_track_counter); 
+        
+        // check for missing stations
+        $this->Handler->findMissingStations($available_stations);
         
         $sensor_data->map(function($value, $key) use($stn_prb_conf,$criticality,$max_track_counter,$relHumidity, $temp, $insulation, $windSpeed, $windDirection, $rainfall, $soilMoisture, $soilTemp, $pressure){
 
@@ -237,12 +248,14 @@ class ObservationSlipAnalyzerController extends Controller
             }
             if (stripos($param, $temp) !== false) {// check for strings
                 // /* relHumidity - temp - insulation - windSpeed - windDirection - rainfall - soilMoisture - soilTemp - pressure 
+                /* this doesn't yet have values to use for comparison */
                 // $this->Handler->analyzeSensorData($this->twoM_nd_sensors, $station_id, 'Temperature', $param_value, $this->problemClassfications, $stn_prb_conf, $criticality, $max_track_counter, $sensor_id);
 
             }
             if (stripos($param, $relHumidity) !== false) {// check for strings
                 // /* relHumidity - temp - insulation - windSpeed - windDirection - rainfall - soilMoisture - soilTemp - pressure 
-                // $this->Handler->analyzeSensorData($this->twoM_nd_sensors, $station_id, 'Temperature', $param_value, $this->problemClassfications, $stn_prb_conf, $criticality, $max_track_counter, $sensor_id);
+                /* this doesn't yet have values to use for comparison */
+                // $this->Handler->analyzeSensorData($this->twoM_nd_sensors, $station_id, 'relative humidity', $param_value, $this->problemClassfications, $stn_prb_conf, $criticality, $max_track_counter, $sensor_id);
 
             }
             if (stripos($param, $windDirection) !== false) {
@@ -266,8 +279,6 @@ class ObservationSlipAnalyzerController extends Controller
                 $this->Handler->analyzeSensorData($this->sink_nd_sensors, $station_id, 'pressure', $param_value, $this->problemClassfications, $stn_prb_conf, $criticality, $max_track_counter, $sensor_id);
             }
         });
-        /* check for missing sensors */
-        $this->Handler->findMissingSensors($available_sensors,$criticality,$max_track_counter); 
 
         $no_of_recs = $id_last_checked - $id_first_checked + 1;
         if ($no_of_recs === 1) {
@@ -282,8 +293,9 @@ class ObservationSlipAnalyzerController extends Controller
         $this->Handler->updateChecksTable('observationslip',$id_first_checked,$id_last_checked);
 
         //show data in the problems table
-        return redirect('/probTbData')->with([
+        return;
+        /* return redirect('/probTbData')->with([
             'flash_message' => 'Analyzed '. $no_of_recs .' records'
-        ]);
+        ]); */
     }
 }

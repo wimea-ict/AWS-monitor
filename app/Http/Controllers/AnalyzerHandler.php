@@ -834,7 +834,14 @@ class AnalyzerHandler extends Controller
                     //     }
                     // }
                     // dd('hold it right here! - '.$parameter_read. ' stn id - '. $station_id);
-                    if ($rec_value < $data->min_value) {
+                    // dd(preg_match("/[a-z]/i", "Cats are fun. I like cats."));
+                    if (preg_match("/[a-z]/i", $rec_value) === 1) {// check for hexadecimals
+                        # then value is less than minimum
+                        $this->checkoutProblem($sensor_id,'sensor',$problemClassfications,"sensor","incorrect",$stn_prb_conf,$criticality,$max_track_counter,$station_id,"addproblem");
+                        // dd('hold it right here! - '.$parameter_read. ' stn id - '. $station_id);
+                        break;// exit loop
+                    }
+                    elseif ($rec_value < $data->min_value) {
                         # then value is less than minimum
                         $this->checkoutProblem($sensor_id,'sensor',$problemClassfications,"sensor","below range",$stn_prb_conf,$criticality,$max_track_counter,$station_id,"addproblem");
                         // dd('hold it right here! - '.$parameter_read. ' stn id - '. $station_id);
@@ -846,7 +853,14 @@ class AnalyzerHandler extends Controller
                         // dd('hold it right here! - '.$parameter_read. ' stn id - '. $station_id);
                         break;// exit loop
                     }
-                    if ($rec_value >= $data->min_value) {
+
+                    if (preg_match("/[a-z]/i", $rec_value) === 0) {// check for hexadecimals
+                        # then value is less than minimum
+                        $this->checkoutProblem($sensor_id,'sensor',$problemClassfications,"sensor","incorrect",$stn_prb_conf,$criticality,$max_track_counter,$station_id,"removeproblem");
+                        // dd('hold it right here! - '.$parameter_read. ' stn id - '. $station_id);
+                        break;// exit loop
+                    }
+                    elseif ($rec_value >= $data->min_value) {
                         # then value is less than minimum
                         $this->checkoutProblem($sensor_id,'sensor',$problemClassfications,"sensor","below range",$stn_prb_conf,$criticality,$max_track_counter,$station_id,"removeproblem");
                         // dd('hold it right here! - '.$parameter_read. ' stn id - '. $station_id);
@@ -870,7 +884,7 @@ class AnalyzerHandler extends Controller
     public function getSensorId($sensors_available, $parameter_read, $station_id)
     {
         $sensor_id = -1;
-        // dd($sensors_available);  && 
+        // dd($sensors_available);//  && 
         // dd($parameter_read . " - " .$station_id);
         /* get sensor id */
         // 'id','node_id','node_type','parameter_read', 'station_id'
@@ -878,10 +892,8 @@ class AnalyzerHandler extends Controller
             // dd($parameter_read . " - " .$station_id); 
             if ($sensor->station_id === $station_id && $sensor->parameter_read === $parameter_read) {
                 // dd($parameter_read . " - " .$station_id); 
-                if ($sensor->parameter_read === $parameter_read) {
-                    $sensor_id = $sensor->id;
-                    break;
-                }
+                $sensor_id = $sensor->id;
+                break;
             }
         }
         return $sensor_id;
@@ -1072,6 +1084,7 @@ class AnalyzerHandler extends Controller
     {
         /* check two meter nodes*/
         $twoM_nds = $this->getEnabledNodes($this->get2mName());
+        // dd($twoM_nds);
         if (!empty($twoM_nds)) {
             foreach ($twoM_nds as $node) {
                 /* if id is not found, report the problem */
@@ -1131,11 +1144,10 @@ class AnalyzerHandler extends Controller
     /**
      * 
      */
-    public function findMissingSensors($available_sensors,$criticality,$max_track_counter)
+    public function findMissingSensors($enabled_sensors,$available_sensors,$criticality,$max_track_counter)
     {
-        // dd($available_sensors);
-        $enabled_sensors = $this->getEnabledSensors();
-
+        // dd($available_sensors);        
+        // dd($enabled_sensors);
         foreach ($enabled_sensors as $enabled) {
             if (array_search($enabled->id, $available_sensors, true) === false) {
                 $this->checkoutProblem($enabled->id,'sensor',$this->getProblemClassifications(),"sensor","off",$this->getStationProbConfig(),$criticality,$max_track_counter,$enabled->station_id,"addproblem");
