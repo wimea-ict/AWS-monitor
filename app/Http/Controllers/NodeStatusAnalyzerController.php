@@ -150,7 +150,7 @@ class NodeStatusAnalyzerController extends Controller
                 }
                 
                 /* if no configuration data was found then skip that record */
-                if ($config_data === '') {
+                if (empty($config_data)) {
                     continue;
                 }
 
@@ -167,28 +167,6 @@ class NodeStatusAnalyzerController extends Controller
                 if ((array_search($stn_id, $available_stations, true)) === false) {
                     array_push($available_stations, $stn_id);
                 }
-                /* twoM_nodes tenM_nodes sink_nodes gnd_nodes */
-                /* if (stripos($node->TXT, 'gnd') !== false) {
-                    if ((array_search($nd_id, $gnd_nodes, true)) === false) {
-                        array_push($gnd_nodes, $nd_id);
-                    } 
-                }
-                elseif (stripos($node->TXT, '2m') !== false) {
-                    if ((array_search($nd_id, $twoM_nodes, true)) === false) {
-                        array_push($twoM_nodes, $nd_id);
-                    } 
-                }
-                elseif (stripos($node->TXT, '10m') !== false) {
-                    if ((array_search($nd_id, $tenM_nodes, true)) === false) {
-                        array_push($tenM_nodes, $nd_id);
-                    }
-                }
-                elseif (stripos($node->TXT, 'sink') !== false) {
-                    if ((array_search($nd_id, $sink_nodes, true)) === false) {
-                        array_push($sink_nodes, $nd_id);
-                    }
-                } */
-                
                 // ------------------------------------------------------------------------------
                 
 
@@ -256,19 +234,15 @@ class NodeStatusAnalyzerController extends Controller
             /* get correct config data */
             if (stripos($TXT_VALUE, 'gnd') !== false) {
                 $config_data = $this->gnd_nd_data;
-                $nd_data = $this->Handler->getGndName();
             }
             elseif (stripos($TXT_VALUE, '2m') !== false) {
                 $config_data = $this->twoM_nd_data;
-                $nd_data = $this->Handler->get2mName();
             }
             elseif (stripos($TXT_VALUE, '10m') !== false) {
                 $config_data = $this->tenM_nd_data;
-                $nd_data = $this->Handler->get10mName();
             }
             elseif (stripos($TXT_VALUE, 'sink') !== false) {
                 $config_data = $this->sink_nd_data;
-                $nd_data = $this->Handler->getSinkName();
             }
             
             /* if no configuration data was found then skip that record */
