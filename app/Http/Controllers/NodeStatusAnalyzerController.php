@@ -30,17 +30,8 @@ class NodeStatusAnalyzerController extends Controller
 
     public function __construct()
     {
-        // dd(Carbon::now('Africa/Kampala'));
-        // $collection = collect();
-        // // dd($collection);
-        // $collection->put("3",['age'=>1,'date'=>2,'time'=>3]);
-        // $collection->put("1",['age'=>1,'date'=>2,'time'=>3]);
-        // dd($collection->put("4",['age'=>1,'date'=>2,'time'=>3]));
-        // $txt_val = 3;
-        // // $node_data->put($node->TXT,$node->V_MCU,$node->date,$node->time);
-        // dd($collection->put('$txt_val','$node->TXT'.'-'.'$node->V_MCU'.'-'.'$node->date,'.'-'.'$node->time'));
-
         $this->Handler = new AnalyzerHandler();
+        // dd(substr(($this->Handler->getCurrentDateTime())->format('Y-m-d H:m:s'),0,4));
         $this->txt_2m_col_name  = 'txt_2m_value';
         $this->txt_10m_col_name  = 'txt_10m_value';
         $this->txt_gnd_col_name  = 'txt_gnd_value';
@@ -228,7 +219,7 @@ class NodeStatusAnalyzerController extends Controller
             $vmcuMaxVal = '';
             $config_data = '';
             $nd_data = '';// variable to hold the array keys
-            $yearNow = substr($date,0,4);
+            $yearNow = substr(($this->Handler->getCurrentDateTime())->format('Y-m-d H:m:s'),0,4);
             $yearRec = substr($date,0,4);
 
             /* get correct config data */
@@ -272,7 +263,7 @@ class NodeStatusAnalyzerController extends Controller
             if (!empty($V_MCU)) {
                 $this->Handler->checkoutProblem($nd_id,$nd_name,$this->problemClassfications,"Node","missing",$stn_prb_conf,$criticality,$max_track_counter,$stn_id,'removeproblem');
             }
-            elseif ($V_MCU >= $vmcuMinVal) {
+            if ($V_MCU >= $vmcuMinVal) {
                 
                 $this->Handler->checkoutProblem($nd_id,$nd_name,$this->problemClassfications,"Node power","below range",$stn_prb_conf,$criticality,$max_track_counter,$stn_id,'removeproblem');
             }

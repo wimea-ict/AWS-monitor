@@ -56,6 +56,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/probTbData', 'ViewAnalyzerData@showProbTable');
 
+    // Route::get('/analyzeNodeStatus', 'NodeStatusAnalyzerController@analyze');
+
 });
 
 Route::get('/', function () {

@@ -559,40 +559,40 @@ class AnalyzerHandler extends Controller
         /* first check for requested problem action */
         if (stripos($prob_action, 'removeproblem') === true) {
             // check if track counter was already equal to zero we set the set the status to solved. This could have happened incase the previous iteration failed to update the status for some reason...
-            if (($prob_track_counter) === 0) {
+            if (($prob_track_counter) <= 0) {
                 // update status to solved
                 DB::table($this->prob_tb)->where('id',$prob_id)->update(['status'=>'solved']);
                 return;// exit method
             }
             // check if max_counter had already been reached to avoid incrementing it again. This could have happened incase the previous iteration failed to update the status for some reason...
-            if (($prob_track_counter) === $max_track_counter && $prob_status !== 'reported') {
+            if (($prob_track_counter) >= $max_track_counter && $prob_status !== 'reported') {
                 // update status to solved
                 DB::table($this->prob_tb)->where('id',$prob_id)->update(['status'=>'reported']);
             }
 
             DB::table($this->prob_tb)->where('id',$prob_id)->decrement('track_counter');
             // check if counter has reached zero in which case the status has to be changed to solved
-            if (($prob_track_counter - 1) === 0) {
+            if (($prob_track_counter - 1) <= 0) {
                 // update status to reported
                 DB::table($this->prob_tb)->where('id',$prob_id)->update(['status'=>'solved']);
             }
         } 
         else {
             // check if max_counter had already been reached to avoid incrementing it again. This could have happened incase the previous iteration failed to update the status for some reason...
-            if ($prob_track_counter === $max_track_counter && $prob_status !== 'reported') {
+            if ($prob_track_counter >= $max_track_counter && $prob_status !== 'reported') {
                 // update status to solved
                 DB::table($this->prob_tb)->where('id',$prob_id)->update(['status'=>'reported']);
             }
 
             // if already at max, don't increment
-            if ($prob_status === 'reported' && $prob_track_counter === $max_track_counter) {
+            if ($prob_status === 'reported' && $prob_track_counter >= $max_track_counter) {
                 // update the updated_at column to affirm that the problem was encountered again
                 DB::table($this->prob_tb)->where('id',$prob_id)->update(['updated_at'=>$this->getCurrentDateTime()]);
             }
             else {
                 DB::table($this->prob_tb)->where('id',$prob_id)->increment('track_counter');
                 // check if max_counter has been reached and if so change status and call the reporter.
-                if (($prob_track_counter + 1) === $max_track_counter) {
+                if (($prob_track_counter + 1) >= $max_track_counter) {
                     // update status to reported
                     DB::table($this->prob_tb)->where('id',$prob_id)->update(['status'=>'reported']);
                 }
@@ -663,17 +663,17 @@ class AnalyzerHandler extends Controller
                         foreach ($stn_prb_conf as $prb_conf) {
                             if ($prb_conf->station_id === $stn_id) {
                                 if ($prb_conf->problem_id === $problem->id) {
-                                    $criticality = $prb_conf->criticality;
-                                    $max_track_counter = $prb_conf->max_track_counter;
-                                    break;
+                                    // $criticality = $prb_conf->criticality;
+                                    // $max_track_counter = $prb_conf->max_track_counter;
+                                    // dd($source_id." - ". $source, $problem->id." - ". $criticality." - ". $max_track_counter." - ".$prob_action);
+                                    $this->registerProblem($source_id, $source, $problem->id, $prb_conf->criticality, $prb_conf->max_track_counter,$prob_action);  
+                                    // break;
+                                    return;// return the problem
                                 }
                             }                            
-                        }
-                        // dd($source_id." - ". $source, $problem->id." - ". $criticality." - ". $max_track_counter." - ".$prob_action);
-                        $this->registerProblem($source_id, $source, $problem->id, $criticality, $max_track_counter,$prob_action);                
+                        }                                      
                         break;
-                    }
-                    
+                    }                    
                 }
             }
         }
