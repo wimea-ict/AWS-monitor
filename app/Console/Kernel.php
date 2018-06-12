@@ -27,8 +27,8 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
         /* run the analyzer */
-        $schedule->command('analyzer:run')->withoutOverlapping()->everyTenMinutes();//run every hour
-        $schedule->command('report:send')->withoutOverlapping()->everyFifteenMinutes(7);//create a 7min difference so that the problems are reported after the analyzer has run
+        $schedule->command('analyzer:run')->withoutOverlapping()->everyThirtyMinutes();//run every hour
+        $schedule->command('report:send')->withoutOverlapping()->everyFifteenMinutes();//create a 7min difference so that the problems are reported after the analyzer has run
     }
 
     /**
