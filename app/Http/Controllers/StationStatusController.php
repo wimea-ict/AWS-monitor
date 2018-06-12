@@ -30,7 +30,7 @@ class StationStatusController extends Controller
                 array_push($stations_with_problems,array("id"=>$problem['source_id'], "category"=>$problem['criticality']));
             }
             elseif($problem['source']=='twoMeterNode'){
-                $TwomNode = TwoMeterNode::where('station_id', $problem['source_id'])->first();
+                $TwomNode = TwoMeterNode::where('node_id', $problem['source_id'])->first();
                 //array_push($stations_with_problems,$TwomNode['station_id']);
                 
 
@@ -40,7 +40,7 @@ class StationStatusController extends Controller
                 }
             }
             elseif($problem['source']=='tenMeterNode'){
-                $TenmNode = TenMeterNode::where('station_id', $problem['source_id'])->first();
+                $TenmNode = TenMeterNode::where('node_id', $problem['source_id'])->first();
                 //array_push($stations_with_problems,$TenmNode['station_id']);
                 
                 if($TenmNode){
@@ -49,7 +49,7 @@ class StationStatusController extends Controller
                 }
             }
             elseif($problem['source']=='sinkNode'){
-                $sinkNode = SinkNode::where('station_id', $problem['source_id'])->first();
+                $sinkNode = SinkNode::where('node_id', $problem['source_id'])->first();
                 //array_push($stations_with_problems,$sinkNode['station_id']);
                 
                 if($sinkNode){
@@ -58,7 +58,7 @@ class StationStatusController extends Controller
                 }
             }
             elseif($problem['source']=='groundNode'){
-                $groundNode = GroundNode::where('station_id', $problem['source_id'])->first();
+                $groundNode = GroundNode::where('node_id', $problem['source_id'])->first();
                 //array_push($stations_with_problems,$groundNode['station_id']);
                 if($groundNode){
                     $groundNode = $groundNode->toArray();
