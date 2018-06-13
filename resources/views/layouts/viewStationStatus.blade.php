@@ -54,7 +54,7 @@
                         
                     @endforeach
                     <div class="col-sm-5 col-md-2">
-                        <div class="panel" style="max-height:160px;">
+                        <div class="panel" style="max-height:160px; min-height:160px;">
                             <a href="{{URL::to('selectedStationStatus/'.$station['station_id'])}}">
                             <div class="h4 text-purple">{{$station['StationName']}}</div>
                             <span class="text-muted">{{$counter}}</span>
@@ -85,7 +85,7 @@
                     @foreach($stationsOn as $station)
                     
                     <div class="col-sm-5 col-md-2">
-                        <div class="panel" style="max-height:160px;">
+                        <div class="panel" style="max-height:160px; min-height:160px;">
                             <a href="{{URL::to('selectedStationStatus/'.$station['station_id'])}}">
                             <div class="h4 text-purple">{{$station['StationName']}}</div>
                             <span class="text-muted">0</span>
