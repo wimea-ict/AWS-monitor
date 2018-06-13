@@ -50,7 +50,7 @@
                                                                                 <label class="col-sm-2 control-label">Select repotrt method</label>
                                                                                 <div class="col-sm-4">
                                                                                     <select class="form-control" name="sorptmethod">
-                                                                                        <option >SMS</option>
+                                                                                        <option>sms</option>
                                                                                         <option selected>email</option>
                                                                                         <option>Both</option>
                                                                                     </select>

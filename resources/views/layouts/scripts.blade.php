@@ -122,6 +122,7 @@
 
             });
 
+            //editing problem configurations
             $('#full-width-modal7').on('show.bs.modal', function(e) {
                 var station_problems = e.relatedTarget.id;
 
@@ -217,6 +218,7 @@
                         $('#pdprobRptTime').val(conigurations[i]['reporting_time_interval']);
 
                     }
+                    
                 }
 
 
