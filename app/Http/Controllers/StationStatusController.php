@@ -21,13 +21,14 @@ class StationStatusController extends Controller
      */
     public function index()
     {
+        app('station\Http\Controllers\ProblemConfigurationsController')->store("33");
         $stations_with_problems = array();
         //$problems_found = Station::where('StationCategory', 'aws')->get();
         $problems_identified = Problems::where('status', 'reported')->get()->toArray();
         //dd( $problems_identified);
         foreach($problems_identified as $problem){
             if($problem['source']=='station'){
-                array_push($stations_with_problems,array("id"=>$problem['source_id'], "category"=>$problem['criticality']));
+                array_push($stations_with_problems,array("id"=>$problem['source_id'], "category"=>$problem['criticality'],"source"=>$problem['source']));
             }
             elseif($problem['source']=='twoMeterNode'){
                 $TwomNode = TwoMeterNode::where('node_id', $problem['source_id'])->first();
@@ -36,7 +37,7 @@ class StationStatusController extends Controller
 
                 if($TwomNode){
                     $TwomNode = $TwomNode->toArray();
-                    array_push($stations_with_problems,array("id"=>$TwomNode['station_id'], "category"=>$problem['criticality']));
+                    array_push($stations_with_problems,array("id"=>$TwomNode['station_id'], "category"=>$problem['criticality'],"source"=>$problem['source']));
                 }
             }
             elseif($problem['source']=='tenMeterNode'){
@@ -45,7 +46,7 @@ class StationStatusController extends Controller
                 
                 if($TenmNode){
                     $TenmNode = $TenmNode->toArray();
-                    array_push($stations_with_problems,array("id"=>$TenmNode['station_id'], "category"=>$problem['criticality']));
+                    array_push($stations_with_problems,array("id"=>$TenmNode['station_id'], "category"=>$problem['criticality'],"source"=>$problem['source']));
                 }
             }
             elseif($problem['source']=='sinkNode'){
@@ -54,7 +55,7 @@ class StationStatusController extends Controller
                 
                 if($sinkNode){
                     $sinkNode = $sinkNode->toArray();
-                    array_push($stations_with_problems,array("id"=>$sinkNode['station_id'], "category"=>$problem['criticality']));
+                    array_push($stations_with_problems,array("id"=>$sinkNode['station_id'], "category"=>$problem['criticality'],"source"=>$problem['source']));
                 }
             }
             elseif($problem['source']=='groundNode'){
@@ -62,7 +63,7 @@ class StationStatusController extends Controller
                 //array_push($stations_with_problems,$groundNode['station_id']);
                 if($groundNode){
                     $groundNode = $groundNode->toArray();
-                    array_push($stations_with_problems,array("id"=>$groundNode['station_id'], "category"=>$problem['criticality']));
+                    array_push($stations_with_problems,array("id"=>$groundNode['station_id'], "category"=>$problem['criticality'],"source"=>$problem['source']));
                 }
             }
             elseif($problem['source']=='sensor'){
@@ -74,7 +75,7 @@ class StationStatusController extends Controller
                 
                     if($TwomNodeFromSensor){
                         $TwomNodeFromSensor = $TwomNodeFromSensor->toArray();
-                        array_push($stations_with_problems,array("id"=>$TwomNodeFromSensor['station_id'], "category"=>$problem['criticality']));
+                        array_push($stations_with_problems,array("id"=>$TwomNodeFromSensor['station_id'], "category"=>$problem['criticality'],"source"=>$problem['source']));
                     }
                 }
                 elseif($sensor['node_type']=='tenMeterNode'){
@@ -82,7 +83,7 @@ class StationStatusController extends Controller
                 //array_push($stations_with_problems,$TenmNodeFromSensor['station_id']);
                     if($TenmNodeFromSensor){
                         $TenmNodeFromSensor = $TenmNodeFromSensor->toArray();
-                        array_push($stations_with_problems,array("id"=>$TenmNodeFromSensor['station_id'], "category"=>$problem['criticality']));
+                        array_push($stations_with_problems,array("id"=>$TenmNodeFromSensor['station_id'], "category"=>$problem['criticality'],"source"=>$problem['source']));
                     }
                 
                 
@@ -90,7 +91,7 @@ class StationStatusController extends Controller
                 elseif($sensor['node_type']=='groundNode'){
                     $groundNodeFromSensor = GroundNode::where('node_id', $sensor['node_id'])->first()->toArray();
                 //array_push($stations_with_problems,$groundNodeFromSensor['station_id']);
-                array_push($stations_with_problems,array("id"=>$groundNodeFromSensor['station_id'], "category"=>$problem['criticality']));
+                array_push($stations_with_problems,array("id"=>$groundNodeFromSensor['station_id'], "category"=>$problem['criticality'],"source"=>$problem['source']));
                 }
                 elseif($sensor['node_type']=='sinkNode'){
                     //$sinkNodeFromSensor = SinkNode::where('node_id', $sensor['node_id'])->first()->toArray();
@@ -105,7 +106,8 @@ class StationStatusController extends Controller
         foreach($stations_with_problems as $filteredStations){
             array_push($uniqueStationsWithProblems,$filteredStations['id']);
         }
-        //dd($uniqueStationsWithProblems);
+        $result = array_count_values( $uniqueStationsWithProblems);
+        //dd($result);
         $stations = Station::whereIn('station_id', $uniqueStationsWithProblems)->get()->toArray();
         $stationsOn = Station::whereNotIn('station_id', $uniqueStationsWithProblems)->where('stationCategory','aws')->get()->toArray();
         //dd($stations);
@@ -180,7 +182,7 @@ class StationStatusController extends Controller
         foreach($problems as $problem){
             if($problem['source']=="station"){
                 if($problem['source_id']== $id){
-                    array_push($ids,$id);
+                    array_push($ids,array("id"=>$id, "source"=>$problem['source']));
                     $twoMFlag =1;
                     $tenMFlag =1;
                     $gndFlag =1;
@@ -200,7 +202,7 @@ class StationStatusController extends Controller
             elseif($problem['source']=="twoMeterNode"){
                 if(!empty($TwomNode)){
                     if($problem['source_id']==$TwomNode['node_id']){
-                        array_push($ids,$TwomNode['node_id']);
+                        array_push($ids,array("id"=>$TwomNode['node_id'], "source"=>$problem['source']));
                         $twoMFlag = 1;
                         $TempSensorFlag =1;
                         $relativeHumidity =1;
@@ -210,7 +212,7 @@ class StationStatusController extends Controller
             elseif($problem['source']=="tenMeterNode"){
                 if(!empty($TenmNode)){
                     if($problem['source_id']==$TenmNode['node_id']){
-                        array_push($ids,$TenmNode['node_id']);
+                        array_push($ids,array("id"=>$TenmNode['node_id'], "source"=>$problem['source']));
                         $tenMFlag =1;
                         $WindSpeedFlag =1;
                         $WindDirectionFlag =1;
@@ -221,7 +223,7 @@ class StationStatusController extends Controller
             elseif($problem['source']=="groundNode"){
                 if(!empty($groundNode)){
                     if($problem['source_id']==$groundNode['node_id']){
-                        array_push($ids,$groundNode['node_id']);
+                        array_push($ids,array("id"=>$groundNode['node_id'], "source"=>$problem['source']));
                         $gndFlag = 1;
                         $SoilMoistureFlag =1;
                         $SoilTempFlag =1;
@@ -232,7 +234,7 @@ class StationStatusController extends Controller
             elseif($problem['source']=="sinkNode"){
                 if(!empty($sinknode)){
                     if($problem['source_id']==$sinknode['node_id']){
-                        array_push($ids,$sinknode['node_id']);
+                        array_push($ids,array("id"=>$sinknode['node_id'], "source"=>$problem['source']));
                         $sinkFlag =1;
                         $PressureFlag =1;
                     }
@@ -246,11 +248,11 @@ class StationStatusController extends Controller
         if(!empty($Twomnodesensors)){
             foreach($Twomnodesensors as $Twomnodesensor){
                 if($Twomnodesensor['parameter_read']=='Temperature'){
-                    array_push($ids,$Twomnodesensor['id']);
+                    array_push($ids,array("id"=>$Twomnodesensor['id'], "source"=>"sensor"));
                     $TempSensorFlag =1;
                 }
                 if($Twomnodesensor['parameter_read']=='relative humidity'){
-                    array_push($ids,$Twomnodesensor['id']);
+                    array_push($ids,array("id"=>$Twomnodesensor['id'], "source"=>"sensor"));
                     $relativeHumidity =1;
                 }
             }
@@ -261,15 +263,15 @@ class StationStatusController extends Controller
          
             foreach($Tenmnodesensors as $Tenmnodesensor){
                 if($Tenmnodesensor['parameter_read']=='wind speed'){
-                    array_push($ids,$Tenmnodesensor['id']);
+                    array_push($ids,array("id"=>$Tenmnodesensor['id'], "source"=>"sensor"));
                     $WindSpeedFlag =1;
                 }
                 if($Tenmnodesensor['parameter_read']=='wind direction'){
-                    array_push($ids,$Tenmnodesensor['id']);
+                    array_push($ids,array("id"=>$Tenmnodesensor['id'], "source"=>"sensor"));
                     $WindDirectionFlag =1;
                 }
                 if($Tenmnodesensor['parameter_read']=='insolation'){
-                    array_push($ids,$Tenmnodesensor['id']);
+                    array_push($ids,array("id"=>$Tenmnodesensor['id'], "source"=>"sensor"));
                     $insolationFlag =1;
                 }
             }
@@ -279,15 +281,15 @@ class StationStatusController extends Controller
            
             foreach($Groundnodesensors as $Groundnodesensor){
                 if($Groundnodesensor['parameter_read']=='soil temperature'){
-                    array_push($ids,$Groundnodesensor['id']);
+                    array_push($ids,array("id"=>$Groundnodesensor['id'], "source"=>"sensor"));
                     $SoilTempFlag =1;
                 }
                 if($Groundnodesensor['parameter_read']=='soil moisture'){
-                    array_push($ids,$Groundnodesensor['id']);
+                    array_push($ids,array("id"=>$Groundnodesensor['id'], "source"=>"sensor"));
                     $SoilMoistureFlag =1;
                 }
                 if($Groundnodesensor['parameter_read']=='preciptation'){
-                    array_push($ids,$Groundnodesensor['id']);
+                    array_push($ids,array("id"=>$Groundnodesensor['id'], "source"=>"sensor"));
                     $PreciptationFlag=1;
                 }
             }
@@ -298,15 +300,22 @@ class StationStatusController extends Controller
            
             foreach($sinkNodesensors as $sinkNodesensor){
                 if($sinkNodesensor['parameter_read']=='pressure'){
-                    array_push($ids,$sinkNodesensors['id']);
+                    array_push($ids,array("id"=>$sinkNodesensors['id'], "source"=>"sensor"));
                     $PressureFlag =1;
                 }
                 
             }
         }
         
+        //dd($ids);
 
-        $problemsForStation = Problems::whereIn('source_id',$ids)->where('status','reported')->leftJoin("problem_classification","problems.classification_id","=","problem_classification.id")->orderBy('problems.id', 'DESC')->get()->toArray();
+        $problemsForStation = array();
+
+        foreach($ids as $id){
+            array_push($problemsForStation ,Problems::select("problems.*",'problem_classification.problem_description')->where('source_id', $id["id"])->where('problems.source', $id["source"])->where('status','reported')->leftJoin("problem_classification","problems.classification_id","=","problem_classification.id")->orderBy('problems.id', 'DESC')->first()->toArray());
+        } 
+
+        //dd($problemsForStation);
 
         $problemsDesc =array_column($problemsForStation, 'problem_description');
         $problemFrequencies =array_count_values($problemsDesc);

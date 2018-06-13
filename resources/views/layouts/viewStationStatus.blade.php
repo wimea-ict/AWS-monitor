@@ -38,17 +38,23 @@
                     @foreach ($stations_with_problems as $problem)
                         @if($problem['id']== $station['station_id'])
                             @if($problem['category']=="Critical")
+                            
+                            @if($flag !=1)
                             <?php $flag=1 ?>
                             @endif
+                            @endif
                             @if($problem['category']=="Non Critical")
-                                <?php $flag=2 ?>
+                                
+                                @if($flag !=1)
+                                    <?php $flag=2 ?>
+                                 @endif
                             @endif
                             <?php $counter++ ?>
                         @endif
                         
                     @endforeach
                     <div class="col-sm-5 col-md-2">
-                        <div class="panel">
+                        <div class="panel" style="max-height:160px;">
                             <a href="{{URL::to('selectedStationStatus/'.$station['station_id'])}}">
                             <div class="h4 text-purple">{{$station['StationName']}}</div>
                             <span class="text-muted">{{$counter}}</span>
@@ -79,7 +85,7 @@
                     @foreach($stationsOn as $station)
                     
                     <div class="col-sm-5 col-md-2">
-                        <div class="panel">
+                        <div class="panel" style="max-height:160px;">
                             <a href="{{URL::to('selectedStationStatus/'.$station['station_id'])}}">
                             <div class="h4 text-purple">{{$station['StationName']}}</div>
                             <span class="text-muted">0</span>

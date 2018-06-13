@@ -41,6 +41,7 @@ class ProblemConfigurationsController extends Controller
      */
     public function store($id)
     {
+        
         $problem_defaults = array (
             "max_counter"=>"4",
             "report_method"=>"Both",
