@@ -21,7 +21,7 @@ class StationStatusController extends Controller
      */
     public function index()
     {
-        app('station\Http\Controllers\ProblemConfigurationsController')->store("33");
+        //app('station\Http\Controllers\ProblemConfigurationsController')->store("33");
         $stations_with_problems = array();
         //$problems_found = Station::where('StationCategory', 'aws')->get();
         $problems_identified = Problems::where('status', 'reported')->get()->toArray();
