@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use station\Http\Controllers\Controller;
 use DateTimeZone;
 use DateTime;
+use ChannelLog as Log;
 
 class AnalyzerHandler extends Controller
 {
@@ -117,6 +118,19 @@ class AnalyzerHandler extends Controller
     public function getProblemClassifications(){
         $problemClassfications = DB::table($this->problem_classifn_tb)->select('id','problem_description','source')->get();
         return $problemClassfications;
+    }
+    /**
+     * getProblemClassification()
+     * gets the problem description for the given id
+     * @returns $prob_description
+     */
+    public function getProblemClassfctn($id){
+        // dd($id);
+        $prob = DB::table($this->problem_classifn_tb)->select('problem_description')->where('id','=',$id)->get();
+        $prob->toArray();
+        // dd($prob);
+        // dd($prob[0]->problem_description);
+        return $prob[0]->problem_description;
     }
 
     /**
@@ -505,6 +519,31 @@ class AnalyzerHandler extends Controller
     }
 
     /**
+     * writes problem to log file
+     */
+    public function logProblem($prob_id, $source, $source_id, $status)
+    {
+        /* prepare and write log to file */
+        $prob_data =  $this->problemStationNames($source, $source_id);
+        $stn_name = $prob_data['stn_name'];
+        $parameter_read = $prob_data['parameter_read'];
+        $source_description = '';
+        if(!empty($parameter_read)){
+            $source_description = $stn_name ." :: ". $parameter_read ." - ". $source;
+        }
+        else {
+            $source_description = $stn_name ." :: ". $source;
+        }
+        $prob_descrptn = $this->getProblemClassfctn($prob_id);
+        // dd($prob_descrptn);
+        // (writes INFO to logs/problem.log)  
+        /* Syntax:- Log::write('file-to-write-to', 'prob-classification','$source_description','prob-status'); */
+        Log::write('problem', $prob_descrptn, ['source'=>$source_description, 'status'=>$status]);
+
+        return;
+    }
+
+    /**
      * Insert data into problem table     
      * @param $nd_id, 
      * @param $nd_name, 
@@ -529,6 +568,10 @@ class AnalyzerHandler extends Controller
         DB::table($this->prob_tb)->insert(
             ['source'=>$source,'source_id'=>$source_id,'criticality'=>$criticality,'classification_id'=>$prob_id,'track_counter'=>1,'status'=>'investigation', 'created_at'=>$this->getCurrentDateTime()]
         );
+
+        //log the problem into a file
+        $this->logProblem($prob_id, $source, $source_id, 'investigation');
+
         return;
     }
 
@@ -554,7 +597,7 @@ class AnalyzerHandler extends Controller
     /**
      * update problem 
      */
-    public function updateProblem($prob_track_counter,$max_track_counter,$prob_status,$prob_id,$prob_action)
+    public function updateProblem($prob_track_counter, $max_track_counter, $prob_status, $prob_id, $prob_action, $source, $source_id, $problem_id)
     {
         /* first check for requested problem action */
         if (stripos($prob_action, 'removeproblem') === true) {
@@ -570,7 +613,12 @@ class AnalyzerHandler extends Controller
                 DB::table($this->prob_tb)->where('id',$prob_id)->update(['status'=>'reported']);
             }
 
+            // decrement counter of the problem
             DB::table($this->prob_tb)->where('id',$prob_id)->decrement('track_counter');
+
+            // update the updated_at column to record when the problem wasn't encountered again            
+            DB::table($this->prob_tb)->where('id',$prob_id)->update(['updated_at'=>$this->getCurrentDateTime()]);
+            
             // check if counter has reached zero in which case the status has to be changed to solved
             if (($prob_track_counter - 1) <= 0) {
                 // update status to reported
@@ -586,18 +634,28 @@ class AnalyzerHandler extends Controller
 
             // if already at max, don't increment
             if ($prob_status === 'reported' && $prob_track_counter >= $max_track_counter) {
-                // update the updated_at column to affirm that the problem was encountered again
+                // update the updated_at column to record when the problem was encountered again
                 DB::table($this->prob_tb)->where('id',$prob_id)->update(['updated_at'=>$this->getCurrentDateTime()]);
             }
             else {
+                // increment the counter
                 DB::table($this->prob_tb)->where('id',$prob_id)->increment('track_counter');
+
+                // update the updated_at column to record when the problem was encountered again
+                DB::table($this->prob_tb)->where('id',$prob_id)->update(['updated_at'=>$this->getCurrentDateTime()]);
+
                 // check if max_counter has been reached and if so change status and call the reporter.
                 if (($prob_track_counter + 1) >= $max_track_counter) {
                     // update status to reported
                     DB::table($this->prob_tb)->where('id',$prob_id)->update(['status'=>'reported']);
                 }
             } 
-        }               
+
+            // log the problem into a file
+            $this->logProblem($problem_id, $source, $source_id, 'investigation');
+        }   
+        
+        return;
     }
 
     /**
@@ -631,8 +689,8 @@ class AnalyzerHandler extends Controller
              */
 
             $prob = $prob->toArray();
-            
-            $this->updateProblem($prob[0]->track_counter,$max_track_counter,$prob[0]->status,$prob[0]->id,$prob_action);
+            // $source, $source_id
+            $this->updateProblem($prob[0]->track_counter, $max_track_counter, $prob[0]->status,$prob[0]->id, $prob_action, $source, $source_id, $problem_id);
         }
     }
 

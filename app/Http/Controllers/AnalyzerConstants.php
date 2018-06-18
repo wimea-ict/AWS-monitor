@@ -43,49 +43,5 @@ class AnalyzerConstants extends Controller
     {
         return self::PROB_TB;
     }
-    public function getProbTbName()
-    {
-        return self::PROB_TB;
-    }
-    public function getProbTbName()
-    {
-        return self::PROB_TB;
-    }
-    public function getProbTbName()
-    {
-        return self::PROB_TB;
-    }
-    public function getProbTbName()
-    {
-        return self::PROB_TB;
-    }
-    public function getProbTbName()
-    {
-        return self::PROB_TB;
-    }
-    public function getProbTbName()
-    {
-        return self::PROB_TB;
-    }
-    public function getProbTbName()
-    {
-        return self::PROB_TB;
-    }
-    public function getProbTbName()
-    {
-        return self::PROB_TB;
-    }
-    public function getProbTbName()
-    {
-        return self::PROB_TB;
-    }
-    public function getProbTbName()
-    {
-        return self::PROB_TB;
-    }
-    public function getProbTbName()
-    {
-        return self::PROB_TB;
-    }
 
 }
