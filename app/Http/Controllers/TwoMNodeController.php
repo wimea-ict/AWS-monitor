@@ -62,6 +62,8 @@ class TwoMNodeController extends Controller
                 // DB::raw("CONCAT(date,' ',time)  AS y")
                         ->select("date_time_recorded AS y",'V_MCU','V_IN')
                         ->latest('date_time_recorded')
+                        ->where('V_MCU','<>','')
+                        ->where('V_IN','<>','')
                         ->take(1000)
                         ->get();
 
@@ -74,16 +76,18 @@ class TwoMNodeController extends Controller
         //need to change instead of i pass the value of y but need to pass it as a string
         foreach($nodeStatus as $status){
           if($status->V_MCU=="" || $status->V_MCU==null){
-            $status->V_MCU=-1;
+            // $status->V_MCU=-1;
           }
 
           if($status->V_IN=="" || $status->V_IN==null){
-            $status->V_IN=-1;
+            // $status->V_IN=-1;
           }
-
+          
+          if(!empty($status->V_MCU) && !empty($status->V_IN)){
             $temp_array=$status->y.",".(float)$status->V_MCU.",".(float)$status->V_IN."\\n";
             $dyGraph_data.=$temp_array;
-
+          }
+          
         }
         $data["vin_vmcu_2m"]=$dyGraph_data;
 
@@ -97,6 +101,8 @@ class TwoMNodeController extends Controller
 
                         ->select("CreationDate AS y",'Wet_Bulb','Dry_Bulb')
                         ->latest('CreationDate')
+                        ->where('Dry_Bulb','<>','')
+                        ->where('Wet_Bulb','<>','')
                         ->take(1000)
                         ->get();
 
@@ -107,18 +113,20 @@ class TwoMNodeController extends Controller
 
             if(empty($humid->Dry_Bulb))
             {
-              $humid->Dry_Bulb=-1;
+              // $humid->Dry_Bulb=-1;
             }
 
             if($humid->Dry_Bulb!=0){
                 $hum_val=((150*$humid->Wet_Bulb)/$humid->Dry_Bulb)-50;
-            }else{
+                $temp_array=$humid->y.",".(float)$hum_val."\\n";
+                $humidity_graph_data.=$temp_array;
+            }else if($humid->Dry_Bulb==0){
                   $hum_val=0;
+                  $temp_array=$humid->y.",".(float)$hum_val."\\n";
+                  $humidity_graph_data.=$temp_array;
             }
 
-            $temp_array=$humid->y.",".(float)$hum_val."\\n";
 
-            $humidity_graph_data.=$temp_array;
 
         }
 
@@ -143,26 +151,18 @@ class TwoMNodeController extends Controller
         foreach($templature as $temp){
             if(empty($temp->Dry_Bulb))
             {
-                $temp->Dry_Bulb=-1;
+                // $temp->Dry_Bulb=-1;
             }
-
-            $temp_array=$temp->y.",".(float)$temp->Dry_Bulb."\\n";
-            $temp_graph_data.=$temp_array;
-
-
+            else{
+                $temp_array=$temp->y.",".(float)$temp->Dry_Bulb."\\n";
+                $temp_graph_data.=$temp_array;
+            }
+            
 
         }
 
         $data["templature"]=$temp_graph_data;
-        //get soil moisture
-
-
-        // $data["action"]=URL::to('reports2m');
-        // $data["selected_station"]=$station_id;
-        // $data["stations"]=Station::all()->where("stationCategory","aws");
-        // $data["heading"]="2m Node Reports";
-
-
+       
         return $data;
     }
 

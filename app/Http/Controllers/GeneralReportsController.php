@@ -31,7 +31,7 @@ class GeneralReportsController extends Controller
         $first_station=$station->station_id;
         break;
       }
-      
+
       $data["submit_form"]=$first_station;
       //10m node
       $data["vin_vmcu_10m"]="";
