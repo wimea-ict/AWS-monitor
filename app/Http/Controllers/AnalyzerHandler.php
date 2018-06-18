@@ -214,6 +214,72 @@ class AnalyzerHandler extends Controller
     }
 
     /**
+     * This method returns sensors with its a station id
+     */
+    public function getSensors()
+    {
+        /* variable to hold all enabled sensors */
+        $Sensors = collect();        
+        /**
+         * $sensors_tb
+         * get corresponding sensors
+         * nodetype - twoMeterNode, tenMeterNode, groundNode, sinkNode
+         */
+        /* create array to loop through node type and get all sensors */
+        $nodeTypes = collect([
+            $this->gnd_name,
+            $this->towN_name,
+            $this->tenN_name,
+            $this->sink_name
+        ]);
+        // dd($nodeTypes);
+
+        foreach ($nodeTypes as $nodeType) {
+            // dd($nodeType); //'node_id','node_type','parameter_read'
+            $sensors = DB::table($this->sensors_tb)->select('id','node_id','node_type','parameter_read')->where([
+                ['node_type','=',$nodeType]
+            ])->get();
+            // dd($sensors);
+            /**
+             * $gnd_nd_tb, $twoM_nd_tb, $tenM_nd_tb, $sink_nd_tb
+             * node tables - twoMeterNode, tenMeterNode, sinkNode, groundNode,
+            */
+            $node_data = $this->getNodesByNodeType($nodeType);
+            // dd($node_data);
+            /* check if any nodes were returned */
+            /* if (empty($node_data)) {
+                //  if no nodes were returned then no sensors should be considered enabled 
+                $sensors = '';
+            } */
+
+            if (!empty($sensors)) {
+                // dd($node_data);
+                /* map enabled sensors to enabled nodes */
+                $sensors->transform(function($sensor) use($node_data){
+                    foreach ($node_data as $data) {
+                        if ($data->node_id === $sensor->node_id) {
+                            /* assign station_id to sensors whose nodes are enabled */
+                            $sensor->station_id = $data->station_id;
+                            return $sensor;
+                        }
+                    }
+                });
+                
+                /* remove nulls */
+                $sensors = $sensors->reject(function($sensor){
+                    return $sensor === null;
+                });
+                // dd($sensors);
+                /* add sensor to collection */
+                $Sensors = $Sensors->concat($sensors);
+            }
+        }
+        
+        // dd($Sensors);
+        return $Sensors;
+    }
+
+    /**
      * 
      */
     public function problemStationNames($source, $source_id)
@@ -434,6 +500,8 @@ class AnalyzerHandler extends Controller
         DB::statement('SET FOREIGN_KEY_CHECKS=0');
         DB::table($tb_name)->truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
+
+        return;
     }
 
     /**
@@ -461,6 +529,7 @@ class AnalyzerHandler extends Controller
         DB::table($this->prob_tb)->insert(
             ['source'=>$source,'source_id'=>$source_id,'criticality'=>$criticality,'classification_id'=>$prob_id,'track_counter'=>1,'status'=>'investigation', 'created_at'=>$this->getCurrentDateTime()]
         );
+        return;
     }
 
     /**
@@ -469,11 +538,11 @@ class AnalyzerHandler extends Controller
      * it excludes the solved problems and so should return only one record
      * this is because we don't record a problem again before it has been solved.
      */
-    public function getProblem($nd_id,$source,$classification_id)
+    public function getProblem($id,$source,$classification_id)
     {
         // id, source_id, track_counter
         $prob = DB::table($this->prob_tb)->select('id','source_id','track_counter','status')->where([
-            ['source_id','=',$nd_id],
+            ['source_id','=',$id],
             ['source','=',$source],
             ['status','<>','solved'],
             ['classification_id','=',$classification_id],
@@ -488,41 +557,45 @@ class AnalyzerHandler extends Controller
     public function updateProblem($prob_track_counter,$max_track_counter,$prob_status,$prob_id,$prob_action)
     {
         /* first check for requested problem action */
-        if (stripos($prob_action, 'removeproblem') === false) {
+        if (stripos($prob_action, 'removeproblem') === true) {
+            // check if track counter was already equal to zero we set the set the status to solved. This could have happened incase the previous iteration failed to update the status for some reason...
+            if (($prob_track_counter) <= 0) {
+                // update status to solved
+                DB::table($this->prob_tb)->where('id',$prob_id)->update(['status'=>'solved']);
+                return;// exit method
+            }
             // check if max_counter had already been reached to avoid incrementing it again. This could have happened incase the previous iteration failed to update the status for some reason...
-                if (($prob_track_counter)<= 0) {
-                    // update status to solved
-                    DB::table($this->prob_tb)->where('id',$prob_id)->update(['status'=>'solved']);
-                    return;// exit method
-                }
+            if (($prob_track_counter) >= $max_track_counter && $prob_status !== 'reported') {
+                // update status to solved
+                DB::table($this->prob_tb)->where('id',$prob_id)->update(['status'=>'reported']);
+            }
+
             DB::table($this->prob_tb)->where('id',$prob_id)->decrement('track_counter');
             // check if counter has reached zero in which case the status has to be changed to solved
-            if (($prob_track_counter - 1)<= 0) {
+            if (($prob_track_counter - 1) <= 0) {
                 // update status to reported
                 DB::table($this->prob_tb)->where('id',$prob_id)->update(['status'=>'solved']);
             }
         } 
         else {
-            if ($prob_status == 'reported') {
+            // check if max_counter had already been reached to avoid incrementing it again. This could have happened incase the previous iteration failed to update the status for some reason...
+            if ($prob_track_counter >= $max_track_counter && $prob_status !== 'reported') {
+                // update status to solved
+                DB::table($this->prob_tb)->where('id',$prob_id)->update(['status'=>'reported']);
+            }
+
+            // if already at max, don't increment
+            if ($prob_status === 'reported' && $prob_track_counter >= $max_track_counter) {
                 // update the updated_at column to affirm that the problem was encountered again
                 DB::table($this->prob_tb)->where('id',$prob_id)->update(['updated_at'=>$this->getCurrentDateTime()]);
             }
             else {
-                // check if max_counter had already been reached to avoid incrementing it again. This could have happened incase the previous iteration failed to update the status for some reason...
-                if (($prob_track_counter)>= $max_track_counter) {
+                DB::table($this->prob_tb)->where('id',$prob_id)->increment('track_counter');
+                // check if max_counter has been reached and if so change status and call the reporter.
+                if (($prob_track_counter + 1) >= $max_track_counter) {
                     // update status to reported
                     DB::table($this->prob_tb)->where('id',$prob_id)->update(['status'=>'reported']);
-                    return;// exit method
                 }
-                else {
-                    DB::table($this->prob_tb)->where('id',$prob_id)->increment('track_counter');
-                    // check if max_counter has been reached and if so change status and call the reporter.
-                    if (($prob_track_counter + 1)>= $max_track_counter) {
-                        // update status to reported
-                        DB::table($this->prob_tb)->where('id',$prob_id)->update(['status'=>'reported']);
-                    }
-                }
-                
             } 
         }               
     }
@@ -590,15 +663,17 @@ class AnalyzerHandler extends Controller
                         foreach ($stn_prb_conf as $prb_conf) {
                             if ($prb_conf->station_id === $stn_id) {
                                 if ($prb_conf->problem_id === $problem->id) {
-                                    $criticality = $prb_conf->criticality;
-                                    $max_track_counter = $prb_conf->max_track_counter;
+                                    // $criticality = $prb_conf->criticality;
+                                    // $max_track_counter = $prb_conf->max_track_counter;
+                                    // dd($source_id." - ". $source, $problem->id." - ". $criticality." - ". $max_track_counter." - ".$prob_action);
+                                    $this->registerProblem($source_id, $source, $problem->id, $prb_conf->criticality, $prb_conf->max_track_counter,$prob_action);  
+                                    // break;
+                                    return;// return the problem
                                 }
                             }                            
-                        }
-                    }
-                    // dd($source_id." - ". $source, $problem->id." - ". $criticality." - ". $max_track_counter." - ".$prob_action);
-                    $this->registerProblem($source_id, $source, $problem->id, $criticality, $max_track_counter,$prob_action);                    
-                    break;
+                        }                                      
+                        break;
+                    }                    
                 }
             }
         }
@@ -742,10 +817,11 @@ class AnalyzerHandler extends Controller
      * @param $criticality, 
      * @param $max_track_counter
      */
-    public function analyzeSensorData($sensor_data, $station_id, $parameter_read, $rec_value, $sensor_id, $problemClassfications, $stn_prb_conf, $criticality, $max_track_counter)
-    {        
-        // dd('hold it right here! - '.$parameter_read. ' stn id - '. $station_id . "\n". $sensor_data);
-        foreach ($sensor_data as $data) {
+    public function analyzeSensorData($available_sensor_data, $station_id, $parameter_read, $rec_value, $problemClassfications, $stn_prb_conf, $criticality, $max_track_counter, $sensor_id)
+    {
+        // $sensors_available = $this->getSensors();
+        // dd('hold it right here! - '.$parameter_read. ' stn id - '. $station_id . "\n". $available_sensors);
+        foreach ($available_sensor_data as $data) {
             /**
              * min_value, max_value 
              * parameter_read - relative humidity(2mnd), Temperature(2mnd), insulation(10mnd), wind speed(10mnd), wind direction(), preciptation(gndnd), soil moisture(gnd), soil temperature(gnd), pressure(sinknd)536738
@@ -757,8 +833,24 @@ class AnalyzerHandler extends Controller
             if ($data->station_id === $station_id) {
                 // dd('hold it right here! - '.$parameter_read. ' stn id - '. $station_id);
                 if (stripos($data->parameter_read, $parameter_read) !== false) {
+                    // $sensor_id = -1;
+                    // /* get sensor id */
+                    // // 'id','node_id','node_type','parameter_read', 'station_id'
+                    // foreach ($sensors_available as $sensor) {
+                    //     if ($sensor->station_id === $station_id && $sensor->parameter_read === $parameter_read ) {
+                    //         $sensor_id = $sensor->id;
+                    //         break;
+                    //     }
+                    // }
                     // dd('hold it right here! - '.$parameter_read. ' stn id - '. $station_id);
-                    if ($rec_value < $data->min_value) {
+                    // dd(preg_match("/[a-z]/i", "Cats are fun. I like cats."));
+                    if (preg_match("/[a-z]/i", $rec_value) === 1) {// check for hexadecimals
+                        # then value is less than minimum
+                        $this->checkoutProblem($sensor_id,'sensor',$problemClassfications,"sensor","incorrect",$stn_prb_conf,$criticality,$max_track_counter,$station_id,"addproblem");
+                        // dd('hold it right here! - '.$parameter_read. ' stn id - '. $station_id);
+                        break;// exit loop
+                    }
+                    elseif ($rec_value < $data->min_value) {
                         # then value is less than minimum
                         $this->checkoutProblem($sensor_id,'sensor',$problemClassfications,"sensor","below range",$stn_prb_conf,$criticality,$max_track_counter,$station_id,"addproblem");
                         // dd('hold it right here! - '.$parameter_read. ' stn id - '. $station_id);
@@ -766,11 +858,18 @@ class AnalyzerHandler extends Controller
                     }
                     elseif ($rec_value > $data->max_value) {
                         # then value is greater than maximum
-                        $this->checkoutProblem($sensor->id,'sensor',$problemClassfications,"sensor","above range",$stn_prb_conf,$criticality,$max_track_counter,$station_id,"addproblem");
+                        $this->checkoutProblem($sensor_id,'sensor',$problemClassfications,"sensor","above range",$stn_prb_conf,$criticality,$max_track_counter,$station_id,"addproblem");
                         // dd('hold it right here! - '.$parameter_read. ' stn id - '. $station_id);
                         break;// exit loop
                     }
-                    if ($rec_value >= $data->min_value) {
+
+                    if (preg_match("/[a-z]/i", $rec_value) === 0) {// check for hexadecimals
+                        # then value is less than minimum
+                        $this->checkoutProblem($sensor_id,'sensor',$problemClassfications,"sensor","incorrect",$stn_prb_conf,$criticality,$max_track_counter,$station_id,"removeproblem");
+                        // dd('hold it right here! - '.$parameter_read. ' stn id - '. $station_id);
+                        break;// exit loop
+                    }
+                    elseif ($rec_value >= $data->min_value) {
                         # then value is less than minimum
                         $this->checkoutProblem($sensor_id,'sensor',$problemClassfications,"sensor","below range",$stn_prb_conf,$criticality,$max_track_counter,$station_id,"removeproblem");
                         // dd('hold it right here! - '.$parameter_read. ' stn id - '. $station_id);
@@ -778,7 +877,7 @@ class AnalyzerHandler extends Controller
                     }
                     elseif ($rec_value <= $data->max_value) {
                         # then value is greater than maximum
-                        $this->checkoutProblem($sensor->id,'sensor',$problemClassfications,"sensor","above range",$stn_prb_conf,$criticality,$max_track_counter,$station_id,"removeproblem");
+                        $this->checkoutProblem($sensor_id,'sensor',$problemClassfications,"sensor","above range",$stn_prb_conf,$criticality,$max_track_counter,$station_id,"removeproblem");
                         // dd('hold it right here! - '.$parameter_read. ' stn id - '. $station_id);
                         break;// exit loop
                     }
@@ -789,11 +888,35 @@ class AnalyzerHandler extends Controller
     }
 
     /**
+     * 
+     */
+    public function getSensorId($sensors_available, $parameter_read, $station_id)
+    {
+        $sensor_id = -1;
+        // dd($sensors_available);//  && 
+        // dd($parameter_read . " - " .$station_id);
+        /* get sensor id */
+        // 'id','node_id','node_type','parameter_read', 'station_id'
+        foreach ($sensors_available as $sensor) {
+            // dd($parameter_read . " - " .$station_id); 
+            if ($sensor->station_id === $station_id && $sensor->parameter_read === $parameter_read) {
+                // dd($parameter_read . " - " .$station_id); 
+                $sensor_id = $sensor->id;
+                break;
+            }
+        }
+        return $sensor_id;
+    }
+
+    /**
      * This method returns all stations with a status of on
      */
     public function getEnabledSations()
     {
-        return DB::table($this->stns_tb)->select('station_id')->where('StationStatus','=','on')->get();
+        return DB::table($this->stns_tb)->select('station_id')->where([
+            ['StationStatus','=','on'],
+            ['stationCategory','=','aws'],
+        ])->get();
     }
 
     /**
@@ -862,6 +985,41 @@ class AnalyzerHandler extends Controller
     }
 
     /**
+     * This method returns the enabled nodes from the enabled stations
+     */
+    public function getNodesByNodeType($nodeType)
+    {
+        $node_data = '';
+        /**
+         * nodetype - twoMeterNode, tenMeterNode, groundNode, sinkNode 
+         * $gnd_nd_tb, $twoM_nd_tb, $tenM_nd_tb, $sink_nd_tb
+         * node tables - twoMeterNode, tenMeterNode, sinkNode, groundNode,
+        */
+        
+        // dd($nodeType);
+        if (stripos($nodeType, $this->towN_name) !== false) { 
+            
+            $node_data = DB::table($this->twoM_nd_tb)->select('node_id','station_id')->get();
+        }
+        elseif (stripos($nodeType, $this->tenN_name) !== false) {
+
+            $node_data = DB::table($this->tenM_nd_tb)->select('node_id','station_id')->get();
+        }
+        elseif (stripos($nodeType, $this->gnd_name) !== false) {
+
+            $node_data = DB::table($this->gnd_nd_tb)->select('node_id','station_id')->get();
+        }
+        elseif (stripos($nodeType, $this->sink_name) !== false) {
+
+            $node_data = DB::table($this->sink_nd_tb)->select('node_id','station_id')->get();
+        }
+
+        // dd($node_data);        
+        
+        return $node_data;
+    }
+
+    /**
      * This method returns the enabled sensors from the enabled nodes
      */
     public function getEnabledSensors()
@@ -884,7 +1042,7 @@ class AnalyzerHandler extends Controller
 
         foreach ($nodeTypes as $nodeType) {
             // dd($nodeType); //'node_id','node_type','parameter_read'
-            $sensors = DB::table($this->sensors_tb)->select('id','node_id')->where([
+            $sensors = DB::table($this->sensors_tb)->select('id','node_id','node_type','parameter_read')->where([
                 ['node_type','=',$nodeType],
                 ['sensor_status','=','on'],
             ])->get();
@@ -935,6 +1093,7 @@ class AnalyzerHandler extends Controller
     {
         /* check two meter nodes*/
         $twoM_nds = $this->getEnabledNodes($this->get2mName());
+        // dd($twoM_nds);
         if (!empty($twoM_nds)) {
             foreach ($twoM_nds as $node) {
                 /* if id is not found, report the problem */
@@ -994,10 +1153,10 @@ class AnalyzerHandler extends Controller
     /**
      * 
      */
-    public function findMissingSensors($available_sensors,$criticality,$max_track_counter)
+    public function findMissingSensors($enabled_sensors,$available_sensors,$criticality,$max_track_counter)
     {
-        $enabled_sensors = $this->getEnabledSensors();
-
+        // dd($available_sensors);        
+        // dd($enabled_sensors);
         foreach ($enabled_sensors as $enabled) {
             if (array_search($enabled->id, $available_sensors, true) === false) {
                 $this->checkoutProblem($enabled->id,'sensor',$this->getProblemClassifications(),"sensor","off",$this->getStationProbConfig(),$criticality,$max_track_counter,$enabled->station_id,"addproblem");
