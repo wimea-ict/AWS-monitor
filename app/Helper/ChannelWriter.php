@@ -14,16 +14,12 @@ class ChannelWriter
      * @var array
      */
     protected $channels = [
-        'event' => [ 
-            'path' => 'logs/event.log', 
-            'level' => Logger::INFO 
-        ],
         'problem' => [ 
             'path' => 'logs/problems.log', 
             'level' => Logger::INFO 
         ],
-        'audit' => [ 
-            'path' => 'logs/audit.log', 
+        'userAction' => [ 
+            'path' => 'logs/userActions.log', 
             'level' => Logger::INFO 
         ]
     ];
