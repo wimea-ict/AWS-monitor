@@ -219,6 +219,7 @@
                                         <table id="datatable" class="table table-striped table-bordered">
                                             <thead>
                                                 <tr>
+                                                    <th>Source</th>
                                                     <th>Problem</th>
                                                     <th>status</th>
                                                     <th>criticality</th>
@@ -230,6 +231,7 @@
                                             <tbody>
                                             @foreach($problemsForStation as $probs)
                                                 <tr>
+                                                    <td>{{$probs['source']}}</td>
                                                     <td>{{$probs['problem_description']}}</td>
                                                     <td>{{$probs['status']}}</td>
                                                     <td>{{$probs['criticality']}}</td>

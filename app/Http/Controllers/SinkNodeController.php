@@ -60,6 +60,8 @@ class SinkNodeController extends Controller
 
                         ->select("date_time_recorded AS y",'V_MCU','V_IN')
                         ->latest('date_time_recorded')
+                        ->where('V_MCU','<>','')
+                        ->where('V_IN','<>','')
                         ->take(1000)
                         ->get();
 
@@ -75,9 +77,9 @@ class SinkNodeController extends Controller
         foreach($nodeStatus as $status){
 
             if($status->V_MCU=="" || $status->V_MCU==null){
-              $status->V_MCU=-1;
+            //   $status->V_MCU=-1;
             }else if($status->V_IN=="" || $status->V_IN==null){
-              $status->V_IN=-1;
+            //   $status->V_IN=-1;
             }
 
             $temp_array=$status->y.",".(float)$status->V_MCU.",".(float)$status->V_IN."\\n ";
@@ -99,6 +101,7 @@ class SinkNodeController extends Controller
                         ->select("creationDate AS y",
                                     'CLP')
                         ->latest('creationDate')
+                        ->where('CLP','<>','')
                         ->take(1000)
                         ->get();
 
@@ -107,7 +110,7 @@ class SinkNodeController extends Controller
         foreach($pressure as $pres){
             if(empty($pres->CLP))
             {
-                $pres->CLP=-1;
+                // $pres->CLP=-1;
             }
 
             $temp_array=$pres->y.",".(float)$pres->CLP."\\n ";
@@ -117,10 +120,6 @@ class SinkNodeController extends Controller
 
         $data["pressure"]=$pressure_data;
 
-        // $data["selected_station"]=$station_id;
-        // $data["action"]=URL::to('reportsSink');
-        // $data["stations"]=Station::all()->where("stationCategory","aws");
-        // $data["heading"]="Sink Node Reports";
         return $data;
     }
 

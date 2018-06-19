@@ -71,6 +71,8 @@ class GroundNodeController extends Controller
 
                         ->select("date_time_recorded as y",'V_MCU','V_IN')
                         ->latest('date_time_recorded')
+                        ->where('V_MCU','<>','')
+                        ->where('V_IN','<>','')
                         ->take(1000)
                         ->get();
         }else{
@@ -81,9 +83,9 @@ class GroundNodeController extends Controller
         //need to change instead of i pass the value of y but need to pass it as a string
         foreach($nodeStatus as $status){
             if($status->V_MCU=="" || $status->V_MCU==null){
-              $status->V_MCU=-1;
+            //   $status->V_MCU=-1;
             }else if($status->V_IN=="" || $status->V_IN==null || $status->V_IN==0){
-              $status->V_IN=-1;
+            //   $status->V_IN=-1;
             }
 
             $temp_array=$status->y.",".(float)$status->V_MCU.",".(float)$status->V_IN."\\n";
@@ -101,6 +103,7 @@ class GroundNodeController extends Controller
                         ->select("CreationDate as y",
                                     'DurationOfPeriodOfPrecipitation')
                         ->latest('CreationDate')
+                        ->where('DurationOfPeriodOfPrecipitation','<>','')
                         ->take(1000)
                         ->get();
 
@@ -109,7 +112,7 @@ class GroundNodeController extends Controller
         //need to change instead of i pass the value of y but need to pass it as a string
         foreach($precipitations as $precipitation){
           if(empty($precipitation->DurationOfPeriodOfPrecipitation)){
-            $precipitation->DurationOfPeriodOfPrecipitation=-1;
+            // $precipitation->DurationOfPeriodOfPrecipitation=-1;
           }
 
             $temp_array=$precipitation->y.",".(float)$precipitation->DurationOfPeriodOfPrecipitation."\\n";
@@ -127,6 +130,7 @@ class GroundNodeController extends Controller
 
                         ->select("creationDate as y",'SoilTemperature')
                         ->latest('creationDate')
+                        ->where('SoilTemperature','<>','')
                         ->take(1000)
                         ->get();
 
@@ -135,7 +139,7 @@ class GroundNodeController extends Controller
         //need to change instead of i pass the value of y but need to pass it as a string
         foreach($soilTemplature as $soilTemp){
           if(empty($soilTemp->SoilTemperature)){
-            $soilTemp->SoilTemperature=-1;
+            // $soilTemp->SoilTemperature=-1;
           }
 
           $temp_array=$soilTemp->y.",".(float)$soilTemp->SoilTemperature."\\n";
@@ -150,6 +154,7 @@ class GroundNodeController extends Controller
 
                         ->select("CreationDate as y",'SoilMoisture')
                         ->latest('CreationDate')
+                        ->where('SoilMoisture','<>','')
                         ->take(1000)
                         ->get();
 
@@ -158,7 +163,7 @@ class GroundNodeController extends Controller
         //need to change instead of i pass the value of y but need to pass it as a string
         foreach($SoilMoisture as $SoilMois){
           if(empty($SoilMois->SoilMoisture)){
-              $SoilMois->SoilMoisture=-1;
+            //   $SoilMois->SoilMoisture=-1;
           }
 
           $temp_array=$SoilMois->y.",".(float)$SoilMois->SoilMoisture."\\n";
@@ -168,10 +173,6 @@ class GroundNodeController extends Controller
 
         $data["soil_moisture"]=$SoilMoisture_graph_data;
 
-        // $data["action"]=URL::to('reportsGnd');
-        // $data["selected_station"]=$station_id;
-        // $data["stations"]=Station::all()->where("stationCategory","aws");
-        // $data["heading"]="Ground Node Reports";
         return $data;
     }
 
