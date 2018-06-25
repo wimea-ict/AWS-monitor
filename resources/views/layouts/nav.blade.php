@@ -48,6 +48,11 @@
                     <li class="has-submenu"><a href="{{URL::to('general_reports')}}"><i class="ion-stats-bars"></i> <span class="nav-label">Reports</span></a>
 
                     </li>
+
+                    {{-- ion-android-bicycle,  --}}
+                    <li class="has-submenu"><a href="{{URL::to('logs')}}"><i class="ion-document-text"></i> <span class="nav-label">Logs</span></a>
+
+                    </li>
                     
 
 

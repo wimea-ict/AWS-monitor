@@ -56,6 +56,18 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/probTbData', 'ViewAnalyzerData@showProbTable');
 
+    Route::get('/logs', function(){
+        return view('layouts.logs');
+    });
+
+    Route::get('/viewUserLogFile', 'ViewAnalyzerData@viewUserLogFile');
+
+    Route::get('/viewProblemLogFile', 'ViewAnalyzerData@viewProblemLogFile');
+
+    Route::get('/downLoadUserLogFile', 'ViewAnalyzerData@downLoadUserLogFile');
+
+    Route::get('/downloadProblemLogFile', 'ViewAnalyzerData@downloadProblemLogFile');
+
     Route::get('/analyzeNodeStatus', 'NodeStatusAnalyzerController@analyze');
 
 });

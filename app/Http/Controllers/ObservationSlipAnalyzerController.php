@@ -74,7 +74,7 @@ class ObservationSlipAnalyzerController extends Controller
         $stn_prb_conf = $this->stn_prb_conf;
 
         /* get the available sensors */
-        $recorded_sensors = $this->Handler->getEnabledSensors();
+        $recorded_sensors = $this->Handler->getEnabledSensors("on");
         // $recorded_sensors = $this->Handler->getSensors();
 
         // dd($recorded_sensors);
