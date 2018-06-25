@@ -35,21 +35,21 @@ class ViewAnalyzerData extends Controller
 
     public function viewProblemLogFile()
     {
-        return response()->file('/var/www/AWS-monitor/storage/logs/problems.log');
+        return response()->file('/var/www/html/awsmonitor/aws-monitor/storage/logs/problems.log');
     }
 
     public function downloadProblemLogFile()
     {
-        return response()->download('/var/www/AWS-monitor/storage/logs/problems.log', "problems.logs");
+        return response()->download('/var/www/html/awsmonitor/aws-monitor/storage/logs/problems.log', "problems.logs");
     }
 
     public function viewUserLogFile()
     {
-        return response()->file('/var/www/AWS-monitor/storage/logs/userActions.log');
+        return response()->file('/var/www/html/awsmonitor/aws-monitor/storage/logs/userActions.log');
     }
 
     public function downLoadUserLogFile()
     {
-        return response()->download('/var/www/AWS-monitor/storage/logs/userActions.log', "userActions.logs");
+        return response()->download('/var/www/html/awsmonitor/aws-monitor/storage/logs/userActions.log', "userActions.logs");
     }
 }
