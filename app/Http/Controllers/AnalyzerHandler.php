@@ -626,7 +626,6 @@ class AnalyzerHandler extends Controller
             }
         } 
         elseif (stripos($prob_action, 'solveproblem') !== false) {
-            dd("checkpoint");
             // set status to solved
             DB::table($this->prob_tb)->where('id',$prob_id)->update(['status'=>'solved']);
             return;// exit method
