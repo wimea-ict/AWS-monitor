@@ -600,7 +600,7 @@ class AnalyzerHandler extends Controller
     public function updateProblem($prob_track_counter, $max_track_counter, $prob_status, $prob_id, $prob_action, $source, $source_id, $problem_id)
     {
         /* first check for requested problem action */
-        if (stripos($prob_action, 'removeproblem') === true) {
+        if (stripos($prob_action, 'removeproblem') !== false) {
             // check if track counter was already equal to zero we set the set the status to solved. This could have happened incase the previous iteration failed to update the status for some reason...
             if (($prob_track_counter) <= 0) {
                 // update status to solved
@@ -625,12 +625,13 @@ class AnalyzerHandler extends Controller
                 DB::table($this->prob_tb)->where('id',$prob_id)->update(['status'=>'solved']);
             }
         } 
-        elseif (stripos($prob_action, 'solveproblem') === true) {
+        elseif (stripos($prob_action, 'solveproblem') !== false) {
+            dd("checkpoint");
             // set status to solved
             DB::table($this->prob_tb)->where('id',$prob_id)->update(['status'=>'solved']);
             return;// exit method
         } 
-        elseif (stripos($prob_action, 'addproblem') === true)  {
+        elseif (stripos($prob_action, 'addproblem') !== false)  {
             // check if max_counter had already been reached to avoid incrementing it again. This could have happened incase the previous iteration failed to update the status for some reason...
             if ($prob_track_counter >= $max_track_counter && $prob_status !== 'reported') {
                 // update status to solved
@@ -714,6 +715,9 @@ class AnalyzerHandler extends Controller
     public function checkoutProblem($source_id,$source,$problemClassfications,$param,$prob,$stn_prb_conf,$criticality,$max_track_counter,$stn_id,$prob_action)
     {
         // dd($problemClassfications);
+        if ($source_id === 15) {
+            dd($source);
+        }
         // get problem
         foreach ($problemClassfications as $problem) {
             // do a case insensitive check
@@ -1172,6 +1176,7 @@ class AnalyzerHandler extends Controller
         /* check if a two meter node was disabled after being reported as off */
         $twoM_nds_2 = $this->getEnabledNodes($this->get2mName(), "off");
         if (!empty($twoM_nds_2)) {
+            // dd($twoM_nds_2);
             foreach ($twoM_nds_2 as $node) {
                 $this->checkoutProblem($node->node_id,$this->get2mName(),$this->getProblemClassifications(),"Node","off",$this->getStationProbConfig(),$criticality,$max_track_counter,$node->station_id,'solveproblem');
             }

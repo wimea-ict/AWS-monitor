@@ -53,7 +53,7 @@ Route::group(['middleware' => 'auth'], function () {
             $message->to('kibsysapps@gmail.com');
         });
     });
-
+    
     Route::get('/probTbData', 'ViewAnalyzerData@showProbTable');
 
     Route::get('/logs', function(){
@@ -67,8 +67,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/downLoadUserLogFile', 'ViewAnalyzerData@downLoadUserLogFile');
 
     Route::get('/downloadProblemLogFile', 'ViewAnalyzerData@downloadProblemLogFile');
-
-    Route::get('/analyzeNodeStatus', 'NodeStatusAnalyzerController@analyze');
 
 });
 
