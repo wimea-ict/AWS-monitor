@@ -9,7 +9,6 @@ use station\Http\Controllers\Controller;
 use station\Http\Controllers\AnalyzerHandler;
 use DateTimeZone;
 use DateTime;
-use \Carbon\Carbon;
 
 class NodeStatusAnalyzerController extends Controller
 {
@@ -30,6 +29,7 @@ class NodeStatusAnalyzerController extends Controller
 
     public function __construct()
     {
+        // dd('yey!');
         $this->Handler = new AnalyzerHandler();
         // dd(substr(($this->Handler->getCurrentDateTime())->format('Y-m-d H:m:s'),0,4));
         $this->txt_2m_col_name  = 'txt_2m_value';
@@ -40,7 +40,6 @@ class NodeStatusAnalyzerController extends Controller
          * PICK ALL THE DATA YOU'LL NEED
          * nodetype - twoMeterNode, tenMeterNode, groundNode, sinkNode 
          */
-        // $this->problemClassfications = $this->Handler->getEnabledSensors('twoMeterNode');
         
 
         // pick problem station configurations
@@ -179,9 +178,9 @@ class NodeStatusAnalyzerController extends Controller
             // 
 
             //dd($counter);
-            // if ($counter === 1000) { // check if max has been reached.
-            //     return false; // stop chucking...
-            // }
+            if ($counter === 500) { // check if max has been reached.
+                return false; // stop chucking...
+            }
         });// end of chunk
         // dd($available_nodes);
         // dd($available_stations);

@@ -32,4 +32,24 @@ class ViewAnalyzerData extends Controller
         // return $data;
         return view('layouts.analyzer', compact('data','problems'));
     }
+
+    public function viewProblemLogFile()
+    {
+        return response()->file('/var/www/html/awsmonitor/aws-monitor/storage/logs/problems.log');
+    }
+
+    public function downloadProblemLogFile()
+    {
+        return response()->download('/var/www/html/awsmonitor/aws-monitor/storage/logs/problems.log', "problems.logs");
+    }
+
+    public function viewUserLogFile()
+    {
+        return response()->file('/var/www/html/awsmonitor/aws-monitor/storage/logs/userActions.log');
+    }
+
+    public function downLoadUserLogFile()
+    {
+        return response()->download('/var/www/html/awsmonitor/aws-monitor/storage/logs/userActions.log', "userActions.logs");
+    }
 }

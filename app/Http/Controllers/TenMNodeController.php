@@ -68,6 +68,8 @@ class TenMNodeController extends Controller
 
                         ->select("date_time_recorded AS y",'V_MCU','V_IN')
                         ->latest('date_time_recorded')
+                        ->where('V_MCU','<>','')
+                        ->where('V_IN','<>','')
                         ->take(1000)
                         ->get();
 
@@ -80,11 +82,11 @@ class TenMNodeController extends Controller
 
         foreach($nodeStatus as $status){
             if($status->V_MCU=="" || $status->V_MCU==null ){
-              $status->V_MCU=-1;
+            //   $status->V_MCU=-1;
             }
 
             if($status->V_IN=="" || $status->V_IN==null ){
-              $status->V_IN=-1;
+            //   $status->V_IN=-1;
             }
 
             $temp_array=$status->y.",".(float)$status->V_MCU.",".(float)$status->V_IN."\\n";
@@ -102,6 +104,7 @@ class TenMNodeController extends Controller
                         ->select(DB::raw("CONCAT(date,' ',time)  AS y"),
                                     'DurationOfPeriodOfPrecipitation')
                         ->latest('creationDate')
+                        ->where('DurationOfPeriodOfPrecipitation','<>','')
                         ->take(1000)
                         ->get();
 
@@ -110,7 +113,7 @@ class TenMNodeController extends Controller
 
         foreach($insulation as $insulation){
           if(empty($insulation->DurationOfPeriodOfPrecipitation)){
-            $insulation->DurationOfPeriodOfPrecipitation-1;
+            // $insulation->DurationOfPeriodOfPrecipitation-1;
           }
 
             $temp_array=$insulation->y.",".(float)$insulation->DurationOfPeriodOfPrecipitation."\\n";
@@ -127,6 +130,7 @@ class TenMNodeController extends Controller
                         ->select(DB::raw("CONCAT(date,' ',time)  AS y"),
                                     'Wind_Speed')
                         ->latest('CreationDate')
+                        ->where('Wind_Speed','<>','')
                         ->take(1000)
                         ->get();
 
@@ -134,7 +138,7 @@ class TenMNodeController extends Controller
 
         foreach($windspeed as $windsp){
           if(empty($windsp->Wind_Speed)){
-            $windsp->Wind_Speed=-1;
+            // $windsp->Wind_Speed=-1;
           }
 
             $temp_array=$windsp->y.",".(float)$windsp->Wind_Speed."\\n";
@@ -151,6 +155,7 @@ class TenMNodeController extends Controller
                         ->select(DB::raw("CONCAT(date,' ',time)  AS y"),
                                     'Wind_Direction')
                         ->latest('CreationDate')
+                        ->where('Wind_Direction','<>','')
                         ->take(1000)
                         ->get();
 
@@ -158,7 +163,7 @@ class TenMNodeController extends Controller
 
       foreach($wind_direction as $wind_d){
           if(empty($wind_d->Wind_Direction)){
-            $wind_d->Wind_Direction=-1;
+            // $wind_d->Wind_Direction=-1;
           }
 
           $temp_array=$wind_d->y.",".(float)$wind_d->Wind_Direction;
@@ -168,12 +173,7 @@ class TenMNodeController extends Controller
 
 
         $data["wind_direction_sensor"]=$wind_direction_data;
-
-        // $data["selected_station"]=$station_id;
-        // $data["action"]=URL::to('reports10m');
-        // $data["stations"]=Station::all()->where("stationCategory","aws");
-        // $data["heading"]="Ground Node Reports";
-
+        
         return $data;
     }
 

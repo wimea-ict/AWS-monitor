@@ -53,10 +53,20 @@ Route::group(['middleware' => 'auth'], function () {
             $message->to('kibsysapps@gmail.com');
         });
     });
-
+    
     Route::get('/probTbData', 'ViewAnalyzerData@showProbTable');
 
-    // Route::get('/analyzeNodeStatus', 'NodeStatusAnalyzerController@analyze');
+    Route::get('/logs', function(){
+        return view('layouts.logs');
+    });
+
+    Route::get('/viewUserLogFile', 'ViewAnalyzerData@viewUserLogFile');
+
+    Route::get('/viewProblemLogFile', 'ViewAnalyzerData@viewProblemLogFile');
+
+    Route::get('/downLoadUserLogFile', 'ViewAnalyzerData@downLoadUserLogFile');
+
+    Route::get('/downloadProblemLogFile', 'ViewAnalyzerData@downloadProblemLogFile');
 
 });
 

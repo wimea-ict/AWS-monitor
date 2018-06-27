@@ -36,17 +36,23 @@
                     <?php $__currentLoopData = $stations_with_problems; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $problem): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <?php if($problem['id']== $station['station_id']): ?>
                             <?php if($problem['category']=="Critical"): ?>
+                            
+                            <?php if($flag !=1): ?>
                             <?php $flag=1 ?>
                             <?php endif; ?>
+                            <?php endif; ?>
                             <?php if($problem['category']=="Non Critical"): ?>
-                                <?php $flag=2 ?>
+                                
+                                <?php if($flag !=1): ?>
+                                    <?php $flag=2 ?>
+                                 <?php endif; ?>
                             <?php endif; ?>
                             <?php $counter++ ?>
                         <?php endif; ?>
                         
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     <div class="col-sm-5 col-md-2">
-                        <div class="panel">
+                        <div class="panel" style="max-height:160px;">
                             <a href="<?php echo e(URL::to('selectedStationStatus/'.$station['station_id'])); ?>">
                             <div class="h4 text-purple"><?php echo e($station['StationName']); ?></div>
                             <span class="text-muted"><?php echo e($counter); ?></span>
@@ -77,7 +83,7 @@
                     <?php $__currentLoopData = $stationsOn; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $station): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     
                     <div class="col-sm-5 col-md-2">
-                        <div class="panel">
+                        <div class="panel" style="max-height:160px;">
                             <a href="<?php echo e(URL::to('selectedStationStatus/'.$station['station_id'])); ?>">
                             <div class="h4 text-purple"><?php echo e($station['StationName']); ?></div>
                             <span class="text-muted">0</span>

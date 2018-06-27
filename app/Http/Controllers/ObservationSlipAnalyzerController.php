@@ -74,7 +74,7 @@ class ObservationSlipAnalyzerController extends Controller
         $stn_prb_conf = $this->stn_prb_conf;
 
         /* get the available sensors */
-        $recorded_sensors = $this->Handler->getEnabledSensors();
+        $recorded_sensors = $this->Handler->getEnabledSensors("on");
         // $recorded_sensors = $this->Handler->getSensors();
 
         // dd($recorded_sensors);
@@ -214,10 +214,10 @@ class ObservationSlipAnalyzerController extends Controller
             }         
 
             // dd($counter);
-            // if ($counter === 1000) { // check if max has been reached.
-            //     // dd($counter);   
-            //     return false; // stop chucking...
-            // }
+            if ($counter === 500) { // check if max has been reached.
+                // dd($counter);   
+                return false; // stop chucking...
+            }
         });
 
         // dd($available_sensors);
