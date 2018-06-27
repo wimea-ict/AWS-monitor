@@ -715,9 +715,9 @@ class AnalyzerHandler extends Controller
     public function checkoutProblem($source_id,$source,$problemClassfications,$param,$prob,$stn_prb_conf,$criticality,$max_track_counter,$stn_id,$prob_action)
     {
         // dd($problemClassfications);
-        if ($source_id === 15) {
-            dd($source);
-        }
+        // if ($source_id === 15) {
+        //     dd($source);
+        // }
         // get problem
         foreach ($problemClassfications as $problem) {
             // do a case insensitive check
