@@ -327,46 +327,6 @@ header {
 .top-nav .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
     background: #edf1f2;
 }
-
-.dropdown .extended {
-  width: 280px;
-  padding: 0;
-  margin-left: -1px;
-  z-index: 3;
-  -webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  border: none;
-  max-height: 330px;
-}
-
-.dropdown .extended li {
-  border-bottom: 1px solid #f0f0f0;
-  line-height: 20px;
-}
-
-.dropdown .extended li a {
-  padding: 10px 20px !important;
-}
-
-.dropdown .extended i {
-  float: left;
-  width: 38px;
-  margin-right: 10px;
-  text-align: center;
-  margin-top: 5px;
-}
-
-.dropdown .extended p {
-  font-weight: 600;
-  background-color: #E4E9ED;
-  padding: 10px 15px 11px 15px;
-  margin-bottom: 0px;
-}
-
-.dropdown .pro-menu {
-  width: 200px;
-}
-
 .Leftmenu-trigger {
   cursor: pointer;
   font-size: 16px;
@@ -386,22 +346,30 @@ header {
 }
 
 .top-menu li {
+
   height: 100%;
   display: inline-block;
   position: relative;
   float: left;
-  line-height: 50px;
   padding: 0px;
 }
 
-.top-menu li >a {
-  color: #979898;
-  text-align: center;
-  padding: 22px 15px;
-  font-size: 16px;
+.login{
+    display: none;
+
 }
 
-.top-menu li >a:hover,.top-menu li >a:focus,.top-menu li >a:active {
+
+
+
+.top-menu li >a {
+  color: #995252;
+  text-align: center;
+  padding: 22px 15px;
+  font-size: 20px;
+}
+
+.top-menu li >.top-menu li >a:focus,.top-menu li > {
   background-color: #edf1f2;
 }
 
@@ -465,6 +433,21 @@ header {
   right: 0;
   left: 230px;
 }
+
+
+/***************** welcome footer ****************/
+.footerr {
+    color: #58666e;
+    padding: 20px 30px;
+    font-weight: 600;
+    background-color: #e6eaed;
+    border-top: 1px solid #ddd;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
 
 .collapsed + .content .footer{
   left: 75px;
@@ -548,6 +531,7 @@ header {
 .panel-group .panel .panel-heading+.panel-collapse .panel-body {
   border-top: 1px solid #DDDDDD;
   margin-top: 15px;
+  width:200px;
 }
 
 .panel-group.panel-group-joined .panel+.panel, .panel-group-joined .panel-group .panel+.panel {
