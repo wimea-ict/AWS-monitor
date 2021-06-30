@@ -1,7 +1,0 @@
-stationID,Formula,Latest,Today,7 days,Month,Year
-54,AVG(% RH),-,-,84.0,80.3,84.2
-54,AVG(mps),-,-,-,-,-
-54,AVG(hPa),-,-,-,-,-
-54,MAX(mps),-,-,-,-,-
-54,SUM(mm),-,-,1865.0,2632.2,3079.6
-54,AVG(C),-,-,41.0,45.8,33.9
