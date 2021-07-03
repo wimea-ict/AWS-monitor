@@ -12,15 +12,15 @@
 import mysql.connector
 
 # mydb = mysql.connector.connect(
-#   host="localhost",
-#   user="oboth",
-#   passwd="oboth",
-#   database="wdrDb"
+#   host="",
+#   user="",
+#   passwd="",
+#   database=""
 # )
 
 mydb = mysql.connector.connect(
-  host="localhost",
-  user="jmuhumuza",
-  passwd="joshua",
-  database="wdrDb"
+  host="",
+  user="",
+  passwd="",
+  database=""
 )
