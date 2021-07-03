@@ -1,6 +1,11 @@
 # Classifier
 
 This is the wimea classifier responsible for classifing weather stations and nodes(sensors) problems. 
+The classifier contains 7 sub modules that represents problems categories faced by the AWSs which include:
+Inaccurante data.
+outliers
+power problems among others
+
 
 to use, 
 - login into the wimea server
