@@ -5,10 +5,10 @@ function callback(QUERY, masterObjectCopy, stationname, callbackfunc) {
   // db init connetions pool
   const pool = mysql.createPool({
     connectionLimit: 5,
-    host: 'localhost',
-    user: 'jmuhumuza',
-    password: 'joshua',
-    database: 'wdrDb',
+    host: '',
+    user: '',
+    password: '',
+    database: '',
   });
 
   pool.query(QUERY, (queryError, result, fields) => {
