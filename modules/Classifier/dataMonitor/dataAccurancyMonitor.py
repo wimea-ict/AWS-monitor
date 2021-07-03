@@ -36,14 +36,15 @@ def stations():
 
   for stationID in result: #for each station
   
-    ##print("_______________________________________",stationID[0],"_CATCHING WRONG DATES_________________________")
+    # print("_______________________________________",stationID[0],"_CATCHING WRONG DATES_________________________")
     for table in list_of_tables: #for each node on a aws
 
-        print(stationID,table)
+        # print(stationID,table)
         sql = "select * from " +table+ " where `stationID` = " +str(stationID[0])+ " ORDER BY id  DESC limit 1"
         result = retrieveQuery(sql)
         fieldname = getHeaders(sql)
         header = fieldname[0]
+        # print(header)
    
         if len(result[0])>0:
 	        nodeData = result[0][0]
@@ -66,26 +67,35 @@ def stations():
 	        if (table == 'GroundNode'):
 	           essentialParameters = GroundNodeParameters
 
-	        i=1
 	        for value in nodeData:
-	          # print([d for d in essentialParameters])
 	          Param =[d for d in essentialParameters]
-	          if header[i] in Param:
+	          # print(header[nodeData.index(value)])
+	          if header[nodeData.index(value)] in Param:
 	            if value:
-	              check_if_problem_existed(str(stationID[0]),'6',table,essentialParameters[header[i]])
+	              print(nodeData.index(value),header[nodeData.index(value)], value, stationID[0])
+	              # print(header[nodeData.index(value)], value)
+	              check_if_problem_existed(str(stationID[0]),'6',table,header[nodeData.index(value)])
 
-	# ========================================CATCHING INCORRECT SENSOR VALUES VALUES================================
+# ========================================CATCHING INCORRECT SENSOR VALUES VALUES================================
 	              try:
 	                float(value)
-	                check_if_problem_existed(str(stationID[0]),'8',table,str(header[i]))
+	                check_if_problem_existed(str(stationID[0]),'8',table,str(header[nodeData.index(value)]))
 	              except ValueError:
-	              	incoValue = header[i]+' \"'+(value)+'\"'
+	              	incoValue = header[nodeData.index(value)]+' \"'+(value)+'\"'
 	              	reportProblemMethod(str(stationID[0]),table, '8', incoValue)
+
+
+# ====================================== CATCHING MISSING VALUES================================================
 	            else:
-	              reportProblemMethod(str(stationID[0]),table,'6',str(essentialParameters[header[i]]))
-	              print(value,str(stationID[0]),table,'6',str(essentialParameters[header[i]]))
-	          # i=i+1
-#==============================END OF CATCHING VALUES MISSING AND INCORRECT SENSOR VALUES=========================================
+	              reportProblemMethod(str(stationID[0]),table,'6',str(header[nodeData.index(value)]))
+	              print(value,str(stationID[0]),table,'6',str(header[nodeData.index(value)]))
+
+
+
+
+
+
+#============================== CATCHING INCORRECT SENSOR VALUES=========================================
 
         sql = "select DATE, TIME from " +table+ " where `stationID` = " +str(stationID[0])+ " ORDER BY id  DESC limit 1"
         result = retrieveQuery(sql)
