@@ -1,0 +1,3 @@
+Dear ZAAKE JOSEPH,
+AWS located at Mukono, KituzaNARO, station with id 70 has a Sensor_off problem, the missing Value is Isolation in the TenMeterNode. This problem was identified on 2021-06-26 10:37:42, and has been reported.
+Regards Admin.
