@@ -1,9 +1,9 @@
 # import pymysql.cursors
 
-# connection = pymysql.connect(host='localhost',
-#                               user='oboth',
-#                               password='oboth',
-#                               db='wdrDb',
+# connection = pymysql.connect(host='',
+#                               user='',
+#                               password='',
+#                               db='',
 #                               charset='utf8mb4',
 #                               cursorclass=pymysql.cursors.DictCursor)
 
