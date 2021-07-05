@@ -28,7 +28,7 @@
 
 
                            <li><a href="{{ route('register') }}"><i class="ion-calendar"></i> <span class="nav-label">Register Users</span></a></li>
-		           <li><a href="{{ route('maillistForm') }}"><i class="ion-calendar"></i> <span class="nav-label">Add to mail list</span></a></li>
+		           <li><a href="{{ url('maillistForm') }}"><i class="ion-calendar"></i> <span class="nav-label">Add to mail list</span></a></li>
                         @endif
 
                             <li>
