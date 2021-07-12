@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','phone','station',
+        'name', 'email', 'password', 'phone', 'station',
     ];
 
     /**
@@ -32,6 +32,10 @@ class User extends Authenticatable
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new CustomPassword($token));
+    }
+    public function station()
+    {
+        return $this->belongsToMany(Station::class, 'maillist', 'userID', 'stationID');
     }
 }
 class CustomPassword extends ResetPassword

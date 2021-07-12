@@ -46,4 +46,10 @@ class Station extends Model  {
      */
     protected $dates = ['date', 'date_time_recorded', 'Date', 'CreationDate', 'Opened', 'Closed', 'CreationDate'];
 
+    public function stationUsers(){
+        return $this->belongsToMany(User::class, 'maillist', 'stationID', 'userID');
+    }
+    public function mobile_numbers(){
+        return $this->hasMany(DataBunbles::class);
+    }
 }
