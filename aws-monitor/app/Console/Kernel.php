@@ -29,7 +29,7 @@ class Kernel extends ConsoleKernel
         /* run the analyzer */
         $schedule->command('analyzer:run')->withoutOverlapping()->hourly(); //run every hour
         $schedule->command('report:send')->withoutOverlapping()->hourlyAt(10); //create a 10min difference so that the problems are reported after the analyzer has run
-        $schedule->command('station:notify')->withoutOverlapping()->hourlyAt(15);
+        $schedule->command('station:notify')->withoutOverlapping()->daily();
     }
 
     /**

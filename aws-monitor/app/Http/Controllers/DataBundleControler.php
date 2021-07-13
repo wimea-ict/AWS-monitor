@@ -5,6 +5,7 @@ namespace station\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use station\DataBunbles;
+use station\Mail\DataBundlesExpired;
 use station\Station;
 
 class DataBundleControler extends Controller

@@ -2,8 +2,10 @@
 
 namespace station\Console\Commands;
 
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
+use station\DataBunbles;
 use station\Mail\DataBundlesExpired;
 use station\Station;
 
@@ -40,15 +42,15 @@ class stationDataBundleDone extends Command
      */
     public function handle()
     {
-        $stations = Station::where('StationStatus', '=', 'on')
-        ->where('closed', '=', null)
-        ->get();
-        foreach ($stations as $station) {
-            $station_name = $station->StationName;
-            foreach( $station->stationUsers as $user){
-                $name = $user->name;
-                dd($name);
-                // Mail::to($user->email)->send(new DataBundlesExpired($name, $station_name));
+        $date_5_days_from_now = Carbon::now()->addDay(5)->format('Y-m-d');
+        $expiring = DataBunbles::where("end_date", '<', $date_5_days_from_now)
+            ->get();
+        foreach ($expiring as $ex) {
+            $mobile_no = $ex->mobile_number;
+            $no_of_days_remaining = Carbon::now()->diff(Carbon::parse($ex->end_date))->format("%r%a");
+            $station = $ex->station['StationName'];
+            foreach ($ex->station->stationUsers as $user) {
+                Mail::to($user->email)->send(new DataBundlesExpired($user->name, $station, $mobile_no, $no_of_days_remaining));
             }
         }
     }
