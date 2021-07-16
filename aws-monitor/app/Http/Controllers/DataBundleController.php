@@ -46,8 +46,7 @@ class DataBundleController extends Controller
      */
     public function store(Request $request)
     {
-
-       
+      
         $no_of_months = $request->input("month");
         $date = Carbon::now()->addMonth($no_of_months)->format('Y-m-d');
         $mobile_no = new DataBundles();

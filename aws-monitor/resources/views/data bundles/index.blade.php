@@ -24,9 +24,7 @@
 													<th>Expiry date</th>
                                                                                                        
                                                 </tr>
-                                            </thead>
-
-                                     
+                                            </thead>                                     
                                             <tbody>
                                                 
                                                 @foreach ($data as $mobile_no)                                               
