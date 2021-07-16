@@ -64,7 +64,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('analyser','AnalyserController');
     Route::resource('analytic','AnalyticController');
-    Route::resource('data_bundle', "DataBundleControler");
+    Route::resource('data_bundle', "DataBundleController");
     Route::get('/node10m_report','TenMNodeController@report1');
     Route::get('/node2m_report','TwoMNodeController@report1');
     Route::get('/nodesink_report','SinkNodeController@report1');

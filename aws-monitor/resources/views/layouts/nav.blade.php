@@ -53,8 +53,19 @@
 
             </li> -->
 @endif
+
             <li class="has-submenu"><a href="{{URL::to('livedata')}}"><i class="ion-radio-waves"></i> <span class="nav-label">Live-Data</span></a></li>
 
+            <li class="has-submenu"><a href="#"><i class="ion-stats-bars"></i> <span class="nav-label">Data Bundles</span></a>
+                <ul class="list-unstyled">
+            
+                   <li class=""><a href="{{URL::to('/data_bundle/create')}}">Add Simcard</a></li>
+                   <li><a href="{{URL::to('/data_bundle')}}">View Bundles</a></li>
+                  
+            
+                </ul>
+            </li>
+           
 @if (Auth::user()->station == NULL)
                 {{--<ul class="list-unstyled">
                     <!--<li><a href="{{URL::to('addnode')}}">Add Node</a></li>-->
@@ -71,6 +82,7 @@
                 <li class="has-submenu"><a href="{{ URL::to('users') }}"><i class="fa fa-list"></i> <span class="nav-label">List of users</span></a></li>
             @endif
 
+           
             <li class="has-submenu">
                 <a href="{{URL::to('data_list')}}"><i class="ion-stats-bars"></i> <span class="nav-label">Import data</span></a>
             </li>
@@ -119,7 +131,7 @@
 
    @if (Auth::user()->station == NULL)
 
-
+   
             {{-- ion-android-bicycle,  --}}
 
             <li class="has-submenu"><a href="#"><i class="ion-document-text"></i> <span class="nav-label">Node Data</span></a>
