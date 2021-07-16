@@ -27,7 +27,7 @@
                                             </thead>                                     
                                             <tbody>
                                                 
-                                                @foreach ($data as $mobile_no)                                               
+                                                @foreach ($data as $mobile_no)                                              
                                                 
                                                 <tr>
                                                 <td> {{ $mobile_no->station_id }}</td>
@@ -36,8 +36,7 @@
 
 
                                                 </tr>
-                                            @endforeach
-                                            
+                                            @endforeach                                    
 
                 
                                                
