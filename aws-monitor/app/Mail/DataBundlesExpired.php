@@ -16,10 +16,12 @@ class DataBundlesExpired extends Mailable
      *
      * @return void
      */
-    public function __construct($name, $station_name)
+    public function __construct($name, $station, $mobile_no, $no_of_days_remaining)
     {
         $this->name = $name;
-        $this->station_name = $station_name;
+        $this->station = $station;
+        $this->mobile_no = $mobile_no;
+        $this->no_of_days_remaining = $no_of_days_remaining;
     }
 
     /**
@@ -29,6 +31,14 @@ class DataBundlesExpired extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.dataBundleExpired', ['name' => $this->name, 'station_name' => $this->station_name]);
+        return $this->markdown(
+            'emails.dataBundleExpired',
+            [
+                'name' => $this->name,
+                'station' => $this->station,
+                'mobile_no' => $this->mobile_no,
+                'no_of_days_remaining' => $this->no_of_days_remaining
+            ]
+        );
     }
 }
