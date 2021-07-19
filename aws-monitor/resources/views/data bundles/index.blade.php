@@ -19,7 +19,6 @@
                                         <table id="datatable" class="table table-striped table-bordered">
                                             <thead>
                                                 <tr>
-                                                    <th>Station id</th>
                                                     <th>Simcard Number</th>                                                   
 													<th>Expiry date</th>
                                                                                                        
@@ -30,7 +29,6 @@
                                                 @foreach ($data as $mobile_no)                                              
                                                 
                                                 <tr>
-                                                <td> {{ $mobile_no->station_id }}</td>
                                                 <td> {{ $mobile_no->mobile_number }}</td>
                                                 <td> {{ $mobile_no->end_date }}</td>
 

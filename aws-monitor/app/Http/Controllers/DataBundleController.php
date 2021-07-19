@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 
-use station\DataBunbles;
+use station\DataBundles;
 use station\Mail\DataBundlesExpired;
 use station\Station;
 use App\Models\User;
