@@ -3,3 +3,8 @@
 *.scss linguist-vendored
 *.js linguist-vendored
 CHANGELOG.md export-ignore
+*.png -text
+*.npz binary
+*.pickle binary
+*.mseed binary
+*.png binary

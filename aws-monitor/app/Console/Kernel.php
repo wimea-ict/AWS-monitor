@@ -27,8 +27,9 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
         /* run the analyzer */
-        $schedule->command('analyzer:run')->withoutOverlapping()->hourly();//run every hour
-        $schedule->command('report:send')->withoutOverlapping()->hourlyAt(10);//create a 10min difference so that the problems are reported after the analyzer has run
+        $schedule->command('analyzer:run')->withoutOverlapping()->hourly(); //run every hour
+        $schedule->command('report:send')->withoutOverlapping()->hourlyAt(10); //create a 10min difference so that the problems are reported after the analyzer has run
+        $schedule->command('station:notify')->withoutOverlapping()->daily();
     }
 
     /**
@@ -38,7 +39,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }

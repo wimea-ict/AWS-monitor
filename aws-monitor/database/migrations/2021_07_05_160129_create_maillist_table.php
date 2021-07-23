@@ -15,7 +15,7 @@ class CreateMaillistTable extends Migration {
 		Schema::create('maillist', function(Blueprint $table)
 		{
 			$table->integer('id', true);
-			$table->integer('userID')->nullable();
+			$table->unsignedInteger('userID')->nullable();
 			$table->integer('stationID')->nullable();
 			$table->boolean('status')->default(1);
 		});

@@ -64,6 +64,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('analyser','AnalyserController');
     Route::resource('analytic','AnalyticController');
+    Route::resource('data_bundle', "DataBundleController");
     Route::get('/node10m_report','TenMNodeController@report1');
     Route::get('/node2m_report','TwoMNodeController@report1');
     Route::get('/nodesink_report','SinkNodeController@report1');
@@ -113,7 +114,9 @@ Route::group(['middleware' => 'auth'], function () {
 Route::get('/', function () {
     return view('/auth/login');
 });
-
+Route::get('/register', function () {
+    return view('/auth/register');
+});
 Auth::routes();
 /*
 Route::get('/', function () {
@@ -142,8 +145,6 @@ Route::get('{fileName}', function($fileName){
 
     return Response::download($file, $fileName, $headers);
 });
-
-
 
 /*Route::get('buyende1file', function(){
     $file = public_path()."/stationsData/buyende_1.dat";
