@@ -19,14 +19,13 @@ class DataBundleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)    
+    public function index(Request $request)
     {
 
         $station = $request->user()->station;
-        $mobile_no = DataBundles::where('station_id', '=', $station)->orderBy('id', 'DSC')->get();   
-      
-        return view('data bundles.index', ['data' => $mobile_no]);
+        $mobile_no = DataBundles::where('station_id', '=', $station)->orderBy('id', 'DSC')->get();
 
+        return view('data bundles.index', ['data' => $mobile_no]);
     }
 
     /**
@@ -36,9 +35,9 @@ class DataBundleController extends Controller
      */
     public function create()
     {
-       // return ('hello');
-       return view('data bundles.create');
-       // return view('data bundles.create');
+        // return ('hello');
+        return view('data bundles.create');
+        // return view('data bundles.create');
     }
 
     /**
@@ -49,7 +48,7 @@ class DataBundleController extends Controller
      */
     public function store(Request $request)
     {
-      
+
         $no_of_months = $request->input("month");
         $date = Carbon::now()->addMonth($no_of_months)->format('Y-m-d');
         $mobile_no = new DataBundles();
@@ -79,7 +78,9 @@ class DataBundleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $databundle = DataBundles::find($id)->first();
+        // dd($databundle);
+        return view('data bundles.edit')->with("data", $databundle);
     }
 
     /**
@@ -91,7 +92,12 @@ class DataBundleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $no_of_months = $request->input("month");
+        $new_end_date = Carbon::now()->addMonth($no_of_months)->format('Y-m-d');
+        $databundle = DataBundles::where("id", $id)->update(
+            ["end_date" => $new_end_date],
+        );
+        return redirect('/data_bundle');
     }
 
     /**
@@ -102,6 +108,8 @@ class DataBundleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $databundle = DataBundles::find($id)->first();
+        $databundle->delete();
+        return redirect('/data_bundle');
     }
 }

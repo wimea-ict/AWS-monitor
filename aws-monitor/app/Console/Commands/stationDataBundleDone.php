@@ -5,7 +5,7 @@ namespace station\Console\Commands;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
-use station\DataBunbles;
+use station\DataBundles;
 use station\Mail\DataBundlesExpired;
 use station\Station;
 
@@ -43,7 +43,7 @@ class stationDataBundleDone extends Command
     public function handle()
     {
         $date_5_days_from_now = Carbon::now()->addDay(5)->format('Y-m-d');
-        $expiring = DataBunbles::where("end_date", '<', $date_5_days_from_now)
+        $expiring = DataBundles::where("end_date", '<', $date_5_days_from_now)
             ->get();
         foreach ($expiring as $ex) {
             $mobile_no = $ex->mobile_number;
