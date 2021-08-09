@@ -2,18 +2,20 @@
 
 namespace station\Http\Controllers;
 
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
-use Excel;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class UploadController extends Controller
 {
-    public function index(){
-        $data = DB::table('uploads')->orderBy('id','ASC')->get();
+    public function index()
+    {
+        $data = DB::table('uploads')->orderBy('id', 'ASC')->get();
         return view('reports.upload', compact('data'));
     }
 
-    public function dataImport(Request $request){
+    public function dataImport(Request $request)
+    {
         $this->validate($request, [
             'select_file'   => 'required|mimes:xls,xlsx,csv'
         ]);
@@ -21,10 +23,8 @@ class UploadController extends Controller
 
         $data = Excel::load($path)->get();
 
-        if($data ->count() > 0) 
-        {
-            foreach($data as $key => $row)
-            {
+        if ($data->count() > 0) {
+            foreach ($data as $key => $row) {
                 $insert_data[] = [
                     'datetime'       => $row->datetime,
                     'rh_wimea'    => $row->rh_wimea,
@@ -38,12 +38,10 @@ class UploadController extends Controller
                     'station'     => $row->station,
                 ];
             }
-            if(!empty($insert_data))
-            {
+            if (!empty($insert_data)) {
                 DB::table('uploads')->insert($insert_data);
             }
         }
-        return back()->with('success','Excel Data Imported successfully.');
-
+        return back()->with('success', 'Excel Data Imported successfully.');
     }
 }

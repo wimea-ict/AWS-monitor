@@ -2,15 +2,15 @@
 
 namespace station\Http\Controllers\Auth;
 
-use station\User;
+use station\Models\User;
 use station\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use \Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
-use station\maillist;
-use DB;
-use station\Station;
+use station\Models\maillist;
+use Illuminate\Support\Facades\DB;
+use station\Models\Station;
 
 class RegisterController extends Controller
 {
@@ -24,17 +24,17 @@ class RegisterController extends Controller
     | provide this functionality without requiring any additional code.
     |
     */
-   public function index()
+    public function index()
     {
         $stations = array();
-        $station = Station::select('station_id','Location')->where("stationCategory","aws")->get()->toArray();
+        $station = Station::select('station_id', 'Location')->where("stationCategory", "aws")->get()->toArray();
         foreach ($station as $value) {
-            $stations[$value['station_id']]=$value['Location'];
+            $stations[$value['station_id']] = $value['Location'];
 
             # code...
         }
         $users = User::orderByDesc('updated_at')->get();
-        return view('layouts.display_users', ['users'=>$users],compact('stations'));
+        return view('layouts.display_users', ['users' => $users], compact('stations'));
     }
 
     use RegistersUsers;
@@ -58,13 +58,14 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
-                $stations = array();
-        $station = Station::select('station_id','Location')->where("stationCategory","aws")->get()->toArray();
+        $stations = array();
+        $station = Station::select('station_id', 'Location')->where("stationCategory", "aws")->get()->toArray();
         foreach ($station as $value) {
-            $stations[$value['station_id']]=$value['Location'];
+            $stations[$value['station_id']] = $value['Location'];
 
             # code...
         }
+
         $this->validator($request->all())->validate();
 
         event(new Registered($user = $this->create($request->all())));
@@ -72,19 +73,20 @@ class RegisterController extends Controller
         // $this->guard()->login($user);
         $this->registered($request, $user);
         $users = User::orderByDesc('updated_at')->get();
-        $this -> mailsend();
+        $this->mailsend();
 
-        return view('layouts.display_users', compact('stations'), ['users'=>$users])->with('registerUser', 'A new member has been registered successfully and added to the maillist');
+        return view('layouts.display_users', compact('stations'), ['users' => $users])->with('registerUser', 'A new member has been registered successfully and added to the maillist');
         //return $this->registered($request, $user)
         //            ?: redirect($this->redirectPath());
     }
 
-    public function showRegistrationForm(){
-        
+    public function showRegistrationForm()
+    {
+
         $stationsAttachedTo = array();
 
-       
-        $stationsAttachedTo = Station::select('station_id','Location')->where("stationCategory","aws")->get()->toArray();
+
+        $stationsAttachedTo = Station::select('station_id', 'Location')->where("stationCategory", "aws")->get()->toArray();
 
         return view('auth.register', compact('stationsAttachedTo'));
     }
@@ -122,7 +124,8 @@ class RegisterController extends Controller
         ]);
     }
 
-    protected function mailsend(){
+    protected function mailsend()
+    {
 
         //protected $fillable = ['id','userID','stationID','status'];
         //SELECT * FROM `users` ORDER BY `id` DESC LIMIT 1
@@ -130,12 +133,12 @@ class RegisterController extends Controller
         $newUserDetails = array();
         $newUserDetails = User::all()->toArray();
 
-        foreach($newUserDetails as $u){
+        foreach ($newUserDetails as $u) {
             $userId = $u['id'];
             $station = $u['station'];
         }
 
-        $data = array("userID"=>$userId,"stationID"=>$station);
+        $data = array("userID" => $userId, "stationID" => $station);
 
         DB::table('maillist')->insert($data);
     }

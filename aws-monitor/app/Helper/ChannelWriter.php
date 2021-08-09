@@ -1,10 +1,10 @@
 <?php
 
-namespace station\Helpers;
+namespace Station\Helpers;
 
 use Monolog\Logger;
-
-use station\Helpers\ChannelStreamHandler;
+use InvalidArgumentException;
+use Station\Helpers\ChannelStreamHandler;
 
 class ChannelWriter
 {
@@ -14,13 +14,13 @@ class ChannelWriter
      * @var array
      */
     protected $channels = [
-        'problem' => [ 
-            'path' => 'logs/problems.log', 
-            'level' => Logger::INFO 
+        'problem' => [
+            'path' => 'logs/problems.log',
+            'level' => Logger::INFO
         ],
-        'userAction' => [ 
-            'path' => 'logs/userActions.log', 
-            'level' => Logger::INFO 
+        'userAction' => [
+            'path' => 'logs/userActions.log',
+            'level' => Logger::INFO
         ]
     ];
 
@@ -40,7 +40,9 @@ class ChannelWriter
         'emergency' => Logger::EMERGENCY,
     ];
 
-    public function __construct() {}
+    public function __construct()
+    {
+    }
 
     /**
      * Write to log based on the given channel and log level set
@@ -53,19 +55,19 @@ class ChannelWriter
     public function writeLog($channel, $level, $message, array $context = [])
     {
         //check channel exist
-        if( !in_array($channel, array_keys($this->channels)) ){
+        if (!in_array($channel, array_keys($this->channels))) {
             throw new InvalidArgumentException('Invalid channel used.');
         }
 
         //lazy load logger
-        if( !isset($this->channels[$channel]['_instance']) ){
+        if (!isset($this->channels[$channel]['_instance'])) {
             //create instance
             $this->channels[$channel]['_instance'] = new Logger($channel);
             //add custom handler
-            $this->channels[$channel]['_instance']->pushHandler( 
-                new ChannelStreamHandler( 
-                    $channel, 
-                    storage_path() .'/'. $this->channels[$channel]['path'], 
+            $this->channels[$channel]['_instance']->pushHandler(
+                new ChannelStreamHandler(
+                    $channel,
+                    storage_path() . '/' . $this->channels[$channel]['path'],
                     $this->channels[$channel]['level']
                 )
             );
@@ -75,18 +77,19 @@ class ChannelWriter
         $this->channels[$channel]['_instance']->{$level}($message, $context);
     }
 
-    public function write($channel, $message, array $context = []){
+    public function write($channel, $message, array $context = [])
+    {
         //get method name for the associated level
-        $level = array_flip( $this->levels )[$this->channels[$channel]['level']];
+        $level = array_flip($this->levels)[$this->channels[$channel]['level']];
         //write to log
         $this->writeLog($channel, $level, $message, $context);
     }
 
     //alert('event','Message');
-    function __call($func, $params){
-        if(in_array($func, array_keys($this->levels))){
+    function __call($func, $params)
+    {
+        if (in_array($func, array_keys($this->levels))) {
             return $this->writeLog($params[0], $func, $params[1]);
         }
     }
-
 }

@@ -2,8 +2,11 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
-class CreateDetectedAnalyzerProblemsTable extends Migration {
+class CreateDetectedAnalyzerProblemsTable extends Migration
+{
 
 	/**
 	 * Run the migrations.
@@ -12,8 +15,7 @@ class CreateDetectedAnalyzerProblemsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('DetectedAnalyzerProblems', function(Blueprint $table)
-		{
+		Schema::create('DetectedAnalyzerProblems', function (Blueprint $table) {
 			$table->integer('id', true);
 			$table->string('Problem', 200)->nullable();
 			$table->string('Value', 20)->nullable();
@@ -35,5 +37,4 @@ class CreateDetectedAnalyzerProblemsTable extends Migration {
 	{
 		Schema::drop('DetectedAnalyzerProblems');
 	}
-
 }

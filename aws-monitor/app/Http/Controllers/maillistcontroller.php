@@ -4,9 +4,9 @@ namespace station\Http\Controllers;
 
 
 use App\layouts;
-use station\maillist;
-use station\User;
-use DB;
+use station\Models\maillist;
+use station\Models\User;
+use Illuminate\Support\Facades\DB;
 use station\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 //use Illuminate\Foundation\Auth\maillist;

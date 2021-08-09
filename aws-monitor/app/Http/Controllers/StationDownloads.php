@@ -3,10 +3,9 @@
 namespace station\Http\Controllers;
 
 use Illuminate\Http\Request;
-use station\User;
-use Auth;
-use station\Station;
-
+use station\Models\User;
+use Illuminate\Support\Facades\Auth;
+use station\Models\Station;
 class StationDownloads extends Controller
 {
     //

@@ -5,7 +5,7 @@ namespace station\Console\Commands;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
-use station\DataBundles;
+use station\Models\DataBundles;
 use station\Mail\DataBundlesExpired;
 use station\Station;
 

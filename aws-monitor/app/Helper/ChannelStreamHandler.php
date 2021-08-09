@@ -2,6 +2,7 @@
 
 namespace station\Helpers;
 
+use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 
 /**
@@ -39,16 +40,11 @@ class ChannelStreamHandler extends StreamHandler
     {
         //Handle if Level high enough to be handled (default mechanism) 
         //AND CHANNELS MATCHING!
-        if( isset($record['channel']) ){
-            return ( 
-                $record['level'] >= $this->level && 
-                $record['channel'] == $this->channel 
-            );
+        if (isset($record['channel'])) {
+            return ($record['level'] >= $this->level &&
+                $record['channel'] == $this->channel);
         } else {
-            return ( 
-                $record['level'] >= $this->level
-            );
+            return ($record['level'] >= $this->level);
         }
     }
-
 }

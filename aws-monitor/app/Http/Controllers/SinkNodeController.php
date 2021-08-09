@@ -3,14 +3,14 @@
 namespace station\Http\Controllers;
 
 use Illuminate\Http\Request;
-use station\Station;
-use station\Sensor;
+use station\Models\Station;
+use station\Models\Sensor;
 
-use station\SinkNode;
-use station\NodeStatus;
-use station\ObservationSlip;
-use DB;
-use URL;
+use station\Models\SinkNode;
+use station\Models\NodeStatus;
+use station\Models\ObservationSlip;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\URL;
 class SinkNodeController extends Controller
 {
     /**

@@ -2,7 +2,7 @@
 
 namespace station\Http\Controllers\Auth;
 
-use station\User;
+use station\Models\User;
 use station\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;

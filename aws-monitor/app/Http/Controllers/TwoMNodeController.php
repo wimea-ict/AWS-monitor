@@ -3,14 +3,14 @@
 namespace station\Http\Controllers;
 
 use Illuminate\Http\Request;
-use station\Station;
-use station\Sensor;
-use station\TwoMeterNode;
-use station\NodeStatus;
-use station\ObservationSlip;
-use station\Problems;
-use DB;
-use URL;
+use station\Models\Station;
+use station\Models\Sensor;
+use station\Models\TwoMeterNode;
+use station\Models\NodeStatus;
+use station\Models\ObservationSlip;
+use station\Models\Problems;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\URL;
 class TwoMNodeController extends Controller
 {
     /**

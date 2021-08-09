@@ -1,10 +1,11 @@
 <?php
+
 namespace station\Http\Controllers\Auth;
 
 
 use App\layouts;
-use station\maillist;
-use station\User;
+use station\Models\maillist;
+use station\Models\User;
 use station\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 //use Illuminate\Foundation\Auth\maillist;
@@ -22,28 +23,29 @@ class maillistController extends Controller
     | This controller handles addition of new maillist recipients to "contacts.txt"
     |
     */
-    public function index(){
-                
+    public function index()
+    {
+
         $mail = array();
         $user_email = array();
         //find how to do joins in laravel 
         //find how to write to text files in laravel
 
 
-        $user_email = maillist::leftJoin('users','maillist.userID', '=', 'users.id')->leftJoin('stations','maillist.stationID','=','stations.station_id')->select('users.email','users.Name','stations.Location','maillist.id')->get();
+        $user_email = maillist::leftJoin('users', 'maillist.userID', '=', 'users.id')->leftJoin('stations', 'maillist.stationID', '=', 'stations.station_id')->select('users.email', 'users.Name', 'stations.Location', 'maillist.id')->get();
 
         $mail = maillist::all()->toArray();
 
-        return view('layouts.maillisttable', compact('mail','user_email'));
+        return view('layouts.maillisttable', compact('mail', 'user_email'));
     }
 
 
 
-   // use maillist;
-   public function showmaillistForm()
-   {
-       return view('auth/maillist');
-   }
+    // use maillist;
+    public function showmaillistForm()
+    {
+        return view('auth/maillist');
+    }
     /**
      * Where to redirect users after registration.
      *
@@ -62,22 +64,21 @@ class maillistController extends Controller
 
     public function maillist(Request $request)
     {
-      //  SELECT maillist.Name as Name, users.email as email FROM maillist INNER JOIN users ON maillist.Name = users.name ORDER BY id DESC
-        
+        //  SELECT maillist.Name as Name, users.email as email FROM maillist INNER JOIN users ON maillist.Name = users.name ORDER BY id DESC
+
         $mail = array();
         $user_email = array();
         //find how to do joins in laravel 
         //find how to write to text files in laravel
 
-       
 
-        $user_email = maillist::leftJoin('users','maillist.userID', '=', 'users.id')->leftJoin('stations','maillist.stationID','=','stations.station_id')->select('users.email','users.Name','stations.Location','maillist.id')->get();
+
+        $user_email = maillist::leftJoin('users', 'maillist.userID', '=', 'users.id')->leftJoin('stations', 'maillist.stationID', '=', 'stations.station_id')->select('users.email', 'users.Name', 'stations.Location', 'maillist.id')->get();
 
 
         $mail = maillist::all()->toArray();
 
-        return view('auth.maillist', compact('mail','user_email'));
-       
+        return view('auth.maillist', compact('mail', 'user_email'));
     }
 
     /**
@@ -91,7 +92,7 @@ class maillistController extends Controller
         return Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            
+
         ]);
     }
     /**
@@ -107,7 +108,5 @@ class maillistController extends Controller
             'email' => $data['email'],
             redirect('/maillisttable'),
         ]);
-            }
-
+    }
 }
-

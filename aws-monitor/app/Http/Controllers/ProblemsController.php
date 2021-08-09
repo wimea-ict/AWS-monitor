@@ -3,8 +3,8 @@
 namespace station\Http\Controllers;
 
 use App\layouts;
-use station\Station;
-use station\problemConfigurations;
+use station\Models\Station;
+use station\Models\problemConfigurations;
 
 use Illuminate\Http\Request;
 

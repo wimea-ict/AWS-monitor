@@ -4,9 +4,9 @@ namespace station\Http\Controllers;
 
 use station\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use DB;
-use station\User;
-use station\Station;
+use Illuminate\Support\Facades\DB;
+use station\Models\User;
+use station\Models\Station;
 class UserController extends Controller
 {
     /**
@@ -77,7 +77,7 @@ class UserController extends Controller
             return view('auth.editUser', compact('stations','users', 'id','stationAttarched'));
         }
         else
-            return view(layouts.display_users);
+            return view("layouts.display_users");
     }
 
     /**

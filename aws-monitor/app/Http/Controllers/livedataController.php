@@ -3,7 +3,7 @@
 namespace station\Http\Controllers;
 
 use App\layouts;
-use station\Station;
+use station\Models\Station;
 use station\TwoMeterNode;
 use station\TenMeterNode;
 use station\SinkNode;
@@ -11,14 +11,14 @@ use station\GroundNode;
 use station\Sensor;
 use station\ReportIntervalClusters;
 use station\ChangeTracker;
-use station\Problems;
+use station\Models\Problems;
 use station\PotentialProblem;
 use station\DetectedAnalyzerProblems;
 use station\problem_classification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Auth;
-use station\User;
+use Illuminate\Support\Facades\Auth;
+use station\Models\User;
 use Carbon\Carbon;
 
 class livedataController extends Controller

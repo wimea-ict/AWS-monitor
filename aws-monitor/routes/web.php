@@ -1,5 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Response;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,6 +14,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::group(['middleware' => 'auth'], function () {
 
     // All my routes that needs a logged in user
@@ -19,30 +24,30 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('livedata/{id}', 'livedataController@show');
 
     Route::resource('configurestation', 'ConfigureStaion');
-    Route::post('updateStation','ConfigureStaion@update');
+    Route::post('updateStation', 'ConfigureStaion@update');
 
-    Route::get('data_list','UploadController@index');
-    Route::post('upload','UploadController@dataImport');
-    Route::get('export/{type}','UploadController@dataExport'); 
+    Route::get('data_list', 'UploadController@index');
+    Route::post('upload', 'UploadController@dataImport');
+    Route::get('export/{type}', 'UploadController@dataExport');
 
-    Route::resource('downloads','StationDownloads');
-    Route::get('caldata1','NodeData@entebbecaldata');
-    Route::get('caldata2','NodeData@entebbecaldata2');
-    Route::get('caldata3','NodeData@kamulicaldata');
-    Route::get('caldata4','NodeData@kamulicaldata2');
-    Route::get('nodeData1','NodeData@twometerdata');
-    Route::get('nodeData2','NodeData@tenmeterdata');
-    Route::get('nodeData3','NodeData@grounddata');
-    Route::get('nodeData4','NodeData@manualdata');
+    Route::resource('downloads', 'StationDownloads');
+    Route::get('caldata1', 'NodeData@entebbecaldata');
+    Route::get('caldata2', 'NodeData@entebbecaldata2');
+    Route::get('caldata3', 'NodeData@kamulicaldata');
+    Route::get('caldata4', 'NodeData@kamulicaldata2');
+    Route::get('nodeData1', 'NodeData@twometerdata');
+    Route::get('nodeData2', 'NodeData@tenmeterdata');
+    Route::get('nodeData3', 'NodeData@grounddata');
+    Route::get('nodeData4', 'NodeData@manualdata');
     //Route::resource('makererestation','MakerereController');   
-    Route::resource('mayuge_station','MayugeStationController');
-    Route::resource('kamuli_station','KamuliStationController');
-    Route::resource('jinja_station','JinjaStationController');
-    Route::resource('buyende2_station','BuyendeStationController');
-    Route::resource('lwengo_station','LwengoStationController');
-    Route::resource('makerere_station','MakerereStationController');
-    Route::resource('entebbe_station','EntebbeStationController');
-    Route::resource('mubende_station','MubendeStationController');
+    Route::resource('mayuge_station', 'MayugeStationController');
+    Route::resource('kamuli_station', 'KamuliStationController');
+    Route::resource('jinja_station', 'JinjaStationController');
+    Route::resource('buyende2_station', 'BuyendeStationController');
+    Route::resource('lwengo_station', 'LwengoStationController');
+    Route::resource('makerere_station', 'MakerereStationController');
+    Route::resource('entebbe_station', 'EntebbeStationController');
+    Route::resource('mubende_station', 'MubendeStationController');
     Route::resource('configure10mnode', 'TenMNodeController');
     Route::post('updateTenMNode', 'TenMNodeController@update');
     Route::resource('configure2mnode', 'TwoMNodeController');
@@ -56,33 +61,32 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('updateProblemConfigurations', 'ProblemsController@update');
     Route::resource('viewStationStatus', 'StationStatusController');
     Route::get('selectedStationStatus/{id}', 'StationStatusController@show');
-    Route::resource('googlemaps','GoogleMapsController');
+    Route::resource('googlemaps', 'GoogleMapsController');
     //Route::get('/analyserdata','AnalyserController@index');
     Route::get('selected_aws/{id}', 'AnalyticController@show');
-     
+
     Route::get('archivedProblems/{id}', 'StationStatusController@archivedProblems')->name('archivedProblems');
 
-    Route::resource('analyser','AnalyserController');
-    Route::resource('analytic','AnalyticController');
+    Route::resource('analyser', 'AnalyserController');
+    Route::resource('analytic', 'AnalyticController');
     Route::resource('data_bundle', "DataBundleController");
-    Route::get('/node10m_report','TenMNodeController@report1');
-    Route::get('/node2m_report','TwoMNodeController@report1');
-    Route::get('/nodesink_report','SinkNodeController@report1');
-    Route::get('/nodegnd_report','GroundNodeController@report1');
+    Route::get('/node10m_report', 'TenMNodeController@report1');
+    Route::get('/node2m_report', 'TwoMNodeController@report1');
+    Route::get('/nodesink_report', 'SinkNodeController@report1');
+    Route::get('/nodegnd_report', 'GroundNodeController@report1');
 
-    Route::get('/general_reports','GeneralReportsController@index');
-    Route::post('/plot_reports','GeneralReportsController@plotGraphs');
+    Route::get('/general_reports', 'GeneralReportsController@index');
+    Route::post('/plot_reports', 'GeneralReportsController@plotGraphs');
 
-    Route::post('/reports10m','TenMNodeController@get10mStationReports');
-    Route::post('/reportsGnd','GroundNodeController@getGndStationReports');
-    Route::post('/reportsSink','SinkNodeController@getSinkStationReports');
-    Route::post('/reports2m','TwoMNodeController@get2mStationReports');
-    Route::get('/report_problems','ReportController@report');
-  
-    Route::get('/hello','MakerereController@index');
-    Route::get('/send_test_email', function(){
-        Mail::raw('Sending emails with Mailgun and Laravel is easy!', function($message)
-        {
+    Route::post('/reports10m', 'TenMNodeController@get10mStationReports');
+    Route::post('/reportsGnd', 'GroundNodeController@getGndStationReports');
+    Route::post('/reportsSink', 'SinkNodeController@getSinkStationReports');
+    Route::post('/reports2m', 'TwoMNodeController@get2mStationReports');
+    Route::get('/report_problems', 'ReportController@report');
+
+    Route::get('/hello', 'MakerereController@index');
+    Route::get('/send_test_email', function () {
+        Mail::raw('Sending emails with Mailgun and Laravel is easy!', function ($message) {
             $message->subject('Mailgun and Laravel are awesome!');
             $message->from('byarus90@gmail.com', 'Website Name');
             $message->to('kibsysapps@gmail.com');
@@ -93,7 +97,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('users', 'UserController');
     Route::get('edit_users/{id}', 'UserController@edit');
     Route::get('delete_users/{id}', 'UserController@destroy');
-    Route::get('/logs', function(){
+    Route::get('/logs', function () {
         return view('layouts.logs');
     });
 
@@ -105,7 +109,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/downLoadUserLogFile', 'ViewAnalyzerData@downLoadUserLogFile');
 
     Route::get('/downloadProblemLogFile', 'ViewAnalyzerData@downloadProblemLogFile');
-
 });
 
 
@@ -126,18 +129,18 @@ Route::get('/', function () {
     Route::get('/welcome', 'welcomeController@index');*/
 
 //================================LOGIN WITH A MAP==========================================
- //Route::get('/login', 'welcomeController@index')->name('login');
+//Route::get('/login', 'welcomeController@index')->name('login');
 
- //Route::get('/', 'welcomeController@index')->name('login');
+//Route::get('/', 'welcomeController@index')->name('login');
 
 
 //Routes for file downloads
 
 
 //updates
-Route::get('{fileName}', function($fileName){
+Route::get('{fileName}', function ($fileName) {
 
-    $file = public_path().'/stationsData/cleanedData/'.$fileName;
+    $file = public_path() . '/stationsData/cleanedData/' . $fileName;
     echo ($fileName);
     $headers = array(
         'Content-Type: application/dat',
@@ -266,6 +269,6 @@ Route::get('fosfile', function(){
     return Response::download($file, "fos.dat", $headers);
 });*/
 
-Route::get('Jinja','BenchmarkingController@jinja_adcon_aws');
-Route::get('Kamuli','BenchmarkingController@kamuli_adcon_aws');
-Route::get('Entebbe','BenchmarkingController@entebbe_adcon_aws');
+Route::get('Jinja', 'BenchmarkingController@jinja_adcon_aws');
+Route::get('Kamuli', 'BenchmarkingController@kamuli_adcon_aws');
+Route::get('Entebbe', 'BenchmarkingController@entebbe_adcon_aws');

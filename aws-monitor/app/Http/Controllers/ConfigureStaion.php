@@ -2,8 +2,8 @@
 
 namespace station\Http\Controllers;
 use App\layouts;
-use station\Station;
-use Auth;
+use station\Models\Station;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class ConfigureStaion extends Controller

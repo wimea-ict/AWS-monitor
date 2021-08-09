@@ -1,12 +1,12 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use station\User;
-use station\Node;
-use station\Sensor;
+use station\Models\User;
+use station\Models\Node;
+use station\Models\Sensor;
 use station\Station;
-use station\NodeStatus;
-use station\NodeStatusConfiguration;
+use station\Models\NodeStatus;
+use station\Models\NodeStatusConfiguration;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,11 +18,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UsersTableSeeder::class);
-<<<<<<< HEAD
-        factory(station\User::class, 50)->create();
-
-=======
-        factory(User::class, 50)->create();
+        User::factory()->count(50)->create();
 
         // factory(Station::class, 5)->create()->each(function($station)
         // {
@@ -39,20 +35,13 @@ class DatabaseSeeder extends Seeder
         //         }));
         //     })
         // );
-
-
-        $stations = factory(Station::class,5)->create();
-        foreach( $stations as $station)
-        {
+        $stations = Station::factory()->count(30)->create();
+        foreach ($stations as $station) {
             //factory(Node::class,5)->create(['station_id' => $station->station_id]);
-            $nodes=$station->nodes()->saveMany(factory(Node::class, 3)->make()); 
-            foreach($nodes as $node){
-                $sensors=$node->sensors()->saveMany(factory(Sensor::class, 5)->make()); 
-            }  
+            $nodes = $station->nodes()->saveMany(Node::factory()->count(3)->make());
+            foreach ($nodes as $node) {
+                $sensors = $node->sensors()->saveMany(Sensor::factory()->count(5)->make());
+            }
         }
-    
-        
-        
->>>>>>> b838b37bc10a9bd92782f5e0213406537638fa83
     }
 }

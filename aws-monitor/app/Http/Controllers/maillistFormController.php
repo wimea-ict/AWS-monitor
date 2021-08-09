@@ -3,10 +3,10 @@
 namespace station\Http\Controllers;
 
 use App\layouts;
-use station\Station;
-use station\maillist;
-use station\User;
-use DB;
+use station\Models\Station;
+use station\Models\maillist;
+use station\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 //so this is the controller used by the mail list form 

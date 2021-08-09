@@ -4,25 +4,25 @@ namespace station\Http\Controllers;
 
 
 use App\layouts;
-use station\Station;
-use station\TwoMeterNode;
-use station\TenMeterNode;
-use station\SinkNode;
-use station\GroundNode;
-use station\Sensor;
-use station\ReportIntervalClusters;
-use station\ChangeTracker;
-use station\Problems;
-use station\PotentialProblem;
-use station\DetectedAnalyzerProblems;
-use station\problem_classification;
+use station\Models\Station;
+use station\Models\TwoMeterNode;
+use station\Models\TenMeterNode;
+use station\Models\SinkNode;
+use station\Models\GroundNode;
+use station\Models\Sensor;
+use station\Models\ReportIntervalClusters;
+use station\Models\ChangeTracker;
+use station\Models\Problems;
+use station\Models\PotentialProblem;
+use station\Models\DetectedAnalyzerProblems;
+use station\Models\problem_classification;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 //use Illuminate\Support\Facades\DB;
 
 // use Illuminate\Http\Request;
 //  use station\DetectedAnalyzerProblems;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 
 class GoogleMapsController extends Controller

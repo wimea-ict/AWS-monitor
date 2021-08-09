@@ -3,7 +3,7 @@
 namespace station\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class NodeData extends Controller
 {

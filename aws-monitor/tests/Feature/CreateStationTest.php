@@ -5,10 +5,11 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use station\Models\User;
 
 class CreateStationTest extends TestCase
 {
-    
+
     /**
      * A basic test example.
      *
@@ -19,8 +20,9 @@ class CreateStationTest extends TestCase
         $this->assertTrue(true);
     }*/
 
-    public function it_can_show_create_station(){
-        $user = factory(User::class)->create();
+    public function it_can_show_create_station()
+    {
+        $user = User::factory()->count(30)->create();
         $this
             ->actingAs($user)
             ->get(route('dd'))

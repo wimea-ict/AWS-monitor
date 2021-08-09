@@ -15,7 +15,7 @@ class LogRequestsAndReponses
      * @return mixed
      */
     public function handle($request, \Closure  $next)
-	{
+    {
         // dd($request['server']);
         // dd($request->header('User-Agent'));
         // dd($request->server('HTTP_REFERER'));
@@ -25,11 +25,11 @@ class LogRequestsAndReponses
         /* 
         user-agent, referer, SERVER_ADDR, REMOTE_ADDR, SCRIPT_FILENAME, REDIRECT_URL
         */
-		return $next($request);
-	}
+        return $next($request);
+    }
 
-	public function terminate($request, $response)
-	{
+    public function terminate($request, $response)
+    {
         // 'request' => $request->all(), 
         // 'response' => $response,
         Log::write('userAction', 'app.requests', [
@@ -40,7 +40,6 @@ class LogRequestsAndReponses
             'URL' => $request->fullUrl(),
             'REQUEST_METHOD' => $request->server('REQUEST_METHOD'),
         ]);
-		// Log::info('app.requests', ['request' => $request->all(), 'response' => $response]);
+        // Log::info('app.requests', ['request' => $request->all(), 'response' => $response]);
     }
-    
 }

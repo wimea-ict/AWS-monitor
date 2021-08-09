@@ -3,14 +3,14 @@
 namespace station\Http\Controllers;
 
 use Illuminate\Http\Request;
-use station\Station;
-use station\Sensor;
+use station\Models\Station;
+use station\Models\Sensor;
 
-use station\TenMeterNode;
-use station\NodeStatus;
-use DB;
-use URL;
-use station\ObservationSlip;
+use station\Models\TenMeterNode;
+use station\Models\NodeStatus;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\URL;
+use station\Models\ObservationSlip;
 class TenMNodeController extends Controller
 {
     /**
