@@ -1,10 +1,10 @@
 <?php
-namespace station\Models;
+namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 class Report extends Model
 {
     //
-    protected $fillable=["problem_id","datetime","message","report_counter","station_id","node","sensor"];
+    protected $fillable=["problem_id","datetime","message","report_counter","App_id","node","sensor"];
     public $timestamps = false;
 }

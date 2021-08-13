@@ -1,16 +1,13 @@
 <?php
 
-namespace station\Http\Controllers\Auth;
+namespace App\Http\Controllers\Auth;
 
-use station\Models\User;
-use station\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
+use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use \Illuminate\Http\Request;
-use Illuminate\Auth\Events\Registered;
-use station\Models\maillist;
-use Illuminate\Support\Facades\DB;
-use station\Models\Station;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
@@ -24,18 +21,6 @@ class RegisterController extends Controller
     | provide this functionality without requiring any additional code.
     |
     */
-    public function index()
-    {
-        $stations = array();
-        $station = Station::select('station_id', 'Location')->where("stationCategory", "aws")->get()->toArray();
-        foreach ($station as $value) {
-            $stations[$value['station_id']] = $value['Location'];
-
-            # code...
-        }
-        $users = User::orderByDesc('updated_at')->get();
-        return view('layouts.display_users', ['users' => $users], compact('stations'));
-    }
 
     use RegistersUsers;
 
@@ -44,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/addstation';
+    protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.
@@ -53,43 +38,9 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        //$this->middleware('guest');
+        $this->middleware('guest');
     }
 
-    public function register(Request $request)
-    {
-        $stations = array();
-        $station = Station::select('station_id', 'Location')->where("stationCategory", "aws")->get()->toArray();
-        foreach ($station as $value) {
-            $stations[$value['station_id']] = $value['Location'];
-
-            # code...
-        }
-
-        $this->validator($request->all())->validate();
-
-        event(new Registered($user = $this->create($request->all())));
-
-        // $this->guard()->login($user);
-        $this->registered($request, $user);
-        $users = User::orderByDesc('updated_at')->get();
-        $this->mailsend();
-
-        return view('layouts.display_users', compact('stations'), ['users' => $users])->with('registerUser', 'A new member has been registered successfully and added to the maillist');
-        //return $this->registered($request, $user)
-        //            ?: redirect($this->redirectPath());
-    }
-
-    public function showRegistrationForm()
-    {
-
-        $stationsAttachedTo = array();
-
-
-        $stationsAttachedTo = Station::select('station_id', 'Location')->where("stationCategory", "aws")->get()->toArray();
-
-        return view('auth.register', compact('stationsAttachedTo'));
-    }
     /**
      * Get a validator for an incoming registration request.
      *
@@ -99,11 +50,10 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'phone' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'station' => 'string|max:255',
-            'password' => 'required|string|min:6|confirmed',
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'phone' => ['required', 'min:10', 'numeric'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
 
@@ -111,7 +61,7 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \station\User
+     * @return \App\Models\User
      */
     protected function create(array $data)
     {
@@ -119,27 +69,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'phone' => $data['phone'],
-            'station' => $data['locat'],
-            'password' => bcrypt($data['password']),
+            'password' => Hash::make($data['password']),
         ]);
-    }
-
-    protected function mailsend()
-    {
-
-        //protected $fillable = ['id','userID','stationID','status'];
-        //SELECT * FROM `users` ORDER BY `id` DESC LIMIT 1
-
-        $newUserDetails = array();
-        $newUserDetails = User::all()->toArray();
-
-        foreach ($newUserDetails as $u) {
-            $userId = $u['id'];
-            $station = $u['station'];
-        }
-
-        $data = array("userID" => $userId, "stationID" => $station);
-
-        DB::table('maillist')->insert($data);
     }
 }

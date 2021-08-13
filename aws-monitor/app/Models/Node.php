@@ -1,6 +1,6 @@
 <?php
 
-namespace station\Models;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,13 +23,13 @@ class Node extends Model
     // const CREATED_AT = 'CreationDate';
     
     //
-   protected $fillable =["station_id","txt_key","mac_address"];
+   protected $fillable =["App_id","txt_key","mac_address"];
 
    public function sensors(){
        return $this->hasMany(Sensor::class);
    }
    
-   public function station(){
+   public function App(){
        return $this->belongsTo(Station::class);
    }
 

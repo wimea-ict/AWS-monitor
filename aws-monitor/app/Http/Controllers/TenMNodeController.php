@@ -1,16 +1,16 @@
 <?php
 
-namespace station\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use station\Models\Station;
-use station\Models\Sensor;
+use App\Models\Station;
+use App\Models\Sensor;
 
-use station\Models\TenMeterNode;
-use station\Models\NodeStatus;
+use App\Models\TenMeterNode;
+use App\Models\NodeStatus;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
-use station\Models\ObservationSlip;
+use App\Models\ObservationSlip;
 class TenMNodeController extends Controller
 {
     /**

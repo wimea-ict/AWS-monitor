@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '8e68356904ea439322a1e143fdb6c75bf5b15110',
+        'reference' => '969a7be017e73aebca37d29fea254ac5f5367ce0',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -382,7 +382,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '8e68356904ea439322a1e143fdb6c75bf5b15110',
+            'reference' => '969a7be017e73aebca37d29fea254ac5f5367ce0',
             'dev_requirement' => false,
         ),
         'laravel/tinker' => array(
@@ -976,6 +976,15 @@
             'aliases' => array(),
             'reference' => 'c6c1022351a901512170118436c764e473f6de8c',
             'dev_requirement' => true,
+        ),
+        'spatie/laravel-permission' => array(
+            'pretty_version' => '4.2.0',
+            'version' => '4.2.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../spatie/laravel-permission',
+            'aliases' => array(),
+            'reference' => 'a6e4122b65094baba7f98df153af0768ef910c85',
+            'dev_requirement' => false,
         ),
         'swiftmailer/swiftmailer' => array(
             'pretty_version' => 'v6.2.7',

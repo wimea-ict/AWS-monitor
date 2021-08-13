@@ -1,6 +1,6 @@
 <?php
 
-namespace station\Models;
+namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 class DetectedAnalyzerProblems extends Model

@@ -1,10 +1,10 @@
 <?php
 
-namespace Station\Helpers;
+namespace App\Helpers;
 
 use Monolog\Logger;
 use InvalidArgumentException;
-use Station\Helpers\ChannelStreamHandler;
+use App\Helpers\ChannelStreamHandler;
 
 class ChannelWriter
 {

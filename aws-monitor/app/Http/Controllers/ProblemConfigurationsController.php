@@ -1,9 +1,9 @@
 <?php
 
-namespace station\Http\Controllers;
+namespace App\Http\Controllers;
 use App\layouts;
-use station\Models\Station;
-use station\Models\problemConfigurations;
+use App\Models\Station;
+use App\Models\problemConfigurations;
 use Illuminate\Http\Request;
 
 class ProblemConfigurationsController extends Controller

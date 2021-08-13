@@ -1,6 +1,6 @@
 <?php
 
-namespace station\Http\Middleware;
+namespace App\Http\Middleware;
 
 use Closure;
 use ChannelLog as Log;

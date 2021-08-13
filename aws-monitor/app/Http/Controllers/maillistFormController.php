@@ -1,11 +1,11 @@
 <?php
 
-namespace station\Http\Controllers;
+namespace App\Http\Controllers;
 
 use App\layouts;
-use station\Models\Station;
-use station\Models\maillist;
-use station\Models\User;
+use App\Models\Station;
+use App\Models\maillist;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 

@@ -1,19 +1,19 @@
 <?php
 
-namespace station\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 use App\layouts;
-use station\Models\Station;
-use station\Models\TwoMeterNode;
-use station\Models\TenMeterNode;
-use station\Models\GroundNode;
-use station\Models\SinkNode;
-use station\Models\Sensor;
+use App\Models\Station;
+use App\Models\TwoMeterNode;
+use App\Models\TenMeterNode;
+use App\Models\GroundNode;
+use App\Models\SinkNode;
+use App\Models\Sensor;
 use ProblemConfigurationsController;
-use station\Models\problemConfigurations;
+use App\Models\problemConfigurations;
 
 class StationsController extends Controller
 {
@@ -251,7 +251,7 @@ class StationsController extends Controller
 
         //$station = Station::where('StationName', $request->get('sname'))->first();
 
-        app('station\Http\Controllers\ProblemConfigurationsController')->store($station["station_id"]);
+        app('App\Http\Controllers\ProblemConfigurationsController')->store($station["station_id"]);
         /* 
           'station_id','date_2m','node_status','time_2m','ut_2m','gw_lat_2m','gw_long_2m','v_mcu_2m','v_in_2m','ttl_2m','rssi_2m','lqi_2m','drp_2m','e64_2m','txt_2m','t_sht2x_2m','v_in_min_value','v_in_max_value','v_mcu_min_value','v_mcu_max_value','t_sht2x_2m','rh_sh2x_2m','txt_2m_value','v_in_max_value','v_in_min_value','v_mcu_max_value','v_mcu_min_value'
           */

@@ -1,8 +1,8 @@
 <?php
 
-namespace station\Http\Controllers;
+namespace App\Http\Controllers;
 use App\layouts;
-use station\Models\Station;
+use App\Models\Station;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 

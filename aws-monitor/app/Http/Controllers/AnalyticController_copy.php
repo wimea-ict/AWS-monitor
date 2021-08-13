@@ -1,28 +1,28 @@
 <?php
 
-namespace station\Http\Controllers;
+namespace App\Http\Controllers;
 
-//namespace station\Http\Controllers;
+//namespace App\Http\Controllers;
 
 use App\layouts;
-use station\Models\Station;
-use station\Models\TwoMeterNode;
-use station\Models\TenMeterNode;
-use station\Models\SinkNode;
-use station\Models\GroundNode;
-use station\Models\Sensor;
-use station\Models\ReportIntervalClusters;
-use station\Models\ChangeTracker;
-use station\Models\Problems;
-use station\Models\PotentialProblem;
-use station\Models\DetectedAnalyzerProblems;
+use App\Models\Station;
+use App\Models\TwoMeterNode;
+use App\Models\TenMeterNode;
+use App\Models\SinkNode;
+use App\Models\GroundNode;
+use App\Models\Sensor;
+use App\Models\ReportIntervalClusters;
+use App\Models\ChangeTracker;
+use App\Models\Problems;
+use App\Models\PotentialProblem;
+use App\Models\DetectedAnalyzerProblems;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 //use Illuminate\Http\Request;
 
 
 use Illuminate\Http\Request;
-//use station\Station;
+//use App\Station;
 
 class AnalyticController extends Controller
 {

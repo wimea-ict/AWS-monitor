@@ -1,8 +1,9 @@
 <?php
 
-namespace station\Http\Controllers\Auth;
+namespace App\Http\Controllers\Auth;
 
-use station\Http\Controllers\Controller;
+use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -25,7 +26,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/viewStationStatus';
+    protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.

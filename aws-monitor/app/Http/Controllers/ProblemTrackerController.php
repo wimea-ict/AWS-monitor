@@ -1,9 +1,9 @@
 <?php
 
-namespace station\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use station\Http\Controllers\Controller;
+use App\Http\Controllers\Controller;
 
 class ProblemTrackerController extends Controller
 {

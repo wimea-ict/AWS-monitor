@@ -1,11 +1,11 @@
 <?php
 
-namespace station\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use station\Models\User;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use station\Models\Station;
+use App\Models\Station;
 class StationDownloads extends Controller
 {
     //

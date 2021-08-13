@@ -1,11 +1,11 @@
 <?php
 
-namespace station\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use station\Http\Controllers\Controller;
-use station\Http\Controllers\AnalyzerHandler;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\AnalyzerHandler;
 use DateTimeZone;
 use DateTime;
 

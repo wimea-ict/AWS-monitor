@@ -1,12 +1,12 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use station\Models\User;
-use station\Models\Node;
-use station\Models\Sensor;
-use station\Station;
-use station\Models\NodeStatus;
-use station\Models\NodeStatusConfiguration;
+use App\Models\User;
+use App\Models\Node;
+use App\Models\Sensor;
+use App\Station;
+use App\Models\NodeStatus;
+use App\Models\NodeStatusConfiguration;
 
 class DatabaseSeeder extends Seeder
 {

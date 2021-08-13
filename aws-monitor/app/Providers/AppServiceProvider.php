@@ -1,6 +1,6 @@
 <?php
 
-namespace station\Providers;
+namespace App\Providers;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
@@ -25,6 +25,6 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //Facade to Object binding
-        $this->app->bind('chanellog', 'station\Helpers\ChannelWriter');
+        $this->app->bind('chanellog', 'App\Helpers\ChannelWriter');
     }
 }

@@ -1,24 +1,24 @@
 <?php
 
-namespace station\Http\Controllers;
+namespace App\Http\Controllers;
 
 use App\layouts;
-use station\Models\Station;
-use station\TwoMeterNode;
-use station\TenMeterNode;
-use station\SinkNode;
-use station\GroundNode;
-use station\Sensor;
-use station\ReportIntervalClusters;
-use station\ChangeTracker;
-use station\Models\Problems;
-use station\PotentialProblem;
-use station\DetectedAnalyzerProblems;
-use station\problem_classification;
+use App\Models\Station;
+use App\TwoMeterNode;
+use App\TenMeterNode;
+use App\SinkNode;
+use App\GroundNode;
+use App\Sensor;
+use App\ReportIntervalClusters;
+use App\ChangeTracker;
+use App\Models\Problems;
+use App\PotentialProblem;
+use App\DetectedAnalyzerProblems;
+use App\problem_classification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use station\Models\User;
+use App\Models\User;
 use Carbon\Carbon;
 
 class livedataController extends Controller

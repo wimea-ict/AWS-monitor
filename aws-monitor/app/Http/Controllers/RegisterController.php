@@ -1,9 +1,9 @@
 <?php
 
-namespace station\Http\Controllers\Auth;
+namespace App\Http\Controllers\Auth;
 
-use station\Models\User;
-use station\Http\Controllers\Controller;
+use App\Models\User;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use \Illuminate\Http\Request;
@@ -75,7 +75,7 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \station\User
+     * @return \App\User
      */
     protected function create(array $data)
     {

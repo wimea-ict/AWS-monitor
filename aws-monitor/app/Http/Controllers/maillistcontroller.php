@@ -1,13 +1,13 @@
 <?php
 
-namespace station\Http\Controllers;
+namespace App\Http\Controllers;
 
 
 use App\layouts;
-use station\Models\maillist;
-use station\Models\User;
+use App\Models\maillist;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
-use station\Http\Controllers\Controller;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 //use Illuminate\Foundation\Auth\maillist;
 use \Illuminate\Http\Request;

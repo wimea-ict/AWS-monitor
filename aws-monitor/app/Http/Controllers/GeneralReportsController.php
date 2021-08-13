@@ -1,21 +1,21 @@
 <?php
 
-namespace station\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use station\Models\Station;
-use station\Sensor;
+use App\Models\Station;
+use App\Sensor;
 
-use station\TenMeterNode;
-use station\NodeStatus;
+use App\TenMeterNode;
+use App\NodeStatus;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
-use station\ObservationSlip;
+use App\ObservationSlip;
 
-use station\Http\Controllers\TenMNodeController;
-use station\Http\Controllers\GroundNodeController;
-use station\Http\Controllers\SinkNodeController;
-use station\Http\Controllers\TwoMNodeController;
+use App\Http\Controllers\TenMNodeController;
+use App\Http\Controllers\GroundNodeController;
+use App\Http\Controllers\SinkNodeController;
+use App\Http\Controllers\TwoMNodeController;
 
 class GeneralReportsController extends Controller
 {

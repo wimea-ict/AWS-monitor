@@ -164,7 +164,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Laracademy\ModelGenerator\ModelGeneratorServiceProvider::class,
-
+        Spatie\Permission\PermissionServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -173,11 +173,11 @@ return [
         /*
          * Application Service Providers...
          */
-        station\Providers\AppServiceProvider::class,
-        station\Providers\AuthServiceProvider::class,
-        // station\Providers\BroadcastServiceProvider::class,
-        station\Providers\EventServiceProvider::class,
-        station\Providers\RouteServiceProvider::class,
+        App\Providers\AppServiceProvider::class,
+        App\Providers\AuthServiceProvider::class,
+        // App\Providers\BroadcastServiceProvider::class,
+        App\Providers\EventServiceProvider::class,
+        App\Providers\RouteServiceProvider::class,
 
         // 'Laracasts\Flash\FlashServiceProvider',
     ],
@@ -229,7 +229,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         //Custom Alias Class
-        'ChannelLog' => station\Facades\ChannelLog::class,
+        'ChannelLog' => App\Facades\ChannelLog::class,
         // 'Flash' => 'Laracasts\Flash\Flash'
 	'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 

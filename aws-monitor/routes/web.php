@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Response;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,6 +19,8 @@ use Illuminate\Support\Facades\Response;
 Route::group(['middleware' => 'auth'], function () {
 
     // All my routes that needs a logged in user
+    Route::resource('', 'StationController');
+    Route::resource('manage', 'ManageUsers');
     Route::resource('display_users', 'Auth\RegisterController');
     Route::resource('addstation', 'StationsController');
     Route::resource('livedata', 'livedataController');
@@ -114,7 +117,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 
-Route::get('/', function () {
+Route::get('/login', function () {
     return view('/auth/login');
 });
 Route::get('/register', function () {

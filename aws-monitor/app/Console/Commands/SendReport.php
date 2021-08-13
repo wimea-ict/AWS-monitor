@@ -1,9 +1,9 @@
 <?php
 
-namespace station\Console\Commands;
+namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use station\Http\Controllers\ReportController;
+use App\Http\Controllers\ReportController;
 
 class SendReport extends Command
 {

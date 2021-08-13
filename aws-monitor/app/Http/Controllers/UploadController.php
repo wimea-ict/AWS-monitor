@@ -1,6 +1,6 @@
 <?php
 
-namespace station\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;

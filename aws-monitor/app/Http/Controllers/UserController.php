@@ -1,12 +1,12 @@
 <?php
 
-namespace station\Http\Controllers;
+namespace App\Http\Controllers;
 
-use station\Http\Controllers\Controller;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use station\Models\User;
-use station\Models\Station;
+use App\Models\User;
+use App\Models\Station;
 class UserController extends Controller
 {
     /**

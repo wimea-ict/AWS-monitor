@@ -15,6 +15,7 @@
     "laravel/framework": "^8.40",
     "laravel/tinker": "^2.5",
     "maatwebsite/excel": "^3.1",
+    "spatie/laravel-permission": "^4.2",
     "twilio/sdk": "^5.16"
   },
   "require-dev": {
@@ -30,7 +31,7 @@
       "database/factories"
     ],
     "psr-4": {
-      "station\\": "app/"
+      "App\\": "app/"
     }
   },
   "autoload-dev": {

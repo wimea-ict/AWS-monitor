@@ -1,11 +1,11 @@
 <?php
 
-namespace station\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
-use station\Http\Controllers\Controller;
+use App\Http\Controllers\Controller;
 use DateTimeZone;
 use DateTime;
 use ChannelLog as Log;

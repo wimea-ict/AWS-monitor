@@ -1,5 +1,5 @@
 <?php
-namespace station\Models;
+namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 class ReportIntervalClusters extends Model

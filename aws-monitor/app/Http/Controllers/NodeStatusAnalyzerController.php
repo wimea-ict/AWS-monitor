@@ -1,12 +1,12 @@
 <?php
 
-namespace station\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
-use station\Http\Controllers\Controller;
-use station\Http\Controllers\AnalyzerHandler;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\AnalyzerHandler;
 use DateTimeZone;
 use DateTime;
 
@@ -303,7 +303,7 @@ class NodeStatusAnalyzerController extends Controller
         $this->Handler->updateChecksTable('nodestatus',$id_first_checked,$id_last_checked);
 
         /* call observationslip analyzer */
-        app('station\Http\Controllers\ObservationSlipAnalyzerController')->analyze($available_stations);
+        app('App\Http\Controllers\ObservationSlipAnalyzerController')->analyze($available_stations);
 
         //show data in the problems table
         return;

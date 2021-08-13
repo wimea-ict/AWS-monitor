@@ -1,9 +1,9 @@
 <?php
 
-namespace station\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use station\Models\DetectedAnalyzerProblems;
+use App\Models\DetectedAnalyzerProblems;
 use Illuminate\Support\Facades\DB;
 
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace station\Exceptions;
+namespace App\Exceptions;
 
 // use Exception;
 Use Throwable;

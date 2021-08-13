@@ -1,12 +1,12 @@
 <?php
 
-namespace station\Models;
+namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 class DataBundles extends Model
 {
-    public function station()
+    public function App()
     {
-        return $this->belongsTo(Station::class, "station_id");
+        return $this->belongsTo(Station::class, "App_id");
     }
 }

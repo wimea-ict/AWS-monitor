@@ -1,13 +1,13 @@
 <?php
 
-namespace station\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 
-use station\Models\DataBundles;
-use station\Mail\DataBundlesExpired;
+use App\Models\DataBundles;
+use App\Mail\DataBundlesExpired;
 use App\Models\User;
 
 

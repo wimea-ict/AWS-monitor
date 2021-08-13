@@ -1,11 +1,11 @@
 <?php
 
-namespace station\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use station\Http\Controllers\Controller;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
-use station\Models\Report;
+use App\Models\Report;
 use Carbon\Carbon;
 use Twilio\Rest\Client;
 use Illuminate\Support\Facades\Log;

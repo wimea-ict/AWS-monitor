@@ -1,13 +1,12 @@
 <?php
 
-namespace station\Console\Commands;
+namespace App\Console\Commands;
 
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
-use station\Models\DataBundles;
-use station\Mail\DataBundlesExpired;
-use station\Station;
+use App\Models\DataBundles;
+use App\Mail\DataBundlesExpired;
 
 class stationDataBundleDone extends Command
 {

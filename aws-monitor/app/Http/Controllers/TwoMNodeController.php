@@ -1,14 +1,14 @@
 <?php
 
-namespace station\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use station\Models\Station;
-use station\Models\Sensor;
-use station\Models\TwoMeterNode;
-use station\Models\NodeStatus;
-use station\Models\ObservationSlip;
-use station\Models\Problems;
+use App\Models\Station;
+use App\Models\Sensor;
+use App\Models\TwoMeterNode;
+use App\Models\NodeStatus;
+use App\Models\ObservationSlip;
+use App\Models\Problems;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 class TwoMNodeController extends Controller
