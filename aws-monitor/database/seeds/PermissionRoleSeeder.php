@@ -23,6 +23,12 @@ class PermissionRoleSeeder extends Seeder
         Permission::create(['name' => 'stations.update']);
         Permission::create(['name' => 'stations.delete']);
         Permission::create(['name' => 'stations.view']);
+
+        // create roles
+        Permission::create(['name' => 'role.create']);
+        Permission::create(['name' => 'role.update']);
+        Permission::create(['name' => 'role.delete']);
+        Permission::create(['name' => 'role.view']);
         // create super admin
 
         $role = Role::create(['name' => 'super-admin']);

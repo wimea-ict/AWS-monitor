@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Console\\Commands\\CreateSuperAdmin' => $baseDir . '/app/Console/Commands/CreateSuperAdmin.php',
     'App\\Console\\Commands\\RunAnalyzer' => $baseDir . '/app/Console/Commands/RunAnalyzer.php',
     'App\\Console\\Commands\\SendReport' => $baseDir . '/app/Console/Commands/SendReport.php',
     'App\\Console\\Commands\\stationDataBundleDone' => $baseDir . '/app/Console/Commands/stationDataBundleDone.php',
@@ -86,6 +87,7 @@ return array(
     'App\\Models\\Station' => $baseDir . '/app/Models/Station.php',
     'App\\Models\\StationRole' => $baseDir . '/app/Models/StationRole.php',
     'App\\Models\\StationStatusController' => $baseDir . '/app/Models/StationStatusController.php',
+    'App\\Models\\StationUsers' => $baseDir . '/app/Models/StationUsers.php',
     'App\\Models\\TwoMeterNode' => $baseDir . '/app/Models/TwoMeterNode.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
     'App\\Models\\maillist' => $baseDir . '/app/Models/maillist.php',
@@ -1844,6 +1846,7 @@ return array(
     'Illuminate\\Http\\Middleware\\FrameGuard' => $vendorDir . '/laravel/framework/src/Illuminate/Http/Middleware/FrameGuard.php',
     'Illuminate\\Http\\Middleware\\SetCacheHeaders' => $vendorDir . '/laravel/framework/src/Illuminate/Http/Middleware/SetCacheHeaders.php',
     'Illuminate\\Http\\Middleware\\TrustHosts' => $vendorDir . '/laravel/framework/src/Illuminate/Http/Middleware/TrustHosts.php',
+    'Illuminate\\Http\\Middleware\\TrustProxies' => $vendorDir . '/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php',
     'Illuminate\\Http\\RedirectResponse' => $vendorDir . '/laravel/framework/src/Illuminate/Http/RedirectResponse.php',
     'Illuminate\\Http\\Request' => $vendorDir . '/laravel/framework/src/Illuminate/Http/Request.php',
     'Illuminate\\Http\\Resources\\CollectsResources' => $vendorDir . '/laravel/framework/src/Illuminate/Http/Resources/CollectsResources.php',

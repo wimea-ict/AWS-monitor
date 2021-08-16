@@ -591,6 +591,7 @@ class ComposerStaticInit5c057541f6c176ad742693773d6975c2
     );
 
     public static $classMap = array (
+        'App\\Console\\Commands\\CreateSuperAdmin' => __DIR__ . '/../..' . '/app/Console/Commands/CreateSuperAdmin.php',
         'App\\Console\\Commands\\RunAnalyzer' => __DIR__ . '/../..' . '/app/Console/Commands/RunAnalyzer.php',
         'App\\Console\\Commands\\SendReport' => __DIR__ . '/../..' . '/app/Console/Commands/SendReport.php',
         'App\\Console\\Commands\\stationDataBundleDone' => __DIR__ . '/../..' . '/app/Console/Commands/stationDataBundleDone.php',
@@ -671,6 +672,7 @@ class ComposerStaticInit5c057541f6c176ad742693773d6975c2
         'App\\Models\\Station' => __DIR__ . '/../..' . '/app/Models/Station.php',
         'App\\Models\\StationRole' => __DIR__ . '/../..' . '/app/Models/StationRole.php',
         'App\\Models\\StationStatusController' => __DIR__ . '/../..' . '/app/Models/StationStatusController.php',
+        'App\\Models\\StationUsers' => __DIR__ . '/../..' . '/app/Models/StationUsers.php',
         'App\\Models\\TwoMeterNode' => __DIR__ . '/../..' . '/app/Models/TwoMeterNode.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Models\\maillist' => __DIR__ . '/../..' . '/app/Models/maillist.php',
@@ -2429,6 +2431,7 @@ class ComposerStaticInit5c057541f6c176ad742693773d6975c2
         'Illuminate\\Http\\Middleware\\FrameGuard' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Http/Middleware/FrameGuard.php',
         'Illuminate\\Http\\Middleware\\SetCacheHeaders' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Http/Middleware/SetCacheHeaders.php',
         'Illuminate\\Http\\Middleware\\TrustHosts' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Http/Middleware/TrustHosts.php',
+        'Illuminate\\Http\\Middleware\\TrustProxies' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php',
         'Illuminate\\Http\\RedirectResponse' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Http/RedirectResponse.php',
         'Illuminate\\Http\\Request' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Http/Request.php',
         'Illuminate\\Http\\Resources\\CollectsResources' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Http/Resources/CollectsResources.php',

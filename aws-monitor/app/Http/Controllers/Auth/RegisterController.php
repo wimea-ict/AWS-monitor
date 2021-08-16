@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Station;
 
 class RegisterController extends Controller
 {
@@ -71,5 +72,17 @@ class RegisterController extends Controller
             'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+    public function index()
+    {
+        $stations = array();
+        $station = Station::select('station_id', 'Location')->where("stationCategory", "aws")->get()->toArray();
+        foreach ($station as $value) {
+            $stations[$value['station_id']] = $value['Location'];
+
+            # code...
+        }
+        $users = User::orderByDesc('updated_at')->get();
+        return view('layouts.display_users', ['users' => $users], compact('stations'));
     }
 }

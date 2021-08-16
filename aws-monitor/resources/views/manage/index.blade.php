@@ -1,93 +1,79 @@
-@extends('layouts.app')
+@extends('main')
 
-@section('header')
-    <link href="{{ asset('css/transferList.css') }}" rel="stylesheet">
-@endsection
 @section('content')
-    <div class="container">
-        <div class="row">
-            <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"
-                id="bootstrap-css">
-            <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-            <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-            <!------ Include the above in your HEAD tag ---------->
+    <div>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            Create New Role
+        </button>
 
-            <div class="container">
-                <br />
-                <div class="row">
-
-                    <div class="dual-list list-left col-md-5">
-                        <div class="well text-right">
-                            <div class="row">
-                                <div class="col-md-10">
-                                    <div class="input-group">
-                                        <span class="input-group-addon glyphicon glyphicon-search"></span>
-                                        <input type="text" name="SearchDualList" class="form-control"
-                                            placeholder="search" />
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="btn-group">
-                                        <a class="btn btn-default selector" title="select all"><i
-                                                class="glyphicon glyphicon-unchecked"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <ul class="list-group">
-                                <li class="list-group-item">bootstrap-duallist <a
-                                        href="https://github.com/bbilginn/bootstrap-duallist" target="_blank">github</a>
-                                </li>
-                                <li class="list-group-item">Dapibus ac facilisis in</li>
-                                <li class="list-group-item">Morbi leo risus</li>
-                                <li class="list-group-item">Porta ac consectetur ac</li>
-                                <li class="list-group-item">Vestibulum at eros</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="list-arrows col-md-1 text-center">
-                        <button class="btn btn-default btn-sm move-left">
-                            <span class="glyphicon glyphicon-chevron-left"></span>
-                        </button>
-
-                        <button class="btn btn-default btn-sm move-right">
-                            <span class="glyphicon glyphicon-chevron-right"></span>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="createRoleModal"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="createRoleModal">Create New Role</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
 
-                    <div class="dual-list list-right col-md-5">
-                        <div class="well">
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <div class="btn-group">
-                                        <a class="btn btn-default selector" title="select all"><i
-                                                class="glyphicon glyphicon-unchecked"></i></a>
-                                    </div>
-                                </div>
-                                <div class="col-md-10">
-                                    <div class="input-group">
-                                        <input type="text" name="SearchDualList" class="form-control"
-                                            placeholder="search" />
-                                        <span class="input-group-addon glyphicon glyphicon-search"></span>
-                                    </div>
-                                </div>
+                    <form action="{{ url('manage') }}" method="post">
+                        <div class="modal-body">
+                            {{ csrf_field() }}
+                            <label class="col-lg-2 control-label" for="name">Role Name</label>
+                            <div class="col-lg-4">
+                                <input class="form-control" id="name" name="name" type="text">
                             </div>
-                            <ul class="list-group">
-                                <li class="list-group-item">Cras justo odio</li>
-                                <li class="list-group-item">Dapibus ac facilisis in</li>
-                                <li class="list-group-item">Morbi leo risus</li>
-                                <li class="list-group-item">Porta ac consectetur ac</li>
-                                <li class="list-group-item">Vestibulum at eros</li>
-                            </ul>
-                        </div>
-                    </div>
 
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-@endsection
+    <div class="table-responsive">
+        <table id="datatable" class="table table-sm table-hover table-bordered" style="margin-bottom: 30px;">
+            <thead class="thead-light">
+                <th scope="col">Role Name</th>
+                <th scope="col">Permissions</th>
+                <th scope="col">Users</th>
+                <th scope="col">Edit</th>
+            </thead>
 
-@section('script')
-    <script src="{{ asset('js/transferList.js') }}"></script>
+            @foreach ($roles as $role)
+                <tr>
+                    <td>{{ $role->name }}</td>
+                    <td>
+                        <ul>
+                            @foreach ($role->permissions as $permission)
+                                <li>
+                                    {{ $permission->name }}
+                                </li>
+                            @endforeach
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            @foreach ($role->users as $user)
+                                <li>
+                                    {{ $user->name }}
+                                </li>
+                            @endforeach
+                        </ul>
+                    </td>
+                    <td>
+                        <a href="{{ URL::to('manage/' . $role->id . '/edit') }}" class="btn btn-success">Assign
+                            Permissions</a>
+                        <a href="{{ URL::to('delete_users/') }}" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            @endforeach
+        </table>
+    </div>
 @endsection

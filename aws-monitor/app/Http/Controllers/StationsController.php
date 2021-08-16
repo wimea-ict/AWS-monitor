@@ -241,9 +241,8 @@ class StationsController extends Controller
             'Country' => $request->get('country'),
             'SubmittedBy' => Auth::user()->name,
             'StationCategory' => 'aws',
-
+            'phone' => $request->get('phone'),
         ]);
-
         $stationcreation->save();
         $station =  $stationcreation->toArray();
 

@@ -16,8 +16,7 @@ class CreateDataBundlesTable extends Migration
         Schema::create('data_bundles', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('station_id');
-            $table->string('mobile_number');
-            $table->string('station');
+            $table->date('load_date');
             $table->date("end_date");
             $table->timestamps();
             $table->foreign('station_id')->references('station_id')->on('stations')->onDelete('cascade');

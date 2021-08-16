@@ -11,6 +11,13 @@ class StationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware(['permission:stations.view'])->only('index');
+        $this->middleware(['permission:stations.update'])->only('edit', 'update');
+        $this->middleware(['permission:stations.delete'])->only('destroy');
+        $this->middleware(['permission:stations.create'])->only('create');
+    }
     public function index()
     {
         return view('stations.index');
@@ -23,7 +30,7 @@ class StationController extends Controller
      */
     public function create()
     {
-        //
+        return view('stations.create');
     }
 
     /**
@@ -34,7 +41,7 @@ class StationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd('strre');
     }
 
     /**

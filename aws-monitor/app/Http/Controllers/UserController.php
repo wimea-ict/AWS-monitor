@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Station;
+
 class UserController extends Controller
 {
     /**
@@ -16,10 +17,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        
-
-        $users = DB::table('users')->get();
-        return view('layouts.display_users',compact('stations'), ['users'=>$users]);
+        $users = User::all();
+        // dd($users[0]->getRoleNames());
+        return view('layouts.display_users', ['users' => $users]);
     }
 
     /**
@@ -62,21 +62,20 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $stationAttarched = Station::select('station_id','Location')->where("stationCategory","aws")->get()->toArray();
-          $stations = array();
-        $station = Station::select('station_id','Location')->where("stationCategory","aws")->get()->toArray();
+        $stationAttarched = Station::select('station_id', 'Location')->where("stationCategory", "aws")->get()->toArray();
+        $stations = array();
+        $station = Station::select('station_id', 'Location')->where("stationCategory", "aws")->get()->toArray();
         foreach ($station as $value) {
-            $stations[$value['station_id']]=$value['Location'];
+            $stations[$value['station_id']] = $value['Location'];
 
             # code...
         }
 
         //$users = DB::table('users')->where('id', $id)->first();
         $users = User::find($id);
-        if(count(array($users))>0){
-            return view('auth.editUser', compact('stations','users', 'id','stationAttarched'));
-        }
-        else
+        if (count(array($users)) > 0) {
+            return view('auth.editUser', compact('stations', 'users', 'id', 'stationAttarched'));
+        } else
             return view("layouts.display_users");
     }
 
@@ -90,23 +89,23 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         //
-          $stations = array();
-        $station = Station::select('station_id','Location')->where("stationCategory","aws")->get()->toArray();
+        $stations = array();
+        $station = Station::select('station_id', 'Location')->where("stationCategory", "aws")->get()->toArray();
         foreach ($station as $value) {
-            $stations[$value['station_id']]=$value['Location'];
+            $stations[$value['station_id']] = $value['Location'];
 
             # code...
         }
-        $user= User::find($id);
-        $user->name=$request->get('name');
-        $user->email=$request->get('email');
-        $user->phone=$request->get('phone');
-        $user->station=$request->get('admin');
+        $user = User::find($id);
+        $user->name = $request->get('name');
+        $user->email = $request->get('email');
+        $user->phone = $request->get('phone');
+        $user->station = $request->get('admin');
 
         // $user->password=bcrypt($request->get('password'));
         $user->save();
         $users = User::orderByDesc('updated_at')->get();
-        return view('layouts.display_users',compact('stations'), ['users'=>$users])->with('successEdit', 'Information has been edited successfully');
+        return view('layouts.display_users', compact('stations'), ['users' => $users])->with('successEdit', 'Information has been edited successfully');
     }
 
     /**
@@ -117,17 +116,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
-          $stations = array();
-        $station = Station::select('station_id','Location')->where("stationCategory","aws")->get()->toArray();
-        foreach ($station as $value) {
-            $stations[$value['station_id']]=$value['Location'];
-
-            # code...
-        }
         $user = User::find($id);
         $user->delete();
-        $users = DB::table('users')->get();
-        return view('layouts.display_users',compact('stations'), ['users'=>$users])->with('success','Information has been  deleted');
+        $users = User::all();
+        return view('layouts.display_users', ['users' => $users])->with('success', 'Information has been  deleted');
     }
 }

@@ -23,7 +23,7 @@ class Station extends Model  {
      *
      * @var array
      */
-    protected $fillable = ['station_id', 'StationName', 'StationNumber', 'StationRegNumber', 'Location', 'Indicator', 'StationRegion', 'Country', 'Latitude', 'Longitude', 'Altitude', 'StationStatus', 'StationType', 'Opened', 'Closed', 'SubmittedBy', 'Creation_Date','UpdateDate','StationCategory'];
+    protected $fillable = ['station_id', 'StationName', 'StationNumber', 'StationRegNumber', 'Location', 'Indicator', 'StationRegion', 'Country', 'Latitude', 'Longitude', 'Altitude', 'StationStatus', 'StationType', 'Opened', 'Closed', 'SubmittedBy', 'Creation_Date','UpdateDate','StationCategory','phone'];
 
     /**
      * The attributes excluded from the model's JSON form.

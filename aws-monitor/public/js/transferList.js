@@ -36,5 +36,13 @@ $(function () {
             return !~text.indexOf(val);
         }).hide();
     });
-
 });
+
+function handleSubmit(){
+    var permissions = []
+    var items = document.getElementById('roles-list').getElementsByTagName('li')
+    for(let i=0; i<items.length; i++){
+        permissions.push(items[i].innerHTML)
+    }
+    document.getElementById("roles").value = permissions
+}

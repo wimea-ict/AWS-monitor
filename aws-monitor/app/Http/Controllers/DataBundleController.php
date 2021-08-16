@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use App\Models\DataBundles;
 use App\Mail\DataBundlesExpired;
+use App\Models\Station;
 use App\Models\User;
 
 
@@ -20,7 +21,7 @@ class DataBundleController extends Controller
      */
     public function index(Request $request)
     {
-
+        dd("called");
         $station = $request->user()->station;
         $mobile_no = DataBundles::where('station_id', '=', $station)->orderBy('id', 'DSC')->get();
 
@@ -66,7 +67,9 @@ class DataBundleController extends Controller
      */
     public function show($id)
     {
-        //
+        $databundle = DataBundles::where('station_id', '=', $id)->get();
+        $station = Station::find($id);
+        return view('data bundles.show', ['data' => $databundle, 'id' => $id, 'station' => $station]);
     }
 
     /**
@@ -77,6 +80,7 @@ class DataBundleController extends Controller
      */
     public function edit($id)
     {
+
         $databundle = DataBundles::find($id)->first();
         // dd($databundle);
         return view('data bundles.edit')->with("data", $databundle);
@@ -91,12 +95,15 @@ class DataBundleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $no_of_months = $request->input("month");
+        $no_of_months = $request->input("months");
         $new_end_date = Carbon::now()->addMonth($no_of_months)->format('Y-m-d');
-        $databundle = DataBundles::where("id", $id)->update(
-            ["end_date" => $new_end_date],
-        );
-        return redirect('/data_bundle');
+        $start_date = Carbon::now();
+        $databundle = new DataBundles();
+        $databundle->station_id = $id;
+        $databundle->end_date = $new_end_date;
+        $databundle->load_date = $start_date;
+        $databundle->save();
+        return redirect('/data_bundle/' . $id);
     }
 
     /**

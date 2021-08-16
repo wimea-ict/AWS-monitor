@@ -19,9 +19,11 @@ use Illuminate\Support\Facades\Response;
 Route::group(['middleware' => 'auth'], function () {
 
     // All my routes that needs a logged in user
-    Route::resource('', 'StationController');
+    Route::resource('', 'StationsController');
     Route::resource('manage', 'ManageUsers');
-    Route::resource('display_users', 'Auth\RegisterController');
+    Route::get('assign_role/{id}', 'ManageUsers@assignRoles');
+    Route::post('assign_role/{id}', 'ManageUsers@assignRolesPost');
+    Route::resource('display_users', 'UserController');
     Route::resource('addstation', 'StationsController');
     Route::resource('livedata', 'livedataController');
     Route::get('livedata/{id}', 'livedataController@show');
