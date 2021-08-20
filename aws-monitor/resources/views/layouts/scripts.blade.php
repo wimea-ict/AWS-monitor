@@ -1,4 +1,4 @@
-        <script src="{{ asset('main.js') }}"></script>
+        {{-- <script src="{{ asset('main.js') }}"></script> --}}
         <script src="{{ asset('js/jquery.js') }}"></script>
         <script src="{{ asset('js/bootstrap.min.js') }}"></script>
         <script src="{{ asset('js/modernizr.min.js') }}"></script>
@@ -45,7 +45,7 @@
         <!-- Todo -->
         <script src="{{ asset('js/jquery.todo.js') }}"></script>
 
-         @yield("page_specific_script_files")
+        @yield("page_specific_script_files")
 
         <!--Form Wizard-->
         <script src="{{ asset('assets/form-wizard/jquery.steps.min.js') }}" type="text/javascript"></script>
@@ -54,25 +54,25 @@
         <!--wizard initialization-->
         <script src="{{ asset('assets/form-wizard/wizard-init.js') }}" type="text/javascript"></script>
 
-         <script src="{{ asset('assets/timepicker/bootstrap-datepicker.js') }}"></script>
+        <script src="{{ asset('assets/timepicker/bootstrap-datepicker.js') }}"></script>
 
         <script src="assets/datatables/jquery.dataTables.min.js"></script>
         <script src="assets/datatables/dataTables.bootstrap.js"></script>
 
 
         {{-- some scripts needed to for better UI with bootstrap --}}
-        {{--  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
+        {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>  --}}
+        <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script> --}}
 
         <script src="{{ asset('assets/datatables/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('assets/datatables/dataTables.bootstrap.js') }}"></script>
 
-         <!-- Modal-Effect -->
-         <script src="{{ asset('assets/modal-effect/js/classie.js') }}"></script>
+        <!-- Modal-Effect -->
+        <script src="{{ asset('assets/modal-effect/js/classie.js') }}"></script>
         <script src="{{ asset('assets/modal-effect/js/modalEffects.js') }}"></script>
         <script src="{{ asset('assets/select2/select2.min.js') }}" type="text/javascript"></script>
 
@@ -82,11 +82,11 @@
 
 
 
-        <script src="{{ asset('assets/dygraph/dygraph.min.js') }}" ></script>
+        <script src="{{ asset('assets/dygraph/dygraph.min.js') }}"></script>
 
-	<!-- Plotly Charts -->
-	<script src="{{ asset('assets/plotly/plotly-latest.min.js') }}" ></script>
-        <script src="{{ asset('https://cdn.plot.ly/plotly-latest.min.js') }}" ></script> 
+        <!-- Plotly Charts -->
+        <script src="{{ asset('assets/plotly/plotly-latest.min.js') }}"></script>
+        <script src="{{ asset('https://cdn.plot.ly/plotly-latest.min.js') }}"></script>
 
         <script type="text/javascript">
             $(document).ready(function() {
@@ -95,8 +95,10 @@
                 jQuery(".select2").select2({
                     width: '100%'
                 });
-                jQuery('.toggle').toggles({on: true});
-            } );
+                jQuery('.toggle').toggles({
+                    on: true
+                });
+            });
 
 
             $('#full-width-modal').on('show.bs.modal', function(e) {
@@ -118,7 +120,7 @@
                 $('#station_type').val(obj["StationType"]);
                 $('#country').val(obj["Country"]);
 
-                if(obj["stationStatus"]=="on")
+                if (obj["stationStatus"] == "on")
                     $('#station_status').prop('checked', true);
                 else
                     $('#station_status').prop('checked', false);
@@ -134,15 +136,15 @@
                 var problems_stations_data = jQuery.parseJSON(station_problems);
 
                 //continue from here tomorrow
-                station=problems_stations_data[0];
+                station = problems_stations_data[0];
 
 
                 //looping to get the problems for the given selection
                 for (var i = 0; i < problems_stations_data[1].length; i++) {
-                            if (problems_stations_data[1][i]['station_id'] === station["station_id"]) {
-                                conigurations.push(problems_stations_data[1][i]);
+                    if (problems_stations_data[1][i]['station_id'] === station["station_id"]) {
+                        conigurations.push(problems_stations_data[1][i]);
 
-                            }
+                    }
                 }
                 //'station_id','problem_id','max_track_counter','report_method',
                 //'criticality','reporting_time_interval'
@@ -159,69 +161,60 @@
                 $('#problem_8').val(conigurations[7]['problem_id']);
 
 
-                for (var i = 0; i <conigurations.length; i++) {
+                for (var i = 0; i < conigurations.length; i++) {
 
-                    if(conigurations[i]['problem_id']==1){
+                    if (conigurations[i]['problem_id'] == 1) {
 
                         $('#sorptmethod').val(conigurations[i]['report_method']);
                         $('#soprobRptTime').val(conigurations[i]['reporting_time_interval']);
-                    }
-                    else if(conigurations[i]['problem_id']==2){
+                    } else if (conigurations[i]['problem_id'] == 2) {
                         $('#nooccurencesConsider').val(conigurations[i]['max_track_counter']);
                         $('#norptmethod').val(conigurations[i]['report_method']);
                         $('#nocriticallity').val(conigurations[i]['criticality']);
                         $('#noprobRptTime').val(conigurations[i]['reporting_time_interval']);
-                    }
-
-                    else if(conigurations[i]['problem_id']==3){
+                    } else if (conigurations[i]['problem_id'] == 3) {
                         $('#lpoccurencesConsider').val(conigurations[i]['max_track_counter']);
                         $('#lprptmethod').val(conigurations[i]['report_method']);
                         $('#lpcriticallity').val(conigurations[i]['criticality']);
                         $('#lpprobRptTime').val(conigurations[i]['reporting_time_interval']);
-                    }
-                    else if(conigurations[i]['problem_id']==4){
+                    } else if (conigurations[i]['problem_id'] == 4) {
                         $('#msoccurencesConsider').val(conigurations[i]['max_track_counter']);
                         $('#msrptmethod').val(conigurations[i]['report_method']);
                         $('#mscriticallity').val(conigurations[i]['criticality']);
                         $('#msprobRptTime').val(conigurations[i]['reporting_time_interval']);
 
-                    }
-                    else if(conigurations[i]['problem_id']==5){
+                    } else if (conigurations[i]['problem_id'] == 5) {
                         $('#nmoccurencesConsider').val(conigurations[i]['max_track_counter']);
                         $('#nmrptmethod').val(conigurations[i]['report_method']);
                         $('#nmcriticallity').val(conigurations[i]['criticality']);
                         $('#nmprobRptTime').val(conigurations[i]['reporting_time_interval']);
 
-                    }
-                    else if(conigurations[i]['problem_id']==6){
+                    } else if (conigurations[i]['problem_id'] == 6) {
                         $('#idoccurencesConsider').val(conigurations[i]['max_track_counter']);
                         $('#idrptmethod').val(conigurations[i]['report_method']);
                         $('#idcriticallity').val(conigurations[i]['criticality']);
                         $('#idprobRptTime').val(conigurations[i]['reporting_time_interval']);
 
-                    }
-                    else if(conigurations[i]['problem_id']==7){
+                    } else if (conigurations[i]['problem_id'] == 7) {
                         $('#isoccurencesConsider').val(conigurations[i]['max_track_counter']);
                         $('#isrptmethod').val(conigurations[i]['report_method']);
                         $('#iscriticallity').val(conigurations[i]['criticality']);
                         $('#isprobRptTime').val(conigurations[i]['reporting_time_interval']);
 
-                    }
-                    else if(conigurations[i]['problem_id']==8){
+                    } else if (conigurations[i]['problem_id'] == 8) {
                         $('#ssoccurencesConsider').val(conigurations[i]['max_track_counter']);
                         $('#ssorptmethod').val(conigurations[i]['report_method']);
                         $('#ssocriticallity').val(conigurations[i]['criticality']);
                         $('#ssoprobRptTime').val(conigurations[i]['reporting_time_interval']);
 
-                    }
-                    else if(conigurations[i]['problem_id']==9){
+                    } else if (conigurations[i]['problem_id'] == 9) {
                         $('#pdoccurencesConsider').val(conigurations[i]['max_track_counter']);
                         $('#pdrptmethod').val(conigurations[i]['report_method']);
                         $('#pdcriticallity').val(conigurations[i]['criticality']);
                         $('#pdprobRptTime').val(conigurations[i]['reporting_time_interval']);
 
                     }
-                    
+
                 }
 
 
@@ -234,29 +227,29 @@
                 //alert(tenMeterNode);
                 var tenMeterData = jQuery.parseJSON(tenMeterNode);
 
-                obj=tenMeterData[0];
+                obj = tenMeterData[0];
                 var insulatorsensors = new Array();
                 var windSpeedSensors = new Array();
                 var windDirectionSensors = new Array();
-                insulationSensors=tenMeterData[1];
-                        for (var i = 0; i < tenMeterData[1].length; i++) {
-                            if (tenMeterData[1][i]['node_id'] === obj["node_id"]) {
-                                insulatorsensors.push(tenMeterData[1][i]);
-                                break;
-                            }
-                        }
-                        for (var i = 0; i < tenMeterData[2].length; i++) {
-                            if (tenMeterData[2][i]['node_id'] === obj["node_id"]) {
-                                windSpeedSensors.push(tenMeterData[2][i]);
-                                break;
-                            }
-                        }
-                        for (var i = 0; i < tenMeterData[3].length; i++) {
-                            if (tenMeterData[3][i]['node_id'] === obj["node_id"]) {
-                                windDirectionSensors.push(tenMeterData[3][i]);
-                                break;
-                            }
-                        }
+                insulationSensors = tenMeterData[1];
+                for (var i = 0; i < tenMeterData[1].length; i++) {
+                    if (tenMeterData[1][i]['node_id'] === obj["node_id"]) {
+                        insulatorsensors.push(tenMeterData[1][i]);
+                        break;
+                    }
+                }
+                for (var i = 0; i < tenMeterData[2].length; i++) {
+                    if (tenMeterData[2][i]['node_id'] === obj["node_id"]) {
+                        windSpeedSensors.push(tenMeterData[2][i]);
+                        break;
+                    }
+                }
+                for (var i = 0; i < tenMeterData[3].length; i++) {
+                    if (tenMeterData[3][i]['node_id'] === obj["node_id"]) {
+                        windDirectionSensors.push(tenMeterData[3][i]);
+                        break;
+                    }
+                }
 
                 //alert(insulatorsensors[0]);
                 //alert(windSpeedSensors[0]["identifier_used"]);
@@ -287,7 +280,7 @@
                 $('#10date').val(obj["date_10m"]);
                 $('#10time').val(obj["time_10m"]);
                 $('#10txt_value').val(obj["txt_10m_value"]);
-                if(obj["node_status"]=="on")
+                if (obj["node_status"] == "on")
                     $('#10mnode_status').prop('checked', true);
                 else
                     $('#10mnode_status').prop('checked', false);
@@ -295,7 +288,7 @@
                 $('#10identifier_used').val(insulatorsensors[0]["identifier_used"]);
                 $('#10max_value').val(insulatorsensors[0]["max_value"]);
                 $('#10min_value').val(insulatorsensors[0]["min_value"]);
-                if(insulatorsensors[0]["sensor_status"]=="on")
+                if (insulatorsensors[0]["sensor_status"] == "on")
                     $('#10sensor_status').prop('checked', true);
                 else
                     $('#10sensor_status').prop('checked', false);
@@ -304,7 +297,7 @@
                 $('#wsidentifier_used').val(windSpeedSensors[0]["identifier_used"]);
                 $('#wsmax_value').val(windSpeedSensors[0]["max_value"]);
                 $('#wsmin_value').val(windSpeedSensors[0]["min_value"]);
-                if(windSpeedSensors[0]["sensor_status"]=="on")
+                if (windSpeedSensors[0]["sensor_status"] == "on")
                     $('#wssensor_status').prop('checked', true);
                 else
                     $('#wssensor_status').prop('checked', false);
@@ -315,7 +308,7 @@
                 $('#wdmax_value').val(windDirectionSensors[0]["max_value"]);
                 $('#wdmin_value').val(windDirectionSensors[0]["min_value"]);
                 $('#wdrptTime').val(windDirectionSensors[0]["report_time_interval"]);
-                if(windDirectionSensors[0]["sensor_status"]=="on")
+                if (windDirectionSensors[0]["sensor_status"] == "on")
                     $('#wdsensor_status').prop('checked', true);
                 else
                     $('#wdsensor_status').prop('checked', false);
@@ -334,17 +327,17 @@
                 var obj = twoMeterData[0]
                 //alert(obj["node_id"]);
                 for (var i = 0; i < twoMeterData[1].length; i++) {
-                            if (twoMeterData[1][i]['node_id'] === obj["node_id"]) {
-                                relativeHumiditysensors.push(twoMeterData[1][i]);
-                                break;
-                            }
-                        }
+                    if (twoMeterData[1][i]['node_id'] === obj["node_id"]) {
+                        relativeHumiditysensors.push(twoMeterData[1][i]);
+                        break;
+                    }
+                }
                 for (var i = 0; i < twoMeterData[2].length; i++) {
-                            if (twoMeterData[2][i]['node_id'] === obj["node_id"]) {
-                                temperatureSensors.push(twoMeterData[2][i]);
-                                break;
-                            }
-                  }
+                    if (twoMeterData[2][i]['node_id'] === obj["node_id"]) {
+                        temperatureSensors.push(twoMeterData[2][i]);
+                        break;
+                    }
+                }
                 //alert(temperatureSensors);
                 $('#2mnode_id').val(obj["node_id"]);
                 $('#2txt_key').val(obj["txt_2m"]);
@@ -368,12 +361,12 @@
                 $('#2txt_value').val(obj["txt_2m_value"]);
 
 
-                if(obj["node_status"]=="on")
+                if (obj["node_status"] == "on")
                     $('#2mnode_status').prop('checked', true);
                 else
                     $('#2mnode_status').prop('checked', false);
 
-                if(relativeHumiditysensors[0]["sensor_status"]=="on")
+                if (relativeHumiditysensors[0]["sensor_status"] == "on")
                     $('#rhsensor_status').prop('checked', true);
                 else
                     $('#rhsensor_status').prop('checked', false);
@@ -382,7 +375,7 @@
                 $('#rhidentifier_used').val(relativeHumiditysensors[0]["identifier_used"]);
                 $('#rhmax_value').val(relativeHumiditysensors[0]["max_value"]);
                 $('#rhmin_value').val(relativeHumiditysensors[0]["min_value"]);
-                if(temperatureSensors[0]["sensor_status"]=="on")
+                if (temperatureSensors[0]["sensor_status"] == "on")
                     $('#tssensor_status').prop('checked', true);
                 else
                     $('#tssensor_status').prop('checked', false);
@@ -402,7 +395,7 @@
                 var groundNode = e.relatedTarget.id;
                 var groundNodeData = jQuery.parseJSON(groundNode);
 
-                obj=groundNodeData[0];
+                obj = groundNodeData[0];
                 var preciptationsensors = new Array();
                 var soilTemperatureSensors = new Array();
                 var soilMoistureSensors = new Array();
@@ -410,23 +403,23 @@
                 //alert(groundNodeData[1])
 
                 for (var i = 0; i < groundNodeData[1].length; i++) {
-                            if (groundNodeData[1][i]['node_id'] === obj["node_id"]) {
-                                preciptationsensors.push(groundNodeData[1][i]);
-                                break;
-                            }
-                        }
+                    if (groundNodeData[1][i]['node_id'] === obj["node_id"]) {
+                        preciptationsensors.push(groundNodeData[1][i]);
+                        break;
+                    }
+                }
                 for (var i = 0; i < groundNodeData[2].length; i++) {
-                            if (groundNodeData[2][i]['node_id'] === obj["node_id"]) {
-                                soilTemperatureSensors.push(groundNodeData[2][i]);
-                                break;
-                            }
-                  }
+                    if (groundNodeData[2][i]['node_id'] === obj["node_id"]) {
+                        soilTemperatureSensors.push(groundNodeData[2][i]);
+                        break;
+                    }
+                }
                 for (var i = 0; i < groundNodeData[3].length; i++) {
-                            if (groundNodeData[3][i]['node_id'] === obj["node_id"]) {
-                                soilMoistureSensors.push(groundNodeData[3][i]);
-                                break;
-                            }
-                  }
+                    if (groundNodeData[3][i]['node_id'] === obj["node_id"]) {
+                        soilMoistureSensors.push(groundNodeData[3][i]);
+                        break;
+                    }
+                }
                 $('#gndnode_id').val(obj["node_id"]);
                 $('#gndtxt_key').val(obj["txt_gnd"]);
                 $('#gndvin_label').val(obj["v_in_gnd"]);
@@ -455,12 +448,12 @@
                 $('#gndtxt_value').val(obj["txt_gnd_value"]);
 
 
-                if(obj["node_status"]=="on")
+                if (obj["node_status"] == "on")
                     $('#gndnode_status').prop('checked', true);
                 else
                     $('#gndnode_status').prop('checked', false);
 
-                if(preciptationsensors[0]["sensor_status"]=="on")
+                if (preciptationsensors[0]["sensor_status"] == "on")
                     $('#ppsensor_status').prop('checked', true);
                 else
                     $('#ppsensor_status').prop('checked', false);
@@ -470,7 +463,7 @@
                 $('#ppmax_value').val(preciptationsensors[0]["max_value"]);
                 $('#ppmin_value').val(preciptationsensors[0]["min_value"]);
 
-                if(soilTemperatureSensors[0]["sensor_status"]=="on")
+                if (soilTemperatureSensors[0]["sensor_status"] == "on")
                     $('#stsensor_status').prop('checked', true);
                 else
                     $('#stsensor_status').prop('checked', false);
@@ -480,7 +473,7 @@
                 $('#stmax_value').val(soilTemperatureSensors[0]["max_value"]);
                 $('#stmin_value').val(soilTemperatureSensors[0]["min_value"]);
 
-                if(soilMoistureSensors[0]["sensor_status"]=="on")
+                if (soilMoistureSensors[0]["sensor_status"] == "on")
                     $('#smsensor_status').prop('checked', true);
                 else
                     $('#smsensor_status').prop('checked', false);
@@ -500,10 +493,10 @@
                 var temperatureSensors = new Array();
                 var obj = sinkData[0]
                 for (var i = 0; i < sinkData[1].length; i++) {
-                            if (sinkData[1][i]['node_id'] === obj["node_id"]) {
-                                Pressuresensors.push(sinkData[1][i]);
-                                break;
-                            }
+                    if (sinkData[1][i]['node_id'] === obj["node_id"]) {
+                        Pressuresensors.push(sinkData[1][i]);
+                        break;
+                    }
                 }
                 $('#sinknode_id').val(obj["node_id"]);
                 $('#sinktxt_key').val(obj["txt_sink"]);
@@ -527,12 +520,12 @@
                 $('#sinkps').val(obj["ps_sink"]);
                 $('#sinkup').val(obj["up_sink"]);
                 $('#sinktxt_value').val(obj["txt_sink_value"]);
-                if(obj["node_status"]=="on")
+                if (obj["node_status"] == "on")
                     $('#sinknode_status').prop('checked', true);
                 else
                     $('#sinknode_status').prop('checked', false);
 
-                if(Pressuresensors[0]["sensor_status"]=="on")
+                if (Pressuresensors[0]["sensor_status"] == "on")
                     $('#pssensor_status').prop('checked', true);
                 else
                     $('#pssensor_status').prop('checked', false);
@@ -543,6 +536,4 @@
                 $('#psmin_value').val(Pressuresensors[0]["min_value"]);
 
             });
-
-
         </script>

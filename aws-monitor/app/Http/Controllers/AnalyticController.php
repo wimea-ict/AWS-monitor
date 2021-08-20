@@ -30,14 +30,16 @@ use Illuminate\Support\Facades\Auth;
 
 class AnalyticController extends Controller
 {
+  public function __construct()
+  {
+      $this->middleware(['permission:analytics']);
+  }
   //
   public function index()
   {
-
-
     $stations = Station::all()->where("stationCategory", "aws")->toArray();
-    $userId = Auth::id();
-    $userdetails = User::all()->where("id", $userId)->toArray();
+    // $userId = Auth::id();
+    // $userdetails = User::all()->where("id", $userId)->toArray();
 
 
     //========================================= Automatic Weather Stn Problems===============================================
@@ -46,25 +48,25 @@ class AnalyticController extends Controller
     $probmClass = problem_classification::all()->where('id', '>', 0)->toArray();
 
 
-    foreach ($userdetails as $u) {
-      if ($u['station'] != NULL) {
-        $months = Carbon::today()->subDays(30);
+    // foreach ($userdetails as $u) {
+    // if ($u['station'] != NULL) {
+    $months = Carbon::today()->subDays(30);
 
-        $x_awsProblems = array();
-        $y_AwsPrbmOccurence = array();
-        $probmClass = problem_classification::all()->where('id', '>', 2)->toArray();
+    $x_awsProblems = array();
+    $y_AwsPrbmOccurence = array();
+    $probmClass = problem_classification::all()->where('id', '>', 2)->toArray();
 
 
-        foreach ($probmClass as $value) {
-          # code...
-          array_push($x_awsProblems, $value['problem_description']);
+    foreach ($probmClass as $value) {
+      # code...
+      array_push($x_awsProblems, $value['problem_description']);
 
-          // $occurenceOfprobm = Problems::where('classification_id',$value['id'])->where('stationID', $u['station'])->count();
-          $occurenceOfprobm = Problems::orderByDesc('id')->where('classification_id', $value['id'])->where('when_reported', '>=', $months)->count();
-          array_push($y_AwsPrbmOccurence, $occurenceOfprobm);
-        }
-      }
+      // $occurenceOfprobm = Problems::where('classification_id',$value['id'])->where('stationID', $u['station'])->count();
+      $occurenceOfprobm = Problems::orderByDesc('id')->where('classification_id', $value['id'])->where('when_reported', '>=', $months)->count();
+      array_push($y_AwsPrbmOccurence, $occurenceOfprobm);
     }
+    // }
+    // }
 
     $months = Carbon::today()->subDays(30);
     // $avgTemp_Months = TwoMeterNode::whereNotNull('T_SHT2X')->where('stationID',$id)->where('RTC_T','>=',$months)->avg('T_SHT2X');
@@ -118,27 +120,27 @@ class AnalyticController extends Controller
 
     //third tier users....
 
-    foreach ($userdetails as $u) {
-      if ($u['station'] != NULL) {
-        $sensors = Problems::select('Value')->where("classification_id", 6)->where("stationID", $u['station'])->groupBy('Value')->get('Value');
-        $y4Sensor = array();
-        $x4Sensor = array();
+    // foreach ($userdetails as $u) {
+    // if ($u['station'] != NULL) {
+    // $sensors = Problems::select('Value')->where("classification_id", 6)->where("stationID", $u['station'])->groupBy('Value')->get('Value');
+    $y4Sensor = array();
+    $x4Sensor = array();
 
-        foreach ($sensors as $value) {
-
-
-          // $occurence = Problems::where('Value',$value['Value'])->count();
-          $occurence = Problems::where('Value', $value['Value'])->where('when_reported', '>=', $months)->count();
+    foreach ($sensors as $value) {
 
 
-          array_push($y4Sensor, $value['Value']);
+      // $occurence = Problems::where('Value',$value['Value'])->count();
+      $occurence = Problems::where('Value', $value['Value'])->where('when_reported', '>=', $months)->count();
 
-          array_push($x4Sensor, $occurence);
-          # code...
-        }
-        return view("reports.analytic", compact('stations', 'x_axix', 'xValues', 'x_awsProblems', 'y_AwsPrbmOccurence', 'y4Sensor', 'x4Sensor'));
-      }
+
+      array_push($y4Sensor, $value['Value']);
+
+      array_push($x4Sensor, $occurence);
+      # code...
     }
+    return view("reports.analytic", compact('stations', 'x_axix', 'xValues', 'x_awsProblems', 'y_AwsPrbmOccurence', 'y4Sensor', 'x4Sensor'));
+    // }
+    // }
     //
 
 

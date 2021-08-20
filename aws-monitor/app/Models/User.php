@@ -37,7 +37,7 @@ class User extends Authenticatable
     }
     public function station()
     {
-        return $this->belongsToMany(Station::class, 'maillist', 'userID', 'stationID');
+        return $this->hasOne(Station::class, 'admin');
     }
 }
 class CustomPassword extends ResetPassword

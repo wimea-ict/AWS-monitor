@@ -14,7 +14,10 @@ class AddPhoneToStation extends Migration
     public function up()
     {
         Schema::table('stations', function (Blueprint $table) {
-            $table->string('phone', 20);
+            $table->string('phone', 20)->nullable();
+            $table->unsignedBigInteger('admin')->nullable();
+            $table->date('expiry_date')->nullable();
+            $table->foreign('admin')->references('id')->on('users')->onDelete('set null');
         });
     }
 
@@ -27,6 +30,8 @@ class AddPhoneToStation extends Migration
     {
         Schema::table('stations', function (Blueprint $table) {
             $table->dropColumn('phone');
+            $table->dropColumn('admin');
+            $table->dropColumn('expiry_date');
         });
     }
 }

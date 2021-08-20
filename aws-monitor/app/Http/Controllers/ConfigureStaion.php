@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\layouts;
 use App\Models\Station;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -16,7 +18,9 @@ class ConfigureStaion extends Controller
     public function index()
     {
         $stations = Station::where('StationCategory', 'aws')->get();
-        return view('layouts.configurestation', compact('stations'));
+        $station = Station::find(95);
+        $users = User::all();
+        return view('layouts.configurestation', compact('stations'), ['users' => $users]);
     }
 
     /**
@@ -49,10 +53,9 @@ class ConfigureStaion extends Controller
     public function show($id)
     {
         $stationToEdit = Station::find($id);
-        
+
 
         return view('layouts.addstation', compact('stationToEdit'));
-    
     }
 
     /**
@@ -78,25 +81,27 @@ class ConfigureStaion extends Controller
         */
     public function update(Request $request)
     {
-        if($request->get('station_number')!= null){
-            $id=$request->get('station_number');
-        $station = Station::where('StationNumber', $id)->first();
-        $station->StationName = $request->get('station_name');
-       
-        $station->StationNumber = $request->get('snumber');
-        $station->Location = $request->get('slocation');
-        $station->Latitude = $request->get('latitude');
-        $station->Longitude = $request->get('longitude');
+        if ($request->get('station_number') != null) {
+            $id = $request->get('station_number');
+            $station = Station::where('StationNumber', $id)->first();
+            $station->StationName = $request->get('station_name');
+
+            $station->StationNumber = $request->get('snumber');
+            $station->Location = $request->get('slocation');
+            $station->Latitude = $request->get('latitude');
+            $station->Longitude = $request->get('longitude');
             /* 'city' => $request->get('city'),
             'code' => $request->get('code'), */
             $station->StationRegion = $request->get('region');
             $station->Opened = $request->get('date_opened');
             $station->Closed = $request->get('date_closed');
             $station->StationType = $request->get('station_type');
-            $station->StationStatus= $request->get('station_status');
-            $station->Country= $request->get('country');
-            $station->SubmittedBy= Auth::user()->name;
-        $station->save();
+            $station->StationStatus = $request->get('station_status');
+            $station->Country = $request->get('country');
+            $station->SubmittedBy = Auth::user()->name;
+            $station->phone = $request->get('phone');
+            $station->admin = $request->get('admin');
+            $station->save();
         }
         return redirect('/configurestation');
     }

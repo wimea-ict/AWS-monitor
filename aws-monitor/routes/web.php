@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Response;
 Route::group(['middleware' => 'auth'], function () {
 
     // All my routes that needs a logged in user
-    Route::resource('', 'StationsController');
+    // Route::resource('', 'StationsController');
     Route::resource('manage', 'ManageUsers');
     Route::get('assign_role/{id}', 'ManageUsers@assignRoles');
     Route::post('assign_role/{id}', 'ManageUsers@assignRolesPost');
@@ -64,7 +64,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('configureproblem', 'ProblemConfigurationsController');
     Route::resource('editProblemConfigurations', 'ProblemsController');
     Route::post('updateProblemConfigurations', 'ProblemsController@update');
-    Route::resource('viewStationStatus', 'StationStatusController');
+    Route::resource('', 'StationStatusController');
     Route::get('selectedStationStatus/{id}', 'StationStatusController@show');
     Route::resource('googlemaps', 'GoogleMapsController');
     //Route::get('/analyserdata','AnalyserController@index');
@@ -102,8 +102,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('users', 'UserController');
     Route::get('edit_users/{id}', 'UserController@edit');
     Route::get('delete_users/{id}', 'UserController@destroy');
-    Route::get('/logs', function () {
-        return view('layouts.logs');
+    Route::group(['middleware' => ['permission:logs']], function () {
+        Route::get('/logs', function () {
+            return view('layouts.logs');
+        });
     });
 
     Route::resource('maillisttable', 'maillistcontroller');
@@ -121,9 +123,6 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::get('/login', function () {
     return view('/auth/login');
-});
-Route::get('/register', function () {
-    return view('/auth/register');
 });
 Auth::routes();
 /*

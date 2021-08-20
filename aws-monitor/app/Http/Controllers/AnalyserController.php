@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\DB;
 
 class AnalyserController extends Controller
 {
+  public function __construct()
+  {
+    $this->middleware(['permission:problem-archive']);
+  }
   public function index()
   {
 

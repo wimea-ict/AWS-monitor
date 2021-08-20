@@ -3,9 +3,11 @@
 @section('content')
     <div>
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-            Create New Role
-        </button>
+        @can('role.create')
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Create New Role
+            </button>
+        @endcan
 
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="createRoleModal"
@@ -68,9 +70,14 @@
                         </ul>
                     </td>
                     <td>
-                        <a href="{{ URL::to('manage/' . $role->id . '/edit') }}" class="btn btn-success">Assign
-                            Permissions</a>
-                        <a href="{{ URL::to('delete_users/') }}" class="btn btn-danger">Delete</a>
+                        @can('role.update')
+                            <a href="{{ URL::to('manage/' . $role->id . '/edit') }}" class="btn btn-success">Assign
+                                Permissions</a>
+                        @endcan
+                        @can('role.delete')
+                            <a href="{{ URL::to('delete_users/') }}" class="btn btn-danger">Delete</a>
+                        @endcan
+
                     </td>
                 </tr>
             @endforeach

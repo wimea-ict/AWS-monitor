@@ -20,7 +20,7 @@
                         <thead class="thead-light">
                             <th scope="col">ID</th>
                             <th scope="col">NAME</th>
-                            <th scope="col">station</th>
+                            <th scope="col">Roles</th>
                             <th scope="col">Email Address</th>
                             <th scope="col">Phone Number</th>
                             <th scope="col">Options</th>
@@ -39,10 +39,16 @@
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->phone }}</td>
                             <td>
-                                <a href="{{ URL::to('assign_role/' . $user->id) }}" class="btn btn-primary">Assign
-                                    Role</a>
-                                <a href="{{ URL::to('edit_users/' . $user->id) }}" class="btn btn-warning">Edit</a>
-                                <a href="{{ URL::to('delete_users/' . $user->id) }}" class="btn btn-danger">Delete</a>
+                                @can('role.update')
+                                    <a href="{{ URL::to('assign_role/' . $user->id) }}" class="btn btn-primary">Assign
+                                        Role</a>
+                                @endcan
+                                @can('user.update')
+                                    <a href="{{ URL::to('edit_users/' . $user->id) }}" class="btn btn-warning">Edit</a>
+                                @endcan
+                                @can('user.delete')
+                                    <a href="{{ URL::to('delete_users/' . $user->id) }}" class="btn btn-danger">Delete</a>
+                                @endcan
                             </td>
                             </tr>
                         @endforeach

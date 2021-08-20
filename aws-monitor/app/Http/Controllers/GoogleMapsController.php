@@ -27,56 +27,59 @@ use Illuminate\Support\Facades\DB;
 
 class GoogleMapsController extends Controller
 {
-	 public function index()
-    {
-    
-  $stations_off = DetectedAnalyzerProblems::select('stationID')->where('Problem', '=', 'Station_off')->where('status', '<>','fixed')->get();//->toArray(); 
-  $data= DB::table('stations')->select('Latitude','Longitude','Location','station_id')->where('stationCategory','=','aws')->orderBy('station_id','DESC')->get();
-$stations = Station::select('station_id')->where('stationCategory','aws')->get()->toArray();
+  public function __construct()
+  {
+    $this->middleware(['permission:google-maps']);
+  }
+  public function index()
+  {
 
-$Actualpackets= array();
-$expectedpackets = array();
+    $stations_off = DetectedAnalyzerProblems::select('stationID')->where('Problem', '=', 'Station_off')->where('status', '<>', 'fixed')->get(); //->toArray(); 
+    $data = DB::table('stations')->select('Latitude', 'Longitude', 'Location', 'station_id')->where('stationCategory', '=', 'aws')->orderBy('station_id', 'DESC')->get();
+    $stations = Station::select('station_id')->where('stationCategory', 'aws')->get()->toArray();
 
-foreach ($stations as $key => $value) {
+    $Actualpackets = array();
+    $expectedpackets = array();
 
-  $SNPackects = DB::table('SinkNode')
-            ->where('stationID',$value['station_id'])
-            ->count('stationID');
-  $TwoMPackects = DB::table('TwoMeterNode')
-            ->where('stationID',$value['station_id'])
-            ->count('stationID');
-  $TnMPackects = DB::table('TenMeterNode')
-            ->where('stationID',$value['station_id'])
-            ->count('stationID');
-  $GNPackects = DB::table('GroundNode')
-            ->where('stationID',$value['station_id'])
-            ->count('stationID');
+    foreach ($stations as $key => $value) {
 
-   $totalPackets= $SNPackects+$TwoMPackects+$TnMPackects+$GNPackects;
-   $Actualpackets[$value['station_id']]=$totalPackets;
+      $SNPackects = DB::table('SinkNode')
+        ->where('stationID', $value['station_id'])
+        ->count('stationID');
+      $TwoMPackects = DB::table('TwoMeterNode')
+        ->where('stationID', $value['station_id'])
+        ->count('stationID');
+      $TnMPackects = DB::table('TenMeterNode')
+        ->where('stationID', $value['station_id'])
+        ->count('stationID');
+      $GNPackects = DB::table('GroundNode')
+        ->where('stationID', $value['station_id'])
+        ->count('stationID');
 
-
-   	$towMs=TenMeterNode::select('hoursSinceEpoch')->orderBy('id','ASC')->where('stationID', $value['station_id'])->limit(1)->pluck('hoursSinceEpoch')->first();
-   	//print_r($towMs);
-   //	$currentTime = Carbon::now()->toDateTimeString();
-   	//print_r(($towMs*60)-$timeNow);
-   	$timeNow=time()/60;
-	$tenMs=TenMeterNode::select('hoursSinceEpoch')->orderBy('id','ASC')->where('stationID', $value['station_id'])->limit(1)->pluck('hoursSinceEpoch')->first();
-	$Snks=SinkNode::select('hoursSinceEpoch')->orderBy('id','ASC')->where('stationID', $value['station_id'])->limit(1)->pluck('hoursSinceEpoch')->first();
-	$Gnds=GroundNode::select('hoursSinceEpoch')->orderBy('id','ASC')->where('stationID', $value['station_id'])->limit(1)->pluck('hoursSinceEpoch')->first();
-	$totalExpected= $timeNow-$towMs*60 + $timeNow-$tenMs*60 + $timeNow-$Gnds*60 + $timeNow-$Snks*60;
+      $totalPackets = $SNPackects + $TwoMPackects + $TnMPackects + $GNPackects;
+      $Actualpackets[$value['station_id']] = $totalPackets;
 
 
-   	$expectedpackets[$value['station_id']]=($totalExpected);
-	# code...
-}
+      $towMs = TenMeterNode::select('hoursSinceEpoch')->orderBy('id', 'ASC')->where('stationID', $value['station_id'])->limit(1)->pluck('hoursSinceEpoch')->first();
+      //print_r($towMs);
+      //	$currentTime = Carbon::now()->toDateTimeString();
+      //print_r(($towMs*60)-$timeNow);
+      $timeNow = time() / 60;
+      $tenMs = TenMeterNode::select('hoursSinceEpoch')->orderBy('id', 'ASC')->where('stationID', $value['station_id'])->limit(1)->pluck('hoursSinceEpoch')->first();
+      $Snks = SinkNode::select('hoursSinceEpoch')->orderBy('id', 'ASC')->where('stationID', $value['station_id'])->limit(1)->pluck('hoursSinceEpoch')->first();
+      $Gnds = GroundNode::select('hoursSinceEpoch')->orderBy('id', 'ASC')->where('stationID', $value['station_id'])->limit(1)->pluck('hoursSinceEpoch')->first();
+      $totalExpected = $timeNow - $towMs * 60 + $timeNow - $tenMs * 60 + $timeNow - $Gnds * 60 + $timeNow - $Snks * 60;
 
-//=====================ACTUAL PACKETS RECEIVED SINCE DEPLOYMENT========================================
+
+      $expectedpackets[$value['station_id']] = ($totalExpected);
+      # code...
+    }
+
+    //=====================ACTUAL PACKETS RECEIVED SINCE DEPLOYMENT========================================
 
 
-   //print_r($f);
-   //print_r($f);
-   return view('reports/googlemaps',compact('expectedpackets','tenMs','Snks','Gnds','data','Actualpackets','stations_off'));
-     }
-
+    //print_r($f);
+    //print_r($f);
+    return view('reports/googlemaps', compact('expectedpackets', 'tenMs', 'Snks', 'Gnds', 'data', 'Actualpackets', 'stations_off'));
+  }
 }

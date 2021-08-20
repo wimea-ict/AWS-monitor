@@ -49,14 +49,16 @@ class DataBundleController extends Controller
     public function store(Request $request)
     {
 
-        $no_of_months = $request->input("month");
-        $date = Carbon::now()->addMonth($no_of_months)->format('Y-m-d');
-        $mobile_no = new DataBundles();
-        $mobile_no->station_id = $request->user()->station;
-        $mobile_no->mobile_number = $request->input("number");
-        $mobile_no->end_date = $date;
-        $mobile_no->save();
-        return redirect('/data_bundle');
+        // $no_of_months = $request->input("month");
+        // $date = Carbon::now()->addMonth($no_of_months)->format('Y-m-d');
+        // $mobile_no = new DataBundles();
+        // $mobile_no->station_id = $request->user()->station;
+        // $mobile_no->mobile_number = $request->input("number");
+        // $mobile_no->end_date = $date;
+        // $mobile_no->save();
+
+
+        // return redirect('/data_bundle');
     }
 
     /**
@@ -103,6 +105,9 @@ class DataBundleController extends Controller
         $databundle->end_date = $new_end_date;
         $databundle->load_date = $start_date;
         $databundle->save();
+        $station = Station::find($id);
+        $station->expiry_date = $new_end_date;
+        $station->save();
         return redirect('/data_bundle/' . $id);
     }
 

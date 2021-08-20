@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\DB;
 
 class UploadController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:import-data']);
+    }
     public function index()
     {
         $data = DB::table('uploads')->orderBy('id', 'ASC')->get();

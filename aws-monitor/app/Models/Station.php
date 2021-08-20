@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Station extends Model  {
+class Station extends Model
+{
 
     /**
      * The database table used by the model.
@@ -23,7 +24,7 @@ class Station extends Model  {
      *
      * @var array
      */
-    protected $fillable = ['station_id', 'StationName', 'StationNumber', 'StationRegNumber', 'Location', 'Indicator', 'StationRegion', 'Country', 'Latitude', 'Longitude', 'Altitude', 'StationStatus', 'StationType', 'Opened', 'Closed', 'SubmittedBy', 'Creation_Date','UpdateDate','StationCategory','phone'];
+    protected $fillable = ['station_id', 'StationName', 'StationNumber', 'StationRegNumber', 'Location', 'Indicator', 'StationRegion', 'Country', 'Latitude', 'Longitude', 'Altitude', 'StationStatus', 'StationType', 'Opened', 'Closed', 'SubmittedBy', 'Creation_Date', 'UpdateDate', 'StationCategory', 'phone', 'admin'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -46,4 +47,8 @@ class Station extends Model  {
      */
     protected $dates = ['date', 'date_time_recorded', 'Date', 'CreationDate', 'Opened', 'Closed', 'CreationDate'];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class,'admin');
+    }
 }

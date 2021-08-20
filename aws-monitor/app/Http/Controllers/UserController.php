@@ -15,6 +15,13 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware(['permission:user.view'])->only('index');
+        // $this->middleware(['permission:user.edit'])->only('edit');
+        // $this->middleware(['permission:user.delete'])->only('destroy');
+        // $this->middleware(['permission:user.create'])->only('index');
+    }
     public function index()
     {
         $users = User::all();
@@ -88,24 +95,13 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-        $stations = array();
-        $station = Station::select('station_id', 'Location')->where("stationCategory", "aws")->get()->toArray();
-        foreach ($station as $value) {
-            $stations[$value['station_id']] = $value['Location'];
-
-            # code...
-        }
         $user = User::find($id);
         $user->name = $request->get('name');
         $user->email = $request->get('email');
         $user->phone = $request->get('phone');
-        $user->station = $request->get('admin');
-
-        // $user->password=bcrypt($request->get('password'));
         $user->save();
         $users = User::orderByDesc('updated_at')->get();
-        return view('layouts.display_users', compact('stations'), ['users' => $users])->with('successEdit', 'Information has been edited successfully');
+        return view('layouts.display_users', ['users' => $users])->with('successEdit', 'Information has been edited successfully');
     }
 
     /**

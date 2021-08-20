@@ -58,10 +58,23 @@
                                     </div>
                                 </div>
                                 <div class="form-group clearfix">
+                                    <label class="col-lg-2 control-label " for="phone">Phone</label>
+                                    <div class="col-lg-4">
+                                        <input id="phone" name="phone" type="text" class="form-control" required>
+                                    </div>
+                                    <label class="col-lg-2 control-label " for="admin">Admin</label>
+                                    <div class="col-lg-4">
+                                        <select class="form-control" name="admin">
+                                            @foreach ($users as $user)
+                                                <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group clearfix">
                                     <label class="col-lg-2 control-label " for="station_type">station Type</label>
                                     <div class="col-lg-4">
                                         <select class="form-control" name="Station_type">
-
                                             <option value="synoptic">Synoptic</option>
                                             <option value="Agrometrological">Agrometrological</option>
                                             <option value="Hydrometrological">Hydrometrological</option>
@@ -75,13 +88,6 @@
                                     <label class="col-lg-2 control-label " for="country">Country</label>
                                     <div class="col-lg-4">
                                         <input id="country" name="country" type="text" class="form-control" required>
-                                    </div>
-
-                                    <div class="form-group clearfix">
-                                        <label class="col-lg-2 control-label " for="phone">Phone</label>
-                                        <div class="col-lg-4">
-                                            <input id="phone" name="phone" type="text" class="form-control" required>
-                                        </div>
                                     </div>
                                 </div>
                         </div>

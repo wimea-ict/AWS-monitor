@@ -14,6 +14,7 @@ use App\Models\SinkNode;
 use App\Models\Sensor;
 use ProblemConfigurationsController;
 use App\Models\problemConfigurations;
+use App\Models\User;
 
 class StationsController extends Controller
 {
@@ -191,8 +192,8 @@ class StationsController extends Controller
             //     "min_value"=>"1",
             //     "rpt_intvl"=>"1",
         );
-
-        return view('layouts.addstation')
+        $users = User::all();
+        return view('layouts.addstation', ["users" => $users])
             ->with('stationdetails', $StationDetails);
     }
 
@@ -231,8 +232,6 @@ class StationsController extends Controller
             'Location' => $request->get('slocation'),
             'Latitude' => $request->get('latitude'),
             'Longitude' => $request->get('longitude'),
-            /* 'city' => $request->get('city'),
-            'code' => $request->get('code'), */
             'StationRegion' => $request->get('region'),
             'Opened' => $request->get('date_opened'),
             'Closed' => $request->get('date_closed'),
@@ -242,6 +241,7 @@ class StationsController extends Controller
             'SubmittedBy' => Auth::user()->name,
             'StationCategory' => 'aws',
             'phone' => $request->get('phone'),
+            'admin' => $request->get('admin'),
         ]);
         $stationcreation->save();
         $station =  $stationcreation->toArray();

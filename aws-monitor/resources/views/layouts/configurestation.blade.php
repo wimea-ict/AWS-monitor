@@ -18,12 +18,13 @@
                                         <th>location</th>
                                         <th>longitude</th>
                                         <th>Latitude</th>
+                                        <th>Admin</th>
                                         <th>Phone</th>
-                                        <th>Edit</th>
+                                        @can('stations.update')
+                                            <th>Edit</th>
+                                        @endcan
                                     </tr>
                                 </thead>
-
-
                                 <tbody>
                                     @foreach ($stations as $station)
                                         <tr>
@@ -32,13 +33,26 @@
                                             <td>{{ $station['Location'] }}</td>
                                             <td>{{ $station['Longitude'] }}</td>
                                             <td>{{ $station['Latitude'] }}</td>
-                                            <td>{{ $station['phone'] }} <a
-                                                    href="{{ URL::to('data_bundle/' . $station['station_id']) }}"
-                                                    class="btn btn-primary">Bundles</a></td>
-                                            <td><button class="btn btn-icon btn-success m-b-5 edit-station-button"
-                                                    data-toggle="modal" id="{{ htmlspecialchars(json_encode($station)) }}"
-                                                    data-target="#full-width-modal" data-delete-link=""> <i
-                                                        class="fa fa-thumbs-o-up"></i> Edit </button></td>
+                                            <td>
+                                                @if (empty($station->user))
+                                                    None
+                                                @else
+                                                    {{ $station->user->name }}
+                                                @endif
+                                            </td>
+                                            <td>{{ $station['phone'] }}
+                                                @can('stations.update')
+                                                    <a href="{{ URL::to('data_bundle/' . $station['station_id']) }}"
+                                                        class="btn btn-primary">Bundles</a>
+                                                @endcan
+                                            </td>
+                                            @can('stations.update')
+                                                <td><button class="btn btn-icon btn-success m-b-5 edit-station-button"
+                                                        data-toggle="modal" id="{{ json_encode($station) }}"
+                                                        data-target="#full-width-modal" data-delete-link=""> <i
+                                                            class="fa fa-thumbs-o-up"></i> Edit </button></td>
+
+                                            @endcan
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -123,34 +137,22 @@
                                                             class="form-control" required>
                                                     </div>
                                                 </div>
-                                                {{-- <div class="form-group clearfix">
-                                                <label class="col-lg-2 control-label " for="code">Code</label>
-                                                <div class="col-lg-4">
-                                                    <input id="code" name="code" type="text" class="form-control" required>
-                                                </div>
-                                                <label class="col-lg-2 control-label " for="city" >City</label>
-                                                <div class="col-lg-4">
-                                                    <input id="city" name="city" type="text" class="form-control" required>
-
-                                                </div>
-                                            </div> --}}
-
-                                                {{-- <div class="form-group clearfix">
-                                                <label class="col-lg-2 control-label " for="dateopened">Date opened</label>
-                                                <div class="col-lg-4">
-                                                    <div class="input-group">
-                                                        <input type="date" class="form-control" placeholder="mm/dd/yyyy" id="datepicker" name="date_opened" required> 
-                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                                <div class="form-group clearfix">
+                                                    <label class="col-lg-2 control-label " for="phone">Phone</label>
+                                                    <div class="col-lg-4">
+                                                        <input id="phone" name="phone" type="text" class="form-control"
+                                                            required>
+                                                    </div>
+                                                    <label class="col-lg-2 control-label " for="admin">Admin</label>
+                                                    <div class="col-lg-4">
+                                                        <select class="form-control" name="admin">
+                                                            @foreach ($users as $user)
+                                                                <option value="{{ $user->id }}">{{ $user->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                 </div>
-                                                <label class="col-lg-2 control-label " for="dateclosed">Date closed</label>
-                                                <div class="col-lg-4">
-                                                <div class="input-group">
-                                                        <input type="date" class="form-control" placeholder="mm/dd/yyyy" id="datepicker" name="date_closed" required>
-                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                                                    </div>
-                                                </div>
-                                            </div> --}}
                                                 <div class="form-group clearfix">
                                                     <label class="col-lg-2 control-label " for="station_type">station
                                                         Type</label>
