@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('main')
 
 @section('header')
     <link href="{{ asset('css/transferList.css') }}" rel="stylesheet">
@@ -68,7 +68,7 @@
                         </ul>
                     </div>
                 </div>
-                <button type='submit'>Save</button>
+                <button type='submit' class="btn btn-primary">Save</button>
             </form>
         </div>
     </div>
@@ -76,6 +76,6 @@
 
 @section('script')
     <script src="{{ asset('js/transferList.js') }}"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    {{-- <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> --}}
 @endsection

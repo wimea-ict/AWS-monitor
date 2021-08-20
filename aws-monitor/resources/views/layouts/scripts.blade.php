@@ -111,6 +111,7 @@
                 $('#slocation').val(obj["Location"]);
                 $('#latitude').val(obj["Latitude"]);
                 $('#longitude').val(obj["Longitude"]);
+                $('#phone').val(obj['phone']);
                 //$('#city').val(obj["city"]);
                 //$('#code').val(obj["code"]);
                 $('#region').val(obj["StationRegion"]);
