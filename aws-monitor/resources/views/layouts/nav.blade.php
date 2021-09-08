@@ -32,7 +32,7 @@
                 <li class="has-submenu"><a href="{{ URL::to('livedata') }}"><i class="ion-radio-waves"></i> <span
                             class="nav-label">Live Data</span></a></li>
             @endcan
-            @can('google-maps')
+            @can('import-data')
                 <li class="has-submenu">
                     <a href="{{ URL::to('data_list') }}"><i class="ion-ios7-upload"></i> <span class="nav-label">Import
                             Data</span></a>

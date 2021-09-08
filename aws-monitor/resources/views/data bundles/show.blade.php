@@ -1,5 +1,9 @@
 @extends('main')
-
+@section('header')
+    <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css"
+        rel="stylesheet" />
+@endsection
 @section('content')
     <div class="container">
         <div class="row">
@@ -27,10 +31,17 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <label class="col-lg-2 control-label " for="months">Months</label>
-                                            <div class="col-lg-4">
-                                                <input id="months" name="months" type="number" class="form-control" required
+                                            <label class="col-lg-2 control-label " for="start">Start</label>
+                                            <div class="input-group">
+                                                <input id="start" name="start" type="text" class="form-control datepicker" required
                                                     min='0'>
+                                                <span class="input-group-addon"><i class="ion-ios7-calendar"></i> </span>
+                                            </div>
+                                            <label class="col-lg-2 control-label " for="end">End</label>
+                                            <div class="input-group">
+                                                <input id="end" name="end" type="text" class="form-control datepicker" required
+                                                    min='0'>
+                                                <span class="input-group-addon"><i class="ion-ios7-calendar"></i> </span>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
@@ -78,4 +89,14 @@
             </div>
         </div>
     </div>
+@section('script')
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js">
+    </script>
+    <script type="text/javascript">
+        $(function() {
+            $('.datepicker').datepicker();
+        })
+    </script>
+@endsection
 @endsection

@@ -41,10 +41,17 @@
                                                 @endif
                                             </td>
                                             <td>{{ $station['phone'] }}
-                                                @can('stations.update')
+                                                @if (!empty($station->user))
+                                                    @if ($station->user['id'] == Auth::user()->id)
                                                     <a href="{{ URL::to('data_bundle/' . $station['station_id']) }}"
-                                                        class="btn btn-primary">Bundles</a>
-                                                @endcan
+                                                    class="btn btn-primary">Bundles</a>
+                                                    @endif 
+                                                @else
+                                                    @can('stations.update')
+                                                        <a href="{{ URL::to('data_bundle/' . $station['station_id']) }}"
+                                                            class="btn btn-primary">Bundles</a>
+                                                    @endcan
+                                                @endif
                                             </td>
                                             @can('stations.update')
                                                 <td><button class="btn btn-icon btn-success m-b-5 edit-station-button"

@@ -97,16 +97,15 @@ class DataBundleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $no_of_months = $request->input("months");
-        $new_end_date = Carbon::now()->addMonth($no_of_months)->format('Y-m-d');
-        $start_date = Carbon::now();
+        $start = Carbon::parse($request->input('start'));
+        $end = Carbon::parse($request->input('end'));
         $databundle = new DataBundles();
         $databundle->station_id = $id;
-        $databundle->end_date = $new_end_date;
-        $databundle->load_date = $start_date;
+        $databundle->end_date = $end->format('Y-m-d');
+        $databundle->load_date =$start->format('Y-m-d');
         $databundle->save();
         $station = Station::find($id);
-        $station->expiry_date = $new_end_date;
+        $station->expiry_date = $end->format('Y-m-d');
         $station->save();
         return redirect('/data_bundle/' . $id);
     }
